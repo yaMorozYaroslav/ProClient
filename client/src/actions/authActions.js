@@ -38,11 +38,19 @@ export const register = ({name, email, password})=>
          type: REGISTER_SUCCESS,
          payload: res.data
       }))
-      .catch(err=>{dispatch({
-         type: REGISTER_FAIL
+      .catch(err=>{
+     dispatch(returnErrors(
+   err.response.data, err.response.status, 'REGISTER_FAIL'));
+         dispatch({
+            type: REGISTER_FAIL
+         }); 
       });
-   }); 
-  }
+   };
+   export const logout =()=>{
+      return{
+         type: LOGOUT_SUCCESS
+      };
+   };
 export const tokenConfig = getState => {
    const token = getState().auth.token;
    const config ={
