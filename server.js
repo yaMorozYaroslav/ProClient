@@ -8,7 +8,7 @@ const auth = require('./routes/api/auth');
 const app = express();
 app.use(bodyParser.json());
 //const config = require('config');
-require('dotenv').config();
+ require('dotenv').config();
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri)
 .then(()=>console.log('MongoDB Connected'))
