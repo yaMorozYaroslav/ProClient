@@ -13,12 +13,11 @@ import{
 } from 'reactstrap';
 import {connect}from'react-redux';
 import PropTypes from 'prop-types';
-import {register} from '../../actions/authActions';
+import {login} from '../../actions/authActions';
 import {clearErrors}from'../../actions/errorActions';
-class RegisterModal extends Component{
+class LoginModal extends Component{
   state = {
   	modal: false,
-  	name: '',
   	email: '',
   	password: '',
   	msg:null
@@ -26,13 +25,13 @@ class RegisterModal extends Component{
   static propTypes = {
   isAuthenticated: PropTypes.bool,
   error: PropTypes.object.isRequired,
-  register: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired
   };
   componentDidUpdate(prevProps){
     const{error, isAuthenticated}=this.props;
     if(error !== prevProps.error){
-      if(error.id === 'REGISTER_FAIL'){
+      if(error.id === 'LOGIN_FAIL'){
         this.setState({msg: error.msg.msg});
       }else{
         this.setState({msg: null});
@@ -50,26 +49,24 @@ class RegisterModal extends Component{
   		modal: !this.state.modal
   	});
   };
-  onChange = e=>{
+  onChange = e =>{
   	this.setState({[
   		e.target.name]:e.target.value});
   };
   onSubmit=e=>{
   	e.preventDefault();
-  const{name, email, password}=this.state;
-  const newUser = {
-    name,
-    email,
-    password
-  };
-
-  this.props.register(newUser);
+    const {email, password}=this.state;
+    const user = {
+      email,
+      password
+    }
+    this.props.login(user);
   };
   render(){
   	return(
   <div>
   	 <NavLink onClick={this.toggle} href="#">
-  	 Register
+  	 Login
   	 </NavLink> 
 
   	 <Modal 
@@ -77,7 +74,7 @@ class RegisterModal extends Component{
   	    toggle={this.toggle}
   	    >
   	    <ModalHeader toggle={this.toggle}>
-  	    Register
+  	    Login
   	    </ModalHeader>
   	    <ModalBody>
              {this.state.msg 
@@ -86,14 +83,7 @@ class RegisterModal extends Component{
              : null }
            <Form onSubmit={this.onSubmit}>
              <FormGroup>
-             <Label for="name">Name</Label>
-             <Input
-               type="text"
-               name="name"
-               id="name"
-               placeholder="Name"
-               className='mb-3'
-               onChange={this.onChange}/>
+             
              <Label for="email">Email</Label>
              <Input
                type="email"
@@ -112,7 +102,7 @@ class RegisterModal extends Component{
                onChange={this.onChange}/>
              
                <Button color="dark" style={{
-    marginTop: '2rem'}} block>Register</Button>
+    marginTop: '2rem'}} block>Login</Button>
              </FormGroup>
              </Form>
   	    </ModalBody>
@@ -125,4 +115,4 @@ isAuthenticated: state.auth.isAuthenticated,
 error:state.error
   });
 export default connect(
-	mapStateToProps,{register, clearErrors})(RegisterModal);
+	mapStateToProps,{login, clearErrors})(LoginModal);

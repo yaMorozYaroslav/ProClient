@@ -13,7 +13,7 @@ router.post('/', auth, (req, res)=>{
 	});
   newItem.save().then(item=>res.json(item));
 });
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', auth, (req, res)=>{
  Item.findById(req.params.id)
  .then(item=>item.remove().then(()=>res
  	.json({success:true})))
