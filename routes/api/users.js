@@ -1,8 +1,8 @@
 const express = require ('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-//const config = require('config');
-require('dotenv').config();
+const config = require('config');
+//require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const User = require('../../models/User');
 router.post('/',(req, res)=>{
@@ -27,7 +27,7 @@ router.post('/',(req, res)=>{
           	
           	jwt.sign(
           		{id: user.id},
-          		process.env.JWT_SECR,
+          		config.get('jwtSecret'),
                 (err, token)=>{
                 	if(err) throw err;
                 	res.json({
