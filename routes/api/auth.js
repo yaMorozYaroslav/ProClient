@@ -1,8 +1,8 @@
 const express = require ('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-//const config = require('config');
-require('dotenv').config();
+const confii = require('config');
+//require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const auth = require('../../middl/auth');
 const User = require('../../models/User');
@@ -21,7 +21,7 @@ router.post('/',(req, res)=>{
 	     	 if(!isMatch)return res.status(400).json({msg: 'Invalid credentials' });
 	     jwt.sign(
           		{id: user.id},
-          	jwtSec,
+          	confii.get('jwtSecret'),
                 (err, token)=>{
 
                 	if(err) throw err;
