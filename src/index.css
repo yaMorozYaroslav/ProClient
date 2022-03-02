@@ -16,26 +16,24 @@ body {
 }
 
 h1 {
-  margin: 2rem;
-  font-size: 40px;
-  margin-left: 180px;
+  font-size: 45px;
+  margin-left: 170px;
 }
 
 .board {
-  border: 1rem solid black;
+  border: 10px solid black;
   background: black;
   width: 500px;
   height: 500px;
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-  gap: 1rem;
+  gap: 20px;
 }
 
 .squares {
   background: white;
   border: none;
-  font-size: 5rem;
-  /* font-weight: 800; */
+  font-size: 100px;
   cursor: pointer;
   outline: none;
 }
@@ -53,7 +51,8 @@ h1 {
 }
 
 h3 {
-  padding: 1rem;
+  padding: 10px;
+  font-size: 30px;
 }
 
 li {
@@ -66,14 +65,9 @@ li {
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 0.5rem;
-  margin: 0.5rem 1rem;
-}
-.but{
- width: 300px;
- font-size: 15px;
-}
-
-.hist{
-  margin-left:  200px;
+  padding: 10px;
+  margin: 10px 0px;
+  width: 300px;
+  font-size: 20px;
+  margin-left: 80px;
 }
