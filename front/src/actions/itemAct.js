@@ -1,13 +1,19 @@
+import {createAsyncThunk} from '@reduxjs/toolkit'
 import {GET_ITEMS, ADD_ITEM, DELETE} from '../constants/actionTypes'
 import * as api from '../api'
 
-export const getItems =()=> async(dispatch)=>{
+
+export const getItems = createAsyncThunk(GET_ITEMS, async()=>{
+	const response = await api.getItems()
+	return response.data
+})
+/*export const getItems =()=> async(dispatch)=>{
 	try{
 		const {data} = await api.getItems()
 		dispatch({type: GET_ITEMS, payload: data})
 	}catch(error){
 		console.log(error.message)
-	}}
+	}}*/
 export const addItem =(item)=> async(dispatch)=>{
     try{
     	const {data} = await api.addItem(item)
