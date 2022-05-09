@@ -1,15 +1,18 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {connect} from 'react-redux'
-import {getItems} from './actions/itemAct'
+import {Container, AppBar, Typography, Grow, Grid} from '@material-ui/core'
+import {useDispatch} from 'react-redux'
 
-const App =()=> {
-     const dispatch = useDispatch()
-     const items = useSelector((state)=> state.items)
-React.useEffect(()=>{
-	dispatch(getItems())
-	console.log(items)
-}, [dispatch])   
-return <p>Hello</p> 
+import {getPosts} from './actions/postact'
+
+import useStyles from './styles'
+
+export const App =()=> {
+    const [currentId, setCurrentId] = React.useState(null)
+    const classes = useStyles()
+    const dispatch = useDispatch()
+
+    React.useEffect(()=>{
+        dispatch(getPosts())
+    }, [ dispatch])
+  return(<p>Hello</p> )
 }
-export default connect(null, {getItems})(App)

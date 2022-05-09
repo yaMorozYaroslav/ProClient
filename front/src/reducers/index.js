@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
 
-import items from './itemSlice'
+import posts from './postred'
 
-export default combineReducers({items})
+export default combineReducers({posts})
