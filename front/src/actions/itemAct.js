@@ -3,14 +3,14 @@ import * as api from '../api'
 
 export const getItems =()=> async(dispatch)=>{
 	try{
-		const {data} = await api.fetchItems()
+		const {data} = await api.getItems()
 		dispatch({type: GET_ITEMS, payload: data})
 	}catch(error){
 		console.log(error.message)
-	}
-export const addItem =(post)=> async(disaptch)=>{
+	}}
+export const addItem =(item)=> async(dispatch)=>{
     try{
-    	const {data} = await api.addItem(post)
+    	const {data} = await api.addItem(item)
     	dispatch({type: ADD_ITEM, payload: data})
     }catch(error){
     	console.log(error)
