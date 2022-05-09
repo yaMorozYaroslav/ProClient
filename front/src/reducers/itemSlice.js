@@ -12,3 +12,4 @@ const func = (items=[], action) => {
 		     return items
 	}
 }
+export default func
