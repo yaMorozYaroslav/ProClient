@@ -1,19 +1,18 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import * as api from '../api'
-import axios from 'axios'
-const initialState = {
-	items: [],
-	status: 'idle',
-	error: null
-}
-const itemSlice = createSlice({
-	name: 'items',
-	initialState,
-	reducers: {}
-})
-export default itemSlice.reducer
+import {FETCH_ALL, CREATE, DELETE} from '../actionTypes'
 
-export const fetchItems = createAsyncThunk('items/fetchItems', async()=>{
-	const response = await api.fetchItems()
-		return response.data
-})
+const func = (posts=[], action) =>{
+	switch(action.type){
+	case DELETE:
+	    return posts.filter((post)=>post._id !== action.payload)
+	case UPDATE:
+	    return posts.map((post)=>post._id===action.payload._id
+	    	                                    ?action.payload:post)
+	case FETCH_ALL:
+        return action.payload
+	case CREATE:
+        return [...posts, action.payload]
+	default:
+	     return posts
+	}
+}
+export default func
