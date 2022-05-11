@@ -1,6 +1,6 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
-import {deleteItem} from './actions/itemAct'
+import {deleteItem} from '../actions/itemAct'
 
 export const Item =({item})=>{
 	const dispatch = useDispatch()

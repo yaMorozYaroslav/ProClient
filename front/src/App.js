@@ -1,9 +1,9 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getItems} from './actions/itemAct'
-import {Form} from './Form'
-import {Items} from './Items'
-import Auth from './Auth'
+import {Form} from './comps/Form'
+import {Items} from './comps/Items'
+import Auth from './comps/Auth'
 //import useStyles from './styles'
 
 export const App =()=> {

@@ -1,7 +1,7 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import {signin, signup} from './actions/authAct'
+import {signin, signup} from '../actions/authAct'
 
 const initialState = {name: '', email: '', password: ''}
 
