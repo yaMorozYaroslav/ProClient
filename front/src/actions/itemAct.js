@@ -1,27 +1,27 @@
 import {FETCH_ALL, CREATE, DELETE} from '../actionTypes.js'
 import * as api from '../api'
 
-export const getPosts =()=> async(dispatch)=> {
+export const getItems =()=> async(dispatch)=> {
 	try{
-		const {data} = await api.fetchPosts()
+		const {data} = await api.fetchItems()
 		dispatch({type: FETCH_ALL, payload: data})
 	}catch(error){
        console.log(error.message)
 	}
 }
 
-export const createPost =(post)=> async(dispatch)=>{
+export const createItem =(item)=> async(dispatch)=>{
 	try{
-      const {data} = await api.createPost(post)
+      const {data} = await api.createItem(item)
       dispatch({type: CREATE, payload: data})
 	}catch(error){
       console.log(error)
 	}
 }
 
-export const deletePost =(id)=> async(dispatch)=> {
+export const deleteItem =(id)=> async(dispatch)=> {
 	try{
-		await api.deletePost(id)
+		await api.deleteItem(id)
 
 		dispatch({type: DELETE, payload: id})
 	}catch(error){

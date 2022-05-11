@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux'
 import {Item} from './Item'
 
 export const Items =()=>{
-	const items = useSelector(state=>state.posts)
+	const items = useSelector(state=>state.items)
 
 return (<>{!items.length
 	?'loading'

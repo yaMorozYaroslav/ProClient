@@ -1,11 +1,11 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
-import {deletePost} from './actions/itemAct'
+import {deleteItem} from './actions/itemAct'
 
 export const Item =({item})=>{
 	const dispatch = useDispatch()
 	return(<>
 		<p>{item.name}</p>
-		<button onClick={()=>dispatch(deletePost(item._id))}>Delete</button>
+		<button onClick={()=>dispatch(deleteItem(item._id))}>Delete</button>
 		</>)
 }
