@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getItems} from './actions/itemAct'
 import {Form} from './Form'
 import {Items} from './Items'
+import Auth from './Auth'
 //import useStyles from './styles'
 
 export const App =()=> {
@@ -12,5 +13,5 @@ export const App =()=> {
    dispatch(getItems())
  },[dispatch])
  console.log(items)
-   return <><Form/><Items/></>
+   return <><Form/><Items/><Auth/></>
     }
