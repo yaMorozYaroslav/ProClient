@@ -1,7 +1,8 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getPosts} from './actions/itemAct'
-
+import {Form} from './Form'
+import {Items} from './Items'
 //import useStyles from './styles'
 
 export const App =()=> {
@@ -9,7 +10,7 @@ export const App =()=> {
  const items = useSelector(state => state.posts)
  React.useEffect(()=>{
    dispatch(getPosts())
- },[])
+ },[dispatch])
  console.log(items)
-   return <p>Hello</p>
+   return <><Form/><Items/></>
     }
