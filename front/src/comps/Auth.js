@@ -27,12 +27,12 @@ const Auth =()=>{
 	return(<>
       <section>
          <label>name</label>
-         <textarea name='name' label='name' onChange={handleChange}/>
+         <textarea name='name' label='name' type='text' onChange={handleChange}/>
          <label>email</label>
-         <textarea name='email' label='email' onChange={handleChange}/>
+         <textarea name='email' label='email' type='email' onChange={handleChange}/>
          <label>password</label>
-         <textarea name='password' label='password' onChange={handleChange}/>
-         <button type='submit'>submit</button>
+         <textarea name='password' label='password' type='password' onChange={handleChange}/>
+         <button onClick={handleSubmit}>submit</button>
          <button onClick={switchMode}>{isSignup?'Do':'Not'}</button>
       </section>
 		</>)
