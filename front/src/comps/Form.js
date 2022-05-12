@@ -9,7 +9,7 @@ export const Form = ()=> {
 	const submit =(e)=>{
 		e.preventDefault()
 	if(itemData.name){
-		dispatch(createItem(itemData))
+		dispatch(addItem(itemData))
 		clear()
 	}
 
