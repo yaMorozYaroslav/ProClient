@@ -1,17 +1,21 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {getItems} from './actions/itemAct'
-import {Form} from './comps/Form'
-import {Items} from './comps/Items'
-import Auth from './comps/Auth'
+import {Container} from '@material-ui/core'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Navbar from './components/Navbar/Navbar'
+import Home from './components/Home/Home'
+import Auth from './components/Auth/Auth'
 //import useStyles from './styles'
 
-export const App =()=> {
- const dispatch = useDispatch()
- const items = useSelector(state => state.items)
- React.useEffect(()=>{
-   dispatch(getItems())
- },[dispatch])
- console.log(items)
-   return <><Form/><Items/><Auth/></>
-    }
+export const App =()=> (
+
+    <BrowserRouter>
+     <Container maxidth="lg">
+      <Navbar/>
+    <Routes>
+      <Route path="/" exact element={<Home/>} />
+      <Route path="/auth" exact element={<Auth/>} />
+    </Routes>
+      </Container>
+   
+    </BrowserRouter>
+    )

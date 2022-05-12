@@ -1,4 +1,3 @@
-
 import React from 'react'
 import {createRoot} from 'react-dom/client'
 
@@ -7,7 +6,9 @@ import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 import reducers from './reducers'
 
-import {App} from './App'
+import {App}from './App'
+import './index.css'
+
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
 const rootElement = document.getElementById('root')

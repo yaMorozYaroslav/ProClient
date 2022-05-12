@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
 
-import items from './itemSlice'
-import auth from './authSlice'
+import posts from './postred'
+import auth from './auth'
 
-export default combineReducers({items, auth})
+export default combineReducers({posts, auth})
