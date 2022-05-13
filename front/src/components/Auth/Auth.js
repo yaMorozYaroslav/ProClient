@@ -11,7 +11,7 @@ import Input from './Input'
 import {signin, signup} from '../../actions/authact'
 
 const initialState =
-  {firstName: '', lastName: '', email: '', password: '', confirmPassword:''}
+  {name: '', email: '', password: ''}
 
  const Auth =()=> {
 	const classes = useStyles()
@@ -62,21 +62,17 @@ const initialState =
                      {
                      	isSignup && (
                               <>
+               
                  <Input 
-                        name="firstName" 
-                        label='First Name' 
-                        handleChange={handleChange}
-                        half/>
-                 <Input 
-                        name="lastName" 
-                        label='Last Name' 
+                        name="name" 
+                        label='Name' 
                         handleChange={handleChange}
                         half/>
                      </>
                       )}
                      <Input 
                            name="email"
-                           label="Email Address" 
+                           label="Email" 
                            handleChange={handleChange} 
                            type="email"/>
                      <Input
@@ -85,13 +81,7 @@ const initialState =
                            handleChange={handleChange}
                            type={showPassword?"text":"password"}
                            handleShowPassword={handleShowPassword}/>
-                        {isSignup && 
-                        	<Input 
-                        	   name="confirmPassword"
-                        	   label="Repeat Password"
-                        	   handleChange={handleChange}
-                               type="password" />
-                        }
+                      
                   </Grid>
                   
                   <Button

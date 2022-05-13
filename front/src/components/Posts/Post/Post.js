@@ -23,7 +23,7 @@ export const Post =({post, setCurrentId})=>{
            <CardMedia className={classes.media} component='div' title={post.data}/>
 		<div className={classes.overlay}>
 		    <Typography variant="h6">{post.name}</Typography>
-		    <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+		    <Typography variant="body2">{moment(post.date).fromNow()}</Typography>
 		</div>
 		<div className={classes.overlay2}>
 		  {(user?.result?.googleId === post?.creator||
@@ -37,7 +37,7 @@ export const Post =({post, setCurrentId})=>{
 		   )}
 		</div>
 		
-		 <Typography className={classes.title} variant="h5" gutterBottom>{post.data}</Typography>
+		 <Typography className={classes.name} variant="h5" gutterBottom>{post.name}</Typography>
 	  <CardContent>
 		 
 	  </CardContent>
@@ -50,7 +50,6 @@ export const Post =({post, setCurrentId})=>{
                <DeleteIcon fontSize="small" />
                Delete
          </Button>
-         	     )}
 	  </CardActions>
 		</Card>
 		)
