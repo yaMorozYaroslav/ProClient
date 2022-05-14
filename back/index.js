@@ -5,7 +5,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 
 import itemRoutes from './routes/items.js'
-//import userRoutes from './routes/user.js'
+import userRoutes from './routes/user.js'
 
 const app = express()
 dotenv.config()
@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use('/items', itemRoutes)
-//app.use('/user', userRoutes)
+app.use('/user', userRoutes)
 
 app.get('/', (req,res)=>{
 	res.send('Hello to Items API')

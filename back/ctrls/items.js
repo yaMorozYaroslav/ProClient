@@ -28,7 +28,7 @@ export const createItem = async(req,res)=> {
 
 	const item = req.body
 	const newItem = new Item({
-		  ...item, creator: req.userId, createdAt: new Data().toISOString})
+		  ...item, creator: req.userId, createdAt: new Date().toISOString()})
 	try{
 		await newItem.save()
 		res.status(201).json(newItem)
