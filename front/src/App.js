@@ -1,15 +1,16 @@
 import React from 'react'
 
 import {Container} from 'reactstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-import Navbar from './comps/Navbar'
+import {AppBar} from './comps/AppBar'
 //import List from './comps/List'
 //import Form from './comps/Form'
 
 export const App =()=> {
-	return(<>
-		<Navbar/>
+	return(<div className="App">
+		<AppBar/>
        <Container>
        </Container>
-		</>)
+		</div>)
 }
