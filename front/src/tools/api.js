@@ -11,5 +11,9 @@ API.interceptors.request.use((req)=>{
 })
 export const fetchItems =()=> API.get('/items')
 export const createItem =(newItem)=> API.item('/items', newItem)
-export const updatePost =(id, updatedItem)=> 
-                                     API.patch(`/posts/${id}`, updatedItem)
+export const editItem =(id, editedItem)=> 
+                                     API.patch(`/posts/${id}`, editedItem)
+export const deleteItem =(id)=>API.delete(`/items/${id}`)
+
+export const auth =(formData)=>API.post('/user/auth', formData)
+export const register =(formData)=>API.post('/user/register', formData)

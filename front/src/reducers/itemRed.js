@@ -1,4 +1,4 @@
-import {FETCH_ALL, CREATE, UPDATE, DELETE} from '../tools/consts'
+import {FETCH_ALL, CREATE, EDIT, DELETE} from '../tools/consts'
 
 const itemRed = (items=[], action) => {
 	switch(action.type){
@@ -6,7 +6,7 @@ const itemRed = (items=[], action) => {
               return action.payload
         case CREATE:
               return [...items, action.payload]
-        case UPDATE:
+        case EDIT:
               return items.map((item)=>
               item._id === action.payload._id ? action.payload: item)
 		case DELETE:

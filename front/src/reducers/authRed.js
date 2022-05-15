@@ -1,4 +1,4 @@
-import {AUTH, LOGOUT} from './tools/consts'
+import {AUTH, LOGOUT} from '../tools/consts'
 
 const authRed =(state = {authData:null}, action)=> {
 	switch(action.type){
