@@ -4,7 +4,7 @@ import {Button, Modal, ModalHeader, ModalBody, Form,
 import {useDispatch} from 'react-redux'
 import {authorization, registration} from '../actions/authAct'
 
-const initial = {name: '', email: '', password: '', confirmPassword: ''}
+const initial = {name: '', email: '', password: ''}
 
 const Auth =()=> {
 	const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const Auth =()=> {
     const handleShow =()=> setShow((showPassword)=> !showPassword)
     const handleSubmit =(e)=>{
     	e.preventDefault()
-    	if(registered){
+    	if(!registered){
     		dispatch(authorization(source))
     	}else{
     		dispatch(registration(source))
@@ -64,14 +64,6 @@ const Auth =()=> {
                         name="name"
                         id="name"
                         placeholder="Name"
-                        className='mb-3'
-                        onChange={handleChange}/>
-                    <Label for="confirmPassword">Confirm Password</Label>
-                    <Input
-                        type="password"
-                        name="confirmPassword"
-                        id="confirmPassword"
-                        placeholder="confirmPassword"
                         className='mb-3'
                         onChange={handleChange}/>
                   	</>)}
