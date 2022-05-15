@@ -2,7 +2,7 @@ import React from 'react'
 
 import {Collapse, Navbar, NavbarBrand, Nav, NavItem, Container} from 'reactstrap'
 
-import Auth from './comps/Auth'
+import Auth from './Auth'
 
 export const AppBar =()=> {
 	return(<>

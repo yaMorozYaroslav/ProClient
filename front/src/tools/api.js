@@ -15,5 +15,5 @@ export const editItem =(id, editedItem)=>
                                      API.patch(`/posts/${id}`, editedItem)
 export const deleteItem =(id)=>API.delete(`/items/${id}`)
 
-export const auth =(data)=>API.post('/user/auth', data)
-export const register =(data)=>API.post('/user/register', data)
+export const auth =(source)=>API.post('/user/auth', source)
+export const register =(source)=>API.post('/user/register', source)
