@@ -22,6 +22,7 @@ const Auth =()=> {
     	}else{
     		dispatch(registration(source))
     	}
+        handToggle()
     }
     const handleChange =(e)=> {
     	setSource({...source, [e.target.name]: e.target.value})
@@ -40,7 +41,7 @@ const Auth =()=> {
               {registered?'Login':'Registration'}
               </ModalHeader>
                 <ModalBody>
-                <Form onSubmit={handleSubmit, handToggle}>
+                <Form onSubmit={handleSubmit}>
                    	<Label for="email">Email</Label>
                   	<Input
                         type="email"
