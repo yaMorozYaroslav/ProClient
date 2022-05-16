@@ -9,7 +9,6 @@ export const AppBar =()=> {
 	const [user, setUser] = React.useState(
 		        JSON.parse(localStorage.getItem('profile')))
 	            const dispatch = useDispatch()
-
 	            const logout =()=>{
 	            	dispatch({type: 'LOGOUT'})
 	            	setUser(null)
@@ -23,14 +22,14 @@ export const AppBar =()=> {
 	        	}
 	        	setUser(JSON.parse(localStorage.getItem('profile')))
 	        },[dispatch])
-	        
-	        	return(<>
+	        //console.log(user.result.name)
+	return(<>
 		    <Navbar color="white" dark-expand="sm" className="mb-3">
 		     <Container>
 		      <NavbarBrand href="/">List of Goods</NavbarBrand>
-		      <p>{user?user.result.name:null}</p>
+		      <p>{user.result.name}</p>
               <Auth />
-              <Button onClick={logout}></Button>
+              <Button onClick={logout}>Logout</Button>
 		      </Container>
 		     </Navbar>
 		  </>)
