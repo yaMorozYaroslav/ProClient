@@ -40,7 +40,7 @@ const Auth =()=> {
               {registered?'Login':'Registration'}
               </ModalHeader>
                 <ModalBody>
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit, handToggle}>
                    	<Label for="email">Email</Label>
                   	<Input
                         type="email"
