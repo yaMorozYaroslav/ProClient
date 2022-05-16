@@ -2,10 +2,10 @@ import React from 'react'
 
 import {Collapse, Button, Navbar, NavbarBrand, Nav, NavItem, Container} from 'reactstrap'
 import decode from 'jwt-decode'
-import {useDispatch} from 'react-redux'
+import {useDispatch, connect} from 'react-redux'
 import Auth from './Auth'
 
-export const AppBar =()=> {
+export const AppBar =(props)=> {
 	const [user, setUser] = React.useState(
 		        JSON.parse(localStorage.getItem('profile')))
 	            const dispatch = useDispatch()
@@ -21,16 +21,22 @@ export const AppBar =()=> {
 	        	    logout()
 	        	}
 	        	setUser(JSON.parse(localStorage.getItem('profile')))
-	        },[dispatch])
-	        //console.log(user.result.name)
+	        },[props.isAuth])
+	        //console.log(props.isAuth)
 	return(<>
 		    <Navbar color="white" dark-expand="sm" className="mb-3">
 		     <Container>
 		      <NavbarBrand href="/">List of Goods</NavbarBrand>
-		      <p>{user.result.name}</p>
+		      <p>Nice to meet you, {user?user.result.name:null}. ^^</p>
               <Auth />
               <Button onClick={logout}>Logout</Button>
 		      </Container>
 		     </Navbar>
 		  </>)
 }
+const mapState =state=>{
+	return{
+		isAuth: state.auth.authData
+	}
+}
+export default connect(mapState, null)(AppBar)
