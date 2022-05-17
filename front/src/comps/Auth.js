@@ -33,7 +33,7 @@ const Auth =()=> {
     	handleShow(false)
     }
     return(<div>
-    	      <NavLink onClick={handToggle} href="#">Authorization</NavLink>
+    	      <Button onClick={handToggle} href="#">Authorization</Button>
     	    <Modal 
     	        isOpen={modal}
     	        toggle={handToggle}>

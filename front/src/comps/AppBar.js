@@ -24,12 +24,18 @@ export const AppBar =(props)=> {
 	        },[props.isAuth])
 	        //console.log(props.isAuth)
 	return(<>
-		    <Navbar color="white" dark-expand="sm" className="mb-3">
+		    <Navbar color="black" dark-expand="sm" className="mb-0">
 		     <Container>
 		      <NavbarBrand href="/">List of Goods</NavbarBrand>
-		      <p>Nice to meet you, {user?user.result.name:null}. ^^</p>
+		      <p style={{color: 'green'}} >{user?`Nice to meet you, ${user.result.name}. ^^`
+		          :'Please, authorize to add your item.'}</p>
+            <div style={{display: 'flex'}}>
               <Auth />
-              <Button onClick={logout}>Logout</Button>
+              <Button 
+                onClick={logout}
+                style={{marginLeft: '5px'}}
+                >Logout</Button>
+            </div>
 		      </Container>
 		     </Navbar>
 		  </>)
