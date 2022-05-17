@@ -19,7 +19,10 @@ const Filler =({currentId, setCurrentId})=>{
 	       React.useEffect(()=>{
 	       	if(item) setItemData(item)
 	       },[item])
-
+           
+           const handChange =(e)=> {
+    	     setItemData({...itemData, [e.target.name]: e.target.value})
+            }
 	       const clear =()=> {
 	       	 setCurrentId(null)
 	       	 setItemData({title:'', description:'', price:'', photo:''})
@@ -44,14 +47,44 @@ const Filler =({currentId, setCurrentId})=>{
              <ModalHeader>Add Your Item</ModalHeader>
              <ModalBody>
                  <Form onSubmit={handleSubmit}>
-                   <Label for="title">Item</Label>
+                   <Label for="title">Title</Label>
                    <Input
                         type="text"
                         name="title"
                         id="item"
+                        onChange={handChange} />
+                    <Label for="description">Description</Label>
+                    <Input
+                         type="text"
+                         name="description"
+                         id="description"
+                         onChange={handChange} />
+                    <Label for="price">Price</Label>
+                    <Input 
+                         type="text"
+                         name="price"
+                         id="price"
+                         style={{marginBottom:'15px'}}
+                         onChange={handChange} />
+                        </Form>
+                    <div>
+                      <FileBase 
+                         type="file"
+                         multiple={false}
+                         onDone={({base64})=>setItemData({
+                         	...itemData, photo: base64})}/>
+                    </div>
+                    <Button 
+                        color='warning'
+                        type="submit"
+                        size="lg"
+                        block={true}
+                        style={{marginTop: '5px'}}>Submit</Button>
+                       </ModalBody>
+                      </Modal>
 
 	   	      </>)
             }
-            }
-} 
+            
+
 export default Filler        
