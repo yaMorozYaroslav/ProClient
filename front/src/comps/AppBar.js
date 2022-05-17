@@ -5,10 +5,12 @@ import decode from 'jwt-decode'
 import {useDispatch, connect} from 'react-redux'
 import Auth from './Auth'
 import Filler from './Filler'
+import List from './List'
 
 export const AppBar =(props)=> {
 	const [user, setUser] = React.useState(
 		        JSON.parse(localStorage.getItem('profile')))
+	const [currentId, setCurrentId] = React.useState(null)
 	            const dispatch = useDispatch()
 	            const logout =()=>{
 	            	dispatch({type: 'LOGOUT'})
@@ -36,10 +38,11 @@ export const AppBar =(props)=> {
                 onClick={logout}
                 style={{marginLeft: '5px', marginRight: '5px'}}
                 >Logout</Button>
-              <Filler />
+              <Filler currentId={currentId} setCurrentId={setCurrentId}/>
             </div>
 		      </Container>
 		     </Navbar>
+		     <List/>
 		  </>)
 }
 const mapState =state=>{

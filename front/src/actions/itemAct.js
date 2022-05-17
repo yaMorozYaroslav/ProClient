@@ -11,9 +11,9 @@ export const getItems =()=> async(dispatch)=> {
 	}
    }
 
-export const addItem =(item)=> async(dispatch)=> {
+export const addItem =(itemData)=> async(dispatch)=> {
 	try{
-		const {data} = await api.createItem(item)
+		const {data} = await api.createItem(itemData)
 		dispatch({type: CREATE, payload: data})
 	 }
     catch(error){

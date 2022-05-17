@@ -33,12 +33,11 @@ const Filler =({currentId, setCurrentId})=>{
 
 	       	if(currentId === null){
 	       		dispatch(addItem({...itemData, name: user?.result?.name}))
-	       		clear()
 	       	}else{
 	       		dispatch(updateItem(
 	       			  currentId, {...itemData, name: user?.result?.name}))
-	       		clear()
 	       	}
+            handToggle()
 	       }
 	   return(<>
             {user
@@ -66,20 +65,21 @@ const Filler =({currentId, setCurrentId})=>{
                          id="price"
                          style={{marginBottom:'15px'}}
                          onChange={handChange} />
-                        </Form>
-                    <div>
+                         <div>
                       <FileBase 
                          type="file"
                          multiple={false}
                          onDone={({base64})=>setItemData({
-                         	...itemData, photo: base64})}/>
+                            ...itemData, photo: base64})}/>
                     </div>
                     <Button 
-                        color='warning'
                         type="submit"
+                        color='warning'
                         size="lg"
                         block={true}
                         style={{marginTop: '5px'}}>Submit</Button>
+                        </Form>
+
                        </ModalBody>
                       </Modal>
 

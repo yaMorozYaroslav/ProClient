@@ -10,7 +10,7 @@ import userRoutes from './routes/user.js'
 const app = express()
 dotenv.config()
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb'}))
 app.use(cors())
 
 app.use('/items', itemRoutes)
