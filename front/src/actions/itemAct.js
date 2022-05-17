@@ -37,6 +37,6 @@ export const removeItem =(id)=> async(dispatch)=> {
 		dispatch({type: DELETE, payload: id})
 	 }
 	catch(error){
-		consloe.log(error)
+		console.log(error)
 	}
    }

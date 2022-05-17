@@ -33,11 +33,11 @@ const Auth =()=> {
     	handleShow(false)
     }
     return(<div>
-    	      <Button onClick={handToggle} href="#">Authorization</Button>
+    	      <Button onClick={handToggle}>Authorization</Button>
     	    <Modal 
     	        isOpen={modal}
     	        toggle={handToggle}>
-              <ModalHeader toggle={handToggle}>
+              <ModalHeader>
               {registered?'Login':'Registration'}
               </ModalHeader>
                 <ModalBody>

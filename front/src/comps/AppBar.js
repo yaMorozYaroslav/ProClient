@@ -4,6 +4,7 @@ import {Collapse, Button, Navbar, NavbarBrand, Nav, NavItem, Container} from 're
 import decode from 'jwt-decode'
 import {useDispatch, connect} from 'react-redux'
 import Auth from './Auth'
+import Filler from './Filler'
 
 export const AppBar =(props)=> {
 	const [user, setUser] = React.useState(
@@ -33,8 +34,9 @@ export const AppBar =(props)=> {
               <Auth />
               <Button 
                 onClick={logout}
-                style={{marginLeft: '5px'}}
+                style={{marginLeft: '5px', marginRight: '5px'}}
                 >Logout</Button>
+              <Filler />
             </div>
 		      </Container>
 		     </Navbar>
