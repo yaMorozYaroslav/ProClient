@@ -17,7 +17,7 @@ const List =()=> {
        {items.map(item=>(<Card key={item._id}>
        <CardImg alt="unknown" src={item.photo} top width="100%" />
       <CardBody>
-        <CardTitle tag="h5">{item.title}</CardTitle>
+        <CardTitle tag="h4">{item.title}</CardTitle>
         <CardSubtitle className="mb-2 text-muted" tag="h6">
           {item.price}</CardSubtitle>
         <CardText>{item.description}</CardText>
