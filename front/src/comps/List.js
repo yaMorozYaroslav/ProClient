@@ -1,7 +1,7 @@
 import React from 'react'
 import {CardGroup, Card, CardImg, CardBody, CardTitle,
         CardSubtitle, CardText, Button} from 'reactstrap'
-import {getItems} from '../actions/itemAct'
+import {getItems, removeItem} from '../actions/itemAct'
 import {useDispatch, useSelector} from 'react-redux'
 
 const List =()=> {
@@ -21,6 +21,7 @@ const List =()=> {
         <CardSubtitle className="mb-2 text-muted" tag="h6">
           {item.price}</CardSubtitle>
         <CardText>{item.description}</CardText>
+        <Button onClick={()=>dispatch(removeItem(item._id))}>Delete</Button>
       </CardBody>
        	</Card>))}
 
