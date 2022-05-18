@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {LOGOUT} from '../tools/consts'
 import {Collapse, Button, Navbar, NavbarBrand, Nav, NavItem, Container} from 'reactstrap'
 import decode from 'jwt-decode'
 import {useDispatch, connect} from 'react-redux'
@@ -13,7 +13,7 @@ export const AppBar =(props)=> {
 	const [currentId, setCurrentId] = React.useState(null)
 	            const dispatch = useDispatch()
 	            const logout =()=>{
-	            	dispatch({type: 'LOGOUT'})
+	            	dispatch({type: LOGOUT})
 	            	setUser(null)
 	            }
 	        React.useEffect(()=>{

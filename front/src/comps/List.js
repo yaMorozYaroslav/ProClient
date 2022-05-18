@@ -14,7 +14,7 @@ const List =()=> {
 	console.log(items)
 	return(
        <CardGroup style={{display: 'grid', gridTemplateColumns: 'repeat(8, 1fr'}}>
-       {items?items.map(item=>(<Card key={item._id}>
+       {items.length?items.map(item=>(<Card key={item._id}>
        <CardImg alt="unknown" src={item.photo} top width="100%" />
       <CardBody>
         <CardTitle tag="h4">{item.title}</CardTitle>

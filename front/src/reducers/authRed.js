@@ -1,6 +1,7 @@
 import {AUTH, LOGOUT} from '../tools/consts'
 
-const authRed =(state = {authData:null}, action)=> {
+const init = {auhtData:null}
+const authRed =(state = init, action)=> {
 	switch(action.type){
 		case AUTH:
 	       localStorage.setItem('profile', JSON.stringify({...action?.data}))

@@ -6,7 +6,7 @@ export const getItems =()=> async(dispatch)=> {
 	try{
 		const {data} = await api.fetchItems()
 		dispatch({type: FETCH_ALL, payload: data})
-		dispatch({type: DOWNLOADED})
+		//dispatch({type: DOWNLOADED})
 	 }
 	catch(error){
 		console.log(error.message)
