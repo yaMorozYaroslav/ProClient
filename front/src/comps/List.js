@@ -13,8 +13,8 @@ const List =()=> {
 	}, [dispatch])
 	console.log(items)
 	return(
-       <CardGroup>
-       {items.map(item=>(<Card key={item._id}>
+       <CardGroup style={{display: 'grid', gridTemplateColumns: 'repeat(8, 1fr'}}>
+       {items?items.map(item=>(<Card key={item._id}>
        <CardImg alt="unknown" src={item.photo} top width="100%" />
       <CardBody>
         <CardTitle tag="h4">{item.title}</CardTitle>
@@ -23,8 +23,8 @@ const List =()=> {
         <CardText>{item.description}</CardText>
         <Button onClick={()=>dispatch(removeItem(item._id))}>Delete</Button>
       </CardBody>
-       	</Card>))}
-
+       	</Card>)):null}
+        
        	</CardGroup>
 		)
 }
