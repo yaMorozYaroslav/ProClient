@@ -13,7 +13,6 @@ export const getItems =()=> async(dispatch)=> {
 		console.log(error.message)
 	}
    }
-
 export const addItem =(itemData)=> async(dispatch)=> {
 	try{
 		const {data} = await api.createItem(itemData)
@@ -43,3 +42,19 @@ export const removeItem =(id)=> async(dispatch)=> {
 		console.log(error)
 	}
    }
+export const setOpen =()=> async(dispatch)=> {
+	try{
+		 dispatch({type: 'OPEN_ADD'})
+	}
+	catch(error){
+		console.log(error.message)
+	}
+}
+export const setClose =()=> async(dispatch)=> {
+	try{
+		dispatch({type: 'CLOSE_ADD'})
+	}
+	catch(error){
+		console.log(error.message)
+	}
+}

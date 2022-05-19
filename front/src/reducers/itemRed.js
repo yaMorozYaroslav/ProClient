@@ -1,7 +1,9 @@
 import {FETCH_ALL, CREATE, EDIT, DELETE} from '../tools/consts'
-const initial = {items:[], loading:true}
+const initial = {items:[], modal:false, loading:true}
 const itemRed = (state=initial, action) => {
 	switch(action.type){
+		    case 'OPEN_ADD':
+		          return {...state, modal: true}
 		    case 'START_LOADING':
 		          return {...state, loading: true}
 		    case 'END_LOADING':

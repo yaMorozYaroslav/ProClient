@@ -23,6 +23,7 @@ const List =()=> {
           {item.price}</CardSubtitle>
         <CardText>{item.description}</CardText>
         <Button onClick={()=>dispatch(removeItem(item._id))}>Delete</Button>
+        <Button onClick={e=>{setCurrentId(item._id)}}>Edit</Button>
       </CardBody>
        	</Card>)):null}
         
