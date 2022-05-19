@@ -26,7 +26,7 @@ export const AppBar =(props)=> {
 	        	}
 	        	setUser(JSON.parse(localStorage.getItem('profile')))
 	        },[props.isAuth])
-	        //console.log(props.isAuth)
+	        console.log(props.isAuth)
 	return(<>
 		    <Navbar color="black" dark-expand="sm" className="mb-0">
 		     <Container>

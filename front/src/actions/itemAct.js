@@ -4,13 +4,14 @@ import * as api from '../tools/api'
 
 export const getItems =()=> async(dispatch)=> {
 	try{
+		dispatch({type: 'START_LOADING'})
 		const {data} = await api.fetchItems()
 		dispatch({type: FETCH_ALL, payload: data})
+		dispatch({type: 'END_LOADING'})
 	 }
 	catch(error){
 		console.log(error.message)
 	}
-	//dispatch({type: DOWNLOADED})
    }
 
 export const addItem =(itemData)=> async(dispatch)=> {

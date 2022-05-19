@@ -2,7 +2,10 @@ import {FETCH_ALL, CREATE, EDIT, DELETE} from '../tools/consts'
 const initial = {items:[], loading:true}
 const itemRed = (state=initial, action) => {
 	switch(action.type){
-		   
+		    case 'START_LOADING':
+		          return {...state, loading: true}
+		    case 'END_LOADING':
+		          return {...state, loading: false}
         case FETCH_ALL:
               return {...state, loading: true, items:action.payload}
         case CREATE:
@@ -15,7 +18,7 @@ const itemRed = (state=initial, action) => {
 		      return {...state, items: state.items.filter(
 		      	                    item => item._id !== action.payload)}
 		default: 
-		         return state.items
+		         return state
 	}
 }
 export default itemRed

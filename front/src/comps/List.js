@@ -7,15 +7,15 @@ import {useDispatch, useSelector} from 'react-redux'
 const List =()=> {
 	const [currentId, setCurrentId] = React.useState(null)
 	const dispatch = useDispatch()
-    const items = useSelector(state=>state.items.items)
-    const condition = useSelector(state=>state.items.loading)
+    const {items, loading} = useSelector(state=>state.items)
 	React.useEffect(()=>{
 		dispatch(getItems())
 	}, [dispatch])
-	console.log(items)
+  if(!loading){console.log(loading)}
+	if(loading)return 'Please, wait while I wake up the server. It takes less than two minutes.'
 	return(
        <CardGroup style={{display: 'grid', gridTemplateColumns: 'repeat(8, 1fr'}}>
-       {!condition?items.map(item=>(<Card key={item._id}>
+       {items?items.map(item=>(<Card key={item._id}>
        <CardImg alt="unknown" src={item.photo} top width="100%" />
       <CardBody>
         <CardTitle tag="h4">{item.title}</CardTitle>
