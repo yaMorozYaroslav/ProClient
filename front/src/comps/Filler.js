@@ -4,7 +4,7 @@ import {Button, Modal, ModalHeader, ModalBody, Form, Label, Input}
                                                       from 'reactstrap'
 import FileBase from 'react-file-base64'
 import {useDispatch, useSelector} from 'react-redux'
-import {addItem, updateItem, setModal} from '../actions/itemAct'
+import {addItem, updateItem, setClose, setOpen} from '../actions/itemAct'
 
 const Filler =({currentId, setCurrentId})=>{
 	       const [itemData, setItemData] = React.useState({
@@ -27,7 +27,6 @@ const Filler =({currentId, setCurrentId})=>{
 	       	 setCurrentId(null)
 	       	 setItemData({title:'', description:'', price:'', photo:''})
 	       }
-	       const handToggle =()=>setModal(isModal=>!isModal)
 	       const handleSubmit =(e)=> {
 	       	e.preventDefault()
 
@@ -37,11 +36,11 @@ const Filler =({currentId, setCurrentId})=>{
 	       		dispatch(updateItem(
 	       			  currentId, {...itemData, name: user?.result?.name}))
 	       	}
-            handToggle()
+            dispatch(setClose())
 	       }
 	   return(<>
             {user
-              ?<Button color="dark" onClick={()=>dispatch(setModal())}>Add Item</Button>:null}
+              ?<Button color="dark" onClick={()=>dispatch(setOpen())}>Add Item</Button>:null}
             <Modal isOpen={modal}>
              <ModalHeader>Add Your Item</ModalHeader>
              <ModalBody>

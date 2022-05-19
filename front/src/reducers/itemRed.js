@@ -4,6 +4,8 @@ const itemRed = (state=initial, action) => {
 	switch(action.type){
 		    case 'OPEN_ADD':
 		          return {...state, modal: true}
+		    case 'CLOSE_ADD':
+		          return {...state, modal: false}
 		    case 'START_LOADING':
 		          return {...state, loading: true}
 		    case 'END_LOADING':
