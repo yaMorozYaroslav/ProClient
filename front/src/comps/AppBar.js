@@ -8,30 +8,32 @@ import Filler from './Filler'
 import List from './List'
 
 export const AppBar =(props)=> {
+
+	const dispatch = useDispatch()
 	const [user, setUser] = React.useState(
 		        JSON.parse(localStorage.getItem('profile')))
 	const [currentId, setCurrentId] = React.useState(null)
-	            const dispatch = useDispatch()
-	            const logout =()=>{
+
+	const logout =()=>{
 	            	dispatch({type: LOGOUT})
 	            	setUser(null)
 	            }
-	        React.useEffect(()=>{
+	React.useEffect(()=>{
 	        	const token = user?.token
-	        	console.log(token)
 	        	if(token){
 	        		const decodedToken = decode(token)
 	        		if(decodedToken.exp * 1000 < new Date().getTime()) logout()
 	        	    
 	        	}
 	        	setUser(JSON.parse(localStorage.getItem('profile')))
-	        },[props.isAuth])
-	        console.log(props.isAuth)
+	        },[props.isAuth, currentId])
+	        
 	return(<>
 		    <Navbar color="black" dark-expand="sm" className="mb-0">
 		     <Container>
 		      <NavbarBrand href="/">List of Goods</NavbarBrand>
-		      <p style={{color: 'green'}} >{user?`Nice to meet you, ${user.result.name}. ^^`
+		      <p style={{color: 'green'}} >{user?
+		      	  `Nice to meet you, ${user.result.name}. ^^`
 		          :'Please, authorize to add your item.'}</p>
             <div style={{display: 'flex'}}>
               <Auth />
@@ -43,7 +45,7 @@ export const AppBar =(props)=> {
             </div>
 		      </Container>
 		     </Navbar>
-		     <List/>
+		     <List setCurrentId={setCurrentId}/>
 		  </>)
 }
 const mapState =state=>{

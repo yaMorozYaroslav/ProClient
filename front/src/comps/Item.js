@@ -4,12 +4,12 @@ import {Card, CardImg, CardBody, CardTitle,
 import {useDispatch} from 'react-redux'
 import {removeItem, setOpen, setClose} from '../actions/itemAct'
 
-export const Item =({item, setCurrentId})=> {
+const Item =({item, setCurrentId})=> {
 	const dispatch = useDispatch()
  
 	const onEdit =()=>{
       dispatch(setOpen())
-      //setCurrentId(item._id)
+      setCurrentId(item._id)
     }
 return(<>
 	<Card>
@@ -20,8 +20,9 @@ return(<>
           {item.price}</CardSubtitle>
         <CardText>{item.description}</CardText>
         <Button onClick={()=>dispatch(removeItem(item._id))}>Delete</Button>
-        <Button onClick={()=>setCurrentId(item._id)}>Edit</Button>
+        <Button onClick={onEdit}>Edit</Button>
       </CardBody>
        	</Card>
        	</>)
 }
+export default Item
