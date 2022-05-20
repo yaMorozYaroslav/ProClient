@@ -1,6 +1,6 @@
 import React from 'react'
 import {LOGOUT} from '../tools/consts'
-import {Collapse, Button, Navbar, NavbarBrand, Nav, NavItem, Container} from 'reactstrap'
+import {Button, Navbar, NavbarBrand, Container} from 'reactstrap'
 import decode from 'jwt-decode'
 import {useDispatch, connect} from 'react-redux'
 import Auth from './Auth'
@@ -14,11 +14,12 @@ export const AppBar =(props)=> {
 		        JSON.parse(localStorage.getItem('profile')))
 	const [currentId, setCurrentId] = React.useState(null)
 
-	const logout =()=>{
+	const logout =e=>{
+		            e.preventDefault()
 	            	dispatch({type: LOGOUT})
 	            	setUser(null)
 	            }
-	React.useEffect(()=>{
+	React.useEffect(logout=>{
 	        	const token = user?.token
 	        	if(token){
 	        		const decodedToken = decode(token)
@@ -26,8 +27,7 @@ export const AppBar =(props)=> {
 	        	    
 	        	}
 	        	setUser(JSON.parse(localStorage.getItem('profile')))
-	        },[props.isAuth, currentId])
-	        
+	        },[props.isAuth, currentId, user?.token])
 	return(<>
 		    <Navbar color="black" dark-expand="sm" className="mb-0">
 		     <Container>

@@ -2,7 +2,7 @@ import React from 'react'
 import {Card, CardImg, CardBody, CardTitle,
         CardSubtitle, CardText, Button} from 'reactstrap'
 import {useDispatch} from 'react-redux'
-import {removeItem, setOpen, setClose} from '../actions/itemAct'
+import {removeItem, setOpen} from '../actions/itemAct'
 
 const Item =({item, setCurrentId})=> {
 	const dispatch = useDispatch()

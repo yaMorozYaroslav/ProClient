@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, Modal, ModalHeader, ModalBody, Form,
-        Label, Input, NavLink, Container} from 'reactstrap'
+        Label, Input} from 'reactstrap'
 import {useDispatch, connect} from 'react-redux'
 import {authorization, registration} from '../actions/authAct'
 
@@ -8,7 +8,6 @@ const initialState = {name: '', email: '', password: ''}
 
 const Auth =()=> {
 	const dispatch = useDispatch()
-
 	const [show, setShow] = React.useState(false)
 	const [modal, setModal] = React.useState(false)
 	const [registered, setRegistered] = React.useState(false)
@@ -52,13 +51,15 @@ const Auth =()=> {
                         onChange={handleChange}/>
                     <Label for="password">Password</Label>
                     <Input
-                        type="password"
+                        type={!show?"password":"text"}
                         name="password"
                         id="password"
                         placeholder="Password"
                         className='mb-3'
                         onChange={handleChange}/>
+                    <Button onClick={handleShow}>Show</Button>
                         {registered && (<>
+                    }
                     <Label for="name">Name</Label>
                     <Input
                         type="name"

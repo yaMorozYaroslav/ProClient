@@ -1,5 +1,4 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import {Button, Modal, ModalHeader, ModalBody, Form, Label, Input} 
                                                       from 'reactstrap'
 import FileBase from 'react-file-base64'

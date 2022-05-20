@@ -1,6 +1,6 @@
 import React from 'react'
 import {CardGroup } from 'reactstrap'
-import {useDispatch, useSelector, connect} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {getItems} from '../actions/itemAct'
 import Item from './Item'
 const List =({setCurrentId})=> {
