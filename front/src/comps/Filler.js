@@ -11,9 +11,10 @@ const Filler =({currentId, setCurrentId})=>{
 	       	title:'', description:'', price:'', photo:''
 	       })
 	       const modal = useSelector(state=>state.items.modal)
-	       const item = useSelector((state)=>
-	       	          currentId?state.items.find((i)=>i._id === currentId):null)
-	       const dispatch = useDispatch()
+	       const item = useSelector(state => (currentId 
+                                 ? state.items.items.find((message) => 
+                                  message._id === currentId) : null));
+           const dispatch = useDispatch()
 	       const user = JSON.parse(localStorage.getItem('profile')) 	
 
 	       React.useEffect(()=>{
@@ -50,6 +51,7 @@ const Filler =({currentId, setCurrentId})=>{
                         type="text"
                         name="title"
                         id="item"
+                        value={itemData.title}
                         onChange={handChange} />
                     <Label for="description">Description</Label>
                     <Input
