@@ -41,7 +41,7 @@ const Filler =({currentId, setCurrentId})=>{
 	   return(<>
             {user
               ?<Button color="dark" onClick={()=>dispatch(setOpen())}>Add Item</Button>:null}
-            <Modal isOpen={modal}>
+            <Modal isOpen={modal} toggle={()=>dispatch(setClose())}>
              <ModalHeader>Add Your Item</ModalHeader>
              <ModalBody>
                  <Form onSubmit={handleSubmit}>

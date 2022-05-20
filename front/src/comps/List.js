@@ -1,13 +1,17 @@
 import React from 'react'
 import {CardGroup, Card, CardImg, CardBody, CardTitle,
         CardSubtitle, CardText, Button} from 'reactstrap'
-import {getItems, removeItem} from '../actions/itemAct'
+import {getItems, removeItem, setOpen, setClose} from '../actions/itemAct'
 import {useDispatch, useSelector} from 'react-redux'
 
 const List =()=> {
-	const [currentId, setCurrentId] = React.useState(null)
+	const [setCurrentId] = React.useState(null)
 	const dispatch = useDispatch()
     const {items, loading} = useSelector(state=>state.items)
+    const onEdit =(thing)=>{
+      dispatch(setOpen())
+      setCurrentId(thing._id)
+    }
 	React.useEffect(()=>{
 		dispatch(getItems())
 	}, [dispatch])
@@ -23,7 +27,7 @@ const List =()=> {
           {item.price}</CardSubtitle>
         <CardText>{item.description}</CardText>
         <Button onClick={()=>dispatch(removeItem(item._id))}>Delete</Button>
-        <Button onClick={e=>{setCurrentId(item._id)}}>Edit</Button>
+        <Button onClick={onEdit} thing={item}>Edit</Button>
       </CardBody>
        	</Card>)):null}
         
