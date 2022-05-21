@@ -1,13 +1,12 @@
 import React from 'react'
 import {CardGroup } from 'reactstrap'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch, useSelector, connect} from 'react-redux'
 import {getItems} from '../actions/itemAct'
 import Item from './Item'
 const List =({setCurrentId})=> {
 	const dispatch = useDispatch()
     const {items, loading} = useSelector(state=>state.items)
     const isAuth = useSelector(state=>state.auth)
-    console.log(isAuth)
 	React.useEffect(()=>{
 		dispatch(getItems())
 	}, [dispatch])

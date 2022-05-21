@@ -18,13 +18,11 @@ export const AppBar =(props)=> {
 	            	setUser(null)
 	            }
 	
-	React.useEffect((dispatch)=>{
+	React.useEffect(()=>{
 	        	const token = user?.token
 	        	if(token){
 	        		const decodedToken = decode(token)
-	        		if(decodedToken.exp * 1000 < new Date().getTime())
-	        		dispatch({type: LOGOUT})
-	        	  setUser(null)
+	        		if(decodedToken.exp * 1000 < new Date().getTime()) logout()
 	        	    
 	        	}
 	        	setUser(JSON.parse(localStorage.getItem('profile')))

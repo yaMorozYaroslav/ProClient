@@ -11,8 +11,8 @@ const Item =({item, setCurrentId})=> {
       dispatch(setOpen())
       setCurrentId(item._id)
     }
-return(<div style={{height: '200px',width:'150px'}}>
-	<Card >
+return(<>
+	<Card>
        <CardImg alt="unknown" src={item.photo} top width="100%" />
       <CardBody>
         <CardTitle tag="h4">{item.title}</CardTitle>
@@ -23,6 +23,6 @@ return(<div style={{height: '200px',width:'150px'}}>
         <Button onClick={onEdit}>Edit</Button>
       </CardBody>
        	</Card>
-       	</div>)
+       	</>)
 }
 export default Item

@@ -21,6 +21,7 @@ const Filler =({currentId, setCurrentId})=>{
 	       },[item])
            
            const handChange =(e)=> {
+            if(e.target.value.length<6)
     	     setItemData({...itemData, [e.target.name]: e.target.value})
             }
 	       const clear =()=> {
@@ -29,7 +30,7 @@ const Filler =({currentId, setCurrentId})=>{
 	       }
 	       const handleSubmit =(e)=> {
 	       	e.preventDefault()
-
+            //if(itemData.title&&itemData.description&&itemData.price&&itemData.photo){
 	       	if(currentId === null){
 	       		dispatch(addItem({...itemData, name: user?.result?.name}))
                 clear()
@@ -39,6 +40,7 @@ const Filler =({currentId, setCurrentId})=>{
                 clear()
 	       	}
             dispatch(setClose())
+        //}
 	       }
 	   return(<>
             {user
