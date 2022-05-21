@@ -13,7 +13,9 @@ export const AppBar =(props)=> {
 	const dispatch = useDispatch()
 	const [user, setUser] = React.useState(
 		        JSON.parse(localStorage.getItem('profile')))
+
 	const [currentId, setCurrentId] = React.useState(null)
+	const [soloId, setSoloId] = React.useState(null)
   const logout =()=>{
 		            dispatch({type: LOGOUT})
 	            	setUser(null)
@@ -42,11 +44,11 @@ export const AppBar =(props)=> {
                 style={{marginLeft: '5px', marginRight: '5px'}}
                 >Logout</Button>
               <Filler currentId={currentId} setCurrentId={setCurrentId}/>
-              <Solo currentId={currentId} setCurrentId={setCurrentId}/>
+              <Solo soloId={soloId} setSoloId={setSoloId}/>
             </div>
 		      </Container>
 		     </Navbar>
-		     <List setCurrentId={setCurrentId}/>
+		     <List setCurrentId={setCurrentId} setSoloId={setSoloId}/>
 		  </>)
 }
 const mapState =state=>{

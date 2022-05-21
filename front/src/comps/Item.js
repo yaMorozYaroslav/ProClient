@@ -4,16 +4,16 @@ import {Card, CardImg, CardBody, CardTitle,
 import {useDispatch} from 'react-redux'
 import {removeItem, setOpen} from '../actions/itemAct'
 
-const Item =({item, setCurrentId})=> {
+const Item =({item, setSoloId, setCurrentId})=> {
 	const dispatch = useDispatch()
- 
+  const onSingle =()=>setSoloId(item._id)
 	const onEdit =()=>{
       dispatch(setOpen())
       setCurrentId(item._id)
     }
 return(<>
 	<Card>
-       <CardImg alt="unknown" src={item.photo} top width="100%" />
+       <CardImg alt="unknown" onClick={onSingle} src={item.photo} top width="100%" />
       <CardBody>
         <CardTitle tag="h4">{item.title}</CardTitle>
         <CardSubtitle className="mb-2 text-muted" tag="h6">

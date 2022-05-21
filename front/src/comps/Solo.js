@@ -2,16 +2,10 @@ import React from 'react'
 import {Button, Modal, ModalHeader, ModalBody, Label} from 'reactstrap'
 import {useSelector} from 'react-redux'
 
-const Solo =({currentId, setCurrentId})=>{
-	const item = useSelector(state => (currentId 
-                                 ? state.items.items.find((prop) => 
-                                  prop._id === currentId) : null))
-	console.log(item?item.description:null)
-	const clear =()=> {
-	       	 setCurrentId(null)
-	       	     }
-	return(<>
-          null
-		  </>)
+const Solo =(soloId, setSoloId)=> {
+const item = useSelector(state => (soloId 
+                                 ? state.items.items.find((message) => 
+                                  message._id === soloId) : null));
+ if(item)console.log(item)
 }
 export default Solo
