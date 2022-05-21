@@ -42,7 +42,7 @@ export const removeItem =(id)=> async(dispatch)=> {
 		console.log(error)
 	}
    }
-export const setOpen =()=> async(dispatch)=> {
+export const formOpen =()=> async(dispatch)=> {
 	try{
 		 dispatch({type: 'OPEN_ADD'})
 	}
@@ -50,7 +50,7 @@ export const setOpen =()=> async(dispatch)=> {
 		console.log(error.message)
 	}
 }
-export const setClose =()=> async(dispatch)=> {
+export const formClose =()=> async(dispatch)=> {
 	try{
 		dispatch({type: 'CLOSE_ADD'})
 	}

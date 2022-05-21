@@ -3,7 +3,7 @@ import {Button, Modal, ModalHeader, ModalBody, Form, Label, Input}
                                                       from 'reactstrap'
 import FileBase from 'react-file-base64'
 import {useDispatch, useSelector} from 'react-redux'
-import {addItem, updateItem, setClose, setOpen} from '../actions/itemAct'
+import {addItem, updateItem, formClose, formOpen} from '../actions/itemAct'
 
 const Filler =({currentId, setCurrentId})=>{
 	       const [itemData, setItemData] = React.useState({
@@ -39,14 +39,14 @@ const Filler =({currentId, setCurrentId})=>{
 	       			  currentId, {...itemData, name: user?.result?.name}))
                 clear()
 	       	}
-            dispatch(setClose())
+            dispatch(formClose())
         }else{alert('Fill all the fields.')
 	       }
         }
 	   return(<>
             {user
-              ?<Button color="dark" onClick={()=>dispatch(setOpen())}>Add Item</Button>:null}
-            <Modal isOpen={modal} toggle={()=>dispatch(setClose())}>
+              ?<Button color="dark" onClick={()=>dispatch(formOpen())}>Add Item</Button>:null}
+            <Modal isOpen={modal} toggle={()=>dispatch(formClose())}>
              <ModalHeader>Add Your Item</ModalHeader>
              <ModalBody>
                  <Form onSubmit={handleSubmit}>
@@ -64,7 +64,8 @@ const Filler =({currentId, setCurrentId})=>{
                          id="description"
                          value={itemData.description}
                          onChange={(e)=>{
-                            if(e.target.value.length<45){setItemData({...itemData, description: e.target.value})}}} />
+                            if(e.target.value.length<45){setItemData({
+                                 ...itemData, description: e.target.value})}}} />
                     <Label for="price">Price</Label>
                     <Input 
                          type="text"
