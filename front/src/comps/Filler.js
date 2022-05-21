@@ -32,9 +32,11 @@ const Filler =({currentId, setCurrentId})=>{
 
 	       	if(currentId === null){
 	       		dispatch(addItem({...itemData, name: user?.result?.name}))
+                clear()
 	       	}else{
 	       		dispatch(updateItem(
 	       			  currentId, {...itemData, name: user?.result?.name}))
+                clear()
 	       	}
             dispatch(setClose())
 	       }

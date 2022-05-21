@@ -56,8 +56,10 @@ const Auth =()=> {
                         id="password"
                         placeholder="Password"
                         className='mb-3'
-                        onChange={handleChange}/>
-                    <Button onClick={handleShow}>Show</Button>
+                        onChange={handleChange} />
+                    <Button 
+                         onClick={handleShow}  
+                         style={{display:'flex'}}>Show Password</Button>
                         {registered && (<>
                     }
                     <Label for="name">Name</Label>
