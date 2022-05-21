@@ -6,6 +6,7 @@ import {useDispatch, connect} from 'react-redux'
 import Auth from './Auth'
 import Filler from './Filler'
 import List from './List'
+import Solo from './Solo'
 
 export const AppBar =(props)=> {
 
@@ -41,6 +42,7 @@ export const AppBar =(props)=> {
                 style={{marginLeft: '5px', marginRight: '5px'}}
                 >Logout</Button>
               <Filler currentId={currentId} setCurrentId={setCurrentId}/>
+              <Solo currentId={currentId} setCurrentId={setCurrentId}/>
             </div>
 		      </Container>
 		     </Navbar>

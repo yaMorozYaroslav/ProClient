@@ -21,7 +21,7 @@ const Filler =({currentId, setCurrentId})=>{
 	       },[item])
            
            const handChange =(e)=> {
-            if(e.target.value.length<6)
+            if(e.target.value.length<10)
     	     setItemData({...itemData, [e.target.name]: e.target.value})
             }
 	       const clear =()=> {
@@ -30,7 +30,7 @@ const Filler =({currentId, setCurrentId})=>{
 	       }
 	       const handleSubmit =(e)=> {
 	       	e.preventDefault()
-            //if(itemData.title&&itemData.description&&itemData.price&&itemData.photo){
+            if(itemData.title&&itemData.description&&itemData.price&&itemData.photo){
 	       	if(currentId === null){
 	       		dispatch(addItem({...itemData, name: user?.result?.name}))
                 clear()
@@ -40,8 +40,9 @@ const Filler =({currentId, setCurrentId})=>{
                 clear()
 	       	}
             dispatch(setClose())
-        //}
+        }else{alert('Fill all the fields.')
 	       }
+        }
 	   return(<>
             {user
               ?<Button color="dark" onClick={()=>dispatch(setOpen())}>Add Item</Button>:null}
@@ -62,7 +63,8 @@ const Filler =({currentId, setCurrentId})=>{
                          name="description"
                          id="description"
                          value={itemData.description}
-                         onChange={handChange} />
+                         onChange={(e)=>{
+                            if(e.target.value.length<45){setItemData({...itemData, description: e.target.value})}}} />
                     <Label for="price">Price</Label>
                     <Input 
                          type="text"
