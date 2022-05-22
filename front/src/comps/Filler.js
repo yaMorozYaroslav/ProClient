@@ -1,5 +1,6 @@
 import React from 'react'
-import {Button, Modal, ModalHeader, ModalBody, Form, Label, Input} 
+import {Button, Modal, ModalHeader, ModalBody,
+Form, Label, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem} 
                                                       from 'reactstrap'
 import FileBase from 'react-file-base64'
 import {useDispatch, useSelector} from 'react-redux'
@@ -7,8 +8,8 @@ import {addItem, updateItem, formClose, formOpen} from '../actions/itemAct'
 
 const Filler =({currentId, setCurrentId})=>{
 	       const [itemData, setItemData] = React.useState({
-	       	title:'', description:'', price:'', photo:''
-	       })
+	       	      title:'', description:'', price:'', photo:''})
+           const [click, setClick] = React.useState(null)
 	       const modal = useSelector(state=>state.items.modal)
 	       const item = useSelector(state => (currentId 
                                  ? state.items.items.find((message) => 
@@ -19,7 +20,7 @@ const Filler =({currentId, setCurrentId})=>{
 	       React.useEffect(()=>{
 	       	if(item){setItemData(item)}
 	       },[item])
-           
+           const handClick =()=> setClick(clicked=>!clicked)
            const handChange =(e)=> {
             if(e.target.value.length<10)
     	     setItemData({...itemData, [e.target.name]: e.target.value})
@@ -66,13 +67,21 @@ const Filler =({currentId, setCurrentId})=>{
                                  ...itemData, description: e.target.value})}}} />
                     <Label for="price">Price</Label>
                     <Input 
-                         type="text"
+                         type="number"
                          name="price"
                          id="price"
                          value={itemData.price}
                          style={{marginBottom:'15px'}}
                          onChange={handChange} />
-                         <section>
+                   <section>
+                    <Dropdown isOpen={click==!null} toggle={handClick}>
+                     <DropdownToggle caret>Dropdown</DropdownToggle>
+                      <DropdownMenu>
+                       <DropdownItem>Item</DropdownItem>
+                      </DropdownMenu>
+                     </Dropdown>
+                    </section>
+                    <section>
                       <FileBase 
                          type="file"
                          multiple={false}

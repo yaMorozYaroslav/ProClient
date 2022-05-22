@@ -12,7 +12,7 @@ const clear =()=> {
            }
  if(item){
     return(<>
-        <Modal isOpen={item} toggle={clear}>
+        <Modal isOpen={item!==null} toggle={clear}>
          <Card><CardImg alt="impossible" src={item.photo}/></Card>
         </Modal>
         </>)
