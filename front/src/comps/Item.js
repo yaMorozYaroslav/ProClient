@@ -17,8 +17,9 @@ return(<>
       <CardBody>
         <CardTitle tag="h4">{item.title}</CardTitle>
         <CardSubtitle className="mb-2 text-muted" tag="h6">
-          {item.price}</CardSubtitle>
+          {item.price}and{item.condition}</CardSubtitle>
         <CardText>{item.description.length>10?item.description.slice(0,10):item.description}</CardText>
+      
         <Button onClick={()=>dispatch(removeItem(item._id))}>Delete</Button>
         <Button onClick={onEdit}>Edit</Button>
       </CardBody>

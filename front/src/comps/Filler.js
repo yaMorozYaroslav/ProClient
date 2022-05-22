@@ -1,14 +1,19 @@
 import React from 'react'
-import {Button, Modal, ModalHeader, ModalBody,
-Form, Label, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem} 
-                                                      from 'reactstrap'
+import {Button, Modal, ModalHeader, ModalBody, Form, Label, Input} 
+                                                       from 'reactstrap'
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
+import BootstrapSelect from 'react-bootstrap-select-dropdown'
 import FileBase from 'react-file-base64'
 import {useDispatch, useSelector} from 'react-redux'
 import {addItem, updateItem, formClose, formOpen} from '../actions/itemAct'
 
+const options = [{value: 'new', value: 'used', value: 'used'}]
+
 const Filler =({currentId, setCurrentId})=>{
 	       const [itemData, setItemData] = React.useState({
-	       	      title:'', description:'', price:'', photo:''})
+	   title:'', description:'', price:'', condition:'', photo:''})
+
            const [click, setClick] = React.useState(null)
 	       const modal = useSelector(state=>state.items.modal)
 	       const item = useSelector(state => (currentId 
@@ -20,6 +25,7 @@ const Filler =({currentId, setCurrentId})=>{
 	       React.useEffect(()=>{
 	       	if(item){setItemData(item)}
 	       },[item])
+           const handDrop =(e)=> setItemData({...itemData, condition: e.target.value})
            const handClick =()=> setClick(clicked=>!clicked)
            const handChange =(e)=> {
             if(e.target.value.length<10)
@@ -74,12 +80,8 @@ const Filler =({currentId, setCurrentId})=>{
                          style={{marginBottom:'15px'}}
                          onChange={handChange} />
                    <section>
-                    <Dropdown isOpen={click==!null} toggle={handClick}>
-                     <DropdownToggle caret>Dropdown</DropdownToggle>
-                      <DropdownMenu>
-                       <DropdownItem>Item</DropdownItem>
-                      </DropdownMenu>
-                     </Dropdown>
+                  
+                           
                     </section>
                     <section>
                       <FileBase 
@@ -106,3 +108,29 @@ const Filler =({currentId, setCurrentId})=>{
             
 
 export default Filler        
+
+                       /*<select 
+                       id="condition"
+                       name="condition" 
+                       value={itemData.condition} 
+                       onChange={handDrop}>
+                       <option>First</option>
+                       <option>Second</option>
+                       </select>
+                                 */
+
+                                /* <Dropdown 
+                              isOpen={click!==null}
+                              toggle={handClick}
+                              type="text"
+                              id="condition"
+                              value={itemData.condition}
+                              >
+                     <DropdownToggle 
+                               caret>{itemData.condition}</DropdownToggle>
+                      <DropdownMenu.Select>
+                       <DropdownItem   onClick={handDrop} >new</DropdownItem>
+                       <option>used</option>
+                       <DropdownItem>antique</DropdownItem>
+                      </DropdownMenu.Select>
+                     </Dropdown>*/
