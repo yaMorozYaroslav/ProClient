@@ -30,8 +30,7 @@ const Filler =({currentId, setCurrentId})=>{
 	       }
 	       const handleSubmit =(e)=> {
 	       	e.preventDefault()
-            if(itemData.title&&itemData.description&&itemData.price&&itemData.photo){
-	       	if(currentId === null){
+            if(currentId === null){
 	       		dispatch(addItem({...itemData, name: user?.result?.name}))
                 clear()
 	       	}else{
@@ -40,8 +39,7 @@ const Filler =({currentId, setCurrentId})=>{
                 clear()
 	       	}
             dispatch(formClose())
-        }else{alert('Fill all the fields.')
-	       }
+    
         }
 	   return(<>
             {user
@@ -54,7 +52,7 @@ const Filler =({currentId, setCurrentId})=>{
                    <Input
                         type="text"
                         name="title"
-                        id="item"
+                        id="title"
                         value={itemData.title}
                         onChange={handChange} />
                     <Label for="description">Description</Label>
@@ -74,20 +72,21 @@ const Filler =({currentId, setCurrentId})=>{
                          value={itemData.price}
                          style={{marginBottom:'15px'}}
                          onChange={handChange} />
-                         <div>
+                         <section>
                       <FileBase 
                          type="file"
                          multiple={false}
                          value={itemData.photo}
                          onDone={({base64})=>setItemData({
                             ...itemData, photo: base64})}/>
-                    </div>
+                    </section>
                     <Button 
                         type="submit"
                         color='warning'
                         size="lg"
                         block={true}
                         style={{marginTop: '5px'}}>Submit</Button>
+
                         </Form>
 
                        </ModalBody>

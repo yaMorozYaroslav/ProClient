@@ -1,5 +1,6 @@
 import React from 'react'
-import {Button, Modal, ModalHeader, ModalBody, Label} from 'reactstrap'
+import {Button, Modal, ModalHeader, ModalBody, Card,
+   CardImg, CardBody, CardTitle,CardSubtitle, CardText} from 'reactstrap'
 import {useSelector} from 'react-redux'
 
 const Solo =({soloId, setSoloId})=> {
@@ -12,7 +13,7 @@ const clear =()=> {
  if(item){
     return(<>
         <Modal isOpen={item} toggle={clear}>
-        <ModalHeader>{item.title}</ModalHeader>
+         <Card><CardImg alt="impossible" src={item.photo}/></Card>
         </Modal>
         </>)
 }

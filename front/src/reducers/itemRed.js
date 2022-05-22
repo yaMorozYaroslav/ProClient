@@ -15,9 +15,8 @@ const itemRed = (state=initial, action) => {
         case CREATE:
               return {...state, items: [...state.items, action.payload]}
         case EDIT:
-              return {...state, items: state.items.map(
-                                   item => item._id === action.payload._id 
-                                   ? action.payload : item)}
+      return { ...state, items: state.items.map((item) =>
+        (item._id === action.payload._id ? action.payload : item)) };
 		case DELETE:
 		      return {...state, items: state.items.filter(
 		      	                    item => item._id !== action.payload)}

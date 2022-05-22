@@ -23,9 +23,9 @@ export const addItem =(itemData)=> async(dispatch)=> {
     }
    }
 
-export const updateItem =(id, item)=> async(dispatch)=> {
+export const updateItem =(id, itemData)=> async(dispatch)=> {
 	try{
-		const {data} = await api.editItem(id, item)
+		const {data} = await api.editItem(id, itemData)
 		dispatch({type: EDIT, payload: data})
 	 }
 	catch(error){
