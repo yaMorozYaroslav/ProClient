@@ -1,19 +1,15 @@
 import React from 'react'
-import {Button, Modal, ModalHeader, ModalBody, Form, Label, Input} 
-                                                       from 'reactstrap'
-import DropdownButton from 'react-bootstrap/DropdownButton'
-import Dropdown from 'react-bootstrap/Dropdown'
-import BootstrapSelect from 'react-bootstrap-select-dropdown'
+import {Button, Modal, ModalHeader, ModalBody,
+                            Form, Label, Input} from 'reactstrap'
+import Select from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
 import FileBase from 'react-file-base64'
 import {useDispatch, useSelector} from 'react-redux'
 import {addItem, updateItem, formClose, formOpen} from '../actions/itemAct'
 
-const options = [{value: 'new', value: 'used', value: 'used'}]
-
 const Filler =({currentId, setCurrentId})=>{
 	       const [itemData, setItemData] = React.useState({
 	   title:'', description:'', price:'', condition:'', photo:''})
-
            const [click, setClick] = React.useState(null)
 	       const modal = useSelector(state=>state.items.modal)
 	       const item = useSelector(state => (currentId 
@@ -80,8 +76,14 @@ const Filler =({currentId, setCurrentId})=>{
                          style={{marginBottom:'15px'}}
                          onChange={handChange} />
                    <section>
-                  
-                           
+                    <Select
+                        name="condition"
+                        id="condition"
+                        value={itemData.condition}
+                        label="Condition"
+                        onChange={handChange}>
+                     <MenuItem value="ten">Ten</MenuItem>
+                    </Select>
                     </section>
                     <section>
                       <FileBase 
@@ -118,19 +120,3 @@ export default Filler
                        <option>Second</option>
                        </select>
                                  */
-
-                                /* <Dropdown 
-                              isOpen={click!==null}
-                              toggle={handClick}
-                              type="text"
-                              id="condition"
-                              value={itemData.condition}
-                              >
-                     <DropdownToggle 
-                               caret>{itemData.condition}</DropdownToggle>
-                      <DropdownMenu.Select>
-                       <DropdownItem   onClick={handDrop} >new</DropdownItem>
-                       <option>used</option>
-                       <DropdownItem>antique</DropdownItem>
-                      </DropdownMenu.Select>
-                     </Dropdown>*/
