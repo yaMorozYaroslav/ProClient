@@ -19,7 +19,8 @@ const clear =()=> {
          <Card>
             <CardImg 
                    alt="impossible" 
-                   src={item.photo}/>
+                   src={item.photo}
+                   style={{marginLeft:'20%', width: '60%'}}/>
             <CardText style={{fontSize:"30px"}}>{item.description}</CardText>
             <CardSubtitle>Price: {item.price} && Condition: {item.condition}</CardSubtitle>
          </Card>

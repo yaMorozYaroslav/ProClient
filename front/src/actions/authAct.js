@@ -7,7 +7,7 @@ export const authorization =source=> async(dispatch)=> {
 		dispatch({type: AUTH, data})
 	   }
 	catch(error){
-		console.log(error)
+		alert('Something wrong.')
       }
      }
 

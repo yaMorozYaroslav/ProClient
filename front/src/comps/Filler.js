@@ -21,15 +21,18 @@ const Filler =({currentId, setCurrentId})=>{
 	       	if(item){setItemData(item)}
 	       },[item])
            const handChange =(e)=> {
-            if(e.target.value.length<10)
+            if(e.target.value.length<9)
     	     setItemData({...itemData, [e.target.name]: e.target.value})
             }
 	       const clear =()=> {
 	       	 setCurrentId(null)
-	       	 setItemData({title:'', description:'', price:'', photo:''})
+	       	 setItemData({
+              title:'', description:'', price:'', condition: '', photo:''})
 	       }
 	       const handleSubmit =(e)=> {
 	       	e.preventDefault()
+           if(itemData.title&&itemData.description.length>15&&itemData.price
+              &&itemData.condition&&itemData.photo){
             if(currentId === null){
 	       		dispatch(addItem({...itemData, name: user?.result?.name}))
                 clear()
@@ -39,7 +42,7 @@ const Filler =({currentId, setCurrentId})=>{
                 clear()
 	       	}
             dispatch(formClose())
-    
+            }else{alert('Fill in all fields and/or write a longer description.')}
         }
 	   return(<>
             {user

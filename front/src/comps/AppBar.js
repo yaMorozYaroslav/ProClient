@@ -21,7 +21,7 @@ export const AppBar =(props)=> {
 	            	setUser(null)
 	            }
 	
-	React.useEffect((dispatch)=>{
+	React.useEffect(()=>{
 	        	const token = user?.token
 	        	if(token){
 	        		const decodedToken = decode(token)
@@ -31,14 +31,15 @@ export const AppBar =(props)=> {
 	            }
 	        	}
 	        	setUser(JSON.parse(localStorage.getItem('profile')))
-	        },[props.isAuth, currentId, user?.token])
+	        },[props.isAuth, currentId, user?.token, dispatch])
 	return(<>
 		    <Navbar color="black" dark-expand="sm" className="mb-0">
 		     <Container>
-		      <NavbarBrand href="/">List of Goods</NavbarBrand>
-		      <p style={{color: 'green'}} >{user?
+		      <NavbarBrand href="/" style={{fontSize: '25px'}}>List of Goods</NavbarBrand>
+		      <p style={{color: 'green', fontSize: '20px'}} >{user?
 		      	  `Nice to meet you, ${user.result.name}. ^^`
 		          :'Please, authorize to add your item.'}</p>
+
             <div style={{display: 'flex'}}>
               <Auth />
               <Button 
