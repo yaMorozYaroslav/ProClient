@@ -77,12 +77,13 @@ const Filler =({currentId, setCurrentId})=>{
                          onChange={handChange} />
                    <section>
                     <Select
-                        name="condition"
                         id="condition"
+                        name=""
                         value={itemData.condition}
-                        label="Condition"
-                        onChange={handChange}>
-                     <MenuItem value="ten">Ten</MenuItem>
+                        onChange={handDrop}>
+                     <MenuItem value="new">new</MenuItem>
+                     <MenuItem value="used">used</MenuItem>
+                     <MenuItem value="antique">antique</MenuItem>
                     </Select>
                     </section>
                     <section>

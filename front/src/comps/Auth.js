@@ -4,7 +4,7 @@ import {Button, Modal, ModalHeader, ModalBody, Form,
 import {useDispatch, connect} from 'react-redux'
 import {authorization, registration} from '../actions/authAct'
 
-const initialState = {name: '', email: '', password: ''}
+const initialState = {name: '', email: '', password: '', confPass: ''}
 
 const Auth =()=> {
 	const dispatch = useDispatch()
@@ -18,10 +18,14 @@ const Auth =()=> {
     	e.preventDefault()
     	if(!registered){
     		dispatch(authorization(source))
+            handToggle()
     	}else{
+            if(source.password === source.confPass){
     		dispatch(registration(source))
+            handToggle()
+         }else{alert('Different passwords.')}
     	}
-        handToggle()
+        
     }
     const handleChange =(e)=> {
     	setSource({...source, [e.target.name]: e.target.value})
@@ -32,12 +36,16 @@ const Auth =()=> {
     	handleShow(false)
     }
     return(<div>
-    	      <Button onClick={handToggle}>Authorization</Button>
+    	      <Button
+                      onClick={handToggle}
+                      size="lg"
+                      color="success"
+                       >Authorization</Button>
     	    <Modal 
     	        isOpen={modal}
     	        toggle={handToggle}>
-              <ModalHeader>
-              {registered?'Login':'Registration'}
+              <ModalHeader style={{justifyContent: 'center'}}>
+              {!registered?'Login':'Registration'}
               </ModalHeader>
                 <ModalBody>
                 <Form onSubmit={handleSubmit}>
@@ -51,17 +59,15 @@ const Auth =()=> {
                         onChange={handleChange}/>
                     <Label for="password">Password</Label>
                     <Input
-                        type={!show?"password":"text"}
+                        type={show?"password":"text"}
                         name="password"
                         id="password"
                         placeholder="Password"
                         className='mb-3'
                         onChange={handleChange} />
-                    <Button 
-                         onClick={handleShow}  
-                         style={{display:'flex'}}>Show Password</Button>
+                    
                         {registered && (<>
-                    }
+                    
                     <Label for="name">Name</Label>
                     <Input
                         type="name"
@@ -70,9 +76,30 @@ const Auth =()=> {
                         placeholder="Name"
                         className='mb-3'
                         onChange={handleChange}/>
+                    <Label for="confirmPass">Confirm Password</Label>
+                    <Input 
+                        type={show?"password":"text"}
+                        name="confPass"
+                        id="confPass"
+                        placeholder="Confirm Password"
+                        className='mb-3'
+                        onChange={handleChange} />
+
                   	</>)}
-                  	<Button type="submit">Submit</Button>
-                  	<Button onClick={switchMode}>
+                    <Button 
+                         onClick={handleShow} 
+                         color="dark" 
+                         style={{display:'flex', marginBottom: '5px'}}
+                         >Show Password</Button>
+                  	<Button 
+                         type="submit"
+                         style={{marginRight: '5px', fontSize:'20px'}}
+                         block={true}
+                         >Submit</Button>
+                  	<Button 
+                        onClick={switchMode}
+                        color="light"
+                        style={{marginLeft: '55%', marginTop: '5px'}}>
                   	  {registered?"Switch to Login":"Switch to Registration"}
                   	</Button>
                 </Form>

@@ -41,6 +41,7 @@ export const AppBar =(props)=> {
               <Auth />
               <Button 
                 onClick={logout}
+                color="danger"
                 style={{marginLeft: '5px', marginRight: '5px'}}
                 >Logout</Button>
               <Filler currentId={currentId} setCurrentId={setCurrentId}/>
