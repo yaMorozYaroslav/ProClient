@@ -59,7 +59,7 @@ const Auth =()=> {
                         onChange={handleChange}/>
                     <Label for="password">Password</Label>
                     <Input
-                        type={show?"password":"text"}
+                        type={!show?"password":"text"}
                         name="password"
                         id="password"
                         placeholder="Password"
@@ -78,7 +78,7 @@ const Auth =()=> {
                         onChange={handleChange}/>
                     <Label for="confirmPass">Confirm Password</Label>
                     <Input 
-                        type={show?"password":"text"}
+                        type={!show?"password":"text"}
                         name="confPass"
                         id="confPass"
                         placeholder="Confirm Password"
@@ -95,6 +95,7 @@ const Auth =()=> {
                          type="submit"
                          style={{marginRight: '5px', fontSize:'20px'}}
                          block={true}
+                         color="warning"
                          >Submit</Button>
                   	<Button 
                         onClick={switchMode}

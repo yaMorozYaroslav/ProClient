@@ -13,7 +13,16 @@ const clear =()=> {
  if(item){
     return(<>
         <Modal isOpen={item!==null} toggle={clear}>
-         <Card><CardImg alt="impossible" src={item.photo}/></Card>
+         <CardTitle 
+          style={{fontSize:"50px", textAlign:'center'}}
+           >{item.title}</CardTitle>
+         <Card>
+            <CardImg 
+                   alt="impossible" 
+                   src={item.photo}/>
+            <CardText style={{fontSize:"30px"}}>{item.description}</CardText>
+            <CardSubtitle>Price: {item.price} && Condition: {item.condition}</CardSubtitle>
+         </Card>
         </Modal>
         </>)
 }

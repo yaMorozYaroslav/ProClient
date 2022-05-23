@@ -10,7 +10,6 @@ import {addItem, updateItem, formClose, formOpen} from '../actions/itemAct'
 const Filler =({currentId, setCurrentId})=>{
 	       const [itemData, setItemData] = React.useState({
 	   title:'', description:'', price:'', condition:'', photo:''})
-           const [click, setClick] = React.useState(null)
 	       const modal = useSelector(state=>state.items.modal)
 	       const item = useSelector(state => (currentId 
                                  ? state.items.items.find((message) => 
@@ -21,8 +20,6 @@ const Filler =({currentId, setCurrentId})=>{
 	       React.useEffect(()=>{
 	       	if(item){setItemData(item)}
 	       },[item])
-           const handDrop =(e)=> setItemData({...itemData, condition: e.target.value})
-           const handClick =()=> setClick(clicked=>!clicked)
            const handChange =(e)=> {
             if(e.target.value.length<10)
     	     setItemData({...itemData, [e.target.name]: e.target.value})
@@ -77,13 +74,12 @@ const Filler =({currentId, setCurrentId})=>{
                          onChange={handChange} />
                    <section>
                     <Select
-                        id="condition"
-                        name=""
-                        value={itemData.condition}
-                        onChange={handDrop}>
+                        name="condition"
+                        value={itemData.condition||''}
+                        onChange={handChange}>
                      <MenuItem value="new">new</MenuItem>
                      <MenuItem value="used">used</MenuItem>
-                     <MenuItem value="antique">antique</MenuItem>
+                     <MenuItem value="rare">rare</MenuItem>
                     </Select>
                     </section>
                     <section>
