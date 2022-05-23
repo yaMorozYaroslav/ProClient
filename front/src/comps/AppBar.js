@@ -35,8 +35,8 @@ export const AppBar =(props)=> {
 	return(<>
 		    <Navbar color="black" dark-expand="sm" className="mb-0">
 		     <Container>
-		      <NavbarBrand href="/" style={{fontSize: '25px'}}>List of Goods</NavbarBrand>
-		      <p style={{color: 'green', fontSize: '20px'}} >{user?
+		      <NavbarBrand href="/" style={{fontSize: '30px'}}>The Funny Fair.</NavbarBrand>
+		      <p style={{color: 'white', fontSize: '22px', fontStyle:'italic'}} >{user?
 		      	  `Nice to meet you, ${user.result.name}. ^^`
 		          :'Please, authorize to add your item.'}</p>
 

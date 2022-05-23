@@ -21,7 +21,7 @@ const Filler =({currentId, setCurrentId})=>{
 	       	if(item){setItemData(item)}
 	       },[item])
            const handChange =(e)=> {
-            if(e.target.value.length<9)
+            if(e.target.value.length<10)
     	     setItemData({...itemData, [e.target.name]: e.target.value})
             }
 	       const clear =()=> {
@@ -56,6 +56,7 @@ const Filler =({currentId, setCurrentId})=>{
                         type="text"
                         name="title"
                         id="title"
+                        placeholder="Item Name"
                         value={itemData.title}
                         onChange={handChange} />
                     <Label for="description">Description</Label>
@@ -63,23 +64,27 @@ const Filler =({currentId, setCurrentId})=>{
                          type="text"
                          name="description"
                          id="description"
+                         placeholder="What is its value?"
                          value={itemData.description}
                          onChange={(e)=>{
-                            if(e.target.value.length<45){setItemData({
+                            if(e.target.value.length<60){setItemData({
                                  ...itemData, description: e.target.value})}}} />
                     <Label for="price">Price</Label>
                     <Input 
                          type="number"
                          name="price"
                          id="price"
+                         placeholder="Tell me the price."
                          value={itemData.price}
                          style={{marginBottom:'15px'}}
                          onChange={handChange} />
                    <section>
+                    <Label for="condition">Condition :</Label>
                     <Select
                         name="condition"
                         value={itemData.condition||''}
-                        onChange={handChange}>
+                        onChange={handChange}
+                        style={{marginBottom:"5px"}}>
                      <MenuItem value="new">new</MenuItem>
                      <MenuItem value="used">used</MenuItem>
                      <MenuItem value="rare">rare</MenuItem>

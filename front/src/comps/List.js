@@ -11,7 +11,7 @@ const List =({setCurrentId,setSoloId})=> {
 		dispatch(getItems())
 	}, [dispatch])
 
-  if(!loading){console.log(loading)}
+ 
 	if(loading)return 'Please, wait while I wake up the server. It takes less than two minutes.'
 	return(
        <CardGroup style={{display: 'grid', gridTemplateColumns: 'repeat(8, 1fr'}}>
