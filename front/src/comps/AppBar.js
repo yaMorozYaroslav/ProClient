@@ -38,15 +38,16 @@ export const AppBar =(props)=> {
 		      <NavbarBrand href="/" style={{fontSize: '30px'}}>The Funny Fair.</NavbarBrand>
 		      <p style={{color: 'white', fontSize: '22px', fontStyle:'italic'}} >{user?
 		      	  `Nice to meet you, ${user.result.name}. ^^`
-		          :'Please, authorize to add your item.'}</p>
+		          :'Login to manipulate your item.'}</p>
 
             <div style={{display: 'flex'}}>
               <Auth />
-              <Button 
+              {user?<Button 
                 onClick={logout}
                 color="danger"
                 style={{marginLeft: '5px', marginRight: '5px'}}
-                >Logout</Button>
+                >Logout</Button>:null}
+              
               <Filler currentId={currentId} setCurrentId={setCurrentId}/>
               <Solo soloId={soloId} setSoloId={setSoloId}/>
             </div>
