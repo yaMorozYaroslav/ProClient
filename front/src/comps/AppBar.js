@@ -44,6 +44,7 @@ export const AppBar =(props)=> {
               <Auth />
               {user?<Button 
                 onClick={logout}
+                size='lg'
                 color="danger"
                 style={{marginLeft: '5px', marginRight: '5px'}}
                 >Logout</Button>:null}

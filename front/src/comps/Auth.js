@@ -1,29 +1,36 @@
 import React from 'react'
 import {Button, Modal, ModalHeader, ModalBody, Form,
         Label, Input} from 'reactstrap'
-import {useDispatch, connect} from 'react-redux'
+import {useDispatch, useSelector, connect} from 'react-redux'
 import {authorization, registration} from '../actions/authAct'
 
 const initialState = {name: '', email: '', password: '', confPass: ''}
 
 const Auth =()=> {
 	const dispatch = useDispatch()
+    const [user, setUser] = React.useState(
+                JSON.parse(localStorage.getItem('profile')))
 	const [show, setShow] = React.useState(false)
 	const [modal, setModal] = React.useState(false)
 	const [registered, setRegistered] = React.useState(false)
 	const [source, setSource] = React.useState(initialState)
     
+    const items = useSelector(state => state.items.items)
+    const profile = JSON.parse(localStorage.getItem('profile'))
+
     const handleShow =()=> setShow((showPassword)=> !showPassword)
     const handleSubmit =(e)=>{
     	e.preventDefault()
     	if(!registered){
     		dispatch(authorization(source))
             handToggle()
-    	}else{
+    	}
+        else{
             if(source.password === source.confPass){
     		dispatch(registration(source))
             handToggle()
-         }else{alert('Different passwords.')}
+            }
+            else{alert('Different passwords.')}
     	}
         
     }
@@ -36,11 +43,11 @@ const Auth =()=> {
     	handleShow(false)
     }
     return(<div>
-    	      <Button
+    	      {!profile?<Button
                       onClick={handToggle}
                       size="lg"
                       color="success"
-                       >Authorization</Button>
+                       >Authorization</Button>:null}
     	    <Modal 
     	        isOpen={modal}
     	        toggle={handToggle}>
@@ -108,4 +115,4 @@ const Auth =()=> {
              </Modal>
     	</div>)
 }
-export default connect(null, {authorization, registration})(Auth)
+export default Auth

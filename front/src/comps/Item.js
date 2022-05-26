@@ -43,7 +43,7 @@ return(<div>
            onClick={onSingle}
            ref={hovRef} 
            src={!isHover?item.photo:finger} 
-           top width="10%" />
+           top='true' width="10%" />
       <CardBody>
         <CardTitle  tag="h4">{item.title}</CardTitle>
         <CardSubtitle className="mb-2 text-muted" tag="h6">
