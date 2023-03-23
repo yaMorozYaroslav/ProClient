@@ -3,12 +3,28 @@ import {useDispatch, useSelector} from 'react-redux'
 import {addItem} from '../Redux/itemsSlice'
 import FileBase from 'react-file-base64'
 
-const initialState = {title: '', description: '', price: '', condition: '', photo: null}
+const initialState = {title: '', description: '', price: '', condition: '', photo: ''}
 
 export const ItemForm = () => {
+	
 	const dispatch = useDispatch()
 	const [source, setSource] = React.useState(initialState)
 	
+	const FileUploaded = ({onFileSelectSuccess, onFileSelectError}) => {
+		const aRef = React.useRef(null)
+		const handFile =(e) => {
+      const file = e.target.files[0];
+      if (file.size > 20000)
+      onFileSelectError({ error: "File size cannot exceed more than 1MB" });
+      else onFileSelectSuccess(file);
+}	
+		return (
+		  <div>
+		  <input type='file' onChange={handFile}/>
+		  <button onClick={(e) => aRef.current && aRef.current.click()} />
+		  </div>
+		)
+		}
 	const handSubmit =(e)=> {
 		e.preventDefault()
 		dispatch(addItem(source))
@@ -16,7 +32,7 @@ export const ItemForm = () => {
 		}
 	console.log(source)
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
-	
+	//const resetFile =()=> aRef.current.value = null
 	 return(
 	 <section>
 	 <h2>Item</h2>
@@ -41,8 +57,10 @@ export const ItemForm = () => {
 	 value={source.condition}
 	 onChange={handChange}/>
 	 
-	 <FileBase multiple={false}
-	 onDone={({base64})=>setSource({...source, photo: base64})}/>
+	<FileUploaded
+          onFileSelectSuccess={(file) => setSource({...source, photo: file})}
+          onFileSelectError={({ error }) => alert(error)}
+        />
 	 
 	 <button onClick={handSubmit}>Save</button>
 	</form>
