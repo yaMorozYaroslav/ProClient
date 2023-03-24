@@ -9,8 +9,7 @@ export const ItemForm = () => {
 	
 	const dispatch = useDispatch()
 	const [source, setSource] = React.useState(initialState)
-	
-	const FileUploaded = ({onFileSelectSuccess, onFileSelectError}) => {
+/*	const FileUploaded = ({onFileSelectSuccess, onFileSelectError}) => {
 		const aRef = React.useRef(null)
 		const handFile =(e) => {
       const file = e.target.files[0];
@@ -24,13 +23,14 @@ export const ItemForm = () => {
 		  <button onClick={(e) => aRef.current && aRef.current.click()} />
 		  </div>
 		)
-		}
+		} */
 	const handSubmit =(e)=> {
 		e.preventDefault()
 		dispatch(addItem(source))
+		console.log(source)
 		setSource(initialState)
+		console.log(source)
 		}
-	console.log(source)
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	//const resetFile =()=> aRef.current.value = null
 	 return(
@@ -56,11 +56,7 @@ export const ItemForm = () => {
 	 <input name='condition'
 	 value={source.condition}
 	 onChange={handChange}/>
-	 
-	<FileUploaded
-          onFileSelectSuccess={(file) => setSource({...source, photo: file})}
-          onFileSelectError={({ error }) => alert(error)}
-        />
+
 	 
 	 <button onClick={handSubmit}>Save</button>
 	</form>

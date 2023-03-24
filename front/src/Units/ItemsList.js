@@ -7,6 +7,7 @@ const ItemExcerpt = ({ item }) => {
 	return (
 	<article key={item._id}>
 	  <h3>{item.title}</h3>
+	  <p>{item.photo}</p>
 	  <p>{item.description}</p>
 	</article>
 	  )
