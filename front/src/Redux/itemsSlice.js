@@ -41,6 +41,7 @@ export const addItem = createAsyncThunk('items/addItem', async (source) => {
 	try{
 		const response = await createItem(source)
 		return [...response.data]
+		console.log(response.data)
 		}catch(err){return err.message}
 	})
 export const removeItem = createAsyncThunk('items/removeItem', async(id) => {
