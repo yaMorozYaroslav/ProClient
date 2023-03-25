@@ -1,14 +1,15 @@
 import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
+import {selectAllItems, fetchItems, removeItem} from '../Redux/itemsSlice'
 
-import {selectAllItems, fetchItems} from '../Redux/itemsSlice'
-
-const ItemExcerpt = ({ item }) => {
+const ItemExcerpt = ({item}) => {
+    const dispatch = useDispatch()
 	return (
 	<article key={item._id}>
 	  <h3>{item.title}</h3>
 	  <p>{item.photo}</p>
 	  <p>{item.description}</p>
+	  <button onClick={() => dispatch(removeItem(item._id))}>Remove</button>
 	</article>
 	  )
 	}

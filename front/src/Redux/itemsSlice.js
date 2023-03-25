@@ -25,6 +25,9 @@ const itemsSlice = createSlice({
 			   state.status = 'failed'
 			   state.error = action.error.message
 			   })
+		   .addCase(addItem.fulfilled, (state, action) => {
+			   state.items.push(action.payload)
+			   })
 		   .addCase(removeItem.fulfilled, (state, action) => {
 			   state.items = state.items.filter(
 			                       item => item._id !== action.payload)
@@ -41,14 +44,16 @@ export const addItem = createAsyncThunk('items/addItem', async (source) => {
 	try{
 		const response = await createItem(source)
 		return [...response.data]
-		console.log(response.data)
-		}catch(err){return err.message}
+		}catch(err){
+			return err.message}
 	})
 export const removeItem = createAsyncThunk('items/removeItem', async(id) => {
 	try{
 		const response = await deleteItem(id)
 		return [...response.data] 
-		}catch(err){return err.message}
+		}catch(err){
+			console.log(err.message)
+			return err.message}
 	})
 	
 export default itemsSlice.reducer
