@@ -26,7 +26,7 @@ const itemsSlice = createSlice({
 			   state.error = action.error.message
 			   })
 		   .addCase(addItem.fulfilled, (state, action) => {
-			   state.items.push(action.payload)
+			   state.items = state.items.concat(action.payload)
 			   })
 		   .addCase(removeItem.fulfilled, (state, action) => {
 			   state.items = state.items.filter(

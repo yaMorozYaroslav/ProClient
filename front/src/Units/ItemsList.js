@@ -33,7 +33,7 @@ export const ItemsList = () => {
 		content = <p>loading</p>
 		}else if (itemStatus === 'succeeded'){
 			const orderedItems = items.slice()
-			
+			console.log(orderedItems)
 			content = orderedItems.map(item => (
 			   <ItemExcerpt key={item._id} item={item} />
 			))
