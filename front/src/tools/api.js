@@ -9,7 +9,7 @@ API.interceptors.request.use((req)=>{
     return req
 })
 export const getItems =()=> API.get('/items')
-export const createItem =(itemData)=> API.post('/items', itemData)
+export const createItem =(source)=> API.post('/items', source)
 export const editItem =(id, editedItem)=> 
                                      API.patch(`/items/${id}`, editedItem)
 export const deleteItem =(id)=>API.delete(`/items/${id}`)

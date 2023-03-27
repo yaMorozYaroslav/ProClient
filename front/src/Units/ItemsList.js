@@ -5,7 +5,7 @@ import {selectAllItems, fetchItems, removeItem} from '../Redux/itemsSlice'
 const ItemExcerpt = ({item}) => {
     const dispatch = useDispatch()
 	return (
-	<article key={item._id}>
+	<article>
 	  <h3>{item.title}</h3>
 	  <p>{item.photo}</p>
 	  <p>{item.description}</p>
@@ -31,10 +31,9 @@ export const ItemsList = () => {
 	
 	if(itemStatus === 'loading'){
 		content = <p>loading</p>
-		}else if (itemStatus === 'succeeded'){
-			const orderedItems = items.slice()
-			console.log(orderedItems)
-			content = orderedItems.map(item => (
+		}else if (itemStatus === 'succeeded'&&items){
+			console.log(items)
+			content = items.map(item => (
 			   <ItemExcerpt key={item._id} item={item} />
 			))
 			} else if (itemStatus === 'failed') {

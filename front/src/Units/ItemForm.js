@@ -15,7 +15,6 @@ export const ItemForm = () => {
 		e.preventDefault()
 		dispatch(addItem(source))
 		reset()
-		console.log(source)
 		}
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	const reset =(e)=> {
