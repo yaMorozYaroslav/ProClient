@@ -26,7 +26,7 @@ const itemsSlice = createSlice({
 			   state.error = action.error.message
 			   })
 		   .addCase(addItem.fulfilled, (state, action) => {
-			   state.items = state.items.push(action.payload)
+			   state.newItem = state.items.push(action.payload)
 			   })
 		   .addCase(removeItem.fulfilled, (state, action) => {
 			   state.items = state.items.filter(
@@ -37,25 +37,17 @@ const itemsSlice = createSlice({
 export const fetchItems = createAsyncThunk('items/fetchItems', async () => {
 	try{
 		const response = await getItems()
-		return [...response.data];
+		return response.data
 		}catch(err){return err.message}
 	})
 export const addItem = createAsyncThunk('items/addItem', async (source) => {
-	try{
 		const response = await createItem(source)
-		return [...response.data]
-	    console.log(response.data)
-		}catch(err){
-			return err.message}
+		return response.data
 	})
 export const removeItem = createAsyncThunk('items/removeItem', async(id) => {
-	try{
 		const response = await deleteItem(id)
-		return [...response.data] 
-		console.log(response.data)
-		}catch(err){
-			console.log(err.message)
-			return err.message}
+		return response.data
+		
 	})
 	
 export default itemsSlice.reducer
