@@ -3,6 +3,7 @@ import {getItems,createItem, deleteItem} from '../tools/api'
 
 const initialState = {
 	items: [],
+	newItem: [],
 	status: 'idle',
 	error: null
 	}
@@ -26,11 +27,11 @@ const itemsSlice = createSlice({
 			   state.error = action.error.message
 			   })
 		   .addCase(addItem.fulfilled, (state, action) => {
-			   state.newItem = state.items.push(action.payload)
+			   state.items.push(action.payload)
 			   })
 		   .addCase(removeItem.fulfilled, (state, action) => {
-			   state.items = state.items.filter(
-			                       item => item._id !== action.payload)
+			  const id = action.payload
+			  state.items = state.items.filter(item => item.id !== id)
 			   })
 		}
 	})
@@ -41,12 +42,17 @@ export const fetchItems = createAsyncThunk('items/fetchItems', async () => {
 		}catch(err){return err.message}
 	})
 export const addItem = createAsyncThunk('items/addItem', async (source) => {
+	 try{	
 		const response = await createItem(source)
 		return response.data
+	   }catch(err){return err.message}
 	})
 export const removeItem = createAsyncThunk('items/removeItem', async(id) => {
+     try{
 		const response = await deleteItem(id)
+		console.log(response.data)
 		return response.data
+	  }catch(err){return err.message}
 		
 	})
 	

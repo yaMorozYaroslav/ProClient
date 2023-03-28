@@ -12,7 +12,7 @@ export const AuthForm = () => {
 		e.preventDefault()
 		dispatch(signUp(source))
 		}
-	console.log(authData)
+	if(authData.length)console.log(authData)
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
 	 return(

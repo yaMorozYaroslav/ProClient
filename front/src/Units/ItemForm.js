@@ -7,20 +7,20 @@ const initialState = {title: '', description: '', price: '', condition: '', phot
 
 export const ItemForm = () => {
 	
-	//const ref = React.useRef()
+	const ref = React.useRef()
 	const dispatch = useDispatch()
 	const [source, setSource] = React.useState(initialState)
     const user = JSON.parse(localStorage.getItem('profile'))
-    const newItem = useSelector(state => state.items.newItem)
-    if(newItem)console.log(newItem)
+    //const items = useSelector(state => state.items.items)
+    
 	const handSubmit =(e)=> {
 		e.preventDefault()
-		dispatch(addItem({...source, name: user?.result?.name}))
+		dispatch(addItem(source))
 		}
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
-	//const reset =(e)=> {
-	//	ref.current.reset()
-	//	}
+	const reset =(e)=> {
+		ref.current.reset()
+		}
 		
 	 return(
 	 <section>

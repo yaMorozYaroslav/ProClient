@@ -17,13 +17,15 @@ const ItemExcerpt = ({item}) => {
 export const ItemsList = () => {
 	const dispatch = useDispatch()
 	const items = useSelector(selectAllItems)
-	
+	const newItem = useSelector(state=> state.items.newItem)
 	const itemStatus = useSelector(state => state.items.status)
 	const error = useSelector(state => state.items.error)
 	
 	React.useEffect(()=> {
 		if(itemStatus === 'idle'){
 			dispatch(fetchItems())
+			if(items)console.log(items)
+			if(newItem)console.log(newItem)
 			}
 		},[itemStatus, dispatch])
 	
