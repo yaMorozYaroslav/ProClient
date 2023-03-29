@@ -2,7 +2,7 @@ import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {selectAllItems, fetchItems, removeItem} from '../Redux/itemsSlice'
 
-const ItemExcerpt = ({item}) => {
+const ItemExcerpt = ({item, setCurrentId}) => {
     const dispatch = useDispatch()
 	return (
 	<article>
@@ -10,11 +10,12 @@ const ItemExcerpt = ({item}) => {
 	  <p>{item.photo}</p>
 	  <p>{item.description}</p>
 	  <button onClick={() => dispatch(removeItem(item._id))}>Remove</button>
+	  <button onClick={() => setCurrentId(item._id)}>Edit</button>
 	</article>
 	  )
 	}
    
-export const ItemsList = () => {
+export const ItemsList = ({setCurrentId}) => {
 	const dispatch = useDispatch()
 	const items = useSelector(selectAllItems)
 	const itemStatus = useSelector(state => state.items.status)
@@ -24,7 +25,6 @@ export const ItemsList = () => {
 		if(itemStatus === 'idle'){
 			dispatch(fetchItems())
 			if(items)console.log(items)
-			if(newItem)console.log(newItem)
 			}
 		},[itemStatus, dispatch])
 	
@@ -35,7 +35,10 @@ export const ItemsList = () => {
 		}else if (itemStatus === 'succeeded'&&items){
 			console.log(items)
 			content = items.map(item => (
-			   <ItemExcerpt key={item._id} item={item} />
+			   <ItemExcerpt 
+			           key={item._id} 
+			           item={item}
+			           setCurrentId={setCurrentId} />
 			))
 			} else if (itemStatus === 'failed') {
 				content = <div>{error}</div>

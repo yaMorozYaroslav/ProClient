@@ -18,5 +18,10 @@ import {ItemForm} from './Units/ItemForm'
 }*/
 
 export const App =()=> {
-	return <><ItemForm/><AuthForm/><ItemsList/></>
+	const [currentId, setCurrentId] = React.useState(null)
+	if(currentId)console.log(currentId)
+	return <><ItemForm setCurrentId={setCurrentId}/>
+	         <AuthForm/>
+	         <ItemsList setCurrentId={setCurrentId}/>
+	       </>
 	}

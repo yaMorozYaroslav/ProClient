@@ -18,8 +18,14 @@ const List =({setCurrentId,setSoloId})=> {
 		          It takes less than two minutes.</p>
 	return(
        <CardGroup style={{display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)'}}>
-       {items?items.map(item=>(<Item key={item._id} item={item} 
-                    setCurrentId={setCurrentId} setSoloId={setSoloId}/>)):null}
+       {items
+		   
+		    ?items.map(item=>(<Item 
+		                           key={item._id} 
+		                           item={item} 
+                                   setCurrentId={setCurrentId} 
+                                   setSoloId={setSoloId}/>))
+            :null}
         
        	</CardGroup>
 		)
