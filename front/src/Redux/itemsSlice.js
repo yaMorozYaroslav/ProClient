@@ -1,9 +1,8 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import {getItems,createItem, deleteItem} from '../tools/api'
+import {getItems,createItem,editItem, deleteItem} from '../tools/api'
 
 const initialState = {
 	items: [],
-	newItem: [],
 	status: 'idle',
 	error: null
 	}
@@ -29,21 +28,33 @@ const itemsSlice = createSlice({
 		   .addCase(addItem.fulfilled, (state, action) => {
 			   state.items.push(action.payload)
 			   })
+		   .addCase(changeItem.fulfilled, (state, action) => {
+			   state.items.map((item) =>
+        (item._id === action.payload._id ? action.payload : item)) 
+			   })
 		   .addCase(removeItem.fulfilled, (state, action) => {
-			  const id = action.payload
-			  state.items = state.items.filter(item => item.id !== id)
+			  state.items = state.items.filter(
+			                item => item._id !== action.payload.id)
 			   })
 		}
 	})
+	
 export const fetchItems = createAsyncThunk('items/fetchItems', async () => {
 	try{
 		const response = await getItems()
 		return response.data
 		}catch(err){return err.message}
 	})
+	
 export const addItem = createAsyncThunk('items/addItem', async (source) => {
 	 try{	
 		const response = await createItem(source)
+		return response.data
+	   }catch(err){return err.message}
+	})
+export const changeItem = createAsyncThunk('items/changeItem', async(id, source) => {
+	 try{
+		const response = await editItem(id, source)
 		return response.data
 	   }catch(err){return err.message}
 	})
