@@ -1,6 +1,6 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {addItem, editItem} from '../Redux/itemsSlice'
+import {addItem, changeItem} from '../Redux/itemsSlice'
 import FileBase from 'react-file-base64'
 
 const initialState = {title: '', description: '', price: '', condition: '', photo: ''}
@@ -18,23 +18,21 @@ export const ItemForm = ({currentId, setCurrentId}) => {
     React.useEffect(()=>{
 	       	                      if(item){setSource(item)
 				                       console.log(item)}
-	       },[item, setSource])
+	       },[item])
     
 	const handSubmit =(e)=> {
 		e.preventDefault()
-		dispatch(addItem(source))
+		if(!currentId)dispatch(addItem(source))
+		if(currentId)dispatch(changeItem(currentId, source))
 		}
-	const handPhoto =(e)=> {
-		if(item){setSource({...source, photo: item.photo})
-		  console.log(item)
-	    }else{}
-		}
+	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
+	
 	const reset =(e)=> {
 		setCurrentId(null)
 		ref.current.reset()
 		}
-	
+	// onChange={(e)=>setSource({...source, photo: e.target.files[0]})}
 	 return(
 	 <section>
 	 <h2>Item</h2>
@@ -60,10 +58,12 @@ export const ItemForm = ({currentId, setCurrentId}) => {
 	 onChange={handChange}/>
 	 
 	 <label>Photo:</label>
-	 <input 
-	     type='file' 
-	     onChange={(e)=>setSource({...source, photo:e.target.files[0]})} />
-                            
+      <FileBase 
+                         type="file"
+                         multiple={false}
+                         value={source.photo}
+                         onDone={({base64})=>setSource({
+                            ...source, photo: base64})}/>                       
 	 <button onClick={handSubmit}>Save</button>
 	</form>
 	 </section>

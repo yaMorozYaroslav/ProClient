@@ -29,7 +29,7 @@ const itemsSlice = createSlice({
 			   state.items.push(action.payload)
 			   })
 		   .addCase(changeItem.fulfilled, (state, action) => {
-			   state.items.map((item) =>
+			   state.items = state.items.map((item) =>
         (item._id === action.payload._id ? action.payload : item)) 
 			   })
 		   .addCase(removeItem.fulfilled, (state, action) => {
@@ -52,12 +52,15 @@ export const addItem = createAsyncThunk('items/addItem', async (source) => {
 		return response.data
 	   }catch(err){return err.message}
 	})
+	
 export const changeItem = createAsyncThunk('items/changeItem', async(id, source) => {
 	 try{
 		const response = await editItem(id, source)
+		console.log(response.data)
 		return response.data
 	   }catch(err){return err.message}
 	})
+	
 export const removeItem = createAsyncThunk('items/removeItem', async(id) => {
      try{
 		const response = await deleteItem(id)
