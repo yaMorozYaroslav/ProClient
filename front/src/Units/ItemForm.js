@@ -24,17 +24,17 @@ export const ItemForm = ({currentId, setCurrentId}) => {
 		e.preventDefault()
 		dispatch(addItem(source))
 		}
+	const handPhoto =(e)=> {
+		if(item){setSource({...source, photo: item.photo})
+		  console.log(item)
+	    }else{}
+		}
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	const reset =(e)=> {
 		setCurrentId(null)
 		ref.current.reset()
 		}
-	/* <FileBase 
-               type="file"
-               multiple={false}
-               value={source.photo}
-               onDone={({base64})=>setSource({
-                        ...source, photo: base64})}/> */
+	
 	 return(
 	 <section>
 	 <h2>Item</h2>
@@ -62,8 +62,7 @@ export const ItemForm = ({currentId, setCurrentId}) => {
 	 <label>Photo:</label>
 	 <input 
 	     type='file' 
-	     onChange={(e)=> setSource({...source,photo: e.target.files[0]}||'')} />
-	
+	     onChange={(e)=>setSource({...source, photo:e.target.files[0]})} />
                             
 	 <button onClick={handSubmit}>Save</button>
 	</form>
