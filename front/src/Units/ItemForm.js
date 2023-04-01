@@ -3,45 +3,45 @@ import {useDispatch, useSelector} from 'react-redux'
 import {addItem, changeItem} from '../Redux/itemsSlice'
 import FileBase from 'react-file-base64'
 
-//const initialState = {title: '', description: '', price: '', creator: '', condition: '', photo: ''}
+const initialState = {title: 'Jackson', description: '', price: '', condition: '', photo: ''}
 
 export const ItemForm = ({currentId, setCurrentId}) => {
 	
 	const ref = React.useRef()
 	const dispatch = useDispatch()
-	const [source, setSource] = React.useState({
-	   title:'', description:'', price:'', creator: '', condition:'', photo:''})
+	const [source, setSource] = React.useState(initialState)
     const user = JSON.parse(localStorage.getItem('profile'))
     //const items = useSelector(state => state.items.items)
     const item = useSelector(state =>  state.items.items.find((message) => 
                                   message._id === currentId))
     React.useEffect(()=>{
 	       	                      if(item){
-									  console.log(item)
-									  setSource({...item})
-				                       console.log(source)
+									  //console.log(item)
+									 // setSource(item)
+				                      // console.log(source)
 				                      // console.log(user?.result)
 								  }
 	       },[item])
-    
+    const reset =(e)=> {
+		setCurrentId(null)
+		ref.current.reset()
+		}
+		
 	const handSubmit =(e)=> {
 		e.preventDefault()
-		if(!currentId){dispatch(addItem(source))
-			console.log(currentId)}
-		if(currentId)dispatch(changeItem(currentId, source))
+		dispatch(changeItem(currentId, source))
+		
+		//reset()
 		}
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
-	const reset =(e)=> {
-		setCurrentId(null)
-		ref.current.reset()
-		}
+	
 	// onChange={(e)=>setSource({...source, photo: e.target.files[0]})}
 	 return(
 	 <section>
 	 <h2>Item</h2>
-	<form >
+	<form ref={ref}>
 	 <label>Title:</label>
 	 <input name='title' 
 	 value={source.title||''}    
