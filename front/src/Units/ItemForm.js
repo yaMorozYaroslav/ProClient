@@ -3,26 +3,31 @@ import {useDispatch, useSelector} from 'react-redux'
 import {addItem, changeItem} from '../Redux/itemsSlice'
 import FileBase from 'react-file-base64'
 
-const initialState = {title: '', description: '', price: '', condition: '', photo: ''}
+//const initialState = {title: '', description: '', price: '', creator: '', condition: '', photo: ''}
 
 export const ItemForm = ({currentId, setCurrentId}) => {
 	
 	const ref = React.useRef()
 	const dispatch = useDispatch()
-	const [source, setSource] = React.useState(initialState)
+	const [source, setSource] = React.useState({
+	   title:'', description:'', price:'', creator: '', condition:'', photo:''})
     const user = JSON.parse(localStorage.getItem('profile'))
     //const items = useSelector(state => state.items.items)
-    const item = useSelector(state => (currentId 
-                                 ? state.items.items.find((message) => 
-                                  message._id === currentId) : null))
+    const item = useSelector(state =>  state.items.items.find((message) => 
+                                  message._id === currentId))
     React.useEffect(()=>{
-	       	                      if(item){setSource(item)
-				                       console.log(item)}
+	       	                      if(item){
+									  console.log(item)
+									  setSource({...item})
+				                       console.log(source)
+				                      // console.log(user?.result)
+								  }
 	       },[item])
     
 	const handSubmit =(e)=> {
 		e.preventDefault()
-		if(!currentId)dispatch(addItem(source))
+		if(!currentId){dispatch(addItem(source))
+			console.log(currentId)}
 		if(currentId)dispatch(changeItem(currentId, source))
 		}
 	
@@ -61,7 +66,7 @@ export const ItemForm = ({currentId, setCurrentId}) => {
       <FileBase 
                          type="file"
                          multiple={false}
-                         value={source.photo}
+                         value={source.photo||''}
                          onDone={({base64})=>setSource({
                             ...source, photo: base64})}/>                       
 	 <button onClick={handSubmit}>Save</button>

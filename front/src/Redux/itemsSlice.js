@@ -29,7 +29,7 @@ const itemsSlice = createSlice({
 			   state.items.push(action.payload)
 			   })
 		   .addCase(changeItem.fulfilled, (state, action) => {
-			   state.items = state.items.map((item) =>
+			   state.items.map((item) =>
         (item._id === action.payload._id ? action.payload : item)) 
 			   })
 		   .addCase(removeItem.fulfilled, (state, action) => {
