@@ -53,9 +53,9 @@ export const addItem = createAsyncThunk('items/addItem', async (source) => {
 	   }catch(err){return err.message}
 	})
 	
-export const changeItem = createAsyncThunk('items/changeItem', async(id, source) => {
+export const changeItem = createAsyncThunk('items/changeItem', async(source, id) => {
 	 try{
-		const response = await editItem(id, source)
+		const response = await editItem(source, id)
 		console.log(response.data)
 		return response.data
 	   }catch(err){return err.message}

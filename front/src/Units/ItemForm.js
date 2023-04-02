@@ -17,7 +17,7 @@ export const ItemForm = ({currentId, setCurrentId}) => {
     React.useEffect(()=>{
 	       	                      if(item){
 									  //console.log(item)
-									 // setSource(item)
+									 setSource(item)
 				                      // console.log(source)
 				                      // console.log(user?.result)
 								  }
@@ -29,7 +29,7 @@ export const ItemForm = ({currentId, setCurrentId}) => {
 		
 	const handSubmit =(e)=> {
 		e.preventDefault()
-		dispatch(changeItem(currentId, source))
+		dispatch(changeItem(source, currentId))
 		
 		//reset()
 		}
