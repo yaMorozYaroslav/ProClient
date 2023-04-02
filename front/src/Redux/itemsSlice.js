@@ -1,17 +1,23 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {getItems,createItem,editItem, deleteItem} from '../tools/api'
+import {useSelector} from 'react-redux'
 
 const initialState = {
 	items: [],
 	status: 'idle',
-	error: null
+	error: null,
+	currID: ''
 	}
 	
 
 const itemsSlice = createSlice({
 	name: 'items',
 	initialState,
-	reducers: {},
+	reducers: {
+		addID(state, action){
+			state.currID = action.payload
+			}
+		},
 	extraReducers(builder){
 		builder
 		   .addCase(fetchItems.pending, (state, action) => {
@@ -53,9 +59,9 @@ export const addItem = createAsyncThunk('items/addItem', async (source) => {
 	   }catch(err){return err.message}
 	})
 	
-export const changeItem = createAsyncThunk('items/changeItem', async(source, id) => {
+export const changeItem = createAsyncThunk('items/changeItem', async({id, source}) => {
 	 try{
-		const response = await editItem(source, id)
+		const response = await editItem(id, source)
 		console.log(response.data)
 		return response.data
 	   }catch(err){return err.message}
@@ -69,7 +75,10 @@ export const removeItem = createAsyncThunk('items/removeItem', async(id) => {
 	  }catch(err){return err.message}
 		
 	})
+
+export const {addID} = itemsSlice.actions	
 	
 export default itemsSlice.reducer
 
 export const selectAllItems = (state) => state.items.items
+export const currId = state => state.items.currID

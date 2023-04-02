@@ -1,9 +1,9 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {addItem, changeItem} from '../Redux/itemsSlice'
+import { addItem, changeItem} from '../Redux/itemsSlice'
 import FileBase from 'react-file-base64'
 
-const initialState = {title: 'Jackson', description: '', price: '', condition: '', photo: ''}
+const initialState = {title: '', description: '', price: '', condition: '', photo: ''}
 
 export const ItemForm = ({currentId, setCurrentId}) => {
 	
@@ -12,13 +12,13 @@ export const ItemForm = ({currentId, setCurrentId}) => {
 	const [source, setSource] = React.useState(initialState)
     const user = JSON.parse(localStorage.getItem('profile'))
     //const items = useSelector(state => state.items.items)
+   // const currId = useSelector(state => state.items.currID)
     const item = useSelector(state =>  state.items.items.find((message) => 
                                   message._id === currentId))
     React.useEffect(()=>{
 	       	                      if(item){
-									  //console.log(item)
 									 setSource(item)
-				                      // console.log(source)
+				                      console.log(source)
 				                      // console.log(user?.result)
 								  }
 	       },[item])
@@ -29,7 +29,7 @@ export const ItemForm = ({currentId, setCurrentId}) => {
 		
 	const handSubmit =(e)=> {
 		e.preventDefault()
-		dispatch(changeItem(source, currentId))
+		dispatch(changeItem({id: currentId, source: source}))
 		
 		//reset()
 		}

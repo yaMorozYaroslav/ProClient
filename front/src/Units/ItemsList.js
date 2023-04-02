@@ -1,9 +1,11 @@
 import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {selectAllItems, fetchItems, removeItem} from '../Redux/itemsSlice'
+import {addID, selectAllItems, fetchItems, removeItem} from '../Redux/itemsSlice'
 
 const ItemExcerpt = ({item, setCurrentId}) => {
     const dispatch = useDispatch()
+    //const currId = useSelector(state => state.items.currID)
+   // if(currId)console.log(currId)
 	return (
 	<article>
 	  <h3>{item.title}</h3>
@@ -26,7 +28,7 @@ export const ItemsList = ({setCurrentId}) => {
 			dispatch(fetchItems())
 			if(items)console.log(items)
 			}
-		},[itemStatus, dispatch])
+		},[items, itemStatus, dispatch])
 	
 	let content
 	
