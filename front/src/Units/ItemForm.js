@@ -11,33 +11,29 @@ export const ItemForm = ({currentId, setCurrentId}) => {
 	const dispatch = useDispatch()
 	const [source, setSource] = React.useState(initialState)
     const user = JSON.parse(localStorage.getItem('profile'))
-    //const items = useSelector(state => state.items.items)
-   // const currId = useSelector(state => state.items.currID)
     const item = useSelector(state =>  state.items.items.find((message) => 
                                   message._id === currentId))
     React.useEffect(()=>{
-	       	                      if(item){
-									 setSource(item)
-				                      console.log(source)
-				                      // console.log(user?.result)
-								  }
+		
+	       	   if(item)setSource(item)
+								 
 	       },[item])
-    const reset =(e)=> {
+	       
+    const reset =()=> {	
 		setCurrentId(null)
+		setSource(initialState)
 		ref.current.reset()
 		}
 		
 	const handSubmit =(e)=> {
 		e.preventDefault()
-		dispatch(changeItem({id: currentId, source: source}))
-		
-		//reset()
+		if(!currentId)dispatch(addItem(source))
+		if(currentId)dispatch(changeItem({id: currentId, source: source}))
+		reset()
 		}
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
-	
-	// onChange={(e)=>setSource({...source, photo: e.target.files[0]})}
 	 return(
 	 <section>
 	 <h2>Item</h2>
@@ -66,7 +62,6 @@ export const ItemForm = ({currentId, setCurrentId}) => {
       <FileBase 
                          type="file"
                          multiple={false}
-                         value={source.photo||''}
                          onDone={({base64})=>setSource({
                             ...source, photo: base64})}/>                       
 	 <button onClick={handSubmit}>Save</button>

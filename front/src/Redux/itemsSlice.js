@@ -1,6 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {getItems,createItem,editItem, deleteItem} from '../tools/api'
-import {useSelector} from 'react-redux'
 
 const initialState = {
 	items: [],
