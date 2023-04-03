@@ -24,7 +24,7 @@ const authSlice = createSlice({
 	
 export const signUp = createAsyncThunk('user/signup', async (source) => {
 	const response = await register(source)
-	localStorage.setItem('profile', JSON.stringify({...response.data}))
+	//localStorage.setItem('profile', JSON.stringify({...response.data}))
 	console.log(response.data)
 	return response.data
 	})

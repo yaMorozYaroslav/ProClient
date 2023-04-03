@@ -8,9 +8,11 @@ export const AuthForm = () => {
 	const dispatch = useDispatch()
 	const authData = useSelector(state => state.auth.authData)
 	const [source, setSource] = React.useState(initialState)
+	const [registered, setRegistered] = React.useState(false)
 	const handSubmit =(e)=> {
 		e.preventDefault()
 		dispatch(signUp(source))
+		if(authData.length)localStorage.setItem('profile', JSON.stringify(authData))
 		}
 	if(authData.length)console.log(authData)
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
@@ -36,6 +38,9 @@ export const AuthForm = () => {
 	 onChange={handChange}/>
 	 
 	 <button onClick={handSubmit}>Save</button>
+	 <button onClick={()=>setRegistered((isRegistered) => !isRegistered)}>
+		 {registered?'Authentication':'Registration'}
+     </button>
 	</form>
 	 </section>
 	 )

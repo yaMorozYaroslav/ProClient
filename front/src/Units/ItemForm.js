@@ -10,7 +10,7 @@ export const ItemForm = ({currentId, setCurrentId}) => {
 	const ref = React.useRef()
 	const dispatch = useDispatch()
 	const [source, setSource] = React.useState(initialState)
-    const user = JSON.parse(localStorage.getItem('profile'))
+    //const user = JSON.parse(localStorage.getItem('profile'))
     const item = useSelector(state =>  state.items.items.find((message) => 
                                   message._id === currentId))
     React.useEffect(()=>{
