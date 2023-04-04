@@ -27,10 +27,11 @@ export const ItemForm = ({currentId, setCurrentId}) => {
 		
 	const handSubmit =(e)=> {
 		e.preventDefault()
-		if(!currentId)dispatch(addItem(source))
-		if(currentId)dispatch(changeItem({id: currentId, source: source}))
+		if(!currentId){dispatch(addItem(source))
+		//}else{dispatch(changeItem({id: currentId, source: source}))
+		 //}
 		reset()
-		}
+		}}
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	

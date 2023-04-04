@@ -1,6 +1,6 @@
 import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {addID, selectAllItems, fetchItems, removeItem} from '../Redux/itemsSlice'
+import {selectAllItems, fetchItems, removeItem} from '../Redux/itemsSlice'
 
 const ItemExcerpt = ({item, setCurrentId}) => {
     const dispatch = useDispatch()
@@ -35,8 +35,10 @@ export const ItemsList = ({setCurrentId}) => {
 	if(itemStatus === 'loading'){
 		content = <p>loading</p>
 		}else if (itemStatus === 'succeeded'&&items){
-			console.log(items)
-			content = items.map(item => (
+		const orderedItems = items.slice().sort((a, b) =>
+		                                   b.createdAt.localeCompare(a.createdAt))
+		 console.log(orderedItems)
+		 content = orderedItems.map(item => (
 			   <ItemExcerpt 
 			           key={item._id} 
 			           item={item}
