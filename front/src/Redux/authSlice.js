@@ -18,13 +18,16 @@ const authSlice = createSlice({
 		.addCase(signUp.fulfilled, (state, action) => {
 			state.status = 'succeeded'
 		    state.authData = state.authData.concat(action.payload)
+		    })
+		.addCase(signUp.pending, (state, action) => {
+			state.status = 'loading'
+			state.authData = []
 			})
 		}
 	})
 	
 export const signUp = createAsyncThunk('user/signup', async (source) => {
 	const response = await register(source)
-	//localStorage.setItem('profile', JSON.stringify({...response.data}))
 	console.log(response.data)
 	return response.data
 	})

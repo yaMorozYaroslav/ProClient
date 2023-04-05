@@ -4,19 +4,14 @@ import {getItems,createItem,editItem, deleteItem} from '../tools/api'
 const initialState = {
 	items: [],
 	status: 'idle',
-	error: null,
-	currID: ''
+	error: null
 	}
 	
 
 const itemsSlice = createSlice({
 	name: 'items',
 	initialState,
-	reducers: {
-		addID(state, action){
-			state.currID = action.payload
-			}
-		},
+	reducers: {},
 	extraReducers(builder){
 		builder
 		   .addCase(fetchItems.pending, (state, action) => {
@@ -34,7 +29,8 @@ const itemsSlice = createSlice({
 			   state.items.push(action.payload)
 			   })
 		   .addCase(changeItem.fulfilled, (state, action) => {
-			   state.items.map((item) =>
+			//  state.items = state.items.concat(action.payload)
+			  state.items = state.items.map((item) =>
         (item._id === action.payload._id ? action.payload : item)) 
 			   })
 		   .addCase(removeItem.fulfilled, (state, action) => {
@@ -75,9 +71,8 @@ export const removeItem = createAsyncThunk('items/removeItem', async(id) => {
 		
 	})
 
-export const {addID} = itemsSlice.actions	
+//export const {addID} = itemsSlice.actions	
 	
 export default itemsSlice.reducer
 
 export const selectAllItems = (state) => state.items.items
-export const currId = state => state.items.currID
