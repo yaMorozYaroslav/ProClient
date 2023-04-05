@@ -6,9 +6,10 @@ const initialState = {name: '', email: '', password: '', confPass: ''}
 
 export const AuthForm = () => {
 	const dispatch = useDispatch()
-	const authData = useSelector(state => state.auth.authData)
 	const [source, setSource] = React.useState(initialState)
+	const authData = useSelector(state => state.auth.authData)
 	const [registered, setRegistered] = React.useState(false)
+	const profile = JSON.parse(localStorage.getItem('profile'))
 	const handSubmit =(e)=> {
 		e.preventDefault()
 		dispatch(signUp(source))
