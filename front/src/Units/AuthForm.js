@@ -1,6 +1,6 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {signUp} from '../Redux/authSlice'
+import {setData, signUp} from '../Redux/authSlice'
 
 const initialState = {name: '', email: '', password: '', confPass: ''}
 
@@ -19,7 +19,9 @@ export const AuthForm = () => {
 	React.useEffect(()=>{
 	if(authData.length)localStorage.setItem('profile', JSON.stringify(authData[0]))
 	console.log(authData)
-		},[authData])
+	dispatch(setData(profile))
+	console.log(authData)
+		},[])
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
