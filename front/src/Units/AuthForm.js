@@ -19,9 +19,9 @@ export const AuthForm = () => {
 	React.useEffect(()=>{
 	if(authData.length)localStorage.setItem('profile', JSON.stringify(authData[0]))
 	//console.log(authData)
-	dispatch(setData('dick'))
+	//dispatch(setData('dick'))
 	console.log(authData)
-		},[profile])
+		},[authData])
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
