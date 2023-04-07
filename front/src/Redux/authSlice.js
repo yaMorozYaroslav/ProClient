@@ -12,7 +12,7 @@ const authSlice = createSlice({
 	initialState,
 	reducers: {
 		setData(state, action){
-			state.authData = state.authData.concat(action.payload)
+			state.authData.push(action.payload)
 			},
 		logout: state => state.authData = []
 		},
