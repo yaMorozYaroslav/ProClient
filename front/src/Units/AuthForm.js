@@ -25,7 +25,7 @@ export const AuthForm = () => {
 	
 	 return(
 	 <section>
-	 <h2>Registration</h2>
+	 <h2>{!registered?'Registration':'Authentication'}</h2>
 	<form>
 	 <label>Email:</label>
 	 <input name='email'
