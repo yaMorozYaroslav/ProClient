@@ -1,6 +1,8 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+
 import {signUp, setData} from '../Redux/authSlice'
+
 
 const initialState = {name: '', email: '', password: '', confPass: ''}
 
@@ -29,6 +31,7 @@ export const AuthForm = () => {
 	  
 	console.log(authData[0])
 		},[authData, dispatch, profile])
+
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	

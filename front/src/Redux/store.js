@@ -7,5 +7,7 @@ export default configureStore({
 	reducer: {
 		items: itemsReducer,
 		auth: authReducer
-	},
+	}
    })
+
+
