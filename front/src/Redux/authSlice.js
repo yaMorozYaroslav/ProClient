@@ -24,6 +24,14 @@ const authSlice = createSlice({
 			state.status = 'loading'
 			state.authData = []
 			})
+		.addCase(signIn.fulfilled, (state, action) => {
+			state.status = 'succeeded'
+			state.authData = state.authData.concat(action.payload)
+		    })
+		.addCase(signIn.pending, (state, action) => {
+			state.status = 'loading'
+			state.authData = []
+			})
 		}
 	})
 	
@@ -34,7 +42,7 @@ export const signUp = createAsyncThunk('user/signup', async (source) => {
 	})
 export const signIn = createAsyncThunk('user/signin', async (source) => {
 	const response = await auth(source)
-	localStorage.setItem('profile', JSON.stringify({...response.data}))
+	//localStorage.setItem('profile', JSON.stringify({...response.data}))
 	console.log(response.data)
 	return response.data
 	})

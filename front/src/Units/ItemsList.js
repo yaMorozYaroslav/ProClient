@@ -1,21 +1,8 @@
 import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {selectAllItems, fetchItems, removeItem} from '../Redux/itemsSlice'
+import {selectAllItems, fetchItems} from '../Redux/itemsSlice'
+import {ItemExcerpt} from './ItemExcerpt'
 
-const ItemExcerpt = ({item, setCurrentId}) => {
-    const dispatch = useDispatch()
-    //const currId = useSelector(state => state.items.currID)
-   // if(currId)console.log(currId)
-	return (
-	<article key={item._id}>
-	  <h3>{item.title}</h3>
-	  <p>{item.photo}</p>
-	  <p>{item.description}</p>
-	  <button onClick={() => dispatch(removeItem(item._id))}>Remove</button>
-	  <button onClick={() => setCurrentId(item._id)}>Edit</button>
-	</article>
-	  )
-	}
    
 export const ItemsList = ({setCurrentId}) => {
 	const dispatch = useDispatch()
@@ -26,7 +13,7 @@ export const ItemsList = ({setCurrentId}) => {
 	React.useEffect(()=> {
 		if(itemStatus === 'idle'){
 			dispatch(fetchItems())
-			if(items)console.log(items)
+			//if(items)console.log(items)
 			}
 		},[items, itemStatus, dispatch])
 	
