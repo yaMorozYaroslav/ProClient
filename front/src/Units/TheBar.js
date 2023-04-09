@@ -9,10 +9,9 @@ import {setData, logout} from '../Redux/authSlice'
 
 
 
-export const TheBar =({currentId, setCurrentId})=> {
+export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {
 	const dispatch = useDispatch()
 	
-	const [opened, setOpened] = React.useState({item: false, auth: false})
 	
 	const authData = useSelector(state => state.auth.authData)
 	const profile = JSON.parse(localStorage.getItem('profile'))
@@ -31,7 +30,7 @@ React.useEffect(()=>{
 	            }
 	        	}
 	        },[authData])
-	        
+      
 React.useEffect(()=>{
 	if(authData.length && JSON.stringify(authData[0]) !== JSON.stringify(profile))
 	   localStorage.setItem('profile', JSON.stringify(authData[0]))

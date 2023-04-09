@@ -31,6 +31,7 @@ export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
 		}else{dispatch(changeItem({id: currentId, source: source}))
 		 }
 		reset()
+		setOpened({...opened, item: false})
 		}
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})

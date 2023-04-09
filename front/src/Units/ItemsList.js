@@ -4,7 +4,7 @@ import {selectAllItems, fetchItems} from '../Redux/itemsSlice'
 import {ItemExcerpt} from './ItemExcerpt'
 
    
-export const ItemsList = ({setCurrentId}) => {
+export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 	const dispatch = useDispatch()
 	const items = useSelector(selectAllItems)
 	const itemStatus = useSelector(state => state.items.status)
@@ -29,7 +29,9 @@ export const ItemsList = ({setCurrentId}) => {
 			   <ItemExcerpt 
 			           key={item._id} 
 			           item={item}
-			           setCurrentId={setCurrentId} />
+			           setCurrentId={setCurrentId}
+			           opened={opened}
+			           setOpened={setOpened} />
 			))
 			} else if (itemStatus === 'failed') {
 				content = <div>{error}</div>
