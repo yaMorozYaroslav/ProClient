@@ -5,7 +5,7 @@ import FileBase from 'react-file-base64'
 
 const initialState = {title: '', description: '', price: '', condition: '', photo: ''}
 
-export const ItemForm = ({currentId, setCurrentId}) => {
+export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
 	
 	const ref = React.useRef()
 	const dispatch = useDispatch()
@@ -36,9 +36,9 @@ export const ItemForm = ({currentId, setCurrentId}) => {
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
 	 return(
-	 <section>
+	 <section >
 	 <h2>Item</h2>
-	<form ref={ref}>
+	<form style={{'width':'20%'}}ref={ref}>
 	 <label>Title:</label>
 	 <input name='title' 
 	 value={source.title||''}    
@@ -66,6 +66,7 @@ export const ItemForm = ({currentId, setCurrentId}) => {
                          onDone={({base64})=>setSource({
                             ...source, photo: base64})}/>                       
 	 <button onClick={handSubmit}>Save</button>
+	 <button onClick={()=>setOpened({...opened, item: false})}>closeForm</button>
 	</form>
 	 </section>
 	 )

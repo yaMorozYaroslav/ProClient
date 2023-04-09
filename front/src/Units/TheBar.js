@@ -1,4 +1,5 @@
 import React from 'react'
+import decode from 'jwt-decode'
 import {useSelector, useDispatch} from 'react-redux'
 
 import {AuthForm} from './AuthForm'
@@ -20,7 +21,17 @@ export const TheBar =({currentId, setCurrentId})=> {
 		dispatch(logout())
 		localStorage.removeItem('profile')
 		}
-	
+React.useEffect(()=>{
+	            let token
+	        	if(profile)token = profile.token
+	        	if(token){
+	        		const decodedToken = decode(token)
+	        		if(decodedToken.exp * 1000 < new Date().getTime()){
+	        		  handLogout()
+	            }
+	        	}
+	        },[authData])
+	        
 React.useEffect(()=>{
 	if(authData.length && JSON.stringify(authData[0]) !== JSON.stringify(profile))
 	   localStorage.setItem('profile', JSON.stringify(authData[0]))
@@ -29,7 +40,7 @@ React.useEffect(()=>{
 	   JSON.stringify(profile).length > 4)dispatch(setData(profile))
 	  
 	console.log(authData[0])
-	//console.log((JSON.stringify(authData[0]) !== JSON.stringify(profile)))
+	
 		},[authData, dispatch, profile])
 		console.log(opened)
 		
@@ -45,6 +56,6 @@ React.useEffect(()=>{
 				         <button onClick={()=>setOpened({...opened, auth:true})}>SignIn</button>
 				</>}
 		    {authData.length > 0 && opened.item && 
-			         <ItemForm currentId={currentId} setCurrentId={setCurrentId}/>}
+			         <ItemForm  opened={opened} setOpened={setOpened} currentId={currentId} setCurrentId={setCurrentId}/>}
 	       </>
 	}
