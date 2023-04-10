@@ -26,10 +26,12 @@ React.useEffect(()=>{
 	        	if(token){
 	        		const decodedToken = decode(token)
 	        		if(decodedToken.exp * 1000 < new Date().getTime()){
-	        		  handLogout()
+	        		 dispatch(logout())
+	        		 localStorage.removeItem('profile')
 	            }
 	        	}
-	        },[authData])
+	        console.log(authData)
+	        },[authData, dispatch, profile])
       
 React.useEffect(()=>{
 	if(authData.length && JSON.stringify(authData[0]) !== JSON.stringify(profile))
