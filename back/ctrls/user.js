@@ -31,7 +31,7 @@ export const signin = async(req,res)=> {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const result = await User.create({ email, password: hashedPassword, name: `${name}` });
+    const result = await User.create({ email, password: hashedPassword, name: `${name}`, role: 'user' });
 
     const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
 
