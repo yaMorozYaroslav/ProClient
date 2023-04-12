@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-
+import User from '../models/User.js'
 const secret = 'test'
 
 const auth = async (req, res, next) => {
@@ -18,7 +18,9 @@ const auth = async (req, res, next) => {
 
       req.userId = decodedData?.sub
     }    
-    console.log(req.userId)
+    console.log(decodedData)
+    const user = await User.findById(req.userId)
+    console.log(user) 
     next();
   } catch (error) {
     console.log(error)
