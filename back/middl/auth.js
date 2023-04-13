@@ -8,7 +8,7 @@ export const auth = async (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1]
     const isCustomAuth = token.length < 500;
     
-    let decodedData
+    /*let decodedData
 
     if (token && isCustomAuth) {      
       decodedData = jwt.verify(token, secret)
@@ -18,11 +18,8 @@ export const auth = async (req, res, next) => {
       decodedData = jwt.decode(token)
 
       req.userId = decodedData?.sub
-    }    
-    console.log(decodedData)
-    const user = await User.findById(req.userId)
-    if(user.role)null
-    //console.log(user, user.role) 
+    }    */
+    
     next();
   } catch (error) {
     console.log(error)
@@ -30,7 +27,8 @@ export const auth = async (req, res, next) => {
 }
 export const delAuth = async(req, res, next) => {
 	try{
-	const item = await Item.findOne(req.userId)
-	console.log(item)
+	const item = await Item.findOne({creator: req.userId})
+	const user = await User.findById(req.userId)
+	console.log(item, user)
 	next()
 	}catch(error){console.log(error)}}

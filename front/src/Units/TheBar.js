@@ -28,6 +28,7 @@ React.useEffect(()=>{
 	        		if(decodedToken.exp * 1000 < new Date().getTime()){
 	        		 dispatch(logout())
 	        		 localStorage.removeItem('profile')
+	        		 alert('Token has expired')
 	            }
 	        	}
 	        console.log(authData)
