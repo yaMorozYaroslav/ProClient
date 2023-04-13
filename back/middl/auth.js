@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken"
 import User from '../models/User.js'
+import Item from '../models/Item.js'
 const secret = 'test'
 
-const auth = async (req, res, next) => {
+export const auth = async (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1]
     const isCustomAuth = token.length < 500;
@@ -20,11 +21,16 @@ const auth = async (req, res, next) => {
     }    
     console.log(decodedData)
     const user = await User.findById(req.userId)
-    console.log(user) 
+    if(user.role)null
+    //console.log(user, user.role) 
     next();
   } catch (error) {
     console.log(error)
   }
 }
-
-export default auth
+export const delAuth = async(req, res, next) => {
+	try{
+	const item = await Item.findOne(req.userId)
+	console.log(item)
+	next()
+	}catch(error){console.log(error)}}

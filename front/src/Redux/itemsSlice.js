@@ -25,14 +25,16 @@ const itemsSlice = createSlice({
 			   state.status = 'failed'
 			   state.error = action.error.message
 			   })
+			   
 		   .addCase(addItem.fulfilled, (state, action) => {
 			   state.items.push(action.payload)
 			   })
+			   
 		   .addCase(changeItem.fulfilled, (state, action) => {
-			//  state.items = state.items.concat(action.payload)
 			  state.items = state.items.map((item) =>
         (item._id === action.payload._id ? action.payload : item)) 
 			   })
+			   
 		   .addCase(removeItem.fulfilled, (state, action) => {
 			  state.items = state.items.filter(
 			                item => item._id !== action.payload.id)
