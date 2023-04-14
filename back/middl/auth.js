@@ -30,7 +30,7 @@ export const delAuth = async(req, res, next) => {
 	const id = req.params
 	const item = await Item.findById(id.id)
 	const user = await User.findById(req.userId)
-	if(item.creator === req.userId||user.role === admin)
+	if(item.creator === req.userId||user.role === 'admin')
 	console.log(user)
 	next()
 	}catch(error){console.log(error)}}
