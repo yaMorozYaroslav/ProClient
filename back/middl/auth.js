@@ -8,7 +8,7 @@ export const auth = async (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1]
     const isCustomAuth = token.length < 500;
     
-    /*let decodedData
+    let decodedData
 
     if (token && isCustomAuth) {      
       decodedData = jwt.verify(token, secret)
@@ -18,7 +18,7 @@ export const auth = async (req, res, next) => {
       decodedData = jwt.decode(token)
 
       req.userId = decodedData?.sub
-    }    */
+    }    
     
     next();
   } catch (error) {
@@ -27,8 +27,10 @@ export const auth = async (req, res, next) => {
 }
 export const delAuth = async(req, res, next) => {
 	try{
-	const item = await Item.findOne({creator: req.userId})
+	const id = req.params
+	const item = await Item.findById(id.id)
 	const user = await User.findById(req.userId)
-	console.log(item, user)
+	if(item.creator === req.userId||user.role === admin)
+	console.log(user)
 	next()
 	}catch(error){console.log(error)}}
