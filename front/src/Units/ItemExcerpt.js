@@ -1,5 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux'
 import {removeItem} from '../Redux/itemsSlice'
+import {addToCart} from '../Redux/cartSlice'
 
 export const ItemExcerpt = ({item, setCurrentId, opened, setOpened}) => {
 	
@@ -13,7 +14,7 @@ export const ItemExcerpt = ({item, setCurrentId, opened, setOpened}) => {
    const randomColor = Math.floor(Math.random()*16777215).toString(16)
    
    const userData = useSelector(state => state.auth.authData)
-   //console.log(userData)
+   //console.log(cartState)
 
 	return (
 	<article style={{'background':`#${randomColor}`}}>
@@ -26,6 +27,7 @@ export const ItemExcerpt = ({item, setCurrentId, opened, setOpened}) => {
 	  <button onClick={() => dispatch(removeItem(item._id))}>Remove</button>
 	  <button onClick={handEdit}>Edit</button>
 	    </>)}
+	   <button onClick={() => dispatch(addToCart(item))}>Buy</button>
 	</article>
 	  )
 	}

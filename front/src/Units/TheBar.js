@@ -12,11 +12,13 @@ import {setData, logout} from '../Redux/authSlice'
 export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {
 	const dispatch = useDispatch()
 	
+	const cartState = useSelector(state => state.cart.cart)
 	
 	const authData = useSelector(state => state.auth.authData)
 	const profile = JSON.parse(localStorage.getItem('profile'))
 	
-	const handLogout =()=> {
+	const handLogout =(e)=> {
+		e.preventDefault()
 		dispatch(logout())
 		localStorage.removeItem('profile')
 		}
@@ -29,9 +31,8 @@ React.useEffect(()=>{
 	        		 dispatch(logout())
 	        		 localStorage.removeItem('profile')
 	        		 alert('Token has expired')
-	            }
+	              }
 	        	}
-	        console.log(authData)
 	        },[authData, dispatch, profile])
       
 React.useEffect(()=>{
@@ -41,12 +42,12 @@ React.useEffect(()=>{
 	if(JSON.stringify(authData[0]) !== JSON.stringify(profile)&&
 	   JSON.stringify(profile).length > 4)dispatch(setData(profile))
 	  
-	console.log(authData[0])
 	
 		},[authData, dispatch, profile])
 		console.log(opened)
-		
+		console.log(cartState)
 	return <>
+	        {cartState.map(item => (<p key={item._id}>{item._id}+{item.quantity}</p>))}
 	        {!authData.length && opened.auth && <><AuthForm/></>}
 	
 	        {authData.length
