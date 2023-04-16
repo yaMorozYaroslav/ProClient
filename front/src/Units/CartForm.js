@@ -1,5 +1,6 @@
 import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
+import emailjs from '@emailjs/browser'
 	
 export const CartForm =()=> {
 	
@@ -8,9 +9,10 @@ export const CartForm =()=> {
 	const inCart = (useSelector(state => state.cart.cart))
 	
 	React.useEffect(()=>{
-		console.log(inCart.length === 0)
-		},[inCart])
+		setForEmail(JSON.stringify(inCart))
+		console.log(forEmail)
+		},[forEmail, inCart])
 	
 	
-	return <></>
+	return <><textarea readOnly value={forEmail}></textarea></>
 	}

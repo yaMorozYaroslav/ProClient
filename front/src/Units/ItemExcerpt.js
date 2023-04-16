@@ -14,6 +14,7 @@ export const ItemExcerpt = ({item, setCurrentId, opened, setOpened}) => {
    const randomColor = Math.floor(Math.random()*16777215).toString(16)
    
    const userData = useSelector(state => state.auth.authData)
+   const newItem = {_id: item._id, title: item.title}
    //console.log(cartState)
 
 	return (
@@ -27,7 +28,7 @@ export const ItemExcerpt = ({item, setCurrentId, opened, setOpened}) => {
 	  <button onClick={() => dispatch(removeItem(item._id))}>Remove</button>
 	  <button onClick={handEdit}>Edit</button>
 	    </>)}
-	   <button onClick={() => dispatch(addToCart(item))}>Buy</button>
+	   <button onClick={() => dispatch(addToCart(newItem))}>Buy</button>
 	</article>
 	  )
 	}
