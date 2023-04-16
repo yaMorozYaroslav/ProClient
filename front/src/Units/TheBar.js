@@ -12,8 +12,6 @@ import {setData, logout} from '../Redux/authSlice'
 export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {
 	const dispatch = useDispatch()
 	
-	const cartState = useSelector(state => state.cart.cart)
-	
 	const authData = useSelector(state => state.auth.authData)
 	const profile = JSON.parse(localStorage.getItem('profile'))
 	
@@ -45,9 +43,8 @@ React.useEffect(()=>{
 	
 		},[authData, dispatch, profile])
 		console.log(opened)
-		console.log(cartState)
+		//console.log(cartState)
 	return <>
-	        {cartState.map(item => (<p key={item._id}>{item._id}+{item.quantity}</p>))}
 	        {!authData.length && opened.auth && <><AuthForm/></>}
 	
 	        {authData.length
