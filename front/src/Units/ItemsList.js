@@ -24,6 +24,8 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 		}else if (itemStatus === 'succeeded'&&items){
 		const orderedItems = items.slice().sort((a, b) =>
 		                                   b.createdAt.localeCompare(a.createdAt))
+		//const filtered = items.filter(item => item.price >  3000)
+		//console.log(filtered)
 		 console.log(orderedItems)
 		 content = orderedItems.map(item => (
 			   <ItemExcerpt 
