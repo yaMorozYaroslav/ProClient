@@ -4,16 +4,21 @@ import {selectAllItems, fetchItems} from '../Redux/itemsSlice'
 import {ItemExcerpt} from './ItemExcerpt'
 
    
-export const ItemsList = ({setCurrentId, opened, setOpened}) => {
+export const ItemsList = ({setCurrentId, opened, setOpened, itemFilter}) => {
 	const dispatch = useDispatch()
 	const items = useSelector(selectAllItems)
 	const itemStatus = useSelector(state => state.items.status)
 	const error = useSelector(state => state.items.error)
 	
+	const filteredItems = items.filter((item)=>{
+		if(itemFilter === 'cheap'){return item.price < 5000}
+		if(itemFilter === 'expansive'){return item.price > 5000}
+		return item
+		})
+		
 	React.useEffect(()=> {
 		if(itemStatus === 'idle'){
 			dispatch(fetchItems())
-			//if(items)console.log(items)
 			}
 		},[items, itemStatus, dispatch])
 	
@@ -22,7 +27,7 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 	if(itemStatus === 'loading'){
 		content = <p>loading</p>
 		}else if (itemStatus === 'succeeded'&&items){
-		const orderedItems = items.slice().sort((a, b) =>
+		const orderedItems = filteredItems.slice().sort((a, b) =>
 		                                   b.createdAt.localeCompare(a.createdAt))
 		//const filtered = items.filter(item => item.price >  3000)
 		//console.log(filtered)
