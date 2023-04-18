@@ -1,4 +1,7 @@
 import React from 'react'
+import Badge from "@material-ui/core/Badge"
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
+import CartIcon from "@material-ui/icons/ShoppingCart"
 import {useSelector, useDispatch} from 'react-redux'
 import {increment,decrement,removeItem} from '../Redux/cartSlice'
 
@@ -13,9 +16,16 @@ const CartItem =({item})=> {
            </section></>
 	}
 
-export const Cart =()=> {
+export const Cart =({opened, setOpened})=> {
 	const cartState = useSelector(state => state.cart.cart)
 	
 //	return<>{cartState.map(item => (<CartItem key={item._id} item={item}/>))}</>
-    return<>{cartState.length}</>
+    return<>
+            <Badge color='secondary'
+                   badgeContent={cartState.length}>
+            <button onClick={() => setOpened({...opened, cart: true})}>
+            Cart<CartIcon/>
+            </button>
+            </Badge>
+          </>
 	}

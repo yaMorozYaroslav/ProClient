@@ -8,7 +8,7 @@ import {ItemsList} from './Units/ItemsList'
 
 export const App =()=> {
 	const [currentId, setCurrentId] = React.useState(null)
-	const [opened, setOpened] = React.useState({item: false, auth: false})
+	const [opened, setOpened] = React.useState({item: false, auth: false, cart: false})
 	const [itemFilter, setItemFilter] = React.useState('all')
 	
 	function onFilterSelected(filterValue){
@@ -16,7 +16,7 @@ export const App =()=> {
 		}
 	
 	return <>
-	         <Cart/>
+	         <Cart opened={opened} setOpened={setOpened}/>
 	         <CartForm/>
 	         
 	         <TheBar currentId={currentId} setCurrentId={setCurrentId}
