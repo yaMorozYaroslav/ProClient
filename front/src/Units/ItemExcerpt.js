@@ -22,6 +22,7 @@ export const ItemExcerpt = ({item, setCurrentId, opened, setOpened}) => {
 	  <h3>{item.title}</h3>
 	  <p>{item.photo}</p>
 	  <p>{item.description}</p>
+	  <p>{item.price}</p>
 	  {(userData[0] && 
 	   (userData[0].result._id === item.creator||userData[0].result.role === 'admin')) && 
 	   (<>
