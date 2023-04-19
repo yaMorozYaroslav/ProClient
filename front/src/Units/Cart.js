@@ -22,10 +22,13 @@ export const Cart =({opened, setOpened})=> {
 //	return<>{cartState.map(item => (<CartItem key={item._id} item={item}/>))}</>
     return<>
             <Badge color='secondary'
-                   badgeContent={cartState.length}>
-            <button onClick={() => setOpened({...opened, cart: true})}>
+                   badgeContent={cartState.length}
+                   onClick={() => setOpened({...opened, cart: true})}>
             Cart<CartIcon/>
-            </button>
             </Badge>
+            {opened.cart && cartState.map(item => (<CartItem key={item._id} item={item}/>))}
+			{opened.cart && <button 
+	                            onClick={() => setOpened({...opened, cart: false})}>
+	                         CloseCart</button>}
           </>
 	}

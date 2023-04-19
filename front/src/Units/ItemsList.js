@@ -4,7 +4,7 @@ import {selectAllItems, fetchItems} from '../Redux/itemsSlice'
 import {ItemExcerpt} from './ItemExcerpt'
 
    
-export const ItemsList = ({setCurrentId, opened, setOpened, itemFilter}) => {
+export const ItemsList = ({setCurrentId, opened, setOpened, itemFilter, itemSearch}) => {
 	const dispatch = useDispatch()
 	const items = useSelector(selectAllItems)
 	const itemStatus = useSelector(state => state.items.status)
@@ -13,6 +13,7 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemFilter}) => {
 	const filteredItems = items.filter((item)=>{
 		if(itemFilter === 'cheap'){return item.price < 5000}
 		if(itemFilter === 'expansive'){return item.price > 5000}
+		if(itemSearch){return item.title.toUpperCase().includes(itemSearch.toUpperCase())}
 		return item
 		})
 		

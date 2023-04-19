@@ -10,9 +10,13 @@ export const App =()=> {
 	const [currentId, setCurrentId] = React.useState(null)
 	const [opened, setOpened] = React.useState({item: false, auth: false, cart: false})
 	const [itemFilter, setItemFilter] = React.useState('all')
+	const [itemSearch, setItemSearch] = React.useState('')
 	
 	function onFilterSelected(filterValue){
 		setItemFilter(filterValue)
+		}
+	function onSearchSelected(filterValue){
+		setItemSearch(filterValue)
 		}
 	
 	return <>
@@ -22,10 +26,10 @@ export const App =()=> {
 	         <TheBar currentId={currentId} setCurrentId={setCurrentId}
 	                 opened={opened} setOpened={setOpened}/>
 	                 
-	         <Filter filterSelected={onFilterSelected}/>
+	         <Filter filterSelected={onFilterSelected} searchSelected={onSearchSelected}/>
 	         
 	         <ItemsList setCurrentId={setCurrentId} 
 	                    opened={opened} setOpened={setOpened}
-	                    itemFilter={itemFilter}/>
+	                    itemFilter={itemFilter} itemSearch={itemSearch}/>
 	       </>
 	}
