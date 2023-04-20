@@ -21,11 +21,12 @@ export const App =()=> {
 		setItemSearch(filterValue)
 		}
 	function onMinPrice(filterValue){
-		
+		setItemPrice({...itemPrice, min: filterValue})
 		}
 	function onMaxPrice(filterValue){
-		
+		setItemPrice({...itemPrice, max: filterValue})
 		}
+		
 	return <>
 	         <Cart opened={opened} setOpened={setOpened}/>
 	         <CartForm/>
@@ -40,6 +41,8 @@ export const App =()=> {
 	         
 	         <ItemsList setCurrentId={setCurrentId} 
 	                    opened={opened} setOpened={setOpened}
-	                    itemFilter={itemFilter} itemSearch={itemSearch}/>
+	                    itemFilter={itemFilter} itemSearch={itemSearch}
+	                    itemPrice={itemPrice}
+	                    />
 	       </>
 	}

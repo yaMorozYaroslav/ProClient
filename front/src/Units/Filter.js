@@ -13,8 +13,8 @@ export const Filter =(props)=> {
 		props.maxPriceSelected(event.target.value)
 		}
 	return <>
-	     <input onChange={onMaxPrice} placeholder='MaxPrice'/>
 	     <input onChange={onMinPrice} placeholder='MinPrice'/>
+	     <input onChange={onMaxPrice} placeholder='MaxPrice'/>
 	     <input onChange={onSearch} placeholder='Search'/>
 	     <select name='howFilter' onChange={onFilter}>
 	       <option value='all'>All</option>
