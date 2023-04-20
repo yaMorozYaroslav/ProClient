@@ -14,11 +14,15 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemFilter, itemSear
 		if(itemFilter === 'cheap'){return item.price < 5000}
 		if(itemFilter === 'expansive'){return item.price > 5000}
 		if(itemSearch){return item.title.toUpperCase().includes(itemSearch.toUpperCase())}
+		//if(itemPrice.min > 0) return item.price > itemPrice.min
 		return item
 		})
 	console.log(itemPrice)
 	const filterByPrice = items.filter(item => {
-		if(itemPrice.min > 0) return item.price > itemPrice.min
+		if(itemPrice.min > 0){ 
+			console.log(itemPrice.min, item.price)
+			return item.price > parseInt(itemPrice.min)}
+		return item
 		})
 		
 	React.useEffect(()=> {
@@ -32,7 +36,7 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemFilter, itemSear
 	if(itemStatus === 'loading'){
 		content = <p>loading</p>
 		}else if (itemStatus === 'succeeded'&&items){
-		const orderedItems = filteredItems.slice().sort((a, b) =>
+		const orderedItems = filterByPrice.slice().sort((a, b) =>
 		                                   b.createdAt.localeCompare(a.createdAt))
 		//const filtered = items.filter(item => item.price >  3000)
 		//console.log(filtered)
