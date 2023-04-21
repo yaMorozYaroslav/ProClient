@@ -6,7 +6,7 @@ const itemSchema = mongoose.Schema({
 	price: String,
 	creator: String,
 	photo: String,
-	condition: String,
+	category: String,
 	createdAt: {
 		type: Date,
 		default: new Date()
