@@ -13,15 +13,19 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemFilter, itemSear
 	const filteredItems = items.filter((item)=>{
 		if(itemFilter === 'cheap'){return item.price < 5000}
 		if(itemFilter === 'expansive'){return item.price > 5000}
-		if(itemSearch){return item.title.toUpperCase().includes(itemSearch.toUpperCase())}
+		//if(itemSearch){return item.title.toUpperCase().includes(itemSearch.toUpperCase())}
 		//if(itemPrice.min > 0) return item.price > itemPrice.min
 		return item
 		})
 	console.log(itemPrice)
 	const filterByPrice = items.filter(item => {
-		if(itemPrice.min > 0){ 
-			console.log(itemPrice.min, item.price)
-			return item.price > parseInt(itemPrice.min)}
+		if(!itemSearch && itemPrice.min > 0 && itemPrice.max === 0){
+			 return item.price > parseInt(itemPrice.min)}
+		if(!itemSearch && itemPrice.max > 0 && itemPrice.min === 0){
+			return item.price < parseInt(itemPrice.max)}
+		if(!itemSearch && itemPrice.max > 0 && itemPrice.min > 0){
+			return item.price > parseInt(itemPrice.min) && item.price < parseInt(itemPrice.max)}
+		if(itemSearch){return item.title.toUpperCase().includes(itemSearch.toUpperCase())}
 		return item
 		})
 		

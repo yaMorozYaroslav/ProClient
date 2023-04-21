@@ -12,7 +12,7 @@ export const App =()=> {
 	
 	const [itemFilter, setItemFilter] = React.useState('all')
 	const [itemSearch, setItemSearch] = React.useState('')
-	const [itemPrice, setItemPrice] = React.useState({min:'0', max:'0'})
+	const [itemPrice, setItemPrice] = React.useState({min:0, max:0})
 	
 	function onFilterSelected(filterValue){
 		setItemFilter(filterValue)
