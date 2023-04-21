@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { addItem, changeItem} from '../Redux/itemsSlice'
 import FileBase from 'react-file-base64'
 
-const initialState = {title: '', description: '', price: '', condition: '', photo: ''}
+const initialState = {title: '', description: '', price: '', category: '', photo: ''}
 
 export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
 	
@@ -55,11 +55,13 @@ export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
 	 value={source.price||''} 
 	 onChange={handChange}/>
 	 
-	 <label>Condition:</label>
-	 <input name='condition'
-	 value={source.condition||''} 
-	 onChange={handChange}/>
-	 
+	 <label>Category:</label>
+	 <select name='category'
+	 onChange={handChange}>
+	 <option value='all'>all</option>
+	 <option value='soil'>soil</option>
+	 <option value='pesticide'>pesticide</option>
+	 </select>
 	 <label>Photo:</label>
       <FileBase 
                          type="file"

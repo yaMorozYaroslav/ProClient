@@ -21,6 +21,7 @@ export const ItemExcerpt = ({item, setCurrentId, opened, setOpened}) => {
 	<article style={{'background':`#${randomColor}`}}>
 	  <h3>{item.title}</h3>
 	  <p>{item.photo}</p>
+	  <p>{item.category}</p>
 	  <p>{item.description}</p>
 	  <p>{item.price}</p>
 	  {(userData[0] && 
