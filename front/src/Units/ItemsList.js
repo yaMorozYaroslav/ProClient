@@ -17,7 +17,6 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemFilter, itemSear
 		//if(itemPrice.min > 0) return item.price > itemPrice.min
 		return item
 		})
-	console.log(itemPrice)
 	const filterByPrice = items.filter(item => {
 		if(!itemSearch && itemPrice.min > 0 && itemPrice.max === 0){
 			 return item.price > parseInt(itemPrice.min)}

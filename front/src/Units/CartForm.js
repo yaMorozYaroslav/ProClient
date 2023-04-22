@@ -25,7 +25,7 @@ export const CartForm =()=> {
 	
 	React.useEffect(()=>{
 		setForEmail(JSON.stringify(inCart))
-		console.log(forEmail)
+		//console.log(forEmail)
 		},[forEmail, inCart])
 	
 	
