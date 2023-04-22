@@ -36,6 +36,7 @@ export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
+	
 	 return(
 	 <section >
 	 <h2>Item</h2>
@@ -57,17 +58,20 @@ export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
 	 
 	 <label>Category:</label>
 	 <select name='category'
-	 onChange={handChange}>
-	 <option value='all'>all</option>
+	         value={source.category}
+	         onChange={handChange}>
+	 <option value='seed'>seed</option>
 	 <option value='soil'>soil</option>
 	 <option value='pesticide'>pesticide</option>
 	 </select>
+	 
 	 <label>Photo:</label>
       <FileBase 
                          type="file"
                          multiple={false}
                          onDone={({base64})=>setSource({
-                            ...source, photo: base64})}/>                       
+                            ...source, photo: base64})}/>
+                            
 	 <button onClick={handSubmit}>Save</button>
 	 <button onClick={()=>setOpened({...opened, item: false})}>closeForm</button>
 	</form>

@@ -10,7 +10,7 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemFilter, itemSear
 	const itemStatus = useSelector(state => state.items.status)
 	const error = useSelector(state => state.items.error)
 	
-	const filteredItems = items.filter((item)=>{
+	const categorized = items.filter((item)=>{
 		if(itemFilter === 'cheap'){return item.price < 5000}
 		if(itemFilter === 'expansive'){return item.price > 5000}
 		//if(itemSearch){return item.title.toUpperCase().includes(itemSearch.toUpperCase())}
