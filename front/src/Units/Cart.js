@@ -24,12 +24,19 @@ export const Cart =({opened, setOpened})=> {
             <Badge color='secondary'
                    overlap="rectangular"
                    badgeContent={cartState.length}
-                   onClick={() => setOpened({...opened, cart: true})}>
+                   onClick={() => setOpened(
+					              {...opened, cart: cartState.length > 0 ? true : false})}>
             Cart<CartIcon/>
             </Badge>
+            
             {opened.cart && cartState.map(item => (<CartItem key={item._id} item={item}/>))}
-			{opened.cart && <button 
+            
+			{opened.cart && cartState.length > 0 && (<>
+				             <button 
+				                onClick={() => setOpened({...opened, mail: true})}>
+				             OrderItems</button>
+				             <button 
 	                            onClick={() => setOpened({...opened, cart: false})}>
-	                         CloseCart</button>}
+	                         CloseCart</button></>)}
           </>
 	}

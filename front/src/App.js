@@ -8,14 +8,14 @@ import {ItemsList} from './Units/ItemsList'
 
 export const App =()=> {
 	const [currentId, setCurrentId] = React.useState(null)
-	const [opened, setOpened] = React.useState({item: false, auth: false, cart: false})
+	const [opened, setOpened] = React.useState({item: false, auth: false, cart: false, mail: false})
 	
-	const [itemFilter, setItemFilter] = React.useState('all')
+	const [itemCategory, setItemCategory] = React.useState('all')
 	const [itemSearch, setItemSearch] = React.useState('')
 	const [itemPrice, setItemPrice] = React.useState({min:0, max:0})
 	
-	function onFilterSelected(filterValue){
-		setItemFilter(filterValue)
+	function onCategory(filterValue){
+		setItemCategory(filterValue)
 		}
 	function onSearchSelected(filterValue){
 		setItemSearch(filterValue)
@@ -29,19 +29,19 @@ export const App =()=> {
 		
 	return <>
 	         <Cart opened={opened} setOpened={setOpened}/>
-	         <CartForm/>
+	         <CartForm opened={opened} setOpened={setOpened}/>
 	         
 	         <TheBar currentId={currentId} setCurrentId={setCurrentId}
 	                 opened={opened} setOpened={setOpened}/>
 	                 
-	         <Filter filterSelected={onFilterSelected}
+	         <Filter onCategory={onCategory}
 	                 searchSelected={onSearchSelected}
 	                 minPriceSelected={onMinPrice}
 	                 maxPriceSelected={onMaxPrice}/>
 	         
 	         <ItemsList setCurrentId={setCurrentId} 
 	                    opened={opened} setOpened={setOpened}
-	                    itemFilter={itemFilter} itemSearch={itemSearch}
+	                    itemCategory={itemCategory} itemSearch={itemSearch}
 	                    itemPrice={itemPrice}
 	                    />
 	       </>

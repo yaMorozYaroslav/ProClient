@@ -1,7 +1,7 @@
 export const Filter =(props)=> {
 	
-	function onFilter(event){
-		props.filterSelected(event.target.value)	
+	function onCategory(event){
+		props.onCategory(event.target.value)	
 		}
 	function onSearch(event){
 		props.searchSelected(event.target.value)
@@ -16,10 +16,11 @@ export const Filter =(props)=> {
 	     <input onChange={onMinPrice} placeholder='MinPrice'/>
 	     <input onChange={onMaxPrice} placeholder='MaxPrice'/>
 	     <input onChange={onSearch} placeholder='Search'/>
-	     <select name='howFilter' onChange={onFilter}>
+	     <select name='howFilter' onChange={onCategory}>
 	       <option value='all'>All</option>
-	       <option value='cheap'>Cheap</option>
-	       <option value='expansive'>Expansive</option>
+	       <option value='soils'>Soils</option>
+	       <option value='pesticides'>Pesticides</option>
+	       <option value='seeds'>Seeds</option>
 	     
 	     </select>
 	</>

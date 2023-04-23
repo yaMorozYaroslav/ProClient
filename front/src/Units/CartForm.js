@@ -2,7 +2,7 @@ import React, {useRef} from 'react'
 import {useSelector} from 'react-redux'
 import emailjs from '@emailjs/browser'
 	
-export const CartForm =()=> {
+export const CartForm =({opened, setOpened})=> {
 	
 	const [forEmail, setForEmail] = React.useState([])
 	
@@ -30,7 +30,7 @@ export const CartForm =()=> {
 	
 	
 	return <>
-	<form ref={form} onSubmit={sendEmail}>
+	<form ref={form} onSubmit={sendEmail} style={{'display': !opened.mail?'none':'block'}}>
 	
 	  <label htmlFor='Name'>Name</label>
 	    <input type='text' placeholder='Name' name='user_name'  required/>
@@ -42,6 +42,8 @@ export const CartForm =()=> {
 	   <textarea readOnly value={forEmail} name='items' style={{'display':'none'}} required/>
 	
 	<button type='submit'>Send</button>
+	
+	<button onClick={()=>setOpened({...opened, mail: false})}>CloseForm</button>
 	</form>
 	      </>
 	}
