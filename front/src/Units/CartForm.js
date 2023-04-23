@@ -30,7 +30,9 @@ export const CartForm =({opened, setOpened})=> {
 	
 	
 	return <>
-	<form ref={form} onSubmit={sendEmail} style={{'display': !opened.mail?'none':'block'}}>
+	<form 
+	      ref={form} onSubmit={sendEmail} 
+	      style={{'display': !opened.mail?'none':'block', 'padding':'20px', 'background':'pink'}}>
 	
 	  <label htmlFor='Name'>Name</label>
 	    <input type='text' placeholder='Name' name='user_name'  required/>
@@ -42,8 +44,6 @@ export const CartForm =({opened, setOpened})=> {
 	   <textarea readOnly value={forEmail} name='items' style={{'display':'none'}} required/>
 	
 	<button type='submit'>Send</button>
-	
-	<button onClick={()=>setOpened({...opened, mail: false})}>CloseForm</button>
 	</form>
 	      </>
 	}

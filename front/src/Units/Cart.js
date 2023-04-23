@@ -22,6 +22,7 @@ export const Cart =({opened, setOpened})=> {
 //	return<>{cartState.map(item => (<CartItem key={item._id} item={item}/>))}</>
     return<>
             <Badge color='secondary'
+                   style={{'cursor':'pointer'}}
                    overlap="rectangular"
                    badgeContent={cartState.length}
                    onClick={() => setOpened(
@@ -33,7 +34,7 @@ export const Cart =({opened, setOpened})=> {
             
 			{opened.cart && cartState.length > 0 && (<>
 				             <button 
-				                onClick={() => setOpened({...opened, mail: true})}>
+				                onClick={() => setOpened({...opened, mail: !opened.mail})}>
 				             OrderItems</button>
 				             <button 
 	                            onClick={() => setOpened({...opened, cart: false})}>

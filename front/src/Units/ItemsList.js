@@ -15,10 +15,14 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSe
 		if(itemCategory === 'soils'){return item.category === 'soil'}
 		if(itemCategory === 'pesticides'){return item.category === 'pesticide'}
 		if(itemCategory === 'seeds'){return item.category === 'seed'}
+		return item
 		//if(itemSearch){return item.title.toUpperCase().includes(itemSearch.toUpperCase())}
 		//if(itemPrice.min > 0) return item.price > itemPrice.min
 		})
-	const filterByPrice = categorized.filter(item => {
+	
+	const sortByPrice = categorized.sort((a,b) => b.price - a.price)
+	console.log(sortByPrice)
+	const filterByPrice = sortByPrice.filter(item => {
 		if(!itemSearch && itemPrice.min > 0 && itemPrice.max === 0){
 			 return item.price > parseInt(itemPrice.min)}
 		if(!itemSearch && itemPrice.max > 0 && itemPrice.min === 0){
@@ -42,9 +46,7 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSe
 		}else if (itemStatus === 'succeeded'&&items){
 		const orderedItems = filterByPrice.slice().sort((a, b) =>
 		                                   b.createdAt.localeCompare(a.createdAt))
-		//const filtered = items.filter(item => item.price >  3000)
-		//console.log(filtered)
-		 console.log(orderedItems)
+		
 		 content = orderedItems.map(item => (
 			   <ItemExcerpt 
 			           key={item._id} 
