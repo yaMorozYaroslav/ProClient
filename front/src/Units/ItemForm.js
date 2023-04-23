@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { addItem, changeItem} from '../Redux/itemsSlice'
 import FileBase from 'react-file-base64'
 
-const initialState = {title: '', description: '', price: '', category: '', photo: ''}
+const initialState = {title: '', description: '', price: '', category: 'seed', photo: ''}
 
 export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
 	
@@ -30,6 +30,7 @@ export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
 		if(!currentId){dispatch(addItem(source))
 		}else{dispatch(changeItem({id: currentId, source: source}))
 		 }
+		 console.log(source)
 		reset()
 		setOpened({...opened, item: false})
 		}

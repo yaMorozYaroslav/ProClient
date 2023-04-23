@@ -42,8 +42,7 @@ React.useEffect(()=>{
 	  
 	
 		},[authData, dispatch, profile])
-		console.log(opened)
-		//console.log(cartState)
+	
 	return <>
 	        {!authData.length && opened.auth && <><AuthForm/></>}
 	

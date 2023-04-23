@@ -10,7 +10,10 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSe
 	const itemStatus = useSelector(state => state.items.status)
 	const error = useSelector(state => state.items.error)
 	
-	const categorized = items.filter((item)=>{
+	const sortedByDate = items.slice().sort((a, b) =>
+		                                   b.createdAt.localeCompare(a.createdAt))
+	
+	const categorized = sortedByDate.filter((item)=>{
 		if(itemCategory === 'all'){ return item }
 		if(itemCategory === 'soils'){return item.category === 'soil'}
 		if(itemCategory === 'pesticides'){return item.category === 'pesticide'}
@@ -20,9 +23,9 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSe
 		//if(itemPrice.min > 0) return item.price > itemPrice.min
 		})
 	
-	const sortByPrice = categorized.sort((a,b) => b.price - a.price)
-	console.log(sortByPrice)
-	const filterByPrice = sortByPrice.filter(item => {
+	const sortedByPrice = categorized.sort((a,b) => a.price - b.price)
+	console.log(sortedByPrice)
+	const filteredByPrice = sortedByPrice.filter(item => {
 		if(!itemSearch && itemPrice.min > 0 && itemPrice.max === 0){
 			 return item.price > parseInt(itemPrice.min)}
 		if(!itemSearch && itemPrice.max > 0 && itemPrice.min === 0){
@@ -32,7 +35,7 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSe
 		if(itemSearch){return item.title.toUpperCase().includes(itemSearch.toUpperCase())}
 		return item
 		})
-		
+    
 	React.useEffect(()=> {
 		if(itemStatus === 'idle'){
 			dispatch(fetchItems())
@@ -42,12 +45,11 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSe
 	let content
 	
 	if(itemStatus === 'loading'){
+		
 		content = <p>loading</p>
 		}else if (itemStatus === 'succeeded'&&items){
-		const orderedItems = filterByPrice.slice().sort((a, b) =>
-		                                   b.createdAt.localeCompare(a.createdAt))
-		
-		 content = orderedItems.map(item => (
+
+		 content = filteredByPrice.map(item => (
 			   <ItemExcerpt 
 			           key={item._id} 
 			           item={item}
