@@ -33,7 +33,7 @@ React.useEffect(()=>{
 	        	}
 	        },[authData, dispatch, profile])
       
-React.useEffect(()=>{
+/*React.useEffect(()=>{
 	if(authData.length && JSON.stringify(authData[0]) !== JSON.stringify(profile))
 	   localStorage.setItem('profile', JSON.stringify(authData[0]))
 	
@@ -42,7 +42,7 @@ React.useEffect(()=>{
 	  
 	
 		},[authData, dispatch, profile])
-	
+	*/
 	return <>
 	        {!authData.length && opened.auth && <><AuthForm/></>}
 	
