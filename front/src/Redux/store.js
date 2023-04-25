@@ -8,14 +8,16 @@ import itemsReducer from './itemsSlice'
 import authReducer from './authSlice'
 import cartReducer from './cartSlice'
 
-const persistConfig = {key: 'profile', storage}
-
-const persistedReducer = persistReducer(persistConfig, authReducer)
+const persistConfig = {
+	                   key: 'profile',
+	                   storage: storage, 
+	                  // whitelist: ['authData']
+	                  }
 
 export const store = configureStore({
 	reducer: {
 		items: itemsReducer,
-		auth: persistedReducer,
+		auth: persistReducer(persistConfig, authReducer),
 		cart: cartReducer,
 	},
 	middleware: [thunk]
