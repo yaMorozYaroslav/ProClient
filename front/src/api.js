@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const API = axios.create({baseURL: 'http://localhost:5000'})
 
-console.log(localStorage.getItem('persist:profile'))
+//console.log(localStorage.getItem('persist:profile'))
 
 API.interceptors.request.use((req)=>{
     if(localStorage.getItem('profile')){
