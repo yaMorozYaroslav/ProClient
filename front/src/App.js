@@ -2,6 +2,7 @@ import React from 'react'
 
 import { AuthContext } from './Context/AuthContext';
 import { useAuth } from './Context/useAuth';
+import { useContext } from "react"
 
 import {Cart} from './Units/Cart'
 import {CartForm} from './Units/CartForm'
@@ -10,7 +11,20 @@ import {Filter} from './Units/Filter'
 import {ItemsList} from './Units/ItemsList'
 
 export const App =()=> {
-	const {user, setUser} = useAuth()
+	const {user, setUser, login} = useAuth()
+	const currUser = useContext(AuthContext)
+	
+	const handleLogin = (e) => {
+		e.preventDefault()
+    login({
+      id: '1',
+      name: 'John Doe',
+      email: 'john.doe@email.com',
+    });
+    console.log(user)
+  };
+	
+	console.log(currUser)
 	
 	const [currentId, setCurrentId] = React.useState(null)
 	const [opened, setOpened] = React.useState({item: false, auth: false, cart: false, mail: false})
@@ -44,6 +58,8 @@ export const App =()=> {
 	                 searchSelected={onSearchSelected}
 	                 minPriceSelected={onMinPrice}
 	                 maxPriceSelected={onMaxPrice}/>
+	                 
+	         <button onClick={handleLogin}>newLogin</button>
 	         
 	         <ItemsList setCurrentId={setCurrentId} 
 	                    opened={opened} setOpened={setOpened}
