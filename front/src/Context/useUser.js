@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../Context/AuthContext';
 import { useLocalStorage } from './useLocalStorage';
 
 
@@ -18,5 +18,5 @@ export const useUser = () => {
     setItem('user', '');
   };
 
-  return { user, login, logout };
+  return { user, setUser, addUser, removeUser };
 };

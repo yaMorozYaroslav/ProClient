@@ -1,5 +1,8 @@
 import React from 'react'
 
+import { AuthContext } from './Context/AuthContext';
+import { useAuth } from './Context/useAuth';
+
 import {Cart} from './Units/Cart'
 import {CartForm} from './Units/CartForm'
 import {TheBar} from './Units/TheBar'
@@ -7,6 +10,8 @@ import {Filter} from './Units/Filter'
 import {ItemsList} from './Units/ItemsList'
 
 export const App =()=> {
+	const {user, setUser} = useAuth()
+	
 	const [currentId, setCurrentId] = React.useState(null)
 	const [opened, setOpened] = React.useState({item: false, auth: false, cart: false, mail: false})
 	
@@ -27,7 +32,8 @@ export const App =()=> {
 		setItemPrice({...itemPrice, max: filterValue})
 		}
 		
-	return <>
+	return (<AuthContext.Provider value={{user, setUser}}>
+	       <>
 	         <Cart opened={opened} setOpened={setOpened}/>
 	         <CartForm opened={opened} setOpened={setOpened}/>
 	         
@@ -45,4 +51,5 @@ export const App =()=> {
 	                    itemPrice={itemPrice}
 	                    />
 	       </>
+	        </AuthContext.Provider>)
 	}
