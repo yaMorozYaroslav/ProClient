@@ -1,8 +1,4 @@
-import React from 'react'
-
-import { AuthContext } from './Context/AuthContext';
-import { useAuth } from './Context/useAuth';
-import { useContext } from "react"
+import React, {createContext, useContext} from 'react'
 
 import {Cart} from './Units/Cart'
 import {CartForm} from './Units/CartForm'
@@ -10,21 +6,17 @@ import {TheBar} from './Units/TheBar'
 import {Filter} from './Units/Filter'
 import {ItemsList} from './Units/ItemsList'
 
+const AuthContext = createContext(null)
+
 export const App =()=> {
-	const {user, setUser, login} = useAuth()
-	const currUser = useContext(AuthContext)
 	
-	const handleLogin = (e) => {
-		e.preventDefault()
-    login({
-      id: '1',
-      name: 'John Doe',
-      email: 'john.doe@email.com',
-    });
-    console.log(user)
+	const [user, setUser] = React.useState(null)
+	
+	const handleLogin = () => {
+    setUser('nuly');
+    if(user !== null) console.log(user)
   };
 	
-	console.log(currUser)
 	
 	const [currentId, setCurrentId] = React.useState(null)
 	const [opened, setOpened] = React.useState({item: false, auth: false, cart: false, mail: false})
@@ -46,8 +38,11 @@ export const App =()=> {
 		setItemPrice({...itemPrice, max: filterValue})
 		}
 		
-	return (<AuthContext.Provider value={{user, setUser}}>
+	const currUser = useContext(AuthContext)
+    if(currUser !== null)console.log(currUser)
+	return (
 	       <>
+	       <AuthContext.Provider value={user}>
 	         <Cart opened={opened} setOpened={setOpened}/>
 	         <CartForm opened={opened} setOpened={setOpened}/>
 	         
@@ -66,6 +61,7 @@ export const App =()=> {
 	                    itemCategory={itemCategory} itemSearch={itemSearch}
 	                    itemPrice={itemPrice}
 	                    />
+	           </AuthContext.Provider>
 	       </>
-	        </AuthContext.Provider>)
+	      )
 	}
