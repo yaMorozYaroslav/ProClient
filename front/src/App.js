@@ -1,6 +1,6 @@
 import React, {createContext, useContext} from 'react'
 
-import {UserButt} from './Units/UserButt'
+import {UseUser} from './Context/useUser'
 
 import {Cart} from './Units/Cart'
 import {CartForm} from './Units/CartForm'
@@ -49,9 +49,9 @@ export const App =()=> {
 	                 searchSelected={onSearchSelected}
 	                 minPriceSelected={onMinPrice}
 	                 maxPriceSelected={onMaxPrice}/>
-	                 
-	         <UserButt/>
-	         
+	       
+	       <UseUser/>
+	           
 	         <ItemsList setCurrentId={setCurrentId} 
 	                    opened={opened} setOpened={setOpened}
 	                    itemCategory={itemCategory} itemSearch={itemSearch}
