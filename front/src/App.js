@@ -1,21 +1,18 @@
 import React, {createContext, useContext} from 'react'
 
+import {UserButt} from './Units/UserButt'
+
 import {Cart} from './Units/Cart'
 import {CartForm} from './Units/CartForm'
 import {TheBar} from './Units/TheBar'
 import {Filter} from './Units/Filter'
 import {ItemsList} from './Units/ItemsList'
 
-const AuthContext = createContext(null)
+export const AuthContext = createContext()
 
 export const App =()=> {
 	
 	const [user, setUser] = React.useState(null)
-	
-	const handleLogin = () => {
-    setUser('nuly');
-    if(user !== null) console.log(user)
-  };
 	
 	
 	const [currentId, setCurrentId] = React.useState(null)
@@ -38,11 +35,10 @@ export const App =()=> {
 		setItemPrice({...itemPrice, max: filterValue})
 		}
 		
-	const currUser = useContext(AuthContext)
-    if(currUser !== null)console.log(currUser)
+	
 	return (
 	       <>
-	       <AuthContext.Provider value={user}>
+	       <AuthContext.Provider value={{user, setUser}}>
 	         <Cart opened={opened} setOpened={setOpened}/>
 	         <CartForm opened={opened} setOpened={setOpened}/>
 	         
@@ -54,7 +50,7 @@ export const App =()=> {
 	                 minPriceSelected={onMinPrice}
 	                 maxPriceSelected={onMaxPrice}/>
 	                 
-	         <button onClick={handleLogin}>newLogin</button>
+	         <UserButt/>
 	         
 	         <ItemsList setCurrentId={setCurrentId} 
 	                    opened={opened} setOpened={setOpened}
