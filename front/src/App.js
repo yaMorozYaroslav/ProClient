@@ -1,20 +1,16 @@
 import React, {createContext, useContext} from 'react'
 
-import {UseUser} from './Context/useUser'
+//import {UseUser} from './Context/useUser'
 
 import {Cart} from './Units/Cart'
 import {CartForm} from './Units/CartForm'
 import {TheBar} from './Units/TheBar'
 import {Filter} from './Units/Filter'
 import {ItemsList} from './Units/ItemsList'
+import ItemState from "./Context/Cart/CartState";
 
-export const AuthContext = createContext()
-export const ItemContext = createContext()
 
 export const App =()=> {
-	
-	const [user, setUser] = React.useState(null)
-	
 	
 	const [currentId, setCurrentId] = React.useState(null)
 	const [opened, setOpened] = React.useState({item: false, auth: false, cart: false, mail: false})
