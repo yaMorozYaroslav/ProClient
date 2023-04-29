@@ -9,6 +9,7 @@ import {Filter} from './Units/Filter'
 import {ItemsList} from './Units/ItemsList'
 
 export const AuthContext = createContext()
+export const ItemContext = createContext()
 
 export const App =()=> {
 	

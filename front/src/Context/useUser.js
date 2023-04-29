@@ -9,7 +9,7 @@ export const UseUser = () => {
         
     const login = async () => {
 	  const result = await auth({email: 'ya.moroz@gmail.com', password: 'HorHor'})
-	  //localStorage.setItem('profile', JSON.stringify(authData[0]))
+	  localStorage.setItem('profile', JSON.stringify(result.data))
       setUser(result.data);
       if(user !== null) console.log(user)
   }; 
