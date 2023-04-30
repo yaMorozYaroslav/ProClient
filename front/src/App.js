@@ -8,7 +8,7 @@ import {TheBar} from './Units/TheBar'
 import {Filter} from './Units/Filter'
 import {ItemsList} from './Units/ItemsList'
 
-import {ItemState} from "./Context/ItemState";
+import {ItemState} from "./Context/Item/ItemState";
 
 
 export const App =()=> {

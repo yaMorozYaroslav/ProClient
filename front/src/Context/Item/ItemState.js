@@ -1,7 +1,7 @@
 import { useReducer } from "react";
-import ItemContext from "./ItemContext";
+import ItemContext from "../Contexts";
 import ItemReducer from "./ItemReducer";
-import {getItems, createItem, editItem, deleteItem} from '../api'
+import {getItems, createItem, editItem, deleteItem} from '../../api'
 
 import {GET_ITEMS, START_LOADING, END_LOADING, ADD_ITEM,
 	   UPDATE_ITEM, REMOVE_ITEM, CHECKOUT, ERROR} from "./ItemTypes.js"
@@ -38,6 +38,7 @@ export const ItemState = ({ children }) => {
 	 }
     catch(err){
     	dispatch({type: ERROR, payload: err})
+    	console.log(err)
     }
   };
 

@@ -1,18 +1,23 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { addItem, changeItem} from '../Redux/itemsSlice'
+//import { addItem, changeItem} from '../Redux/itemsSlice'
 import FileBase from 'react-file-base64'
+import ItemContext from '../Context/Contexts'
 
 const initialState = {title: '', description: '', price: '', category: 'seed', photo: ''}
 
 export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
 	
+	const {items, addItem, updateItem} = React.useContext(ItemContext)
+	
 	const ref = React.useRef()
 	const dispatch = useDispatch()
 	const [source, setSource] = React.useState(initialState)
     //const user = JSON.parse(localStorage.getItem('profile'))
-    const currItem = useSelector(state =>  state.items.items.find((item) => 
-                                  item._id === currentId))
+    // const currItem = useSelector(state =>  state.items.items.find((item) => 
+    //                             item._id === currentId))
+    const currItem = items.find((item) => item._id === currentId)
+    
     React.useEffect(()=>{
 		
 	       	   if(currItem)setSource(currItem)
@@ -27,8 +32,8 @@ export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
 		
 	const handSubmit =(e)=> {
 		e.preventDefault()
-		if(!currentId){dispatch(addItem(source))
-		}else{dispatch(changeItem({id: currentId, source: source}))
+		if(!currentId){addItem(source)
+		}else{updateItem(currentId, source)
 		 }
 		 console.log(source)
 		reset()

@@ -1,7 +1,7 @@
 import React,{useContext} from 'react'
 import {ItemExcerpt} from './ItemExcerpt'
 
-import ItemContext from '../Context/ItemContext'
+import ItemContext from '../Context/Contexts'
 
    
 export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSearch, itemPrice}) => {
@@ -40,7 +40,6 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSe
 	React.useEffect(()=> {
 		    
 			if(!loading&&!items.length)fetchItems()
-			console.log(items.length)
 		},[loading,fetchItems,items.length])
 	
 	if(items.length)console.log(items)
