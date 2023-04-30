@@ -1,50 +1,34 @@
-COPY
-// /src/Context/Cart/CartReducer.jsx
 
-//Import the Action types
-/*import {
-  REMOVE_ITEM,
-  ADD_ITEM,
-  INCREASE,
-  DECREASE,
-  CHECKOUT,
-  CLEAR,
-} from "./CartTypes.js";
+import {GET_ITEMS, ADD_ITEM, UPDATE_ITEM,
+                   REMOVE_ITEM, CHECKOUT} from "./ItemTypes.js";
 
-// Export function to calculate the total price of the cart and the total quantity of the cart
-export const sumItems = (cartItems) => {
-  Storage(cartItems);
-  let itemCount = cartItems.reduce(
-    (total, product) => total + product.quantity,
-    0
-  );
-  let total = cartItems
-    .reduce((total, product) => total + product.price * product.quantity, 0)
-    .toFixed(2);
-  return { itemCount, total };
-};
-*/
-
-// The reducer is listening for an action, which is the type that we defined in the CartTypes.js file
 const ItemReducer = (state, action) => {
-  // The switch statement is checking the type of action that is being passed in
   switch (action.type) {
-    // If the action type is ADD_TO_CART, we want to add the item to the cartItems array
-    case 'ADD_ITEM':
-        state.items.push({...action.payload});
-        
+	  
+	case GET_ITEMS:
+	  return {
+		  ...state,
+		  items: action.payload
+		  }
+		  
+	case 'START_LOADING':
+	return{...state,loading: true}
+	case 'END_LOADING':
+	return{...state,loading: false}
+	
+    case ADD_ITEM:
       return {
-        ...state,
-        items: [...state.items],
+       ...state, 
+       items: [...state.items, action.payload],
       };
-    case 'UPDATE_ITEM': 
+    case UPDATE_ITEM: 
         return{
 		...state,
 		items: state.items.map((item) =>
         (item._id === action.payload._id ? action.payload : item)) 
 			}
 
-    case 'REMOVE_ITEM':
+    case REMOVE_ITEM:
       return {
         ...state,
         items: [
@@ -55,7 +39,7 @@ const ItemReducer = (state, action) => {
 
     // If the action type is CHECKOUT,
     // we want to clear the cartItems array and set the checkout to true
-    case 'CHECKOUT':
+    case CHECKOUT:
       return {
         items: [],
         checkout: true

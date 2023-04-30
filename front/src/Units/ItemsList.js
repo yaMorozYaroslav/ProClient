@@ -1,14 +1,15 @@
-import React from 'react'
-import {useSelector, useDispatch} from 'react-redux'
-import {selectAllItems, fetchItems} from '../Redux/itemsSlice'
+import React,{useContext} from 'react'
 import {ItemExcerpt} from './ItemExcerpt'
+
+import ItemContext from '../Context/ItemContext'
 
    
 export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSearch, itemPrice}) => {
-	const dispatch = useDispatch()
-	const items = useSelector(selectAllItems)
-	const itemStatus = useSelector(state => state.items.status)
-	const error = useSelector(state => state.items.error)
+	const {items, loading, fetchItems} = useContext(ItemContext)
+	
+	
+	//const itemStatus = useSelector(state => state.items.status)
+	//const error = useSelector(state => state.items.error)
 	
 	const sortedByDate = items.slice().sort((a, b) =>
 		                                   b.createdAt.localeCompare(a.createdAt))
@@ -37,17 +38,18 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSe
 		})
     
 	React.useEffect(()=> {
-		if(itemStatus === 'idle'){
-			dispatch(fetchItems())
-			}
-		},[items, itemStatus, dispatch])
-	
+		//if(itemStatus === 'idle'){
+			//dispatch(fetchItems())
+			fetchItems()
+			//}
+		},[])
+	if(items.length)console.log(items)
 	let content
 	
-	if(itemStatus === 'loading'){
+	if(!loading){
 		
 		content = <p>loading</p>
-		}else if (itemStatus === 'succeeded'&&items){
+		}else if (loading&&items){
 
 		 content = filteredByPrice.map(item => (
 			   <ItemExcerpt 
@@ -57,7 +59,7 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSe
 			           opened={opened}
 			           setOpened={setOpened} />
 			))
-			} else if (itemStatus === 'failed') {
+			} else if (!loading && !items.length) {
 				content = <div>{error}</div>
 				}
 		 return(

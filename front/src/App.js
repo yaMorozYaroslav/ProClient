@@ -7,7 +7,8 @@ import {CartForm} from './Units/CartForm'
 import {TheBar} from './Units/TheBar'
 import {Filter} from './Units/Filter'
 import {ItemsList} from './Units/ItemsList'
-import ItemState from "./Context/Cart/CartState";
+
+import {ItemState} from "./Context/ItemState";
 
 
 export const App =()=> {
@@ -35,7 +36,7 @@ export const App =()=> {
 	
 	return (
 	       <>
-	       <AuthContext.Provider value={{user, setUser}}>
+	       <ItemState>
 	         <Cart opened={opened} setOpened={setOpened}/>
 	         <CartForm opened={opened} setOpened={setOpened}/>
 	         
@@ -46,15 +47,13 @@ export const App =()=> {
 	                 searchSelected={onSearchSelected}
 	                 minPriceSelected={onMinPrice}
 	                 maxPriceSelected={onMaxPrice}/>
-	       
-	       <UseUser/>
 	           
 	         <ItemsList setCurrentId={setCurrentId} 
 	                    opened={opened} setOpened={setOpened}
 	                    itemCategory={itemCategory} itemSearch={itemSearch}
 	                    itemPrice={itemPrice}
 	                    />
-	           </AuthContext.Provider>
+	           </ItemState>
 	       </>
 	      )
 	}
