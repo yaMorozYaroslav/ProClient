@@ -3,8 +3,8 @@ import ItemContext from "./ItemContext";
 import ItemReducer from "./ItemReducer";
 import {getItems, createItem, editItem, deleteItem} from '../api'
 
-import {GET_ITEMS, ADD_ITEM, UPDATE_ITEM,
-                   REMOVE_ITEM, CHECKOUT} from "./ItemTypes.js";
+import {GET_ITEMS, START_LOADING, END_LOADING, ADD_ITEM,
+	   UPDATE_ITEM, REMOVE_ITEM, CHECKOUT, ERROR} from "./ItemTypes.js"
 
 export const ItemState = ({ children }) => {
   
@@ -16,26 +16,28 @@ export const ItemState = ({ children }) => {
   };
 
 
-  const [state, dispatch] = useReducer(ItemReducer, initialState);
+  const [state, dispatch] = useReducer(ItemReducer, initialState)
 
   
   const fetchItems = async() => {
 	try{
-		dispatch({type: 'START_LOADING'})
+		dispatch({type: START_LOADING})
 		const {data} = await getItems()
 		dispatch({type: GET_ITEMS, payload: data})
-		dispatch({type: 'END_LOADING'})
+		dispatch({type: END_LOADING})
 	 }
-	catch(err){	return err.message}
+	catch(err){	
+		dispatch({type: ERROR, payload: err})
+	  }
    }
   
-  const addItem = (source) => async(dispatch)=> {
+  const addItem = async(source) => {
     try{
 		const {data} = await createItem(source)
 		dispatch({type: ADD_ITEM, payload: data})
 	 }
-    catch(error){
-    	console.log(error)
+    catch(err){
+    	dispatch({type: ERROR, payload: err})
     }
   };
 
@@ -44,8 +46,8 @@ export const ItemState = ({ children }) => {
 		  const {data} = await editItem(id, source)
 		  dispatch({type: UPDATE_ITEM, payload: data})
 		  }
-	  catch(error){
-		console.log(error)
+	  catch(err){
+		dispatch({type: ERROR, payload: err})
 	   }
 	  }
 
@@ -54,21 +56,26 @@ export const ItemState = ({ children }) => {
 		await deleteItem(id)
 		dispatch({type: REMOVE_ITEM, payload: id})
 	 }
-	catch(error){
-		console.log(error)
+	catch(err){
+		dispatch({type: ERROR, payload: err})
 	}
    }
 
   const handleCheckout = () => {
+	  try{
     dispatch({ type: CHECKOUT });
-  };
-
+  }
+  catch(err){
+	  dispatch({type: ERROR, payload: err})
+	  }
+    }
   return (
 
     <ItemContext.Provider
       value={{
         items: state.items,
         loading: state.loading,
+        error: state.error,
         fetchItems,
         addItem,
         updateItem,

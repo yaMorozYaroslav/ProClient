@@ -5,7 +5,7 @@ import ItemContext from '../Context/ItemContext'
 
    
 export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSearch, itemPrice}) => {
-	const {items, loading, fetchItems} = useContext(ItemContext)
+	const {items, loading, error, fetchItems} = useContext(ItemContext)
 	
 	
 	//const itemStatus = useSelector(state => state.items.status)
@@ -38,18 +38,18 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSe
 		})
     
 	React.useEffect(()=> {
-		//if(itemStatus === 'idle'){
-			//dispatch(fetchItems())
-			fetchItems()
-			//}
-		},[])
+		    
+			if(!loading&&!items.length)fetchItems()
+			console.log(items.length)
+		},[loading,fetchItems,items.length])
+	
 	if(items.length)console.log(items)
 	let content
 	
-	if(!loading){
+	if(loading){
 		
 		content = <p>loading</p>
-		}else if (loading&&items){
+		}else if (!loading&&items){
 
 		 content = filteredByPrice.map(item => (
 			   <ItemExcerpt 
