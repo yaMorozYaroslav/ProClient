@@ -1,7 +1,7 @@
 import React,{useContext} from 'react'
 import {ItemExcerpt} from './ItemExcerpt'
 
-import ItemContext from '../Context/Contexts'
+import {ItemContext} from '../Context/Contexts'
 
    
 export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSearch, itemPrice}) => {

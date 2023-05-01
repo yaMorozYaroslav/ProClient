@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import ItemContext from "../Contexts";
+import {ItemContext} from "../Contexts";
 import ItemReducer from "./ItemReducer";
 import {getItems, createItem, editItem, deleteItem} from '../../api'
 

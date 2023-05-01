@@ -2,7 +2,7 @@ import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 //import { addItem, changeItem} from '../Redux/itemsSlice'
 import FileBase from 'react-file-base64'
-import ItemContext from '../Context/Contexts'
+import {ItemContext} from '../Context/Contexts'
 
 const initialState = {title: '', description: '', price: '', category: 'seed', photo: ''}
 
