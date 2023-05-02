@@ -15,10 +15,8 @@ export const ItemState = ({ children }) => {
     error: null
   };
 
-
   const [state, dispatch] = useReducer(ItemReducer, initialState)
 
-  
   const fetchItems = async() => {
 	try{
 		dispatch({type: START_LOADING})
