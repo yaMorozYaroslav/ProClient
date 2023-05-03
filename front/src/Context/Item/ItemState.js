@@ -60,7 +60,7 @@ export const ItemState = ({ children }) => {
 	}
    }
 
-  const handleCheckout = () => {
+  const handCheckout = () => {
 	  try{
     dispatch({ type: CHECKOUT });
   }
@@ -79,7 +79,7 @@ export const ItemState = ({ children }) => {
         addItem,
         updateItem,
         removeItem,
-        handleCheckout,
+        handCheckout,
         ...state,
       }}
     >

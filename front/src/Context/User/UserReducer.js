@@ -8,8 +8,9 @@ export const UserReducer = (state, action) => {
 		  return {...state, userData: action.data}
 		
 		case LOGOUT:
-		  return {...state, userData: null)
-		}
+		  return {...state, userData: null}
+
 		default:
 		  return state
 	}
+  }
