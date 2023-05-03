@@ -1,12 +1,15 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 
-import {signUp, signIn} from '../Redux/authSlice'
-
+//import {signUp, signIn} from '../Redux/authSlice'
+//import {signUp, signIn} from '../Context/User/UserState'
+import {UserContext} from '../Context/Contexts'
 
 const initialState = {name: '', email: '', password: '', confPass: ''}
 
 export const AuthForm = () => {
+	
+	const {userData, signUp, signIn} = React.useContext(UserContext)
 	
 	const dispatch = useDispatch()
 	const [source, setSource] = React.useState(initialState)
@@ -16,9 +19,17 @@ export const AuthForm = () => {
 	const handSubmit =(e)=> {
 		e.preventDefault()
 		if(!registered && source.password === source.confPass){
-			                                  dispatch(signUp(source))}
-        if(registered)dispatch(signIn(source))
+			                                  signUp(source)}
+        if(registered)signIn(source)
 	}
+	
+	React.useEffect(()=>{
+		const isNew = userData.hasOwnProperty('name') &&
+		      userData !== JSON.parse(localStorage.getItem('profile'))
+		if(isNew){
+		localStorage.setItem('profile', JSON.stringify(userData))
+		console.log(userData, JSON.parse(localStorage.getItem('profile')))}
+		},[userData])
 
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})

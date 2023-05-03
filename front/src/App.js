@@ -37,6 +37,7 @@ export const App =()=> {
 	
 	return (
 	       <>
+	       <UserState>
 	       <ItemState>
 	         <Cart opened={opened} setOpened={setOpened}/>
 	         <CartForm opened={opened} setOpened={setOpened}/>
@@ -55,6 +56,7 @@ export const App =()=> {
 	                    itemPrice={itemPrice}
 	                    />
 	           </ItemState>
+	           </UserState>
 	       </>
 	      )
 	}

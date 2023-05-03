@@ -5,17 +5,17 @@ import {UserContext} from '../Contexts'
 //import {AUTH} from '../UserTypes'
 
 export const UserState = ({children}) => {
-	const UserContext = React.useContext(UserContext)
+	//const UserContext = React.useContext(UserContext)
 	
-	const [userData, setUserData] = React.useState(null)
+	const [userData, setUserData] = React.useState({})
 	
 	const signUp = async(source) => {
-		const {data} = await register(source)
+		const data = await register(source)
 		setUserData(data)
 		console.log(userData)
 		}
 	const signIn = async(source) => {
-		const {data} = await auth(source)
+		const data = await auth(source)
 		setUserData(data)
 		console.log(userData)
 		}
