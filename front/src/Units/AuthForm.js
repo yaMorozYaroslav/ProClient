@@ -24,11 +24,10 @@ export const AuthForm = () => {
 	}
 	
 	React.useEffect(()=>{
-		const isNew = userData.hasOwnProperty('name') &&
-		      userData !== JSON.parse(localStorage.getItem('profile'))
-		if(isNew){
-		localStorage.setItem('profile', JSON.stringify(userData))
-		console.log(userData, JSON.parse(localStorage.getItem('profile')))}
+		const isNew =  userData !== JSON.parse(localStorage.getItem('profile'))
+		//if(isNew){
+		//localStorage.setItem('profile', JSON.stringify(userData))
+		if(userData.length > 0)console.log(userData, JSON.parse(localStorage.getItem('profile')))
 		},[userData])
 
 	

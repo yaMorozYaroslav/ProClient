@@ -4,9 +4,8 @@ export const UserReducer = (state, action) => {
 	switch(action.type) {
 		
 		case AUTH:
-		console.log(action.data)
-		  return {...state, userData: action.data}
-		
+		  return {...state, userData: action.payload}
+		  console.log(action.payload)
 		case LOGOUT:
 		  return {...state, userData: null}
 

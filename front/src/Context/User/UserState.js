@@ -7,20 +7,19 @@ import {AUTH, LOGOUT} from './UserTypes'
 
 export const UserState = ({children}) => {
 	//const UserContext = React.useContext(UserContext)
+   const initialState = {userData: []}
 
-   const [state, dispatch] = React.useReducer(UserReducer, {userData: {}})
+   const [state, dispatch] = React.useReducer(UserReducer, initialState)
 	
 	
 	const signUp = async(source) => {
 		const {data} = await register(source)
         dispatch({type: AUTH, payload: data})
-		console.log(state.userData)
 		}
 	const signIn = async(source) => {
 		try{
 		const {data }= await auth(source)
 		dispatch({type: AUTH, payload: data})
-		console.log(state.userData)
 	}catch(err){console.log(err)}
 		}
     const logout = () => {
