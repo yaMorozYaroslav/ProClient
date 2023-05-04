@@ -11,7 +11,6 @@ export const AuthForm = () => {
 	
 	const {userData, signUp, signIn} = React.useContext(UserContext)
 	
-	const dispatch = useDispatch()
 	const [source, setSource] = React.useState(initialState)
 	const [registered, setRegistered] = React.useState(false)
 	
@@ -24,10 +23,14 @@ export const AuthForm = () => {
 	}
 	
 	React.useEffect(()=>{
-		const isNew =  userData !== JSON.parse(localStorage.getItem('profile'))
+		//const isNew =  userData !== JSON.parse(localStorage.getItem('profile'))
 		//if(isNew){
-		//localStorage.setItem('profile', JSON.stringify(userData))
-		if(userData.length > 0)console.log(userData, JSON.parse(localStorage.getItem('profile')))
+		//if(userData.length > 0)console.log(userData, JSON.parse(localStorage.getItem('profile')))
+		//console.log(Object.keys(userData).length === 0, JSON.parse(localStorage.getItem('profile')))
+		if(Object.keys(userData).length > 0){
+		  localStorage.setItem('profile', JSON.stringify(userData))
+          console.log(userData, JSON.parse(localStorage.getItem('profile')))
+		  console.log(Object.keys(userData))}
 		},[userData])
 
 	
