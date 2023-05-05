@@ -6,7 +6,7 @@ import {AuthForm} from './AuthForm'
 import {ItemForm} from './ItemForm'
 
 import {setData, logout} from '../Redux/authSlice'
-
+import {UserContext} from '../Context/Contexts'
 
 
 export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {

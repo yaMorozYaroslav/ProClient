@@ -23,13 +23,14 @@ export const AuthForm = () => {
 	}
 	
 	React.useEffect(()=>{
-		//const isNew =  userData !== JSON.parse(localStorage.getItem('profile'))
-		//if(isNew){
-		//if(userData.length > 0)console.log(userData, JSON.parse(localStorage.getItem('profile')))
-		//console.log(Object.keys(userData).length === 0, JSON.parse(localStorage.getItem('profile')))
-		if(Object.keys(userData).length > 0){
+		
+		const shouldUpdate = Object.keys(userData).length > 0 && 
+		  JSON.stringify(userData) !== 
+		    JSON.stringify(JSON.parse(localStorage.getItem('profile')))
+		
+		if(shouldUpdate){
 		  localStorage.setItem('profile', JSON.stringify(userData))
-          console.log(userData, JSON.parse(localStorage.getItem('profile')))
+          
 		  console.log(Object.keys(userData))}
 		},[userData])
 
