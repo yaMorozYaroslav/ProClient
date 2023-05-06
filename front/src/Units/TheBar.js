@@ -5,19 +5,18 @@ import {useSelector, useDispatch} from 'react-redux'
 import {AuthForm} from './AuthForm'
 import {ItemForm} from './ItemForm'
 
-import {setData, logout} from '../Redux/authSlice'
+//import {setData, logout} from '../Redux/authSlice'
 import {UserContext} from '../Context/Contexts'
 
 
 export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {
-	const dispatch = useDispatch()
-	
-	const authData = useSelector(state => state.auth.authData)
+	//const dispatch = useDispatch()
+	const {userData, logout} = React.useContext(UserContext)
+	//const authData = useSelector(state => state.auth.authData)
 	const profile = JSON.parse(localStorage.getItem('profile'))
 	
-	const handLogout =(e)=> {
-		e.preventDefault()
-		dispatch(logout())
+	const handLogout =()=> {
+		logout()
 		localStorage.removeItem('profile')
 		}
 React.useEffect(()=>{
@@ -26,12 +25,12 @@ React.useEffect(()=>{
 	        	if(token){
 	        		const decodedToken = decode(token)
 	        		if(decodedToken.exp * 1000 < new Date().getTime()){
-	        		 dispatch(logout())
+	        		 logout()
 	        		 localStorage.removeItem('profile')
 	        		 alert('Token has expired')
 	              }
 	        	}
-	        },[authData, dispatch, profile])
+	        },[userData, profile])
       
 /*React.useEffect(()=>{
 	if(authData.length && JSON.stringify(authData[0]) !== JSON.stringify(profile))
@@ -43,18 +42,20 @@ React.useEffect(()=>{
 	
 		},[authData, dispatch, profile])
 	*/
-	return <>
-	        {!authData.length && opened.auth && <><AuthForm/></>}
 	
-	        {authData.length
+	const userKeys = Object.keys(userData)
+	return <>
+	        {!userKeys.length && opened.auth && <><AuthForm/></>}
+	
+	        {userKeys.length
 				?<><button  onClick={()=>setOpened({...opened, item:true})}>addItem</button>
 				   <button  onClick={handLogout}> logout </button></>
 				:null}
-			{!opened.auth && !authData.length && <>
+			{!opened.auth && !userKeys.length && <>
 				         <h2>SignIn to Add an Item</h2>
 				         <button onClick={()=>setOpened({...opened, auth:true})}>SignIn</button>
 				</>}
-		    {authData.length > 0 && opened.item && 
+		    {userKeys.length > 0 && opened.item && 
 			         <ItemForm  opened={opened} setOpened={setOpened} currentId={currentId} setCurrentId={setCurrentId}/>}
 	       </>
 	}
