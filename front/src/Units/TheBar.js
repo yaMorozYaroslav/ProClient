@@ -1,12 +1,11 @@
 import React from 'react'
 import decode from 'jwt-decode'
-import {useSelector, useDispatch} from 'react-redux'
 
 import {AuthForm} from './AuthForm'
 import {ItemForm} from './ItemForm'
 
-//import {setData, logout} from '../Redux/authSlice'
 import {UserContext} from '../Context/Contexts'
+import {UserState} from '../Context/User/UserState'
 
 
 export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {
@@ -15,7 +14,8 @@ export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {
 	//const authData = useSelector(state => state.auth.authData)
 	const profile = JSON.parse(localStorage.getItem('profile'))
 	
-	const handLogout =()=> {
+	const handLogout =(e)=> {
+		e.preventDefault()
 		logout()
 		localStorage.removeItem('profile')
 		}
@@ -25,26 +25,16 @@ React.useEffect(()=>{
 	        	if(token){
 	        		const decodedToken = decode(token)
 	        		if(decodedToken.exp * 1000 < new Date().getTime()){
-	        		 logout()
-	        		 localStorage.removeItem('profile')
+	        		// logout()
 	        		 alert('Token has expired')
 	              }
 	        	}
 	        },[userData, profile])
       
-/*React.useEffect(()=>{
-	if(authData.length && JSON.stringify(authData[0]) !== JSON.stringify(profile))
-	   localStorage.setItem('profile', JSON.stringify(authData[0]))
-	
-	if(JSON.stringify(authData[0]) !== JSON.stringify(profile)&&
-	   JSON.stringify(profile).length > 4)dispatch(setData(profile))
-	  
-	
-		},[authData, dispatch, profile])
-	*/
-	
-	const userKeys = Object.keys(userData)
+	const userKeys = Object.keys(profile)
+	console.log(userKeys)
 	return <>
+	       <UserState>
 	        {!userKeys.length && opened.auth && <><AuthForm/></>}
 	
 	        {userKeys.length
@@ -57,5 +47,6 @@ React.useEffect(()=>{
 				</>}
 		    {userKeys.length > 0 && opened.item && 
 			         <ItemForm  opened={opened} setOpened={setOpened} currentId={currentId} setCurrentId={setCurrentId}/>}
+	       </UserState>
 	       </>
 	}

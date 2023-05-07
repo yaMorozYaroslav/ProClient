@@ -5,10 +5,14 @@ export const UserReducer = (state, action) => {
 		
 		case AUTH:
 		  return {...state, userData: action.payload}
-		  console.log(action.payload)
 		case LOGOUT:
-		  return {...state, userData: null}
-
+		  return {...state, userData: {}}
+        
+        case 'START_LOADING':
+	      return{...state,loading: true}
+	    case 'END_LOADING':
+	      return{...state,loading: false}
+        
 		default:
 		  return state
 	}

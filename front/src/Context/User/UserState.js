@@ -7,8 +7,8 @@ import {AUTH, LOGOUT} from './UserTypes'
 
 export const UserState = ({children}) => {
 	//const UserContext = React.useContext(UserContext)
-   const initialState = {userData: []}
-
+   const initialState = {userData: {}, loading: false}
+   
    const [state, dispatch] = React.useReducer(UserReducer, initialState)
 	
 	
@@ -16,12 +16,16 @@ export const UserState = ({children}) => {
 		const {data} = await register(source)
         dispatch({type: AUTH, payload: data})
 		}
+		
 	const signIn = async(source) => {
 		try{
-		const {data }= await auth(source)
+		dispatch({type: 'START_LOADING'})
+		const {data}= await auth(source)
 		dispatch({type: AUTH, payload: data})
+		dispatch({type: 'END_LOADING'})
 	}catch(err){console.log(err)}
 		}
+		
     const logout = () => {
 		dispatch({type: LOGOUT})
    		console.log(state.userData)

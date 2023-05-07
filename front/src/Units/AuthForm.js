@@ -1,15 +1,13 @@
-import React from 'react'
-import {useDispatch} from 'react-redux'
+import React, {useContext} from 'react'
 
-//import {signUp, signIn} from '../Redux/authSlice'
-//import {signUp, signIn} from '../Context/User/UserState'
 import {UserContext} from '../Context/Contexts'
+
 
 const initialState = {name: '', email: '', password: '', confPass: ''}
 
 export const AuthForm = () => {
 	
-	const {userData, signUp, signIn} = React.useContext(UserContext)
+   const {userData, signIn, signUp} = useContext(UserContext)
 	
 	const [source, setSource] = React.useState(initialState)
 	const [registered, setRegistered] = React.useState(false)
@@ -23,20 +21,19 @@ export const AuthForm = () => {
 	}
 	
 	React.useEffect(()=>{
-		
 		const shouldUpdate = Object.keys(userData).length > 0 && 
 		  JSON.stringify(userData) !== 
 		    JSON.stringify(JSON.parse(localStorage.getItem('profile')))
 		
+		console.log(userData)
 		if(shouldUpdate){
+		  console.log(userData)
 		  localStorage.setItem('profile', JSON.stringify(userData))
-          
-		  console.log(Object.keys(userData))}
+		  }
 		},[userData])
 
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
-	
 	 return(
 	 <section>
 	 <h2>{!registered?'Registration':'Authentication'}</h2>

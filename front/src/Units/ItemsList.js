@@ -2,11 +2,11 @@ import React,{useContext} from 'react'
 import {ItemExcerpt} from './ItemExcerpt'
 
 import {ItemContext} from '../Context/Contexts'
-
+import {UserContext} from '../Context/Contexts'
    
 export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSearch, itemPrice}) => {
 	const {items, loading, error, fetchItems} = useContext(ItemContext)
-	
+
 	const offItems = [{
 		              _id: 0,
 		              title: 'SomeTitlte',
@@ -33,7 +33,7 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSe
 		})
 	
 	const sortedByPrice = categorized.sort((a,b) => a.price - b.price)
-	console.log(sortedByPrice)
+	//console.log(sortedByPrice)
 	const filteredByPrice = sortedByPrice.filter(item => {
 		if(!itemSearch && itemPrice.min > 0 && itemPrice.max === 0){
 			 return item.price > parseInt(itemPrice.min)}
