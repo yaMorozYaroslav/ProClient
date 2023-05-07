@@ -17,6 +17,8 @@ const CartItem =({item})=> {
 	}
 
 export const Cart =({opened, setOpened})=> {
+	
+	const [open, setOpen] = React.useState(false)
 	const cartState = useSelector(state => state.cart.cart)
 	
 //	return<>{cartState.map(item => (<CartItem key={item._id} item={item}/>))}</>
@@ -25,19 +27,18 @@ export const Cart =({opened, setOpened})=> {
                    style={{'cursor':'pointer'}}
                    overlap="rectangular"
                    badgeContent={cartState.length}
-                   onClick={() => setOpened(
-					              {...opened, cart: cartState.length > 0 ? true : false})}>
+                   onClick={() => setOpen(cartState.length > 0 && !open ? true : false)}>
             Cart<CartIcon/>
             </Badge>
             
-            {opened.cart && cartState.map(item => (<CartItem key={item._id} item={item}/>))}
+            {open && cartState.map(item => (<CartItem key={item._id} item={item}/>))}
             
-			{opened.cart && cartState.length > 0 && (<>
+			{open && cartState.length > 0 && (<>
 				             <button 
-				                onClick={() => setOpened({...opened, mail: !opened.mail})}>
+				                onClick={() => setOpen({...opened, mail: !opened.mail})}>
 				             OrderItems</button>
 				             <button 
-	                            onClick={() => setOpened({...opened, cart: false})}>
+	                            onClick={() => setOpen(false)}>
 	                         CloseCart</button></>)}
           </>
 	}

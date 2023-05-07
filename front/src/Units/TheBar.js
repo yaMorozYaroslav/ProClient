@@ -25,14 +25,17 @@ React.useEffect(()=>{
 	        	if(token){
 	        		const decodedToken = decode(token)
 	        		if(decodedToken.exp * 1000 < new Date().getTime()){
-	        		// logout()
+	        		 //logout()
+	        		 //localStorage.removeItem('profile')
 	        		 alert('Token has expired')
 	              }
 	        	}
 	        },[userData, profile])
-      
-	const userKeys = Object.keys(profile)
-	console.log(userKeys)
+	        
+    let userKeys
+	if(profile)userKeys = Object.keys(profile)
+	if(!profile)userKeys = []
+	
 	return <>
 	       <UserState>
 	        {!userKeys.length && opened.auth && <><AuthForm/></>}
