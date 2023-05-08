@@ -10,6 +10,7 @@ import {ItemsList} from './Units/ItemsList'
 
 import {ItemState} from "./Context/Item/ItemState"
 import {UserState} from './Context/User/UserState'
+import {OpenState} from './Context/Open/OpenState'
 
 
 export const App =()=> {
@@ -39,6 +40,7 @@ export const App =()=> {
 	       <>
 	       <UserState>
 	       <ItemState>
+	       <OpenState>
 	         <Cart opened={opened} setOpened={setOpened}/>
 	         <CartForm opened={opened} setOpened={setOpened}/>
 	         
@@ -55,6 +57,7 @@ export const App =()=> {
 	                    itemCategory={itemCategory} itemSearch={itemSearch}
 	                    itemPrice={itemPrice}
 	                    />
+	           </OpenState>
 	           </ItemState>
 	           </UserState>
 	       </>

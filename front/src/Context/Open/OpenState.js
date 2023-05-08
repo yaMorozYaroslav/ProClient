@@ -1,11 +1,10 @@
-//import {UserReducer} from '../UserReducer'
 import React from 'react'
-import {register, auth} from '../../api'
-import {UserContext} from '../Contexts'
-import {UserReducer} from './UserReducer'
-import {AUTH, LOGOUT} from './UserTypes'
+import {OpenContext} from '../Contexts'
+import {OpenReducer} from './OpenReducer'
+import {OPEN_ITEM, CLOSE_ITEM, 
+	    OPEN_AUTH, CLOSE_AUTH, OPEN_MAIL, CLOSE_MAIL} from './OpenTypes'
 
-export const UserState = ({children}) => {
+export const OpenState = ({children}) => {
 	
    const initialState = {item: false, auth: false, mail: false}
    
@@ -37,8 +36,8 @@ export const UserState = ({children}) => {
 	return (
 
    <UserContext.Provider
-     value={{state, openAuthForm, closeAuthForm,
-		    openAuthForm, closeAuthForm, openAuthForm, closeAuthForm}}>
+     value={{state, openItemForm, closeItemForm,
+		    openAuthForm, closeAuthForm, openMailForm, closeMailForm}}>
       {children}
     </UserContext.Provider>
   )
