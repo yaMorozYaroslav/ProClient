@@ -8,7 +8,7 @@ export const OpenState = ({children}) => {
 	
    const initialState = {item: false, auth: false, mail: false}
    
-   const [state, dispatch] = React.useReducer(UserReducer, initialState)
+   const [state, dispatch] = React.useReducer(OpenReducer, initialState)
 	
 	
 	const openItemForm = () => {
@@ -35,10 +35,10 @@ export const OpenState = ({children}) => {
 		}
 	return (
 
-   <UserContext.Provider
+   <OpenContext.Provider
      value={{state, openItemForm, closeItemForm,
 		    openAuthForm, closeAuthForm, openMailForm, closeMailForm}}>
       {children}
-    </UserContext.Provider>
+    </OpenContext.Provider>
   )
 	}
