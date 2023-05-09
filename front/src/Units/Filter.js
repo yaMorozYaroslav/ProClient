@@ -1,7 +1,14 @@
+import React from 'react'
+import {FiltContext} from '../Context/Contexts'
+
+
 export const Filter =(props)=> {
 	
+	const {state, setCategory} = React.useContext(FiltContext)
+	console.log(state)
 	function onCategory(event){
-		props.onCategory(event.target.value)	
+		props.onCategory(event.target.value)
+		//setCategory(event.target.value)	
 		}
 	function onSearch(event){
 		props.searchSelected(event.target.value)

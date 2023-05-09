@@ -8,9 +8,10 @@ import {TheBar} from './Units/TheBar'
 import {Filter} from './Units/Filter'
 import {ItemsList} from './Units/ItemsList'
 
-import {ItemState} from "./Context/Item/ItemState"
+import {ItemState} from './Context/Item/ItemState'
 import {UserState} from './Context/User/UserState'
 import {OpenState} from './Context/Open/OpenState'
+import {FiltState} from './Context/Filter/FiltState'
 
 
 export const App =()=> {
@@ -41,6 +42,7 @@ export const App =()=> {
 	       <UserState>
 	       <ItemState>
 	       <OpenState>
+	       <FiltState>
 	         <Cart opened={opened} setOpened={setOpened}/>
 	         <CartForm opened={opened} setOpened={setOpened}/>
 	         
@@ -57,6 +59,7 @@ export const App =()=> {
 	                    itemCategory={itemCategory} itemSearch={itemSearch}
 	                    itemPrice={itemPrice}
 	                    />
+	           </FiltState>
 	           </OpenState>
 	           </ItemState>
 	           </UserState>

@@ -7,14 +7,14 @@ import {UserContext} from '../Context/Contexts'
 export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSearch, itemPrice}) => {
 	const {items, loading, error, fetchItems} = useContext(ItemContext)
 
-	const offItems = [{
+/*	const offItems = [{
 		              _id: 0,
 		              title: 'SomeTitlte',
 		              description: 'Trying do not make a description which is too short.'},
 	                  
 	                 { _id: 1,
 	                  title: 'SomeTitlte',
-	                  description: 'Trying do not make a description which is too short.'}]
+	                  description: 'Trying do not make a description which is too short.'}] */
 	
 	//const itemStatus = useSelector(state => state.items.status)
 	//const error = useSelector(state => state.items.error)
@@ -71,15 +71,6 @@ export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSe
 				}
 		 return(
 		    <section>
-		       {offItems.map(item => 
-				   (
-			   <ItemExcerpt 
-			           key={item._id} 
-			           item={item}
-			           setCurrentId={setCurrentId}
-			           opened={opened}
-			           setOpened={setOpened} />
-			))}
 		       {content}
 		    </section>
 		 )
