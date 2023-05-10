@@ -2,46 +2,39 @@ import React,{useContext} from 'react'
 import {ItemExcerpt} from './ItemExcerpt'
 
 import {ItemContext} from '../Context/Contexts'
-import {UserContext} from '../Context/Contexts'
+import {FiltContext} from '../Context/Contexts'
    
-export const ItemsList = ({setCurrentId, opened, setOpened, itemCategory, itemSearch, itemPrice}) => {
-	const {items, loading, error, fetchItems} = useContext(ItemContext)
-
-/*	const offItems = [{
-		              _id: 0,
-		              title: 'SomeTitlte',
-		              description: 'Trying do not make a description which is too short.'},
-	                  
-	                 { _id: 1,
-	                  title: 'SomeTitlte',
-	                  description: 'Trying do not make a description which is too short.'}] */
+export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 	
-	//const itemStatus = useSelector(state => state.items.status)
-	//const error = useSelector(state => state.items.error)
+	const {items, loading, error, fetchItems} = useContext(ItemContext)
+    const {state} = useContext(FiltContext)
+    
+    const category = state.itemCategory
+	const search = state.itemSearch
+	const minPrice = state.minPrice
+	const maxPrice = state.maxPrice
 	
 	const sortedByDate = items.slice().sort((a, b) =>
 		                                   b.createdAt.localeCompare(a.createdAt))
 	
 	const categorized = sortedByDate.filter((item)=>{
-		if(itemCategory === 'all'){ return item }
-		if(itemCategory === 'soils'){return item.category === 'soil'}
-		if(itemCategory === 'pesticides'){return item.category === 'pesticide'}
-		if(itemCategory === 'seeds'){return item.category === 'seed'}
+		if(category === 'all'){ return item }
+		if(category === 'soils'){return item.category === 'soil'}
+		if(category === 'pesticides'){return item.category === 'pesticide'}
+		if(category === 'seeds'){return item.category === 'seed'}
 		return item
-		//if(itemSearch){return item.title.toUpperCase().includes(itemSearch.toUpperCase())}
-		//if(itemPrice.min > 0) return item.price > itemPrice.min
 		})
 	
 	const sortedByPrice = categorized.sort((a,b) => a.price - b.price)
 	//console.log(sortedByPrice)
 	const filteredByPrice = sortedByPrice.filter(item => {
-		if(!itemSearch && itemPrice.min > 0 && itemPrice.max === 0){
-			 return item.price > parseInt(itemPrice.min)}
-		if(!itemSearch && itemPrice.max > 0 && itemPrice.min === 0){
-			return item.price < parseInt(itemPrice.max)}
-		if(!itemSearch && itemPrice.max > 0 && itemPrice.min > 0){
-			return item.price > parseInt(itemPrice.min) && item.price < parseInt(itemPrice.max)}
-		if(itemSearch){return item.title.toUpperCase().includes(itemSearch.toUpperCase())}
+		if(!search && minPrice > 0 && maxPrice === 0){
+			 return item.price > parseInt(minPrice)}
+		if(!search && maxPrice > 0 && minPrice === 0){
+			return item.price < parseInt(maxPrice)}
+		if(!search && maxPrice > 0 && minPrice > 0){
+			return item.price > parseInt(minPrice) && item.price < parseInt(maxPrice)}
+		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
     

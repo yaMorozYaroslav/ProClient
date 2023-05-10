@@ -64,8 +64,7 @@ export const FiltState = ({ children }) => {
         setCategory,
         setSearch,
         setMinPrice,
-        setMaxPrice,
-        ...state,
+        setMaxPrice
       }}
     >
       {children}

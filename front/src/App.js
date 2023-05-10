@@ -23,18 +23,7 @@ export const App =()=> {
 	const [itemSearch, setItemSearch] = React.useState('')
 	const [itemPrice, setItemPrice] = React.useState({min:0, max:0})
 	
-	function onCategory(filterValue){
-		setItemCategory(filterValue)
-		}
-	function onSearchSelected(filterValue){
-		setItemSearch(filterValue)
-		}
-	function onMinPrice(filterValue){
-		setItemPrice({...itemPrice, min: filterValue})
-		}
-	function onMaxPrice(filterValue){
-		setItemPrice({...itemPrice, max: filterValue})
-		}
+	
 		
 	
 	return (
@@ -49,15 +38,10 @@ export const App =()=> {
 	         <TheBar currentId={currentId} setCurrentId={setCurrentId}
 	                 opened={opened} setOpened={setOpened}/>
 	                 
-	         <Filter onCategory={onCategory}
-	                 searchSelected={onSearchSelected}
-	                 minPriceSelected={onMinPrice}
-	                 maxPriceSelected={onMaxPrice}/>
+	         <Filter />
 	           
 	         <ItemsList setCurrentId={setCurrentId} 
 	                    opened={opened} setOpened={setOpened}
-	                    itemCategory={itemCategory} itemSearch={itemSearch}
-	                    itemPrice={itemPrice}
 	                    />
 	           </FiltState>
 	           </OpenState>
