@@ -21,10 +21,7 @@ export const App =()=> {
 	
 	const [itemCategory, setItemCategory] = React.useState('all')
 	const [itemSearch, setItemSearch] = React.useState('')
-	const [itemPrice, setItemPrice] = React.useState({min:0, max:0})
-	
-	
-		
+	const [itemPrice, setItemPrice] = React.useState({min:0, max:0})	
 	
 	return (
 	       <>

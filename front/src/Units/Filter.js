@@ -22,8 +22,8 @@ export const Filter =(props)=> {
 		setMaxPrice(event.target.value)
 		}
 	return <>
-	     <input onChange={onMinPrice} placeholder='MinPrice'/>
-	     <input onChange={onMaxPrice} placeholder='MaxPrice'/>
+	     <input onChange={onMinPrice} placeholder='MinPrice' type='num'/>
+	     <input onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
 	     <input onChange={onSearch} placeholder='Search'/>
 	     <select name='howFilter' onChange={onCategory}>
 	       <option value='all'>All</option>

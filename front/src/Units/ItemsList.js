@@ -11,8 +11,8 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
     
     const category = state.itemCategory
 	const search = state.itemSearch
-	const minPrice = state.minPrice
-	const maxPrice = state.maxPrice
+	const minPrice = state.itemPrice.min
+	const maxPrice = state.itemPrice.max
 	
 	const sortedByDate = items.slice().sort((a, b) =>
 		                                   b.createdAt.localeCompare(a.createdAt))
@@ -26,7 +26,7 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 		})
 	
 	const sortedByPrice = categorized.sort((a,b) => a.price - b.price)
-	//console.log(sortedByPrice)
+	console.log(minPrice)
 	const filteredByPrice = sortedByPrice.filter(item => {
 		if(!search && minPrice > 0 && maxPrice === 0){
 			 return item.price > parseInt(minPrice)}
