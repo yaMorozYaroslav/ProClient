@@ -5,7 +5,7 @@ import {FiltContext} from '../Context/Contexts'
 export const Filter =(props)=> {
 	
 	const {state, setCategory, setSearch,setMinPrice, setMaxPrice} = React.useContext(FiltContext)
-	console.log(state)
+	//console.log(state)
 	function onCategory(event){
 		event.preventDefault()
 		setCategory(event.target.value)

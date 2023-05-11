@@ -12,7 +12,7 @@ export const ItemState = ({ children }) => {
     items: [],
     checkout: false,
     loading: false, 
-    error: null
+    error: []
   };
 
   const [state, dispatch] = useReducer(ItemReducer, initialState)
@@ -25,7 +25,7 @@ export const ItemState = ({ children }) => {
 		dispatch({type: END_LOADING})
 	 }
 	catch(err){	
-		dispatch({type: ERROR, payload: err})
+		dispatch({type: ERROR, payload: err.message})
 	  }
    }
   

@@ -40,8 +40,8 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
     console.log(error)
 	React.useEffect(()=> {
 		    
-			if(!loading&&!items.length&&!error)fetchItems()
-		},[loading,fetchItems,items.length])
+			if(!loading&&!items.length&&!error.length)fetchItems()
+		},[loading,fetchItems,items.length, error])
 	
 	if(items.length)console.log(items)
 	let content
@@ -49,9 +49,10 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 	if(loading){
 		
 		content = <p>loading</p>
-		}else if (!loading&&items){
+		
+	}else if (!loading&&items){
 
-		 content = filteredByPrice.map(item => (
+		content = filteredByPrice.map(item => (
 			   <ItemExcerpt 
 			           key={item._id} 
 			           item={item}
@@ -59,9 +60,9 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 			           opened={opened}
 			           setOpened={setOpened} />
 			))
-			} else if (error) {
-				content = <p>{error}</p>
-				}
+			}else if (error.length) {
+				content = <section>Errori</section>
+			}else{content = <section>Section</section>}
 		 return(
 		    <section>
 		       {content}
