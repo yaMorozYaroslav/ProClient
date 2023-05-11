@@ -36,7 +36,6 @@ export const ItemState = ({ children }) => {
 	 }
     catch(err){
     	dispatch({type: ERROR, payload: err})
-    	console.log(err)
     }
   };
 

@@ -41,7 +41,7 @@ const ItemReducer = (state, action) => {
     case CHECKOUT:
       return {items: [],checkout: true}
     case ERROR:
-	return{...state,error: action.payload}
+	return{...state, error: action.payload.message, loading: false}
    
     default:
       return state;

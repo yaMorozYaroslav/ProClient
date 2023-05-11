@@ -37,10 +37,10 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
-    
+    console.log(error)
 	React.useEffect(()=> {
 		    
-			if(!loading&&!items.length)fetchItems()
+			if(!loading&&!items.length&&!error)fetchItems()
 		},[loading,fetchItems,items.length])
 	
 	if(items.length)console.log(items)
@@ -59,8 +59,8 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 			           opened={opened}
 			           setOpened={setOpened} />
 			))
-			} else if (!loading && !items.length) {
-				content = <div>{error}</div>
+			} else if (error) {
+				content = <p>{error}</p>
 				}
 		 return(
 		    <section>
