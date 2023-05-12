@@ -35,9 +35,10 @@ export const OpenState = ({children}) => {
 		}
 	return (
 
-   <OpenContext.Provider
-     value={{state, openItemForm, closeItemForm,
-		    openAuthForm, closeAuthForm, openMailForm, closeMailForm}}>
+   <OpenContext.Provider value={{
+	  itemForm: state.item, authForm: state.auth, mailForm: state.mail,
+	                       openItemForm, closeItemForm, openAuthForm, 
+	                       closeAuthForm, openMailForm, closeMailForm}}>
       {children}
     </OpenContext.Provider>
   )

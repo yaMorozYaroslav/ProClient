@@ -3,12 +3,14 @@ import {ItemExcerpt} from './ItemExcerpt'
 
 import {ItemContext} from '../Context/Contexts'
 import {FiltContext} from '../Context/Contexts'
+import {OpenContext} from '../Context/Contexts'
    
 export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 	
 	const {items, loading, error, fetchItems} = useContext(ItemContext)
     const {state} = useContext(FiltContext)
-    
+    const {auth, closeAuthForm} = useContext(OpenContext)
+    console.log(auth)
     const category = state.itemCategory
 	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
@@ -64,6 +66,7 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(
 		    <section>
+		     {auth?<><button onClick={closeAuthForm}>close</button><p>dick</p></>:null}
 		       {content}
 		    </section>
 		 )

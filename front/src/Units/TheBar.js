@@ -14,8 +14,8 @@ export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {
 	
 	const {userData, logout} = React.useContext(UserContext)
 	
-	const {state, openItemForm, openAuthForm} = React.useContext(OpenContext)
-	console.log(state)
+	const {auth, openItemForm, openAuthForm} = React.useContext(OpenContext)
+	//console.log(state)
 	const profile = JSON.parse(localStorage.getItem('profile'))
 	
 	const handLogout =(e)=> {
@@ -39,18 +39,18 @@ React.useEffect(()=>{
     let userKeys
 	if(profile)userKeys = Object.keys(profile)
 	if(!profile)userKeys = []
-	console.log(state.auth)
+	console.log(auth)
 	
-	return <>
+	return (<>
 	       <UserState>
 	       <OpenState>
-	        {!userKeys.length && state.auth && <><AuthForm/></>}
+	        {auth ? <AuthForm/> : null}
 	
 	        {userKeys.length
 				?<><button  onClick={openItemForm}>addItem</button>
 				   <button  onClick={handLogout}> logout </button></>
 				:null}
-			{!state.auth && !userKeys.length && <>
+			{!auth && !userKeys.length && <>
 				         <h2>SignIn to Add an Item</h2>
 				         <button onClick={openAuthForm}>SignIn</button>
 				</>}
@@ -58,5 +58,5 @@ React.useEffect(()=>{
 			         <ItemForm  opened={opened} setOpened={setOpened} currentId={currentId} setCurrentId={setCurrentId}/>}
 	       </OpenState>
 	       </UserState>
-	       </>
+	       </>)
 	}

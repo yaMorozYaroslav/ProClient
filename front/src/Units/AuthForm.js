@@ -1,26 +1,28 @@
 import React, {useContext} from 'react'
 
 import {UserContext} from '../Context/Contexts'
-
+import {OpenContext} from '../Context/Contexts'
 
 const initialState = {name: '', email: '', password: '', confPass: ''}
 
 export const AuthForm = () => {
 	
-   const {userData, signIn, signUp} = useContext(UserContext)
+    const {userData, signIn, signUp} = useContext(UserContext)
+	const {auth, closeAuthForm} = useContext(OpenContext)
 	
 	const [source, setSource] = React.useState(initialState)
 	const [registered, setRegistered] = React.useState(false)
 	
-	const form = document.getElementById('form')
+	//const form = document.getElementById('form')
 	
 	const handSubmit =(e)=> {
 		e.preventDefault()
 		if(!registered && source.password === source.confPass){
 			                                  signUp(source)}
         if(registered)signIn(source)
-        form.reset()
-        console.log(source)
+       // form.reset()
+        closeAuthForm()
+        console.log(auth)
 	}
 	
 	React.useEffect(()=>{
