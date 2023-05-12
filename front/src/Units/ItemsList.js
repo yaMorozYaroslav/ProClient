@@ -26,7 +26,7 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 		})
 	
 	const sortedByPrice = categorized.sort((a,b) => a.price - b.price)
-	console.log(minPrice)
+	//console.log(minPrice)
 	const filteredByPrice = sortedByPrice.filter(item => {
 		if(!search && minPrice > 0 && maxPrice === 0){
 			 return item.price > parseInt(minPrice)}
@@ -37,7 +37,6 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
-    console.log(error)
 	React.useEffect(()=> {
 		    
 			if(!loading&&!items.length&&!error.length)fetchItems()

@@ -12,24 +12,28 @@ export const AuthForm = () => {
 	const [source, setSource] = React.useState(initialState)
 	const [registered, setRegistered] = React.useState(false)
 	
+	const form = document.getElementById('form')
 	
 	const handSubmit =(e)=> {
 		e.preventDefault()
 		if(!registered && source.password === source.confPass){
 			                                  signUp(source)}
         if(registered)signIn(source)
+        form.reset()
+        console.log(source)
 	}
 	
 	React.useEffect(()=>{
+		
 		const shouldUpdate = Object.keys(userData).length > 0 && 
 		  JSON.stringify(userData) !== 
 		    JSON.stringify(JSON.parse(localStorage.getItem('profile')))
 		
-		console.log(userData)
 		if(shouldUpdate){
 		  console.log(userData)
 		  localStorage.setItem('profile', JSON.stringify(userData))
 		  }
+		  
 		},[userData])
 
 	
@@ -37,7 +41,7 @@ export const AuthForm = () => {
 	 return(
 	 <section>
 	 <h2>{!registered?'Registration':'Authentication'}</h2>
-	<form>
+	<form id='form'>
 	 <label>Email:</label>
 	 <input name='email'
 	 onChange={handChange}/>

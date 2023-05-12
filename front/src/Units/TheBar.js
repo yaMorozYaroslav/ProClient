@@ -5,13 +5,17 @@ import {AuthForm} from './AuthForm'
 import {ItemForm} from './ItemForm'
 
 import {UserContext} from '../Context/Contexts'
-import {OpenContext} from '../Context/Open/OpenState'
+import {OpenContext} from '../Context/Contexts'
+
 import {UserState} from '../Context/User/UserState'
+import {OpenState} from '../Context/Open/OpenState'
 
 export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {
-	//const dispatch = useDispatch()
+	
 	const {userData, logout} = React.useContext(UserContext)
-	//const authData = useSelector(state => state.auth.authData)
+	
+	const {state, openItemForm, openAuthForm} = React.useContext(OpenContext)
+	console.log(state)
 	const profile = JSON.parse(localStorage.getItem('profile'))
 	
 	const handLogout =(e)=> {
@@ -25,31 +29,34 @@ React.useEffect(()=>{
 	        	if(token){
 	        		const decodedToken = decode(token)
 	        		if(decodedToken.exp * 1000 < new Date().getTime()){
-	        		 //logout()
-	        		 //localStorage.removeItem('profile')
+	        		 logout()
+	        		 localStorage.removeItem('profile')
 	        		 alert('Token has expired')
 	              }
 	        	}
-	        },[userData, profile])
+	        },[userData, profile, logout])
 	        
     let userKeys
 	if(profile)userKeys = Object.keys(profile)
 	if(!profile)userKeys = []
+	console.log(state.auth)
 	
 	return <>
 	       <UserState>
-	        {!userKeys.length && opened.auth && <><AuthForm/></>}
+	       <OpenState>
+	        {!userKeys.length && state.auth && <><AuthForm/></>}
 	
 	        {userKeys.length
-				?<><button  onClick={()=>setOpened({...opened, item:true})}>addItem</button>
+				?<><button  onClick={openItemForm}>addItem</button>
 				   <button  onClick={handLogout}> logout </button></>
 				:null}
-			{!opened.auth && !userKeys.length && <>
+			{!state.auth && !userKeys.length && <>
 				         <h2>SignIn to Add an Item</h2>
-				         <button onClick={()=>setOpened({...opened, auth:true})}>SignIn</button>
+				         <button onClick={openAuthForm}>SignIn</button>
 				</>}
 		    {userKeys.length > 0 && opened.item && 
 			         <ItemForm  opened={opened} setOpened={setOpened} currentId={currentId} setCurrentId={setCurrentId}/>}
+	       </OpenState>
 	       </UserState>
 	       </>
 	}
