@@ -50,7 +50,8 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 		
 		content = <p>loading</p>
 		
-	}else if (!loading&&items){
+	}
+	if (!loading&&items){
 
 		content = filteredByPrice.map(item => (
 			   <ItemExcerpt 
@@ -60,9 +61,8 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 			           opened={opened}
 			           setOpened={setOpened} />
 			))
-			}else if (error.length) {
-				content = <section>Errori</section>
-			}else{content = <section>Section</section>}
+	}
+	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(
 		    <section>
 		       {content}

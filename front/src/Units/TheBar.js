@@ -5,8 +5,8 @@ import {AuthForm} from './AuthForm'
 import {ItemForm} from './ItemForm'
 
 import {UserContext} from '../Context/Contexts'
+import {OpenContext} from '../Context/Open/OpenState'
 import {UserState} from '../Context/User/UserState'
-
 
 export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {
 	//const dispatch = useDispatch()
