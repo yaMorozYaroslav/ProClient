@@ -1,12 +1,13 @@
 import React, {createContext, useContext} from 'react'
 
-//import {UseUser} from './Context/useUser'
-
 import {Cart} from './Units/Cart'
-import {CartForm} from './Units/CartForm'
 import {TheBar} from './Units/TheBar'
 import {Filter} from './Units/Filter'
 import {ItemsList} from './Units/ItemsList'
+
+import {AuthForm} from './Units/AuthForm'
+import {ItemForm} from './Units/ItemForm'
+import {MailForm} from './Units/CartForm'
 
 import {ItemState} from './Context/Item/ItemState'
 import {UserState} from './Context/User/UserState'
@@ -30,11 +31,12 @@ export const App =()=> {
 	       <OpenState>
 	       <FiltState>
 	         <Cart opened={opened} setOpened={setOpened}/>
-	         <CartForm opened={opened} setOpened={setOpened}/>
+	         <MailForm/>
 	         
 	         <TheBar currentId={currentId} setCurrentId={setCurrentId}
 	                 opened={opened} setOpened={setOpened}/>
-	                 
+	         <AuthForm/>
+	         <ItemForm currentId={currentId} setCurrentId={setCurrentId} />     
 	         <Filter />
 	           
 	         <ItemsList setCurrentId={setCurrentId} 

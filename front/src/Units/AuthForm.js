@@ -8,7 +8,7 @@ const initialState = {name: '', email: '', password: '', confPass: ''}
 export const AuthForm = () => {
 	
     const {userData, signIn, signUp} = useContext(UserContext)
-	const {auth, closeAuthForm} = useContext(OpenContext)
+	const {authForm, closeAuthForm} = useContext(OpenContext)
 	
 	const [source, setSource] = React.useState(initialState)
 	const [registered, setRegistered] = React.useState(false)
@@ -22,7 +22,7 @@ export const AuthForm = () => {
         if(registered)signIn(source)
        // form.reset()
         closeAuthForm()
-        console.log(auth)
+        console.log(authForm)
 	}
 	
 	React.useEffect(()=>{
@@ -41,7 +41,7 @@ export const AuthForm = () => {
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	 return(
-	 <section>
+	 <section style={{'display': !authForm ?'none':'block'}}>
 	 <h2>{!registered?'Registration':'Authentication'}</h2>
 	<form id='form'>
 	 <label>Email:</label>

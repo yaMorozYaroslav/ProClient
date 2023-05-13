@@ -1,9 +1,6 @@
 import React from 'react'
 import decode from 'jwt-decode'
 
-import {AuthForm} from './AuthForm'
-import {ItemForm} from './ItemForm'
-
 import {UserContext} from '../Context/Contexts'
 import {OpenContext} from '../Context/Contexts'
 
@@ -14,7 +11,7 @@ export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {
 	
 	const {userData, logout} = React.useContext(UserContext)
 	
-	const {auth, openItemForm, openAuthForm} = React.useContext(OpenContext)
+	const {authForm, openItemForm, openAuthForm} = React.useContext(OpenContext)
 	//console.log(state)
 	const profile = JSON.parse(localStorage.getItem('profile'))
 	
@@ -39,24 +36,18 @@ React.useEffect(()=>{
     let userKeys
 	if(profile)userKeys = Object.keys(profile)
 	if(!profile)userKeys = []
-	console.log(auth)
+	console.log(authForm)
 	
-	return (<>
-	       <UserState>
-	       <OpenState>
-	        {auth ? <AuthForm/> : null}
-	
+	return <>
 	        {userKeys.length
 				?<><button  onClick={openItemForm}>addItem</button>
 				   <button  onClick={handLogout}> logout </button></>
 				:null}
-			{!auth && !userKeys.length && <>
+			{!authForm && !userKeys.length && <>
 				         <h2>SignIn to Add an Item</h2>
 				         <button onClick={openAuthForm}>SignIn</button>
 				</>}
-		    {userKeys.length > 0 && opened.item && 
-			         <ItemForm  opened={opened} setOpened={setOpened} currentId={currentId} setCurrentId={setCurrentId}/>}
-	       </OpenState>
-	       </UserState>
-	       </>)
+
+	      
+	       </>
 	}

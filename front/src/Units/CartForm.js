@@ -1,10 +1,13 @@
 import React, {useRef} from 'react'
 import {useSelector} from 'react-redux'
 import emailjs from '@emailjs/browser'
+import {OpenContext} from '../Context/Contexts'
 	
-export const CartForm =({opened, setOpened})=> {
+export const MailForm =()=> {
 	
 	const [forEmail, setForEmail] = React.useState([])
+	
+	const {mailForm} = React.useContext(OpenContext)
 	
 	const inCart = (useSelector(state => state.cart.cart))
 	
@@ -32,7 +35,7 @@ export const CartForm =({opened, setOpened})=> {
 	return <>
 	<form 
 	      ref={form} onSubmit={sendEmail} 
-	      style={{'display': !opened.mail?'none':'block', 'padding':'20px', 'background':'pink'}}>
+	      style={{'display': !mailForm ?'none':'block', 'padding':'20px', 'background':'pink'}}>
 	
 	  <label htmlFor='Name'>Name</label>
 	    <input type='text' placeholder='Name' name='user_name'  required/>

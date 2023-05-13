@@ -9,8 +9,8 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 	
 	const {items, loading, error, fetchItems} = useContext(ItemContext)
     const {state} = useContext(FiltContext)
-    const {auth, closeAuthForm} = useContext(OpenContext)
-    console.log(auth)
+    const {authForm, closeAuthForm} = useContext(OpenContext)
+    console.log(authForm)
     const category = state.itemCategory
 	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
@@ -66,7 +66,7 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(
 		    <section>
-		     {auth?<><button onClick={closeAuthForm}>close</button><p>dick</p></>:null}
+		     {authForm?<><button onClick={closeAuthForm}>close</button><p>dick</p></>:null}
 		       {content}
 		    </section>
 		 )
