@@ -7,11 +7,11 @@ import {OpenContext} from '../Context/Contexts'
 
 const initialState = {title: '', description: '', price: '', category: 'seed', photo: ''}
 
-export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
+export const ItemForm = ({opened, setOpened}) => {
 	
 	const {items, addItem, updateItem} = React.useContext(ItemContext)
 	
-	const {itemForm} = React.useContext(OpenContext)
+	const {itemForm,currentId, setCurrentId, closeItemForm} = React.useContext(OpenContext)
 	
 	const ref = React.useRef()
 	const dispatch = useDispatch()

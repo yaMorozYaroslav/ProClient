@@ -1,10 +1,12 @@
+import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {removeItem} from '../Redux/itemsSlice'
 import {addToCart} from '../Redux/cartSlice'
-import {OpenContext} from '../Context/Contexts'
 
 export const ItemExcerpt = ({item, setCurrentId, openItemForm}) => {
 	
+	const profile = JSON.parse(localStorage.getItem('profile'))
+	//console.log(profile)
     const dispatch = useDispatch()
    
     const handEdit =(e)=> {
@@ -14,9 +16,8 @@ export const ItemExcerpt = ({item, setCurrentId, openItemForm}) => {
 		}
    const randomColor = Math.floor(Math.random()*16777215).toString(16)
    
-   const userData = useSelector(state => state.auth.authData)
+   
    const newItem = {_id: item._id, title: item.title}
-   //console.log(cartState)
 
 	return (
 	<article style={{'background':`#${randomColor}`}}>
@@ -25,8 +26,8 @@ export const ItemExcerpt = ({item, setCurrentId, openItemForm}) => {
 	  <p>{item.category}</p>
 	  <p>{item.description}</p>
 	  <p>{item.price}</p>
-	  {(userData[0] && 
-	   (userData[0].result._id === item.creator||userData[0].result.role === 'admin')) && 
+	  {(profile && 
+	   (profile.result._id === item.creator||profile.result.role === 'admin')) && 
 	   (<>
 	  <button onClick={() => dispatch(removeItem(item._id))}>Remove</button>
 	  <button onClick={handEdit}>Edit</button>

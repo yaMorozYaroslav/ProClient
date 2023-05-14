@@ -1,6 +1,6 @@
 
 import {GET_ITEMS, START_LOADING, END_LOADING, ADD_ITEM,
-	   UPDATE_ITEM, REMOVE_ITEM, CHECKOUT, ERROR} from "./ItemTypes.js"
+	   UPDATE_ITEM, REMOVE_ITEM, CHECKOUT, SET_ID, REMOVE_ID, ERROR} from "./ItemTypes.js"
 
 const ItemReducer = (state, action) => {
   switch (action.type) {
@@ -38,8 +38,10 @@ const ItemReducer = (state, action) => {
 
     // If the action type is CHECKOUT,
     // we want to clear the cartItems array and set the checkout to true
-    case CHECKOUT:
-      return {items: [],checkout: true}
+    case SET_ID: 
+      return {...state, currentId: action.payload}
+    case REMOVE_ID:
+      return {...state, currentId: null}
     case ERROR:
 	return{...state, error: action.payload, loading: false}
 	

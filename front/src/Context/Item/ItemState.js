@@ -4,15 +4,15 @@ import ItemReducer from "./ItemReducer";
 import {getItems, createItem, editItem, deleteItem} from '../../api'
 
 import {GET_ITEMS, START_LOADING, END_LOADING, ADD_ITEM,
-	   UPDATE_ITEM, REMOVE_ITEM, CHECKOUT, ERROR} from "./ItemTypes.js"
+	   UPDATE_ITEM, REMOVE_ITEM, SET_ID, REMOVE_ID, CHECKOUT, ERROR} from "./ItemTypes.js"
 
 export const ItemState = ({ children }) => {
   
   const initialState = {
     items: [],
-    checkout: false,
     loading: false, 
-    error: []
+    error: [],
+    currentId: null
   };
 
   const [state, dispatch] = useReducer(ItemReducer, initialState)
@@ -59,9 +59,18 @@ export const ItemState = ({ children }) => {
 	}
    }
 
-  const handCheckout = () => {
+  const setCurrentId = (id) => {
 	  try{
-    dispatch({ type: CHECKOUT });
+    dispatch({ type: SET_ID, payload: id });
+  }
+  catch(err){
+	  dispatch({type: ERROR, payload: err})
+	  }
+    }
+    
+     const removeCurrentId = () => {
+	  try{
+    dispatch({ type: REMOVE_ID });
   }
   catch(err){
 	  dispatch({type: ERROR, payload: err})
@@ -74,11 +83,13 @@ export const ItemState = ({ children }) => {
         items: state.items,
         loading: state.loading,
         error: state.error,
+        currentId: state.currentId,
         fetchItems,
         addItem,
         updateItem,
         removeItem,
-        handCheckout,
+        setCurrentId,
+        removeCurrentId,
         ...state,
       }}
     >

@@ -5,9 +5,10 @@ import {ItemContext} from '../Context/Contexts'
 import {FiltContext} from '../Context/Contexts'
 import {OpenContext} from '../Context/Contexts'
    
-export const ItemsList = ({setCurrentId}) => {
+export const ItemsList = () => {
 	
-	const {items, loading, error, fetchItems} = useContext(ItemContext)
+	const {items, loading, error, fetchItems, currentId, setCurrentId} = useContext(ItemContext)
+	console.log(currentId)
     const {state} = useContext(FiltContext)
     const {itemForm, authForm, openItemForm, closeAuthForm} = useContext(OpenContext)
     console.log(authForm)
