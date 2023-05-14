@@ -7,7 +7,7 @@ export const MailForm =()=> {
 	
 	const [forEmail, setForEmail] = React.useState([])
 	
-	const {mailForm} = React.useContext(OpenContext)
+	const {mailForm, closeMailForm} = React.useContext(OpenContext)
 	
 	const inCart = (useSelector(state => state.cart.cart))
 	
@@ -47,6 +47,7 @@ export const MailForm =()=> {
 	   <textarea readOnly value={forEmail} name='items' style={{'display':'none'}} required/>
 	
 	<button type='submit'>Send</button>
+	<button onClick={closeMailForm}>Close</button>
 	</form>
 	      </>
 	}

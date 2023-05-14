@@ -3,12 +3,15 @@ import {useDispatch, useSelector} from 'react-redux'
 //import { addItem, changeItem} from '../Redux/itemsSlice'
 import FileBase from 'react-file-base64'
 import {ItemContext} from '../Context/Contexts'
+import {OpenContext} from '../Context/Contexts'
 
 const initialState = {title: '', description: '', price: '', category: 'seed', photo: ''}
 
 export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
 	
 	const {items, addItem, updateItem} = React.useContext(ItemContext)
+	
+	const {itemForm} = React.useContext(OpenContext)
 	
 	const ref = React.useRef()
 	const dispatch = useDispatch()
@@ -44,7 +47,7 @@ export const ItemForm = ({opened, setOpened, currentId, setCurrentId}) => {
 	
 	
 	 return(
-	 <section >
+	 <section style={{'display': !itemForm ?'none':'block'}}>
 	 <h2>Item</h2>
 	<form style={{'width':'20%'}}ref={ref}>
 	 <label>Title:</label>

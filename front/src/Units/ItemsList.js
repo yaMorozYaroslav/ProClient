@@ -5,11 +5,11 @@ import {ItemContext} from '../Context/Contexts'
 import {FiltContext} from '../Context/Contexts'
 import {OpenContext} from '../Context/Contexts'
    
-export const ItemsList = ({setCurrentId, opened, setOpened}) => {
+export const ItemsList = ({setCurrentId}) => {
 	
 	const {items, loading, error, fetchItems} = useContext(ItemContext)
     const {state} = useContext(FiltContext)
-    const {authForm, closeAuthForm} = useContext(OpenContext)
+    const {itemForm, authForm, openItemForm, closeAuthForm} = useContext(OpenContext)
     console.log(authForm)
     const category = state.itemCategory
 	const search = state.itemSearch
@@ -59,14 +59,13 @@ export const ItemsList = ({setCurrentId, opened, setOpened}) => {
 			           key={item._id} 
 			           item={item}
 			           setCurrentId={setCurrentId}
-			           opened={opened}
-			           setOpened={setOpened} />
+			           openItemForm={openItemForm}
+			            />
 			))
 	}
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(
 		    <section>
-		     {authForm?<><button onClick={closeAuthForm}>close</button><p>dick</p></>:null}
 		       {content}
 		    </section>
 		 )

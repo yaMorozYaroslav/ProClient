@@ -36,17 +36,17 @@ React.useEffect(()=>{
     let userKeys
 	if(profile)userKeys = Object.keys(profile)
 	if(!profile)userKeys = []
-	console.log(authForm)
+	console.log(userKeys)
 	
 	return <>
-	        {userKeys.length
-				?<><button  onClick={openItemForm}>addItem</button>
+	        {userKeys.length > 0 &&
+				<><button  onClick={openItemForm}>addItem</button>
 				   <button  onClick={handLogout}> logout </button></>
-				:null}
+				}
 			{!authForm && !userKeys.length && <>
 				         <h2>SignIn to Add an Item</h2>
 				         <button onClick={openAuthForm}>SignIn</button>
-				</>}
+				<br/></>}
 
 	      
 	       </>

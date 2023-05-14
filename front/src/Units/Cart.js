@@ -4,6 +4,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import CartIcon from "@material-ui/icons/ShoppingCart"
 import {useSelector, useDispatch} from 'react-redux'
 import {increment,decrement,removeItem} from '../Redux/cartSlice'
+import {OpenContext} from '../Context/Contexts'
 
 const CartItem =({item})=> {
 	const dispatch = useDispatch()
@@ -16,10 +17,12 @@ const CartItem =({item})=> {
            </section></>
 	}
 
-export const Cart =({opened, setOpened})=> {
+export const Cart =()=> {
 	
 	const [open, setOpen] = React.useState(false)
 	const cartState = useSelector(state => state.cart.cart)
+	
+	const {mailForm, openMailForm, closeMailForm} = React.useContext(OpenContext)
 	
 //	return<>{cartState.map(item => (<CartItem key={item._id} item={item}/>))}</>
     return<>
@@ -34,8 +37,8 @@ export const Cart =({opened, setOpened})=> {
             {open && cartState.map(item => (<CartItem key={item._id} item={item}/>))}
             
 			{open && cartState.length > 0 && (<>
-				             <button 
-				                onClick={() => setOpen({...opened, mail: !opened.mail})}>
+				       <button 
+				          onClick={!mailForm?openMailForm:closeMailForm}>
 				             OrderItems</button>
 				             <button 
 	                            onClick={() => setOpen(false)}>

@@ -1,14 +1,15 @@
 import {useSelector, useDispatch} from 'react-redux'
 import {removeItem} from '../Redux/itemsSlice'
 import {addToCart} from '../Redux/cartSlice'
+import {OpenContext} from '../Context/Contexts'
 
-export const ItemExcerpt = ({item, setCurrentId, opened, setOpened}) => {
+export const ItemExcerpt = ({item, setCurrentId, openItemForm}) => {
 	
     const dispatch = useDispatch()
    
     const handEdit =(e)=> {
 		e.preventDefault()
-		setOpened({...opened, item:true})
+		openItemForm()
 		setCurrentId(item._id)
 		}
    const randomColor = Math.floor(Math.random()*16777215).toString(16)

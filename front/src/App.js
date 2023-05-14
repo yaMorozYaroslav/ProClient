@@ -7,7 +7,7 @@ import {ItemsList} from './Units/ItemsList'
 
 import {AuthForm} from './Units/AuthForm'
 import {ItemForm} from './Units/ItemForm'
-import {MailForm} from './Units/CartForm'
+import {MailForm} from './Units/MailForm'
 
 import {ItemState} from './Context/Item/ItemState'
 import {UserState} from './Context/User/UserState'
@@ -30,18 +30,14 @@ export const App =()=> {
 	       <ItemState>
 	       <OpenState>
 	       <FiltState>
-	         <Cart opened={opened} setOpened={setOpened}/>
+	         <Cart/>
 	         <MailForm/>
-	         
-	         <TheBar currentId={currentId} setCurrentId={setCurrentId}
-	                 opened={opened} setOpened={setOpened}/>
+	         <TheBar currentId={currentId} setCurrentId={setCurrentId}/>
 	         <AuthForm/>
 	         <ItemForm currentId={currentId} setCurrentId={setCurrentId} />     
 	         <Filter />
 	           
-	         <ItemsList setCurrentId={setCurrentId} 
-	                    opened={opened} setOpened={setOpened}
-	                    />
+	         <ItemsList setCurrentId={setCurrentId} />
 	           </FiltState>
 	           </OpenState>
 	           </ItemState>
