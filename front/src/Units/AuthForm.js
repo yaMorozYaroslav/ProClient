@@ -7,13 +7,13 @@ const initialState = {name: '', email: '', password: '', confPass: ''}
 
 export const AuthForm = () => {
 	
-    const {userData, signIn, signUp} = useContext(UserContext)
+    const {userData, signIn, signUp, setFromStorage} = useContext(UserContext)
 	const {authForm, closeAuthForm} = useContext(OpenContext)
 	
 	const [source, setSource] = React.useState(initialState)
 	const [registered, setRegistered] = React.useState(false)
 	
-	//const form = document.getElementById('form')
+	const profile = JSON.parse(localStorage.getItem('profile'))
 	
 	const handSubmit =(e)=> {
 		e.preventDefault()
@@ -27,14 +27,15 @@ export const AuthForm = () => {
 	
 	React.useEffect(()=>{
 		
-		const shouldUpdate = Object.keys(userData).length > 0 && 
-		  JSON.stringify(userData) !== 
-		    JSON.stringify(JSON.parse(localStorage.getItem('profile')))
+		const shouldUpdateStorage = Object.keys(userData).length > 0 && 
+		         JSON.stringify(userData) !== JSON.stringify(profile)
 		
-		if(shouldUpdate){
+		if(shouldUpdateStorage){
 		  console.log(userData)
 		  localStorage.setItem('profile', JSON.stringify(userData))
 		  }
+		console.log(Object.keys(userData).length)
+		//const shouldUpdateState = Object.keys(profile).length > 0
 		  
 		},[userData])
 

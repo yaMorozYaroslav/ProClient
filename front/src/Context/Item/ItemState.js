@@ -4,7 +4,7 @@ import ItemReducer from "./ItemReducer";
 import {getItems, createItem, editItem, deleteItem} from '../../api'
 
 import {GET_ITEMS, START_LOADING, END_LOADING, ADD_ITEM,
-	   UPDATE_ITEM, REMOVE_ITEM, SET_ID, REMOVE_ID, CHECKOUT, ERROR} from "./ItemTypes.js"
+	   UPDATE_ITEM, REMOVE_ITEM, SET_ID, REMOVE_ID, ERROR} from "./ItemTypes.js"
 
 export const ItemState = ({ children }) => {
   

@@ -2,13 +2,12 @@ import React from 'react'
 import decode from 'jwt-decode'
 
 import {UserContext} from '../Context/Contexts'
-import {OpenContext} from '../Context/Contexts'
+import {OpenContext, ItemContext} from '../Context/Contexts'
 
-import {UserState} from '../Context/User/UserState'
-import {OpenState} from '../Context/Open/OpenState'
 
-export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {
+export const TheBar =()=> {
 	
+	//const {currentId, setCurrentId} = React.useContext(ItemContext)
 	const {userData, logout} = React.useContext(UserContext)
 	
 	const {authForm, openItemForm, openAuthForm} = React.useContext(OpenContext)
@@ -20,7 +19,8 @@ export const TheBar =({currentId, setCurrentId, opened, setOpened})=> {
 		logout()
 		localStorage.removeItem('profile')
 		}
-React.useEffect(()=>{
+		
+    React.useEffect(()=>{
 	            let token
 	        	if(profile)token = profile.token
 	        	if(token){

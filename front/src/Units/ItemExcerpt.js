@@ -3,10 +3,9 @@ import {useSelector, useDispatch} from 'react-redux'
 import {removeItem} from '../Redux/itemsSlice'
 import {addToCart} from '../Redux/cartSlice'
 
-export const ItemExcerpt = ({item, setCurrentId, openItemForm}) => {
+export const ItemExcerpt = ({item, setCurrentId, openItemForm, userData}) => {
 	
-	const profile = JSON.parse(localStorage.getItem('profile'))
-	//console.log(profile)
+	//if(userData)console.log(userData.result, userData.result)
     const dispatch = useDispatch()
    
     const handEdit =(e)=> {
@@ -26,8 +25,8 @@ export const ItemExcerpt = ({item, setCurrentId, openItemForm}) => {
 	  <p>{item.category}</p>
 	  <p>{item.description}</p>
 	  <p>{item.price}</p>
-	  {(profile && 
-	   (profile.result._id === item.creator||profile.result.role === 'admin')) && 
+	  {(userData.result && 
+	   (userData.result._id === item.creator||userData.result.role === 'admin')) && 
 	   (<>
 	  <button onClick={() => dispatch(removeItem(item._id))}>Remove</button>
 	  <button onClick={handEdit}>Edit</button>

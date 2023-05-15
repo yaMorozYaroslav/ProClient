@@ -3,15 +3,17 @@ import {ItemExcerpt} from './ItemExcerpt'
 
 import {ItemContext} from '../Context/Contexts'
 import {FiltContext} from '../Context/Contexts'
-import {OpenContext} from '../Context/Contexts'
+import {OpenContext, UserContext} from '../Context/Contexts'
    
 export const ItemsList = () => {
 	
+	//const profile = JSON.parse(localStorage.getItem('profile'))
 	const {items, loading, error, fetchItems, currentId, setCurrentId} = useContext(ItemContext)
-	console.log(currentId)
     const {state} = useContext(FiltContext)
+    const {userData} = useContext(UserContext)
+    
     const {itemForm, authForm, openItemForm, closeAuthForm} = useContext(OpenContext)
-    console.log(authForm)
+    
     const category = state.itemCategory
 	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
@@ -61,6 +63,7 @@ export const ItemsList = () => {
 			           item={item}
 			           setCurrentId={setCurrentId}
 			           openItemForm={openItemForm}
+			           userData={userData}
 			            />
 			))
 	}

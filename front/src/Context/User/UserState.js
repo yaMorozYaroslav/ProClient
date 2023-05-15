@@ -3,7 +3,7 @@ import React from 'react'
 import {register, auth} from '../../api'
 import {UserContext} from '../Contexts'
 import {UserReducer} from './UserReducer'
-import {AUTH, LOGOUT} from './UserTypes'
+import {AUTH, LOGOUT, FROM_STORAGE} from './UserTypes'
 
 export const UserState = ({children}) => {
 	//const UserContext = React.useContext(UserContext)
@@ -25,10 +25,12 @@ export const UserState = ({children}) => {
 		dispatch({type: 'END_LOADING'})
 	}catch(err){console.log(err)}
 		}
+	const setFromStorage =(source)=> {
+		dispatch({type: FROM_STORAGE})
+		}
 		
     const logout = () => {
 		dispatch({type: LOGOUT})
-   		console.log(state.userData)
 		}
 	return (
 
