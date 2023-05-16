@@ -39,9 +39,10 @@ export const ItemState = ({ children }) => {
     }
   };
 
-  const updateItem = (id, source) => async(dispatch)=> {
+  const updateItem = async (id, source) => {
 	  try{
 		  const {data} = await editItem(id, source)
+		  console.log(data)
 		  dispatch({type: UPDATE_ITEM, payload: data})
 		  }
 	  catch(err){
@@ -49,9 +50,10 @@ export const ItemState = ({ children }) => {
 	   }
 	  }
 
-   const removeItem =(id)=> async(dispatch)=> {
+   const removeItem = async(id) => {
 	try{
-		await deleteItem(id)
+		const {data} = await deleteItem(id)
+		console.log(data)
 		dispatch({type: REMOVE_ITEM, payload: id})
 	 }
 	catch(err){

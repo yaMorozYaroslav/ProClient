@@ -17,14 +17,11 @@ const ItemReducer = (state, action) => {
 	return{...state,loading: false}
 	
     case ADD_ITEM:
-      return {
-       ...state, 
-       items: [...state.items.push(action.payload)],
-      };
+      return {...state, items: [...state.items, action.payload]
+      }
     case UPDATE_ITEM: 
         return{
-		...state,
-		items: state.items.map((item) =>
+	     ...state, items: state.items.map((item) =>
         (item._id === action.payload._id ? action.payload : item)) 
 			}
 

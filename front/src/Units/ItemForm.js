@@ -9,9 +9,9 @@ const initialState = {title: '', description: '', price: '', category: 'seed', p
 
 export const ItemForm = ({opened, setOpened}) => {
 	
-	const {items, addItem, updateItem} = React.useContext(ItemContext)
+	const {items, addItem, updateItem, currentId, setCurrentId} = React.useContext(ItemContext)
 	
-	const {itemForm,currentId, setCurrentId, closeItemForm} = React.useContext(OpenContext)
+	const {itemForm, closeItemForm} = React.useContext(OpenContext)
 	
 	const ref = React.useRef()
 	const dispatch = useDispatch()
@@ -40,7 +40,7 @@ export const ItemForm = ({opened, setOpened}) => {
 		 }
 		 console.log(source)
 		reset()
-		setOpened({...opened, item: false})
+		closeItemForm()
 		}
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
@@ -82,7 +82,7 @@ export const ItemForm = ({opened, setOpened}) => {
                             ...source, photo: base64})}/>
                             
 	 <button onClick={handSubmit}>Save</button>
-	 <button onClick={()=>setOpened({...opened, item: false})}>closeForm</button>
+	 <button onClick={closeItemForm}>closeForm</button>
 	</form>
 	 </section>
 	 )
