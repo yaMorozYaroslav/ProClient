@@ -26,7 +26,7 @@ export const UserState = ({children}) => {
 	}catch(err){console.log(err)}
 		}
 	const setFromStorage =(source)=> {
-		dispatch({type: FROM_STORAGE})
+		dispatch({type: FROM_STORAGE, payload: source})
 		}
 		
     const logout = () => {
@@ -35,7 +35,8 @@ export const UserState = ({children}) => {
 	return (
 
     <UserContext.Provider
-      value={{userData: state.userData, signUp, signIn, logout}}>
+      value={{userData: state.userData, signUp,
+		                signIn, logout, setFromStorage}}>
       {children}
     </UserContext.Provider>
   )

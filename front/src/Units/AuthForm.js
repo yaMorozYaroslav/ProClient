@@ -20,26 +20,25 @@ export const AuthForm = () => {
 		if(!registered && source.password === source.confPass){
 			                                  signUp(source)}
         if(registered)signIn(source)
-       // form.reset()
         closeAuthForm()
-        console.log(authForm)
 	}
 	
 	React.useEffect(()=>{
 		
 		const shouldUpdateStorage = Object.keys(userData).length > 0 && 
 		         JSON.stringify(userData) !== JSON.stringify(profile)
-		
 		if(shouldUpdateStorage){
-		  console.log(userData)
 		  localStorage.setItem('profile', JSON.stringify(userData))
 		  }
-		console.log(Object.keys(userData).length)
-		//const shouldUpdateState = Object.keys(profile).length > 0
-		  
+
+		const shouldUpdateState = profile && 
+		            Object.keys(profile).length > 0 &&
+		            JSON.stringify(userData) !== JSON.stringify(profile)
+		if(shouldUpdateState){
+		setFromStorage(profile)
+	    }
 		},[userData])
 
-	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	 return(
 	 <section style={{'display': !authForm ?'none':'block'}}>

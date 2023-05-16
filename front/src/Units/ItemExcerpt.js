@@ -7,7 +7,7 @@ export const ItemExcerpt = ({item, setCurrentId, openItemForm, userData}) => {
 	
 	//if(userData)console.log(userData.result, userData.result)
     const dispatch = useDispatch()
-   
+   const profile = JSON.parse(localStorage.getItem('profile'))
     const handEdit =(e)=> {
 		e.preventDefault()
 		openItemForm()

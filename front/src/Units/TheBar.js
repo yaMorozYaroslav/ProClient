@@ -34,8 +34,8 @@ export const TheBar =()=> {
 	        },[userData, profile, logout])
 	        
     let userKeys
-	if(profile)userKeys = Object.keys(profile)
-	if(!profile)userKeys = []
+	if(userData)userKeys = Object.keys(userData)
+	if(!userData)userKeys = []
 	console.log(userKeys)
 	
 	return <>
