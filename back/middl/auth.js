@@ -31,8 +31,8 @@ export const delAuth = async(req, res, next) => {
 	const id = req.params
 	const item = await Item.findById(id.id)
 	const user = await User.findById(req.userId)
+	if(user.role === 'user')
 	console.log(user.role)
-	const isUser = user.role === 'user'
-	if(isUser)next()
+	next()
 	}catch(error){console.log(error)}}
 //item.creator === req.userId||
