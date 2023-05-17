@@ -8,7 +8,8 @@ import {OpenContext, UserContext} from '../Context/Contexts'
 export const ItemsList = () => {
 	
 	//const profile = JSON.parse(localStorage.getItem('profile'))
-	const {items, loading, error, fetchItems, currentId, setCurrentId} = useContext(ItemContext)
+	const {items, loading, error, fetchItems,
+		   removeItem, currentId, setCurrentId} = useContext(ItemContext)
     const {state} = useContext(FiltContext)
     const {userData} = useContext(UserContext)
     
@@ -63,6 +64,7 @@ export const ItemsList = () => {
 			           item={item}
 			           setCurrentId={setCurrentId}
 			           openItemForm={openItemForm}
+			           removeItem={removeItem}
 			           userData={userData}
 			            />
 			))

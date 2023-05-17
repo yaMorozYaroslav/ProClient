@@ -14,10 +14,12 @@ export const TheBar =()=> {
 	//console.log(state)
 	const profile = JSON.parse(localStorage.getItem('profile'))
 	
+	const removeProfile = () => localStorage.removeItem('profile')
+	
 	const handLogout =(e)=> {
 		e.preventDefault()
 		logout()
-		localStorage.removeItem('profile')
+		removeProfile()
 		}
 		
     React.useEffect(()=>{
@@ -27,7 +29,7 @@ export const TheBar =()=> {
 	        		const decodedToken = decode(token)
 	        		if(decodedToken.exp * 1000 < new Date().getTime()){
 	        		 logout()
-	        		 localStorage.removeItem('profile')
+	        		 removeProfile()
 	        		 alert('Token has expired')
 	              }
 	        	}
@@ -36,7 +38,7 @@ export const TheBar =()=> {
     let userKeys
 	if(userData)userKeys = Object.keys(userData)
 	if(!userData)userKeys = []
-	console.log(userKeys)
+	
 	
 	return <>
 	        {userKeys.length > 0 &&

@@ -26,11 +26,10 @@ const ItemReducer = (state, action) => {
 			}
 
     case REMOVE_ITEM:
+    console.log(action.payload.id)
       return {
         ...state,
-        items: [
-         ...state.items.filter((item) => item.id !== action.payload.id),
-        ],
+        items: state.items.filter((item) => item.id !== action.payload.id),
       }
 
     // If the action type is CHECKOUT,
