@@ -23,10 +23,12 @@ export const TheBar =()=> {
 		}
 		
     React.useEffect(()=>{
+		      
 	            let token
-	        	if(profile)token = profile.token
+	        	if(userData)token = userData.token
 	        	if(token){
 	        		const decodedToken = decode(token)
+	        		console.log(decodedToken)
 	        		if(decodedToken.exp * 1000 < new Date().getTime()){
 	        		 logout()
 	        		 removeProfile()
