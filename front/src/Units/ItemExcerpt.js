@@ -22,6 +22,7 @@ export const ItemExcerpt = ({item, setCurrentId, openItemForm,
    
    
    const newItem = {_id: item._id, title: item.title}
+   console.log(userData.result._id,item.creator )
 
 	return (
 	<article style={{'background':`#${randomColor}`}}>

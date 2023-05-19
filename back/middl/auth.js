@@ -26,15 +26,13 @@ export const auth = async (req, res, next) => {
     console.log(error)
   }
 }
-export const delAuth = async(req, res, next) => {
+export const roleAuth = async(req, res, next) => {
 	try{
 	const id = req.params
 	const item = await Item.findById(id.id)
 	const user = await User.findById(req.userId)
-	//const itemId = item._id.replace(/\D/g, '')
-	console.log(item._id)
-	if(user.role === 'admin'){next()}
-	else{throw new Error('Users cannot perform the action')}
+	if(user.role === 'admin'||req.userId === item.creator){next()}
+	else{throw new Error('User cannot perform the action')}
 	
 	}catch(error){console.log(error)}}
 //item.creator === req.userId||
