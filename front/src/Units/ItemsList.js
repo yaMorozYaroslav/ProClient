@@ -4,7 +4,8 @@ import {ItemExcerpt} from './ItemExcerpt'
 import {ItemContext} from '../Context/Contexts'
 import {FiltContext} from '../Context/Contexts'
 import {OpenContext, UserContext} from '../Context/Contexts'
-   
+
+import InfiniteScroll from 'react-infinite-scroll-component'
 import {Row, Col} from 'antd'   
    
 export const ItemsList = () => {
@@ -60,8 +61,14 @@ export const ItemsList = () => {
 	}
 	if (!loading&&items){
 
-		content = <Row gutter={[16, 24]}> {filteredByPrice.map(item => (
-			  <Col>
+		content = <InfiniteScroll
+                                               dataLength={items.length} 
+                                               next={fetchItems}
+                                               hasMore={true}
+                                               loader={<h4>Loading...</h4>}>
+      <Row gutter={[16, 16]}>
+        {filteredByPrice.map(item => (
+			  <Col span={24}>
 			   <ItemExcerpt 
 			           key={item._id} 
 			           item={item}
@@ -70,7 +77,7 @@ export const ItemsList = () => {
 			           removeItem={removeItem}
 			           userData={userData}
 			            />
-			  </Col>))}</Row>
+			  </Col>))}</Row></InfiniteScroll>
 		}
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(
