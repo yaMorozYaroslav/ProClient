@@ -5,6 +5,8 @@ import {ItemContext} from '../Context/Contexts'
 import {FiltContext} from '../Context/Contexts'
 import {OpenContext, UserContext} from '../Context/Contexts'
    
+import {Row, Col} from 'antd'   
+   
 export const ItemsList = () => {
 	
 	//const profile = JSON.parse(localStorage.getItem('profile'))
@@ -58,7 +60,8 @@ export const ItemsList = () => {
 	}
 	if (!loading&&items){
 
-		content = filteredByPrice.map(item => (
+		content = <Row gutter={[16, 24]}> {filteredByPrice.map(item => (
+			  <Col>
 			   <ItemExcerpt 
 			           key={item._id} 
 			           item={item}
@@ -67,8 +70,8 @@ export const ItemsList = () => {
 			           removeItem={removeItem}
 			           userData={userData}
 			            />
-			))
-	}
+			  </Col>))}</Row>
+		}
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(
 		    <section>
