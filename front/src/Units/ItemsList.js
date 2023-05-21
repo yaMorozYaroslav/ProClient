@@ -46,6 +46,17 @@ export const ItemsList = () => {
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
+/* const handleScroll = () => {
+  if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight ) {
+    return;
+  }
+  fetchItems();
+};
+
+React.useEffect(() => {
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []) */
 	React.useEffect(()=> {
 		    
 			if(!loading&&!items.length&&!error.length)fetchItems()
@@ -67,8 +78,9 @@ export const ItemsList = () => {
                                                hasMore={true}
                                                loader={<h4>Loading...</h4>}>
       <Row gutter={[16, 16]}>
-        {filteredByPrice.map(item => (
+       
 			  <Col span={24}>
+			   {filteredByPrice.map(item => (
 			   <ItemExcerpt 
 			           key={item._id} 
 			           item={item}
@@ -76,8 +88,8 @@ export const ItemsList = () => {
 			           openItemForm={openItemForm}
 			           removeItem={removeItem}
 			           userData={userData}
-			            />
-			  </Col>))}</Row></InfiniteScroll>
+			            />))}
+			  </Col></Row></InfiniteScroll>
 		}
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(

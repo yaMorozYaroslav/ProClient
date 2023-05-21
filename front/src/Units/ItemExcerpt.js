@@ -1,13 +1,13 @@
 import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-//import {removeItem} from '../Redux/itemsSlice'
+
 import {addToCart} from '../Redux/cartSlice'
 
 export const ItemExcerpt = ({item, setCurrentId, openItemForm, 
 	                                     userData, removeItem}) => {
 	
-	//if(userData)console.log(userData.result, userData.result)
-    const dispatch = useDispatch()
+   const dispatch = useDispatch()
+   
    const profile = JSON.parse(localStorage.getItem('profile'))
     const handEdit =(e)=> {
 		e.preventDefault()

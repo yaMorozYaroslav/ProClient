@@ -8,8 +8,15 @@ const router = express.Router()
 
 export const getItems = async(req,res) => {
 	try{
+		const { page = 1, limit = 5 } = req.query
 		const items = await Item.find()
-		res.status(200).json(items)
+		                          .limit(limit * 1)
+                                  .skip((page - 1) * limit)
+                                  .exec()
+         
+        const count = await Item.countDocuments() 
+         
+		res.status(200).json({items, totalPages: Math.ceil(count/limit), currentPage: page})
 	}catch(error){
 		res.status(404).json({message: error.message})
 	}

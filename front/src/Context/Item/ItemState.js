@@ -20,8 +20,10 @@ export const ItemState = ({ children }) => {
   const fetchItems = async() => {
 	try{
 		dispatch({type: START_LOADING})
+		
 		const {data} = await getItems()
-		dispatch({type: GET_ITEMS, payload: data})
+		dispatch({type: GET_ITEMS, payload: data.items})
+		
 		dispatch({type: END_LOADING})
 	 }
 	catch(err){	
