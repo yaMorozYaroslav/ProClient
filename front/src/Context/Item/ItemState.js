@@ -12,18 +12,19 @@ export const ItemState = ({ children }) => {
     items: [],
     loading: false, 
     error: [],
-    currentId: null
+    currentId: null,
+    totalPages: null
   };
 
   const [state, dispatch] = useReducer(ItemReducer, initialState)
 
-  const fetchItems = async() => {
+  const fetchItems = async(page) => {
 	try{
 		dispatch({type: START_LOADING})
 		
-		const {data} = await getItems()
+		const {data} = await getItems(page)
 		dispatch({type: GET_ITEMS, payload: data.items})
-		
+		dispatch({type: 'GET_TOTAL', payload: data.totalPages})
 		dispatch({type: END_LOADING})
 	 }
 	catch(err){	
@@ -85,6 +86,7 @@ export const ItemState = ({ children }) => {
     <ItemContext.Provider
       value={{
         items: state.items,
+        totalPages: state.totalPages,
         loading: state.loading,
         error: state.error,
         currentId: state.currentId,

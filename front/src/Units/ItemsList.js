@@ -10,14 +10,17 @@ import {Row, Col} from 'antd'
    
 export const ItemsList = () => {
 	
-	//const profile = JSON.parse(localStorage.getItem('profile'))
-	const {items, loading, error, fetchItems,
+	const {items, totalPages, loading, error, fetchItems,
 		   removeItem, currentId, setCurrentId} = useContext(ItemContext)
+    
     const {state} = useContext(FiltContext)
+
     const {userData} = useContext(UserContext)
     
     const {itemForm, authForm, openItemForm, closeAuthForm} = useContext(OpenContext)
     
+    const [page, setPage] = React.useState(1)
+    console.log(totalPages)
     const category = state.itemCategory
 	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
@@ -46,21 +49,25 @@ export const ItemsList = () => {
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
-/* const handleScroll = () => {
-  if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight ) {
+ const handleScroll = () => {
+  if (window.innerHeight + document.documentElement.scrollTop !== 
+                              document.documentElement.offsetHeight ) {
     return;
   }
-  fetchItems();
+  setPage(page+1)
+  fetchItems(page+1)
+  console.log(page)
 };
 
 React.useEffect(() => {
   window.addEventListener('scroll', handleScroll);
   return () => window.removeEventListener('scroll', handleScroll);
-}, []) */
-	React.useEffect(()=> {
+}, [handleScroll]) 
+
+	 React.useEffect(()=> {
 		    
-			if(!loading&&!items.length&&!error.length)fetchItems()
-		},[loading,fetchItems,items.length, error])
+			if(!loading&&!items.length &&!error.length)fetchItems(page)
+		},[loading,fetchItems,items.length, error]) 
 	
 	if(items.length)console.log(items)
 	let content
@@ -72,11 +79,7 @@ React.useEffect(() => {
 	}
 	if (!loading&&items){
 
-		content = <InfiniteScroll
-                                               dataLength={items.length} 
-                                               next={fetchItems}
-                                               hasMore={true}
-                                               loader={<h4>Loading...</h4>}>
+		content = 
       <Row gutter={[16, 16]}>
        
 			  <Col span={24}>
@@ -89,7 +92,7 @@ React.useEffect(() => {
 			           removeItem={removeItem}
 			           userData={userData}
 			            />))}
-			  </Col></Row></InfiniteScroll>
+			  </Col></Row>
 		}
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(
