@@ -17,7 +17,8 @@ const ItemReducer = (state, action) => {
 	return{...state,loading: false}
 	case 'GET_TOTAL':
 	return {...state,totalPages: action.payload}
-	
+	case 'GET_CURRENT':
+	return {...state,currentPage: action.payload}
     case ADD_ITEM:
       return {...state, items: [...state.items, action.payload]
       }

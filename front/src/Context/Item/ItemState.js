@@ -13,7 +13,8 @@ export const ItemState = ({ children }) => {
     loading: false, 
     error: [],
     currentId: null,
-    totalPages: null
+    totalPages: null,
+    currentPage: 0
   };
 
   const [state, dispatch] = useReducer(ItemReducer, initialState)
@@ -25,6 +26,7 @@ export const ItemState = ({ children }) => {
 		const {data} = await getItems(page)
 		dispatch({type: GET_ITEMS, payload: data.items})
 		dispatch({type: 'GET_TOTAL', payload: data.totalPages})
+		dispatch({type: 'GET_CURRENT', payload: data.currentPage})
 		dispatch({type: END_LOADING})
 	 }
 	catch(err){	
@@ -87,6 +89,7 @@ export const ItemState = ({ children }) => {
       value={{
         items: state.items,
         totalPages: state.totalPages,
+        currentPage: state.currentPage,
         loading: state.loading,
         error: state.error,
         currentId: state.currentId,

@@ -10,7 +10,7 @@ import {Row, Col} from 'antd'
    
 export const ItemsList = () => {
 	
-	const {items, totalPages, loading, error, fetchItems,
+	const {items, totalPages, currentPage, loading, error, fetchItems,
 		   removeItem, currentId, setCurrentId} = useContext(ItemContext)
     
     const {state} = useContext(FiltContext)
@@ -19,8 +19,7 @@ export const ItemsList = () => {
     
     const {itemForm, authForm, openItemForm, closeAuthForm} = useContext(OpenContext)
     
-    const [page, setPage] = React.useState(1)
-    console.log(totalPages)
+    console.log(totalPages, currentPage)
     const category = state.itemCategory
 	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
@@ -49,7 +48,11 @@ export const ItemsList = () => {
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
- const handleScroll = () => {
+const fetchData = () => {
+    console.log('bottom')
+    }
+/* React.useEffect(() => {
+	 const handleScroll = () => {
   if (window.innerHeight + document.documentElement.scrollTop !== 
                               document.documentElement.offsetHeight ) {
     return;
@@ -59,14 +62,13 @@ export const ItemsList = () => {
   console.log(page)
 };
 
-React.useEffect(() => {
   window.addEventListener('scroll', handleScroll);
   return () => window.removeEventListener('scroll', handleScroll);
-}, [handleScroll]) 
-
+}, [fetchItems, page]) */
+console.log(currentPage < totalPages)
 	 React.useEffect(()=> {
 		    
-			if(!loading&&!items.length &&!error.length)fetchItems(page)
+			if(!loading&&!items.length &&!error.length)fetchItems()
 		},[loading,fetchItems,items.length, error]) 
 	
 	if(items.length)console.log(items)
@@ -80,6 +82,13 @@ React.useEffect(() => {
 	if (!loading&&items){
 
 		content = 
+  <InfiniteScroll
+      dataLength={items.length}
+      next={fetchData}
+      hasMore={currentPage < totalPages} // Replace with a condition based on your data source
+      loader={<p>Loading...</p>}
+      endMessage={<p>No more data to load.</p>}
+                                               >
       <Row gutter={[16, 16]}>
        
 			  <Col span={24}>
@@ -93,6 +102,7 @@ React.useEffect(() => {
 			           userData={userData}
 			            />))}
 			  </Col></Row>
+   </InfiniteScroll>
 		}
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(
