@@ -8,15 +8,27 @@ const router = express.Router()
 
 export const getItems = async(req,res) => {
 	try{
-		const { page = 1, limit = 5 } = req.query
+		req.query.page=1
+		req.query.limit=5
+		const filters = req.query
+		console.log(filters.limit)
 		const items = await Item.find()
-		                          .limit(limit * 1)
-                                  .skip((page - 1) * limit)
+		                          .filters.limit(filters.limit * 1)
+                                  .skip((filters.page - 1) * filters.limit)
                                   .exec()
-         
+                                  
+        const filteredItems = items.filter(item => {
+        let isValid = true;
+        for (key in filters) {
+        console.log(key, item[key], filters[key]);
+        isValid = isValid && item[key] == filters[key];
+    }
+       return isValid;
+    })
+     console.log(filteredItems)
         const count = await Item.countDocuments() 
          
-		res.status(200).json({items, totalPages: Math.ceil(count/limit), currentPage: page})
+		res.status(200).json({filteredItems, totalPages: Math.ceil(count/filters.limit), currentPage: page})
 	}catch(error){
 		res.status(404).json({message: error.message})
 	}
