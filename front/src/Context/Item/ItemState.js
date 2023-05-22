@@ -24,7 +24,7 @@ export const ItemState = ({ children }) => {
 		dispatch({type: START_LOADING})
 		
 		const {data} = await getItems(page)
-		dispatch({type: GET_ITEMS, payload: data.filteredItems})
+		dispatch({type: GET_ITEMS, payload: data.items})
 		dispatch({type: 'GET_TOTAL', payload: data.totalPages})
 		dispatch({type: 'GET_CURRENT', payload: data.currentPage})
 		dispatch({type: END_LOADING})
