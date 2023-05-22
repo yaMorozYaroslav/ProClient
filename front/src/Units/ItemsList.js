@@ -19,6 +19,8 @@ export const ItemsList = () => {
     
     const {itemForm, authForm, openItemForm, closeAuthForm} = useContext(OpenContext)
     
+    const [page, setPage] = React.useState(1)
+    
     console.log(totalPages, currentPage)
     const category = state.itemCategory
 	const search = state.itemSearch
@@ -49,8 +51,11 @@ export const ItemsList = () => {
 		return item
 		})
 const fetchData = () => {
+	setPage(page+1)
+	fetchItems(page+1)
     console.log('bottom')
     }
+console.log(page)
 /* React.useEffect(() => {
 	 const handleScroll = () => {
   if (window.innerHeight + document.documentElement.scrollTop !== 
@@ -65,11 +70,12 @@ const fetchData = () => {
   window.addEventListener('scroll', handleScroll);
   return () => window.removeEventListener('scroll', handleScroll);
 }, [fetchItems, page]) */
-console.log(currentPage < totalPages)
+const quantity = items.length * currentPage 
+console.log(currentPage < totalPages, quantity )
 	 React.useEffect(()=> {
 		    
-			if(!loading&&!items.length &&!error.length)fetchItems()
-		},[loading,fetchItems,items.length, error]) 
+			if(!loading&&!items.length &&!error.length)fetchItems(page)
+		},[loading,fetchItems,items.length, error, page]) 
 	
 	if(items.length)console.log(items)
 	let content
