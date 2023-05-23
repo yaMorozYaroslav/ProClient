@@ -8,33 +8,18 @@ const router = express.Router()
 
 export const getItems = async(req,res) => {
 	try{
-		const {page=1, limit=5} = req.params
-		
-		const items = await Item.find()
-		                          .limit(limit * 1)
-                                  .skip((page - 1) * limit)
-                                  .exec()
-                                  
-        const count = await Item.countDocuments() 
-         
-		res.status(200).json({items, totalPages: Math.ceil(count/limit), currentPage: page})
-	}catch(error){
-		res.status(404).json({message: error.message})
-	}
-   }
-
-export const getCategory = async(req,res) => {
-	try{
-		const {page=1, limit=5, category='seed'} = req.params
+		const {page=1, limit=5, category='seed'} = req.query
+		console.log(category)
 		
 		const itemsBefore = await Item.find()
 		                          .limit(limit * 1)
                                   .skip((page - 1) * limit)
                                   .exec()
         const items = itemsBefore.filter(item =>{
-                                     return item.category === category})               
-        const count = await Item.countDocuments() 
-         
+                                     return item.category == category}) 
+                      
+        const count = await Item.find().length
+         console.log(count)
 		res.status(200).json({items, totalPages: Math.ceil(count/limit), currentPage: page})
 	}catch(error){
 		res.status(404).json({message: error.message})
@@ -43,10 +28,11 @@ export const getCategory = async(req,res) => {
 
 
 export const getItem = async(req, res) => {
-
-	const {id} = req.params
 	try{
+		const {id} = req.params
+	console.log(id)
 		const item = await Item.findById(id)
+		console.log(item)
 		res.status(200).json(item)
 	}catch(error){res.status(404).json({message: error.message})}
 }
