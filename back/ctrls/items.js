@@ -9,6 +9,7 @@ const router = express.Router()
 export const getItems = async(req,res) => {
 	try{
 		const {page=1, limit=5, category='seed'} = req.query
+		
 		console.log(category)
 		
 		const itemsBefore = await Item.find()
@@ -16,9 +17,10 @@ export const getItems = async(req,res) => {
                                   .skip((page - 1) * limit)
                                   .exec()
         const items = itemsBefore.filter(item =>{
-                                     return item.category == category}) 
+                                     return item.category === category
+                                     }) 
                       
-        const count = await Item.find().length
+        const count = await Item.countDocuments({category: category})
          console.log(count)
 		res.status(200).json({items, totalPages: Math.ceil(count/limit), currentPage: page})
 	}catch(error){

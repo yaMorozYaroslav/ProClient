@@ -52,7 +52,7 @@ export const ItemsList = () => {
 		})
 const fetchData = () => {
 	setPage(page+1)
-	fetchItems(page+1)
+	fetchItems(page+1, 'seed')
     console.log('bottom')
     }
 console.log(page)
@@ -74,7 +74,7 @@ const quantity = items.length * currentPage
 console.log(currentPage < totalPages, quantity )
 	 React.useEffect(()=> {
 		    
-			if(!loading&&!items.length &&!error.length)fetchItems(page)
+			if(!loading&&!items.length &&!error.length)fetchItems(page, 'seed')
 		},[loading,fetchItems,items.length, error, page]) 
 	
 	if(items.length)console.log(items)
