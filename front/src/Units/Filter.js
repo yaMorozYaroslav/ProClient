@@ -1,10 +1,12 @@
 import React from 'react'
 import {FiltContext} from '../Context/Contexts'
+import {ItemContext} from '../Context/Contexts'
 
 
 export const Filter =(props)=> {
 	
 	const {state, setCategory, setSearch,setMinPrice, setMaxPrice} = React.useContext(FiltContext)
+	const {fetchItems} = React.useContext(ItemContext)
 	//console.log(state)
 	function onCategory(event){
 		event.preventDefault()
@@ -25,11 +27,10 @@ export const Filter =(props)=> {
 	     <input onChange={onMinPrice} placeholder='MinPrice' type='num'/>
 	     <input onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
 	     <input onChange={onSearch} placeholder='Search'/>
-	     <select name='howFilter' onChange={onCategory}>
-	       <option value='all'>All</option>
-	       <option value='soils'>Soils</option>
-	       <option value='pesticides'>Pesticides</option>
-	       <option value='seeds'>Seeds</option>
+	     <select onClick={()=>fetchItems(1,state.itemCategory)} name='howFilter' onChange={onCategory}>
+	       <option value='soil'>Soils</option>
+	       <option value='pesticide'>Pesticides</option>
+	       <option value='seed'>Seeds</option>
 	     
 	     </select>
 	</>

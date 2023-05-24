@@ -55,28 +55,16 @@ const fetchData = () => {
 	fetchItems(page+1, 'seed')
     console.log('bottom')
     }
-console.log(page)
-/* React.useEffect(() => {
-	 const handleScroll = () => {
-  if (window.innerHeight + document.documentElement.scrollTop !== 
-                              document.documentElement.offsetHeight ) {
-    return;
-  }
-  setPage(page+1)
-  fetchItems(page+1)
-  console.log(page)
-};
 
-  window.addEventListener('scroll', handleScroll);
-  return () => window.removeEventListener('scroll', handleScroll);
-}, [fetchItems, page]) */
+console.log(state.itemCategory)
+
 const quantity = items.length * currentPage 
 console.log(currentPage < totalPages, quantity )
-	 React.useEffect(()=> {
+	/* React.useEffect(()=> {
 		    
-			if(!loading&&!items.length &&!error.length)fetchItems(page, 'seed')
-		},[loading,fetchItems,items.length, error, page]) 
-	
+			if(!loading&&!items.length &&!error.length&&category)fetchItems(page, category)
+		},[loading,fetchItems,items.length, error, page, category]) 
+	*/
 	if(items.length)console.log(items)
 	let content
 	
