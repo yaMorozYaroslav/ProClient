@@ -90,7 +90,7 @@ console.log(currentPage < totalPages, quantity )
 			  </Col>
 		       ))}
 			  </Row>
-			  <p>{totalPages} {currentPage}</p>
+			  <p>{currentPage} of {totalPages} pages</p>
 			  <button onClick={()=>nextPage()}>Next</button>
 			</>
 		}

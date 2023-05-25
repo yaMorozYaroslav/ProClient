@@ -8,19 +8,19 @@ const router = express.Router()
 
 export const getItems = async(req,res) => {
 	try{
-		const {page=1, limit=5, category='seed'} = req.query
+		const {page=1, limit=5, search='e'} = req.query
 		
-		console.log(category)
+		console.log(search)
 		
 		const itemsBefore = await Item.find()
 		                          .limit(limit * 1)
                                   .skip((page - 1) * limit)
                                   .exec()
         const items = itemsBefore.filter(item =>{
-                                     return item.category === category
+                                     return item.title.toUpperCase().includes(search.toUpperCase())
                                      }) 
                       
-        const count = await Item.countDocuments({category: category})
+        const count = await Item.countDocuments({title: 'o'})
          console.log(count)
 		res.status(200).json({items, totalPages: Math.ceil(count/limit), currentPage: page})
 	}catch(error){

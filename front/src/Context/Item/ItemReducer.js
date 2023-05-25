@@ -1,5 +1,5 @@
 
-import {GET_ITEMS, START_LOADING, END_LOADING, ADD_ITEM,
+import {GET_ITEMS, GET_CATEGORY, START_LOADING, END_LOADING, ADD_ITEM,
 	   UPDATE_ITEM, REMOVE_ITEM, CHECKOUT, SET_ID, REMOVE_ID, ERROR} from "./ItemTypes.js"
 
 const ItemReducer = (state, action) => {
