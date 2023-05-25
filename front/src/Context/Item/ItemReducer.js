@@ -8,7 +8,7 @@ const ItemReducer = (state, action) => {
 	case GET_ITEMS:
 	  return {
 		  ...state,
-		  items: state.items.concat(action.payload)
+		  items: action.payload
 		  }
 		  
 	case START_LOADING:

@@ -31,7 +31,6 @@ export const ItemsList = () => {
 		                                   b.createdAt.localeCompare(a.createdAt))
 	
 	const categorized = sortedByDate.filter((item)=>{
-		if(category === 'all'){ return item }
 		if(category === 'soils'){return item.category === 'soil'}
 		if(category === 'pesticides'){return item.category === 'pesticide'}
 		if(category === 'seeds'){return item.category === 'seed'}
@@ -50,11 +49,12 @@ export const ItemsList = () => {
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
-const fetchData = () => {
+const nextPage = () => {
 	setPage(page+1)
-	fetchItems(page+1, 'seed')
+	fetchItems(page+1, category)
     console.log('bottom')
     }
+
 
 console.log(state.itemCategory)
 
@@ -76,27 +76,23 @@ console.log(currentPage < totalPages, quantity )
 	if (!loading&&items){
 
 		content = 
-  <InfiniteScroll
-      dataLength={items.length}
-      next={fetchData}
-      hasMore={currentPage < totalPages} // Replace with a condition based on your data source
-      loader={<p>Loading...</p>}
-      endMessage={<p>No more data to load.</p>}
-                                               >
-      <Row gutter={[16, 16]}>
-       
-			  <Col span={24}>
-			   {filteredByPrice.map(item => (
-			   <ItemExcerpt 
-			           key={item._id} 
+  
+      <><Row gutter={[24, 24]}>
+       {filteredByPrice.map(item => (
+			  <Col key={item._id}  span={12}> 
+			   <ItemExcerpt  
 			           item={item}
 			           setCurrentId={setCurrentId}
 			           openItemForm={openItemForm}
 			           removeItem={removeItem}
 			           userData={userData}
-			            />))}
-			  </Col></Row>
-   </InfiniteScroll>
+			            />
+			  </Col>
+		       ))}
+			  </Row>
+			  <p>{totalPages} {currentPage}</p>
+			  <button onClick={()=>nextPage()}>Next</button>
+			</>
 		}
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(
