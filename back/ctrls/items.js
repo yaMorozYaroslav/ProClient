@@ -10,20 +10,16 @@ export const getItems = async(req,res) => {
 	try{
 		const category = req.query.category
 		
-		var count
-		if(category !== 'all') count = Item.countDocuments({category: category})
-		if(category === 'all') count = Item.countDocuments()
-		console.log(category)
+		//console.log(category)
 		
+		var count
+		if(category !== 'all') count = await Item.countDocuments({category: category})
+		if(category === 'all') count = await Item.countDocuments()
+		console.log(count)
 		var items
 		if(category !== 'all') items = await Item.find({category: category})
-		if(category === 'all'||!category) items = await Item.find()
-   //     const items = itemsBefore.filter(item =>{
-    //                                 return item.title.toUpperCase().includes(search.toUpperCase())
-   //                                  }) 
-                      
-       // const count = await Item.countDocuments({title: 'o'})
-         //console.log(count)
+		if(category === 'all') items = await Item.find()
+
 		res.status(200).json({items})
 	}catch(error){
 		res.status(404).json({message: error.message})

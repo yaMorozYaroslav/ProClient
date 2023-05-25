@@ -19,14 +19,13 @@ export const ItemState = ({ children }) => {
 
   const [state, dispatch] = useReducer(ItemReducer, initialState)
 
-  const fetchItems = async(page, category) => {
+  const fetchItems = async(category) => {
 	try{
 		dispatch({type: START_LOADING})
 		
-		const {data} = await getItems(page, category)
+		const {data} = await getItems(category)
 		dispatch({type: GET_ITEMS, payload: data.items})
-		dispatch({type: 'GET_TOTAL', payload: data.totalPages})
-		dispatch({type: 'GET_CURRENT', payload: data.currentPage})
+		
 		dispatch({type: END_LOADING})
 	 }
 	catch(err){	

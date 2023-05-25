@@ -6,19 +6,13 @@ const ItemReducer = (state, action) => {
   switch (action.type) {
 	  
 	case GET_ITEMS:
-	  return {
-		  ...state,
-		  items: action.payload
-		  }
+	  return {...state, items: action.payload}
 		  
 	case START_LOADING:
 	return{...state,loading: true}
 	case END_LOADING:
 	return{...state,loading: false}
-	case 'GET_TOTAL':
-	return {...state,totalPages: action.payload}
-	case 'GET_CURRENT':
-	return {...state,currentPage: action.payload}
+
     case ADD_ITEM:
       return {...state, items: [...state.items, action.payload]
       }
