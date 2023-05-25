@@ -8,21 +8,23 @@ const router = express.Router()
 
 export const getItems = async(req,res) => {
 	try{
-		const {page=1, limit=5, search='e'} = req.query
+		const category = req.query.category
 		
-		console.log(search)
+		var count
+		if(category !== 'all') count = Item.countDocuments({category: category})
+		if(category === 'all') count = Item.countDocuments()
+		console.log(category)
 		
-		const itemsBefore = await Item.find()
-		                          .limit(limit * 1)
-                                  .skip((page - 1) * limit)
-                                  .exec()
-        const items = itemsBefore.filter(item =>{
-                                     return item.title.toUpperCase().includes(search.toUpperCase())
-                                     }) 
+		var items
+		if(category !== 'all') items = await Item.find({category: category})
+		if(category === 'all'||!category) items = await Item.find()
+   //     const items = itemsBefore.filter(item =>{
+    //                                 return item.title.toUpperCase().includes(search.toUpperCase())
+   //                                  }) 
                       
-        const count = await Item.countDocuments({title: 'o'})
-         console.log(count)
-		res.status(200).json({items, totalPages: Math.ceil(count/limit), currentPage: page})
+       // const count = await Item.countDocuments({title: 'o'})
+         //console.log(count)
+		res.status(200).json({items})
 	}catch(error){
 		res.status(404).json({message: error.message})
 	}

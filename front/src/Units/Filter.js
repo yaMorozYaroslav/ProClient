@@ -27,7 +27,8 @@ export const Filter =(props)=> {
 	     <input onChange={onMinPrice} placeholder='MinPrice' type='num'/>
 	     <input onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
 	     <input onChange={onSearch} placeholder='Search'/>
-	     <select onClick={()=>fetchItems(1,state.itemCategory)} name='howFilter' onChange={onCategory}>
+	     <select onClick={()=>fetchItems(state.itemCategory)} name='howFilter' onChange={onCategory}>
+	       <option value='all'>All</option>
 	       <option value='soil'>Soils</option>
 	       <option value='pesticide'>Pesticides</option>
 	       <option value='seed'>Seeds</option>

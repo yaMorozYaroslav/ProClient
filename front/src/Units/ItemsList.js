@@ -31,9 +31,9 @@ export const ItemsList = () => {
 		                                   b.createdAt.localeCompare(a.createdAt))
 	
 	const categorized = sortedByDate.filter((item)=>{
-		if(category === 'soils'){return item.category === 'soil'}
-		if(category === 'pesticides'){return item.category === 'pesticide'}
-		if(category === 'seeds'){return item.category === 'seed'}
+		if(category === 'soil'){return item.category === 'soil'}
+		if(category === 'pesticide'){return item.category === 'pesticide'}
+		if(category === 'seed'){return item.category === 'seed'}
 		return item
 		})
 	
@@ -49,22 +49,22 @@ export const ItemsList = () => {
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
-const nextPage = () => {
+/* const nextPage = () => {
 	setPage(page+1)
 	fetchItems(page+1, category)
     console.log('bottom')
-    }
+    } */
 
 
 console.log(state.itemCategory)
 
 const quantity = items.length * currentPage 
 console.log(currentPage < totalPages, quantity )
-	/* React.useEffect(()=> {
+	 React.useEffect(()=> {
 		    
-			if(!loading&&!items.length &&!error.length&&category)fetchItems(page, category)
+			if(!loading&&!items.length &&!error.length&&category)fetchItems(category)
 		},[loading,fetchItems,items.length, error, page, category]) 
-	*/
+	
 	if(items.length)console.log(items)
 	let content
 	
@@ -91,7 +91,6 @@ console.log(currentPage < totalPages, quantity )
 		       ))}
 			  </Row>
 			  <p>{currentPage} of {totalPages} pages</p>
-			  <button onClick={()=>nextPage()}>Next</button>
 			</>
 		}
 	if (error.length && !loading) {content = <section>{error}</section>}
