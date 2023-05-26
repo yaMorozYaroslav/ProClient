@@ -7,24 +7,20 @@ import {
   CLEAR,
 } from "./CartTypes.js";
 
-// Export function to calculate the total price of the cart and the total quantity of the cart
 export const sumItems = (cartItems) => {
-  Storage(cartItems);
-  let itemCount = cartItems.reduce(
-    (total, product) => total + product.quantity,
-    0
-  );
+  let itemCount = cartItems.reduce((total, product) =>
+                                           total + product.quantity, 0)
   let total = cartItems
-    .reduce((total, product) => total + product.price * product.quantity, 0)
-    .toFixed(2);
+    .reduce((total, product) => total + 
+                                   product.price * product.quantity, 0)
+                                  .toFixed(2);
   return { itemCount, total };
 };
 
-// The reducer is listening for an action, which is the type that we defined in the CartTypes.js file
 const CartReducer = (state, action) => {
-  // The switch statement is checking the type of action that is being passed in
+  
   switch (action.type) {
-    // If the action type is ADD_TO_CART, we want to add the item to the cartItems array
+    
     case ADD_TO_CART:
       if (!state.cartItems.find((item) => item.id === action.payload.id)) {
         state.cartItems.push({
@@ -35,7 +31,6 @@ const CartReducer = (state, action) => {
 
       return {
         ...state,
-        ...sumItems(state.cartItems),
         cartItems: [...state.cartItems],
       };
 
@@ -86,7 +81,6 @@ const CartReducer = (state, action) => {
         ...sumItems([]),
       };
 
-    //Return the state if the action type is not found
     default:
       return state
   }

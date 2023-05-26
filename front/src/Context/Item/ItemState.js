@@ -12,9 +12,7 @@ export const ItemState = ({ children }) => {
     items: [],
     loading: false, 
     error: [],
-    currentId: null,
-    totalPages: null,
-    currentPage: 0
+    currentId: null
   };
 
   const [state, dispatch] = useReducer(ItemReducer, initialState)

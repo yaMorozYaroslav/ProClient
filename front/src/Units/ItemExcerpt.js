@@ -1,12 +1,7 @@
 import React from 'react'
-import {useSelector, useDispatch} from 'react-redux'
-
-import {addToCart} from '../Redux/cartSlice'
 
 export const ItemExcerpt = ({item, setCurrentId, openItemForm, 
-	                                     userData, removeItem}) => {
-	
-   const dispatch = useDispatch()
+	                          userData, removeItem, addToCart }) => {
    
    const profile = JSON.parse(localStorage.getItem('profile'))
     const handEdit =(e)=> {
@@ -21,7 +16,7 @@ export const ItemExcerpt = ({item, setCurrentId, openItemForm,
    const randomColor = Math.floor(Math.random()*16777215).toString(16)
    
    
-   const newItem = {_id: item._id, title: item.title}
+   const newItem = {_id: item._id, title: item.title, price: item.price}
   // console.log(userData.result._id,item.creator )
 
 	return (
@@ -37,7 +32,7 @@ export const ItemExcerpt = ({item, setCurrentId, openItemForm,
 	  <button onClick={handDelete}>Remove</button>
 	  <button onClick={handEdit}>Edit</button>
 	    </>)}
-	   <button onClick={() => dispatch(addToCart(newItem))}>Buy</button>
+	   <button onClick={() => addToCart(newItem)}>Buy</button>
 	</article>
 	  )
 	}

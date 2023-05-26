@@ -7,7 +7,7 @@ import {OpenContext} from '../Context/Contexts'
 
 const initialState = {title: '', description: '', price: '', category: 'seed', photo: ''}
 
-export const ItemForm = ({opened, setOpened}) => {
+export const ItemForm = () => {
 	
 	const {items, addItem, updateItem, currentId, setCurrentId} = React.useContext(ItemContext)
 	

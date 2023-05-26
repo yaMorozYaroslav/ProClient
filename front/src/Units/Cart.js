@@ -4,7 +4,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import CartIcon from "@material-ui/icons/ShoppingCart"
 import {useSelector, useDispatch} from 'react-redux'
 import {increment,decrement,removeItem} from '../Redux/cartSlice'
-import {OpenContext} from '../Context/Contexts'
+import {OpenContext, CartContext} from '../Context/Contexts'
 
 const CartItem =({item})=> {
 	const dispatch = useDispatch()
@@ -22,6 +22,8 @@ export const Cart =()=> {
 	const [open, setOpen] = React.useState(false)
 	const cartState = useSelector(state => state.cart.cart)
 	
+	const {cartItems} = React.useContext(CartContext)
+	console.log(cartItems)
 	const {mailForm, openMailForm, closeMailForm} = React.useContext(OpenContext)
 	
 //	return<>{cartState.map(item => (<CartItem key={item._id} item={item}/>))}</>

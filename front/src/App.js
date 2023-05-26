@@ -1,4 +1,4 @@
-import React, {createContext, useContext} from 'react'
+import React from 'react'
 
 import {Cart} from './Units/Cart'
 import {TheBar} from './Units/TheBar'
@@ -13,16 +13,12 @@ import {ItemState} from './Context/Item/ItemState'
 import {UserState} from './Context/User/UserState'
 import {OpenState} from './Context/Open/OpenState'
 import {FiltState} from './Context/Filter/FiltState'
+import {CartState} from './Context/Cart/CartState'
 
 
 export const App =()=> {
 	
-	const [currentId, setCurrentId] = React.useState(null)
-	const [opened, setOpened] = React.useState({item: false, auth: false, cart: false, mail: false})
-	
-	const [itemCategory, setItemCategory] = React.useState('all')
-	const [itemSearch, setItemSearch] = React.useState('')
-	const [itemPrice, setItemPrice] = React.useState({min:0, max:0})	
+	const [currentId, setCurrentId] = React.useState(null)	
 	
 	return (
 	       <>
@@ -30,14 +26,17 @@ export const App =()=> {
 	       <ItemState>
 	       <OpenState>
 	       <FiltState>
+	       <CartState>
+	       
 	         <Cart/>
 	         <MailForm/>
-	         <TheBar currentId={currentId} setCurrentId={setCurrentId}/>
+	         <TheBar  />
 	         <AuthForm/>
-	         <ItemForm currentId={currentId} setCurrentId={setCurrentId} />     
-	         <Filter />
-	           
-	         <ItemsList setCurrentId={setCurrentId} />
+	         <ItemForm/>     
+	         <Filter  /> 
+	         <ItemsList />
+	         
+	           </CartState>
 	           </FiltState>
 	           </OpenState>
 	           </ItemState>

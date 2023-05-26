@@ -3,15 +3,20 @@ import {ItemExcerpt} from './ItemExcerpt'
 
 import {ItemContext} from '../Context/Contexts'
 import {FiltContext} from '../Context/Contexts'
-import {OpenContext, UserContext} from '../Context/Contexts'
+import {OpenContext,
+	    UserContext,
+	    CartContext} from '../Context/Contexts'
 
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {Row, Col} from 'antd'   
    
 export const ItemsList = () => {
 	
-	const {items, totalPages, currentPage, loading, error, fetchItems,
+	const {items, loading, error, fetchItems,
 		   removeItem, currentId, setCurrentId} = useContext(ItemContext)
+    
+    const {addToCart} = useContext(CartContext)
+		   
     
     const {state} = useContext(FiltContext)
 
@@ -21,7 +26,7 @@ export const ItemsList = () => {
     
     const [page, setPage] = React.useState(1)
     
-    console.log(totalPages, currentPage)
+    //console.log(totalPages, currentPage)
     const category = state.itemCategory
 	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
@@ -49,17 +54,9 @@ export const ItemsList = () => {
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
-/* const nextPage = () => {
-	setPage(page+1)
-	fetchItems(page+1, category)
-    console.log('bottom')
-    } */
-
 
 console.log(state.itemCategory)
 
-const quantity = items.length * currentPage 
-console.log(currentPage < totalPages, quantity )
 	 React.useEffect(()=> {
 		    
 			if(!loading&&!items.length &&!error.length&&category)fetchItems(category)
@@ -86,12 +83,12 @@ console.log(currentPage < totalPages, quantity )
 			           openItemForm={openItemForm}
 			           removeItem={removeItem}
 			           userData={userData}
+			           addToCart={addToCart}
 			            />
 			  </Col>
 		       ))}
 			  </Row>
-			  <p>{currentPage} of {totalPages} pages</p>
-			</>
+	  </>
 		}
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(

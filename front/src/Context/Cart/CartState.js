@@ -1,9 +1,18 @@
-import { useReducer } from "react";
-import CartContext from "./CartContext";
-import CartReducer from "./CartReducer";
-import { sumItems } from "./CartReducer";
+import { useReducer } from "react"
+import {CartContext} from "../Contexts"
+import CartReducer from "./CartReducer"
+import { sumItems } from "./CartReducer"
 
-const CartState = ({ children }) => {
+import {
+  REMOVE_ITEM,
+  ADD_TO_CART,
+  INCREASE,
+  DECREASE,
+  CHECKOUT,
+  CLEAR,
+} from "./CartTypes.js";
+
+export const CartState = ({ children }) => {
   
   const initialState = {
     cartItems: [],
@@ -13,42 +22,40 @@ const CartState = ({ children }) => {
   const [state, dispatch] = useReducer(CartReducer, initialState)
 
   const addToCart = (payload) => {
-    dispatch({ type: "ADD_TO_CART", payload })
+    dispatch({ type: ADD_TO_CART, payload })
   }
 
   const increase = (payload) => {
-    dispatch({ type: "INCREASE", payload });
+    dispatch({ type: INCREASE, payload });
   };
 
   const decrease = (payload) => {
-    dispatch({ type: "DECREASE", payload });
+    dispatch({ type: DECREASE, payload });
   };
 
   const removeFromCart = (payload) => {
-    dispatch({ type: "REMOVE_ITEM", payload });
+    dispatch({ type: REMOVE_ITEM, payload });
   };
 
   
   const clearCart = () => {
-    dispatch({ type: "CLEAR" });
+    dispatch({ type: CLEAR });
   };
 
   const handleCheckout = () => {
-    dispatch({ type: "CHECKOUT" });
+    dispatch({ type: CHECKOUT });
   };
 
   return (
      <CartContext.Provider
       value={{
-        showCart: state.showCart,
         cartItems: state.cartItems,
         addToCart,
         removeFromCart,
         increase,
         decrease,
         handleCheckout,
-        clearCart,
-        ...state,
+        clearCart
       }}
     >
       {children}
@@ -56,4 +63,3 @@ const CartState = ({ children }) => {
   );
 };
 
-export default CartState
