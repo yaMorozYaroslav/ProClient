@@ -44,13 +44,15 @@ export const TheBar =()=> {
 	
 	return <>
 	        {userKeys.length > 0 &&
-				<><button  onClick={openItemForm}>addItem</button>
-				   <button  onClick={handLogout}> logout </button></>
+				<div style={{'display': 'flex'}}>
+				   <h2>Hello, {userData.result.name}</h2>
+				   <button  onClick={openItemForm}>AddItem</button>
+				   <button  onClick={handLogout}> Logout </button></div>
 				}
-			{!authForm && !userKeys.length && <>
+			{!authForm && !userKeys.length && <div style={{'display': 'flex'}}>
 				         <h2>SignIn to Add an Item</h2>
 				         <button onClick={openAuthForm}>SignIn</button>
-				<br/></>}
+				</div>}
 
 	      
 	       </>

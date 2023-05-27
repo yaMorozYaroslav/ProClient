@@ -47,9 +47,9 @@ export const ItemForm = () => {
 	
 	
 	 return(
-	 <section style={{'display': !itemForm ?'none':'block'}}>
+	 <section style={{'display': !itemForm ?'none':'block', 'margin-left':'40%'}}>
 	 <h2>Item</h2>
-	<form style={{'width':'20%'}}ref={ref}>
+	<form style={{'width':'20%',}}ref={ref}>
 	 <label>Title:</label>
 	 <input name='title' 
 	 value={source.title||''}    

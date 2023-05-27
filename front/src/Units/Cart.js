@@ -5,7 +5,8 @@ import CartIcon from "@material-ui/icons/ShoppingCart"
 
 import {OpenContext, CartContext} from '../Context/Contexts'
 
-const CartItem =({item,removeFromCart,increase,decrease,clearCart}) => {
+const CartItem =({item,removeFromCart,increase,
+	              decrease,clearCart, setFromLocale}) => {
 	
     return <><section>
                {item.length}
@@ -27,6 +28,24 @@ export const Cart =()=> {
 	console.log(cartItems)
 	const {mailForm, openMailForm, closeMailForm} = React.useContext(OpenContext)
 	
+	React.useEffect(()=>{
+		console.log(Object.keys(cartItems).length)
+		
+		const cart = JSON.parse(localStorage.getItem('cart'))
+		
+		const shouldUpdateStorage = Object.keys(cartItems).length > 0 && 
+		         JSON.stringify(cartItems) !== JSON.stringify(cart)
+		if(shouldUpdateStorage){
+		  localStorage.setItem('cart', JSON.stringify(cartItems))
+		  }
+       /*
+		const shouldUpdateState = profile && 
+		            Object.keys(profile).length > 0 &&
+		            JSON.stringify(userData) !== JSON.stringify(profile)
+		if(shouldUpdateState){
+		setFromStorage(profile)
+	    } */
+		},[cartItems])
 //	return<>{cartState.map(item => (<CartItem key={item._id} item={item}/>))}</>
     return<>
             <Badge color='secondary'
@@ -50,7 +69,8 @@ export const Cart =()=> {
 				                                     
 			    <button onClick={() => setOpen(false)}>
 	                                                CloseCart</button>
-	            <button onClick={() => clearCart()}>ClearCart</button></>)}
+	            <button onClick={() => clearCart()}>ClearCart</button>
+	            </>)}
 	             
           </>
 	}
