@@ -1,25 +1,19 @@
 import { useReducer } from "react"
 import {CartContext} from "../Contexts"
 import CartReducer from "./CartReducer"
-import { sumItems } from "./CartReducer"
 
 import {
   REMOVE_ITEM,
   ADD_TO_CART,
   INCREASE,
   DECREASE,
-  CHECKOUT,
+  FROM_LOCALE,
   CLEAR,
 } from "./CartTypes.js";
 
 export const CartState = ({ children }) => {
-  
-  const initialState = {
-    cartItems: [],
-    checkout: false,
-  };
 
-  const [state, dispatch] = useReducer(CartReducer, initialState)
+  const [state, dispatch] = useReducer(CartReducer, {cartItems:[]})
 
   const addToCart = (payload) => {
     dispatch({ type: ADD_TO_CART, payload })
@@ -42,9 +36,10 @@ export const CartState = ({ children }) => {
     dispatch({ type: CLEAR });
   };
 
-  const handleCheckout = () => {
-    dispatch({ type: CHECKOUT });
-  };
+  const setFromLocale =(source)=> {
+		dispatch({type: FROM_LOCALE, payload: source})
+		}
+  
 
   return (
      <CartContext.Provider
@@ -54,7 +49,6 @@ export const CartState = ({ children }) => {
         removeFromCart,
         increase,
         decrease,
-        handleCheckout,
         clearCart
       }}
     >

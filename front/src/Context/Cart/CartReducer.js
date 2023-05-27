@@ -3,7 +3,7 @@ import {
   ADD_TO_CART,
   INCREASE,
   DECREASE,
-  CHECKOUT,
+  FROM_LOCALE,
   CLEAR,
 } from "./CartTypes.js";
 
@@ -49,7 +49,6 @@ const CartReducer = (state, action) => {
       ].quantity++;
       return {
         ...state,
-        ...sumItems(state.cartItems),
         cartItems: [...state.cartItems],
       };
 
@@ -60,21 +59,17 @@ const CartReducer = (state, action) => {
       ].quantity--;
       return {
         ...state,
-        ...sumItems(state.cartItems),
         cartItems: [...state.cartItems],
       };
 
-   case CHECKOUT:
+   case FROM_LOCALE:
       return {
-        cartItems: [],
-        checkout: true,
-        ...sumItems([]),
+        cartItems: action.payload
       };
 
     case CLEAR:
       return {
-        cartItems: [],
-        ...sumItems([]),
+        cartItems: []
       };
 
     default:

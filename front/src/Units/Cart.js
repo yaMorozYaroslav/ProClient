@@ -1,18 +1,17 @@
 import React from 'react'
 import Badge from "@material-ui/core/Badge"
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
+//import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import CartIcon from "@material-ui/icons/ShoppingCart"
-import {useSelector, useDispatch} from 'react-redux'
-import {increment,decrement,removeItem} from '../Redux/cartSlice'
+
 import {OpenContext, CartContext} from '../Context/Contexts'
 
-const CartItem =({item, removeFromCart})=> {
-	const dispatch = useDispatch()
+const CartItem =({item,removeFromCart,increase,decrease,clearCart}) => {
+	
     return <><section>
                {item.length}
                {item._id} + {item.quantity}
-             <button onClick={()=>dispatch(increment(item._id))}>inc</button>
-             <button onClick={()=>dispatch(decrement(item._id))}>dec</button>
+             <button onClick={()=>increase(item._id)}>inc</button>
+             <button onClick={()=>decrease(item._id)}>dec</button>
              <button onClick={()=>removeFromCart(item._id)}>delete</button>
            </section></>
 	}
@@ -20,9 +19,11 @@ const CartItem =({item, removeFromCart})=> {
 export const Cart =()=> {
 	
 	const [open, setOpen] = React.useState(false)
-	const cartState = useSelector(state => state.cart.cart)
 	
-	const {cartItems, removeFromCart} = React.useContext(CartContext)
+	const {cartItems, increase, decrease, 
+		     removeFromCart, clearCart} = React.useContext(CartContext)
+	
+	
 	console.log(cartItems)
 	const {mailForm, openMailForm, closeMailForm} = React.useContext(OpenContext)
 	
@@ -39,14 +40,17 @@ export const Cart =()=> {
             {open && cartItems.map(item => (<CartItem 
 				                                 key={item._id} 
 				                                 item={item} 
-				                                 removeFromCart={removeFromCart}/>))}
+				                                 removeFromCart={removeFromCart}
+				                                 increase={increase}
+				                                 decrease={decrease}/>))}
             
 			{open && cartItems.length > 0 && (<>
-				       <button 
-				          onClick={!mailForm?openMailForm:closeMailForm}>
-				             OrderItems</button>
-				             <button 
-	                            onClick={() => setOpen(false)}>
-	                         CloseCart</button></>)}
+				 <button onClick={!mailForm?openMailForm:closeMailForm}>
+				                                     OrderItems</button>
+				                                     
+			    <button onClick={() => setOpen(false)}>
+	                                                CloseCart</button>
+	            <button onClick={() => clearCart()}>ClearCart</button></>)}
+	             
           </>
 	}
