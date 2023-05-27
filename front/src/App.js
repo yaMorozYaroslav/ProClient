@@ -18,7 +18,6 @@ import {CartState} from './Context/Cart/CartState'
 
 export const App =()=> {
 	
-	const [currentId, setCurrentId] = React.useState(null)	
 	
 	return (
 	       <>

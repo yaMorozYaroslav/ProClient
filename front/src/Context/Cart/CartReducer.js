@@ -22,29 +22,25 @@ const CartReducer = (state, action) => {
   switch (action.type) {
     
     case ADD_TO_CART:
-      if (!state.cartItems.find((item) => item.id === action.payload.id)) {
-        state.cartItems.push({
-          ...action.payload,
-          quantity: 1,
-        });
-      }
+      
+      const itemInCart = state.cartItems.find((item) => 
+                                       item._id === action.payload._id)
+      if (itemInCart) {
+        itemInCart.quantity++;    
+      } else {state.cartItems.push({ ...action.payload, quantity: 1 })}
 
       return {
         ...state,
         cartItems: [...state.cartItems],
-      };
+      }
 
-    // If the action type is REMOVE_ITEM, we want to remove the item from the cartItems array
     case REMOVE_ITEM:
       return {
         ...state,
-        ...sumItems(
-          state.cartItems.filter((item) => item.id !== action.payload.id)
-        ),
         cartItems: [
-          ...state.cartItems.filter((item) => item.id !== action.payload.id),
-        ],
-      };
+          ...state.cartItems.filter((item) => 
+                                  item._id !== action.payload)]
+      }
 
     // If the action type is INCREASE, we want to increase the quantity of the particular item in the cartItems array
     case INCREASE:
