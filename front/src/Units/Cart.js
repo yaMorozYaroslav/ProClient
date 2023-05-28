@@ -5,15 +5,16 @@ import CartIcon from "@material-ui/icons/ShoppingCart"
 
 import {OpenContext, CartContext} from '../Context/Contexts'
 
+const button = {'fontSize':'20px', 'cursor':'pointer'}
+
 const CartItem =({item,removeFromCart,increase,
 	              decrease,clearCart, setFromLocale}) => {
-	
     return <><section>
                {item.length}
                {item._id} + {item.quantity}
-             <button onClick={()=>increase(item._id)}>inc</button>
-             <button onClick={()=>decrease(item._id)}>dec</button>
-             <button onClick={()=>removeFromCart(item._id)}>delete</button>
+             <button style={button} onClick={()=>increase(item._id)}>inc</button>
+             <button style={button} onClick={()=>decrease(item._id)}>dec</button>
+             <button style={button} onClick={()=>removeFromCart(item._id)}>delete</button>
            </section></>
 	}
 
@@ -22,7 +23,7 @@ export const Cart =()=> {
 	const [open, setOpen] = React.useState(false)
 	
 	const {cartItems, increase, decrease, 
-		     removeFromCart, clearCart} = React.useContext(CartContext)
+		     removeFromCart, clearCart, setFromLocale} = React.useContext(CartContext)
 	
 	
 	console.log(cartItems)
@@ -38,22 +39,22 @@ export const Cart =()=> {
 		if(shouldUpdateStorage){
 		  localStorage.setItem('cart', JSON.stringify(cartItems))
 		  }
-       /*
-		const shouldUpdateState = profile && 
-		            Object.keys(profile).length > 0 &&
-		            JSON.stringify(userData) !== JSON.stringify(profile)
+  
+		const shouldUpdateState = cart && 
+		            Object.keys(cart).length > 0 &&
+		            JSON.stringify(cartItems) !== JSON.stringify(cart)
 		if(shouldUpdateState){
-		setFromStorage(profile)
-	    } */
+		setFromLocale(cart)
+	    } 
 		},[cartItems])
 //	return<>{cartState.map(item => (<CartItem key={item._id} item={item}/>))}</>
-    return<div style={{'margin-top':'15px'}}>
+    return<div style={{'marginTop':'15px','fontSize':'32px'}}>
             <Badge color='secondary'
                    style={{'cursor':'pointer'}}
                    overlap="rectangular"
                    badgeContent={cartItems.length}
                    onClick={() => setOpen(cartItems.length > 0 && !open ? true : false)}>
-            Cart<CartIcon/>
+            Cart<CartIcon style={{ 'height': '40px', 'width': '40px' }}/>
             </Badge>
             
             {open && cartItems.map(item => (<CartItem 
@@ -64,12 +65,15 @@ export const Cart =()=> {
 				                                 decrease={decrease}/>))}
             
 			{open && cartItems.length > 0 && (<>
-				 <button onClick={!mailForm?openMailForm:closeMailForm}>
+				 <button  style={button} 
+				          onClick={!mailForm?openMailForm:closeMailForm}>
 				                                     OrderItems</button>
 				                                     
-			    <button onClick={() => setOpen(false)}>
+			    <button style={button}
+			            onClick={() => setOpen(false)}>
 	                                                CloseCart</button>
-	            <button onClick={() => clearCart()}>ClearCart</button>
+	            <button style={button}
+	                    onClick={() => clearCart()}>ClearCart</button>
 	            </>)}
 	             
           </div>

@@ -1,13 +1,12 @@
 import React from 'react'
 import decode from 'jwt-decode'
 
-import {UserContext} from '../Context/Contexts'
-import {OpenContext, ItemContext} from '../Context/Contexts'
+import {UserContext, OpenContext} from '../Context/Contexts'
 
 
 export const TheBar =()=> {
 	
-	//const {currentId, setCurrentId} = React.useContext(ItemContext)
+	//const {currentId, setCurrentId} )= React.useContext(ItemContext
 	const {userData, logout} = React.useContext(UserContext)
 	
 	const {authForm, openItemForm, openAuthForm} = React.useContext(OpenContext)
@@ -41,19 +40,25 @@ export const TheBar =()=> {
 	if(userData)userKeys = Object.keys(userData)
 	if(!userData)userKeys = []
 	
+	const onAddItem = () => {
+		if(userKeys.length > 0)openItemForm()
+		if(userKeys.length === 0)alert('SignIn To Add An Item')
+		}
 	
-	return <div style={{'width':'40%','margin-left':'60%'}}>
+	const button = { 'cursor':'pointer',
+		             'fontSize':'25px',
+		             'border':'1px solid black',
+		             'margin':'10px'}
+	
+	return <div style={{'marginLeft':'70%', 'display': 'flex'}}>
+	        {!authForm && <button  style={button} onClick={onAddItem}>AddItem</button>}
 	        {userKeys.length > 0 &&
-				<div style={{'display': 'flex'}}>
+				<div>		   
 				   <h2>Hello, {userData.result.name}</h2>
-				   <button  onClick={openItemForm}>AddItem</button>
-				   <button  onClick={handLogout}> Logout </button></div>
+				   <button  style={button} onClick={handLogout}> Logout </button></div>
 				}
-			{!authForm && !userKeys.length && <div style={{'display': 'flex'}}>
-				         <h2>SignIn to Add an Item</h2>
-				         <button onClick={openAuthForm}>SignIn</button>
-				</div>}
-
-	      
+			{!authForm && !userKeys.length && <div >
+				         <button style={button} onClick={openAuthForm}>SignIn</button>
+				</div>}    
 	       </div>
 	}

@@ -41,7 +41,7 @@ export const AuthForm = () => {
 
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	 return(
-	 <section style={{'display': !authForm ?'none':'block'}}>
+	 <section style={{'display': !authForm ?'none':'block', 'fontSize':'20px'}}>
 	 <h2>{!registered?'Registration':'Authentication'}</h2>
 	<form id='form'>
 	 <label>Email:</label>

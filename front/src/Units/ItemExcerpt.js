@@ -2,7 +2,6 @@ import React from 'react'
 
 export const ItemExcerpt = ({item, setCurrentId, openItemForm, 
 	                          userData, removeItem, addToCart }) => {
-   console.log(item)
    const profile = JSON.parse(localStorage.getItem('profile'))
     const handEdit =(e)=> {
 		e.preventDefault()

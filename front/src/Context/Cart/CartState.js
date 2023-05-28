@@ -49,7 +49,8 @@ export const CartState = ({ children }) => {
         removeFromCart,
         increase,
         decrease,
-        clearCart
+        clearCart,
+        setFromLocale
       }}
     >
       {children}
