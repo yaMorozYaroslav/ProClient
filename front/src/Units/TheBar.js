@@ -42,7 +42,7 @@ export const TheBar =()=> {
 	if(!userData)userKeys = []
 	
 	
-	return <>
+	return <div style={{'width':'40%','margin-left':'60%'}}>
 	        {userKeys.length > 0 &&
 				<div style={{'display': 'flex'}}>
 				   <h2>Hello, {userData.result.name}</h2>
@@ -55,5 +55,5 @@ export const TheBar =()=> {
 				</div>}
 
 	      
-	       </>
+	       </div>
 	}

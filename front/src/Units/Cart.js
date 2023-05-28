@@ -47,7 +47,7 @@ export const Cart =()=> {
 	    } */
 		},[cartItems])
 //	return<>{cartState.map(item => (<CartItem key={item._id} item={item}/>))}</>
-    return<>
+    return<div style={{'margin-top':'15px'}}>
             <Badge color='secondary'
                    style={{'cursor':'pointer'}}
                    overlap="rectangular"
@@ -72,5 +72,5 @@ export const Cart =()=> {
 	            <button onClick={() => clearCart()}>ClearCart</button>
 	            </>)}
 	             
-          </>
+          </div>
 	}

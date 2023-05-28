@@ -2,7 +2,7 @@ import React from 'react'
 
 export const ItemExcerpt = ({item, setCurrentId, openItemForm, 
 	                          userData, removeItem, addToCart }) => {
-   
+   console.log(item)
    const profile = JSON.parse(localStorage.getItem('profile'))
     const handEdit =(e)=> {
 		e.preventDefault()
@@ -22,7 +22,7 @@ export const ItemExcerpt = ({item, setCurrentId, openItemForm,
 	return (
 	<article style={{'background':`#${randomColor}`}}>
 	  <h3>{item.title}</h3>
-	  <p>{item.photo}</p>
+	  <img src={item.photo}/>
 	  <p>{item.category}</p>
 	  <p>{item.description}</p>
 	  <p>{item.price}</p>
