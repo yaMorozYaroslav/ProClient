@@ -45,7 +45,7 @@ const CartReducer = (state, action) => {
     // If the action type is INCREASE, we want to increase the quantity of the particular item in the cartItems array
     case INCREASE:
       state.cartItems[
-        state.cartItems.findIndex((item) => item.id === action.payload.id)
+        state.cartItems.findIndex((item) => item._id === action.payload)
       ].quantity++;
       return {
         ...state,
@@ -55,7 +55,7 @@ const CartReducer = (state, action) => {
     // If the action type is DECREASE, we want to decrease the quantity of the particular item in the cartItems array
     case DECREASE:
       state.cartItems[
-        state.cartItems.findIndex((item) => item.id === action.payload.id)
+        state.cartItems.findIndex((item) => item._id === action.payload)
       ].quantity--;
       return {
         ...state,

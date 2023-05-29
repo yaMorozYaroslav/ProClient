@@ -3,7 +3,7 @@ import Badge from "@material-ui/core/Badge"
 //import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import CartIcon from "@material-ui/icons/ShoppingCart"
 
-import {OpenContext, CartContext} from '../Context/Contexts'
+import {OpenContext, CartContext, ItemContext} from '../Context/Contexts'
 
 const button = {'fontSize':'20px', 'cursor':'pointer'}
 
@@ -30,29 +30,28 @@ export const Cart =()=> {
 	
 	const {cartItems, increase, decrease, 
 		     removeFromCart, clearCart, setFromLocale} = React.useContext(CartContext)
-	
-	
+	const {loading} = React.useContext(ItemContext)
 	console.log(cartItems)
 	const {mailForm, openMailForm, closeMailForm} = React.useContext(OpenContext)
 	
 	React.useEffect(()=>{
-		console.log(Object.keys(cartItems).length)
-		
 		const cart = JSON.parse(localStorage.getItem('cart'))
 		
-		const shouldUpdateStorage = Object.keys(cartItems).length > 0 && 
-		         JSON.stringify(cartItems) !== JSON.stringify(cart)
+		const shouldUpdateStorage = Object.keys(cartItems).length > 0 &&
+		                            JSON.stringify(cartItems) !== JSON.stringify(cart)
 		if(shouldUpdateStorage){
 		  localStorage.setItem('cart', JSON.stringify(cartItems))
 		  }
-  
-		const shouldUpdateState = cart && 
-		            Object.keys(cart).length > 0 && Object.keys(cartItems).length === 0 &&
-		            JSON.stringify(cartItems) !== JSON.stringify(cart)
+		  
+        const shouldUpdateState = //loading && 
+		                          Object.keys(cart).length > 0 &&
+		              JSON.stringify(cartItems) !== JSON.stringify(cart)
+		            
 		if(shouldUpdateState){
-		setFromLocale(cart)
-	    } 
-		},[cartItems])
+		                 setFromLocale(cart)}
+		},[cartItems, loading, setFromLocale])
+		console.log(loading)
+		
 //	return<>{cartState.map(item => (<CartItem key={item._id} item={item}/>))}</>
     return<div style={{'marginTop':'15px','fontSize':'32px'}}>
             <Badge color='secondary'
