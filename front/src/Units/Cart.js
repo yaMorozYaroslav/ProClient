@@ -8,13 +8,19 @@ import {OpenContext, CartContext} from '../Context/Contexts'
 const button = {'fontSize':'20px', 'cursor':'pointer'}
 
 const CartItem =({item,removeFromCart,increase,
-	              decrease,clearCart, setFromLocale}) => {
+	              decrease,clearCart, setFromLocale, cartItems}) => {
+		const onDelete =()=>{
+			removeFromCart(item._id)
+			//localStorage.setItem('cart', JSON.stringify(cartItems))
+			}
+			
     return <><section>
                {item.length}
                {item._id} + {item.quantity}
+             <img src={item.photo} />
              <button style={button} onClick={()=>increase(item._id)}>inc</button>
              <button style={button} onClick={()=>decrease(item._id)}>dec</button>
-             <button style={button} onClick={()=>removeFromCart(item._id)}>delete</button>
+             <button style={button} onClick={onDelete}>delete</button>
            </section></>
 	}
 
@@ -41,7 +47,7 @@ export const Cart =()=> {
 		  }
   
 		const shouldUpdateState = cart && 
-		            Object.keys(cart).length > 0 &&
+		            Object.keys(cart).length > 0 && Object.keys(cartItems).length === 0 &&
 		            JSON.stringify(cartItems) !== JSON.stringify(cart)
 		if(shouldUpdateState){
 		setFromLocale(cart)
@@ -62,7 +68,8 @@ export const Cart =()=> {
 				                                 item={item} 
 				                                 removeFromCart={removeFromCart}
 				                                 increase={increase}
-				                                 decrease={decrease}/>))}
+				                                 decrease={decrease}
+				                                 cartItems={cartItems}/>))}
             
 			{open && cartItems.length > 0 && (<>
 				 <button  style={button} 

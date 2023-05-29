@@ -15,8 +15,8 @@ export const ItemExcerpt = ({item, setCurrentId, openItemForm,
    const randomColor = Math.floor(Math.random()*16777215).toString(16)
    
    
-   const newItem = {_id: item._id, title: item.title, price: item.price}
-  // console.log(userData.result._id,item.creator )
+   const newItem = {_id: item._id, title: item.title, 
+	                price: item.price, photo: item.photo}
 
 	return (
 	<article style={{'background':`#${randomColor}`}}>
