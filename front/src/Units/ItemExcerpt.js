@@ -19,9 +19,9 @@ export const ItemExcerpt = ({item, setCurrentId, openItemForm,
 	                price: item.price, photo: item.photo}
 
 	return (
-	<article style={{'background':`#${randomColor}`}}>
+	<article style={{'background':`#${randomColor}`, 'textAlign':'center'}}>
 	  <h3>{item.title}</h3>
-	  <img src={item.photo}/>
+	  <img style={{'width':'200px'}} src={item.photo}/>
 	  <p>{item.category}</p>
 	  <p>{item.description}</p>
 	  <p>{item.price}</p>

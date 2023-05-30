@@ -11,13 +11,13 @@ const CartItem =({item,removeFromCart,increase,
 	              decrease,clearCart, setFromLocale, cartItems}) => {
 		const onDelete =()=>{
 			removeFromCart(item._id)
-			//localStorage.setItem('cart', JSON.stringify(cartItems))
+			localStorage.setItem('cart', JSON.stringify(cartItems))
 			}
 			
     return <><section>
                {item.length}
-               {item._id} + {item.quantity}
-             <img src={item.photo} />
+             <img style={{'width':'80px'}} src={item.photo} />
+               {item.title} * {item.quantity}
              <button style={button} onClick={()=>increase(item._id)}>inc</button>
              <button style={button} onClick={()=>decrease(item._id)}>dec</button>
              <button style={button} onClick={onDelete}>delete</button>
@@ -43,7 +43,7 @@ export const Cart =()=> {
 		  localStorage.setItem('cart', JSON.stringify(cartItems))
 		  }
 		  
-        const shouldUpdateState = //loading && 
+        const shouldUpdateState = loading && 
 		                          Object.keys(cart).length > 0 &&
 		              JSON.stringify(cartItems) !== JSON.stringify(cart)
 		            
