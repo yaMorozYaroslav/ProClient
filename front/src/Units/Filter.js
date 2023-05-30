@@ -24,17 +24,20 @@ export const Filter =(props)=> {
 	function onMaxPrice(event){
 		setMaxPrice(event.target.value)
 		}
-	return <> {show && <>
-		 <button onClick={()=>setShow(false)}>HideFilters</button>
-	     <input onChange={onMinPrice} placeholder='MinPrice' type='num'/>
-	     <input onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
-	     <input onChange={onSearch} placeholder='Search'/>
-	     <select onClick={()=>fetchItems(state.itemCategory)} name='howFilter' onChange={onCategory}>
+		const text = {'fontSize':'20px', 'margin': '4px'}
+	return <> {show && <div>
+		 <button style={text} onClick={()=>setShow(false)}>HideFilters</button>
+		  <label style={{'fontSize':'30px', 'color':'purple'}}>Category</label>
+		 <select style={text} onClick={()=>fetchItems(state.itemCategory)} name='howFilter' onChange={onCategory}>
 	       <option value='all'>All</option>
 	       <option value='soil'>Soils</option>
 	       <option value='pesticide'>Pesticides</option>
 	       <option value='seed'>Seeds</option>
-	     </select></>}
-	     {!show && <button onClick={()=>setShow(true)}>ShowFilters</button>}
+	     </select>
+	     <input style={text} onChange={onMinPrice} placeholder='MinPrice' type='num'/>
+	     <input style={text} onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
+	     <input style={text} onChange={onSearch} placeholder='Search'/>
+	     </div>}
+	     {!show && <button style={text} onClick={()=>setShow(true)}>ShowFilters</button>}
 	     </>
 	}

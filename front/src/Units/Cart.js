@@ -11,7 +11,8 @@ const CartItem =({item,removeFromCart,increase,
 	              decrease,clearCart, setFromLocale, cartItems}) => {
 		const onDelete =()=>{
 			removeFromCart(item._id)
-			localStorage.setItem('cart', JSON.stringify(cartItems))
+			//localStorage.setItem('cart', JSON.stringify(cartItems))
+			if(cartItems.length <= 1)localStorage.clear()
 			}
 			
     return <><section>
@@ -43,7 +44,7 @@ export const Cart =()=> {
 		  localStorage.setItem('cart', JSON.stringify(cartItems))
 		  }
 		  
-        const shouldUpdateState = loading && 
+        const shouldUpdateState = cart && loading && 
 		                          Object.keys(cart).length > 0 &&
 		              JSON.stringify(cartItems) !== JSON.stringify(cart)
 		            
