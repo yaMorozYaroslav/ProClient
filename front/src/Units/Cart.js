@@ -12,15 +12,18 @@ const CartItem =({item,removeFromCart,increase,
 		const onDelete =()=>{
 			removeFromCart(item._id)
 			//localStorage.setItem('cart', JSON.stringify(cartItems))
-			if(cartItems.length <= 1)localStorage.clear()
+			if(cartItems.length <= 1)localStorage.removeItem('cart')
 			}
-			
+	    const onDecrease =()=> {
+			decrease(item._id)
+			if(item.quantity < 2)removeFromCart(item._id)
+			}
     return <><section>
                {item.length}
              <img style={{'width':'80px'}} src={item.photo} />
                {item.title} * {item.quantity}
              <button style={button} onClick={()=>increase(item._id)}>inc</button>
-             <button style={button} onClick={()=>decrease(item._id)}>dec</button>
+             <button style={button} onClick={onDecrease}>dec</button>
              <button style={button} onClick={onDelete}>delete</button>
            </section></>
 	}
@@ -53,6 +56,11 @@ export const Cart =()=> {
 		},[cartItems, loading, setFromLocale])
 		console.log(loading)
 		
+		const onClearCart =()=> {
+			clearCart()
+			localStorage.removeItem('cart')
+			}
+		
 //	return<>{cartState.map(item => (<CartItem key={item._id} item={item}/>))}</>
     return<div style={{'marginTop':'15px','fontSize':'32px'}}>
             <Badge color='secondary'
@@ -80,7 +88,7 @@ export const Cart =()=> {
 			            onClick={() => setOpen(false)}>
 	                                                CloseCart</button>
 	            <button style={button}
-	                    onClick={() => clearCart()}>ClearCart</button>
+	                    onClick={onClearCart}>ClearCart</button>
 	            </>)}
 	             
           </div>

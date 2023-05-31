@@ -56,7 +56,7 @@ const CartReducer = (state, action) => {
     case DECREASE:
       state.cartItems[
         state.cartItems.findIndex((item) => item._id === action.payload)
-      ].quantity--;
+      ].quantity--
       return {
         ...state,
         cartItems: [...state.cartItems],
