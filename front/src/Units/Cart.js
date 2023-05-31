@@ -17,6 +17,7 @@ const CartItem =({item,removeFromCart,increase,
 	    const onDecrease =()=> {
 			decrease(item._id)
 			if(item.quantity < 2)removeFromCart(item._id)
+			if(cartItems.length <= 1)localStorage.removeItem('cart')
 			}
     return <><section>
                {item.length}

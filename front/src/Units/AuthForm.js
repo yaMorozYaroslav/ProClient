@@ -40,33 +40,38 @@ export const AuthForm = () => {
 		},[userData])
 
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
+	
+	const text = {'fontSize':'18px', 'margin':'1px'}
+	const pointer = {'cursor':'pointer'}
+	
 	 return(
-	 <section style={{'display': !authForm ?'none':'block', 'fontSize':'20px'}}>
+	 <section style={{'display': !authForm ?'none':'block'}}>
 	 <h2>{!registered?'Registration':'Authentication'}</h2>
-	<form id='form'>
+	<form style={text} id='form'>
 	 <label>Email:</label>
-	 <input name='email'
+	 <input style={text} name='email'
 	 onChange={handChange}/>
 	
 	 <label>Password:</label>
-	 <input name='password'
+	 <input style={text} name='password'
 	 onChange={handChange}/>
 	 
 	 {!registered && (<>
 	 <label>Name:</label>
-	 <input name='name'
+	 <input style={text} name='name'
 	 onChange={handChange}/>
 	 
 	 <label>ConfPass:</label>
-	 <input name='confPass'
+	 <input style={text} name='confPass'
 	 onChange={handChange}/>
 	                   </>)}
 	                   
-	 <button onClick={handSubmit}>Save</button>
+	 <button style={text} onClick={handSubmit}>Save</button>
 	</form>
-	 <button onClick={()=>setRegistered(isRegistered => !isRegistered)}>
+	 <button style={{...text, ...pointer}} onClick={()=>setRegistered(isRegistered => !isRegistered)}>
 		 {!registered?'to authentication':'to registration'}
      </button>
+     <button onClick={()=>closeAuthForm()}>CloseForm</button>
 	 </section>
 	 )
 	}
