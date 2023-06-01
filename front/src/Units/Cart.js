@@ -5,7 +5,7 @@ import CartIcon from "@material-ui/icons/ShoppingCart"
 
 import {OpenContext, CartContext, ItemContext} from '../Context/Contexts'
 
-const button = {'fontSize':'20px', 'cursor':'pointer'}
+const button = {'fontSize':'20px', 'cursor':'pointer', 'margin':'5px'}
 
 const CartItem =({item,removeFromCart,increase,
 	              decrease,clearCart, setFromLocale, cartItems}) => {
@@ -15,9 +15,8 @@ const CartItem =({item,removeFromCart,increase,
 			if(cartItems.length <= 1)localStorage.removeItem('cart')
 			}
 	    const onDecrease =()=> {
-			decrease(item._id)
-			if(item.quantity < 2)removeFromCart(item._id)
-			if(cartItems.length <= 1)localStorage.removeItem('cart')
+			if(item.quantity > 1){decrease(item._id)
+            }else{}
 			}
     return <><section>
                {item.length}
@@ -36,7 +35,7 @@ export const Cart =()=> {
 	const {cartItems, increase, decrease, 
 		     removeFromCart, clearCart, setFromLocale} = React.useContext(CartContext)
 	const {loading} = React.useContext(ItemContext)
-	console.log(cartItems)
+	
 	const {mailForm, openMailForm, closeMailForm} = React.useContext(OpenContext)
 	
 	React.useEffect(()=>{

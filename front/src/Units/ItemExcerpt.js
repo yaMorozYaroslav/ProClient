@@ -13,17 +13,17 @@ export const ItemExcerpt = ({item, setCurrentId, openItemForm,
 		removeItem(item._id)
 		}
    const randomColor = Math.floor(Math.random()*16777215).toString(16)
-   
+    const newColor = Math.floor(Math.random()*16777215).toString(16)
    
    const newItem = {_id: item._id, title: item.title, 
 	                price: item.price, photo: item.photo}
-
+   const parag = {'background':`#${newColor}`}
 	return (
 	<article style={{'background':`#${randomColor}`, 'textAlign':'center'}}>
 	  <h3>{item.title}</h3>
 	  <img style={{'width':'200px'}} src={item.photo}/>
 	  <p>{item.category}</p>
-	  <p>{item.description}</p>
+	  <p style={parag}>{item.description}</p>
 	  <p>{item.price}</p>
 	  {(userData.result && 
 	   (userData.result._id === item.creator||userData.result.role === 'admin')) && 
