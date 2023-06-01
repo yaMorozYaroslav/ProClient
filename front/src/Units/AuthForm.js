@@ -69,9 +69,9 @@ export const AuthForm = () => {
 	 <button style={text} onClick={handSubmit}>Save</button>
 	</form>
 	 <button style={{...text, ...pointer}} onClick={()=>setRegistered(isRegistered => !isRegistered)}>
-		 {!registered?'to authentication':'to registration'}
+		 {!registered?'ToAuthentication':'ToRegistration'}
      </button>
-     <button onClick={()=>closeAuthForm()}>CloseForm</button>
+     <button style={{...text, ...pointer}} onClick={()=>closeAuthForm()}>CloseForm</button>
 	 </section>
 	 )
 	}

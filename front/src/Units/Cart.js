@@ -9,6 +9,7 @@ const button = {'fontSize':'20px', 'cursor':'pointer', 'margin':'5px'}
 
 const CartItem =({item,removeFromCart,increase,
 	              decrease,clearCart, setFromLocale, cartItems}) => {
+		//console.log(indexOf(item))
 		const onDelete =()=>{
 			removeFromCart(item._id)
 			//localStorage.setItem('cart', JSON.stringify(cartItems))
