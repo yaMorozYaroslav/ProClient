@@ -1,38 +1,12 @@
 import React from 'react'
 import Badge from "@material-ui/core/Badge"
-//import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import CartIcon from "@material-ui/icons/ShoppingCart"
+
+import {CartItem} from './CartItem'
 
 import {OpenContext, CartContext, ItemContext} from '../Context/Contexts'
 
 const button = {'fontSize':'20px', 'cursor':'pointer', 'margin':'5px'}
-
-const CartItem =({item,removeFromCart,increase,
-	              decrease,clearCart, setFromLocale, cartItems}) => {
-	    const ref = React.useRef()	  
-		const onDelete =()=>{
-			removeFromCart(item._id)
-			//localStorage.setItem('cart', JSON.stringify(cartItems))
-			if(cartItems.length <= 1)localStorage.removeItem('cart')
-			}
-	    const onDecrease =()=> {
-			if(item.quantity > 1){decrease(item._id)
-            }else{}
-			}
-		const itemIndex = cartItems.findIndex(obj => { return obj._id === item._id}) + 1
-		console.log(itemIndex)
-		const changeColor =(e)=> {
-			console.log(e.target.style.fontSize = '30px')
-			}
-    return <><section>
-               {itemIndex}. &nbsp;
-             <img style={{'width':'80px'}} src={item.photo} />
-               {item.title} * {item.quantity}
-             <button ref={ref} onMouseOver={changeColor} style={button} onClick={()=>increase(item._id)}>inc</button>
-             <button style={button} onClick={onDecrease}>dec</button>
-             <button style={button} onClick={onDelete}>delete</button>
-           </section></>
-	}
 
 export const Cart =()=> {
 	
@@ -66,8 +40,12 @@ export const Cart =()=> {
 			clearCart()
 			localStorage.removeItem('cart')
 			}
-		
-//	return<>{cartState.map(item => (<CartItem key={item._id} item={item}/>))}</>
+			
+		const changeBorder =(e)=> {
+			e.target.style.border = '2px solid blue'
+			setTimeout(() => e.target.style.border = null, 1000)
+			}
+
     return<div style={{'marginTop':'15px','fontSize':'32px'}}>
             <Badge color='secondary'
                    style={{'cursor':'pointer'}}
@@ -86,14 +64,14 @@ export const Cart =()=> {
 				                                 cartItems={cartItems}/>))}
             
 			{open && cartItems.length > 0 && (<>
-				 <button  style={button} 
+				 <button onMouseOver={changeBorder} style={button} 
 				          onClick={!mailForm?openMailForm:closeMailForm}>
 				                                     OrderItems</button>
 				                                     
-			    <button style={button}
+			    <button onMouseOver={changeBorder} style={button}
 			            onClick={() => setOpen(false)}>
 	                                                CloseCart</button>
-	            <button style={button}
+	            <button onMouseOver={changeBorder} style={button}
 	                    onClick={onClearCart}>ClearCart</button>
 	            </>)}
 	             
