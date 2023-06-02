@@ -9,7 +9,7 @@ const button = {'fontSize':'20px', 'cursor':'pointer', 'margin':'5px'}
 
 const CartItem =({item,removeFromCart,increase,
 	              decrease,clearCart, setFromLocale, cartItems}) => {
-					  
+	    const ref = React.useRef()	  
 		const onDelete =()=>{
 			removeFromCart(item._id)
 			//localStorage.setItem('cart', JSON.stringify(cartItems))
@@ -21,11 +21,14 @@ const CartItem =({item,removeFromCart,increase,
 			}
 		const itemIndex = cartItems.findIndex(obj => { return obj._id === item._id}) + 1
 		console.log(itemIndex)
+		const changeColor =(e)=> {
+			console.log(e.target.style.fontSize = '30px')
+			}
     return <><section>
                {itemIndex}. &nbsp;
              <img style={{'width':'80px'}} src={item.photo} />
                {item.title} * {item.quantity}
-             <button onMouseOver={() => this.style.color='red'} style={button} onClick={()=>increase(item._id)}>inc</button>
+             <button ref={ref} onMouseOver={changeColor} style={button} onClick={()=>increase(item._id)}>inc</button>
              <button style={button} onClick={onDecrease}>dec</button>
              <button style={button} onClick={onDelete}>delete</button>
            </section></>
