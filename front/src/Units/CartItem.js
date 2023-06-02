@@ -1,4 +1,5 @@
-const button = {'fontSize':'20px', 'cursor':'pointer', 'margin':'5px'}
+const button = {'height':'50px','fontSize':'20px', 
+	            'cursor':'pointer', 'marginTop':'25px', 'marginLeft':'5px'}
 
 export const CartItem =({item,removeFromCart,increase,
 	              decrease,clearCart, setFromLocale, cartItems}) => {
@@ -20,10 +21,11 @@ export const CartItem =({item,removeFromCart,increase,
 			setTimeout(() => e.target.style.border = null, 1000)
 			}
 		
-    return <><section>
-               {itemIndex}. &nbsp;
-             <img style={{'width':'80px'}} src={item.photo} />
-               {item.title} * {item.quantity}
+    return <><section style={{'display':'flex', 'height':'100px'}}>
+              
+              <h5> {itemIndex}. &nbsp; </h5>
+             <img style={{'width':'80px', 'margin':'10px'}} src={item.photo} />
+              <p style={{'margin-right':'5px'}}> {item.title} * {item.quantity}</p>
              <button onMouseOver={changeBorder} style={button} onClick={()=>increase(item._id)}>inc</button>
              <button onMouseOver={changeBorder} style={button} onClick={onDecrease}>dec</button>
              <button onMouseOver={changeBorder} style={button} onClick={onDelete}>delete</button>

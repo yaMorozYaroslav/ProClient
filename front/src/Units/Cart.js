@@ -46,7 +46,7 @@ export const Cart =()=> {
 			setTimeout(() => e.target.style.border = null, 1000)
 			}
 
-    return<div style={{'marginTop':'15px','fontSize':'32px'}}>
+    return <>{!mailForm && <div style={{'marginTop':'15px','fontSize':'32px'}}>
             <Badge color='secondary'
                    style={{'cursor':'pointer'}}
                    overlap="rectangular"
@@ -75,5 +75,8 @@ export const Cart =()=> {
 	                    onClick={onClearCart}>ClearCart</button>
 	            </>)}
 	             
-          </div>
+          </div>}
+        {mailForm && cartItems.map(item => <div style={{'display':'flex'}}>
+			<img style={{'width':'60px', 'margin':'5px'}} src={item.photo}/>
+			<p style={{'fontSize':'20px'}}>{item.title}*{item.quantity}</p></div>)}</>
 	}
