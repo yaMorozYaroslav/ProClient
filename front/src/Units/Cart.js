@@ -9,7 +9,7 @@ const button = {'fontSize':'20px', 'cursor':'pointer', 'margin':'5px'}
 
 const CartItem =({item,removeFromCart,increase,
 	              decrease,clearCart, setFromLocale, cartItems}) => {
-		//console.log(indexOf(item))
+					  
 		const onDelete =()=>{
 			removeFromCart(item._id)
 			//localStorage.setItem('cart', JSON.stringify(cartItems))
@@ -19,11 +19,13 @@ const CartItem =({item,removeFromCart,increase,
 			if(item.quantity > 1){decrease(item._id)
             }else{}
 			}
+		const itemIndex = cartItems.findIndex(obj => { return obj._id === item._id}) + 1
+		console.log(itemIndex)
     return <><section>
-               {item.length}
+               {itemIndex}. &nbsp;
              <img style={{'width':'80px'}} src={item.photo} />
                {item.title} * {item.quantity}
-             <button style={button} onClick={()=>increase(item._id)}>inc</button>
+             <button onMouseOver={() => this.style.color='red'} style={button} onClick={()=>increase(item._id)}>inc</button>
              <button style={button} onClick={onDecrease}>dec</button>
              <button style={button} onClick={onDelete}>delete</button>
            </section></>
