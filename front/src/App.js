@@ -28,8 +28,8 @@ export const App =()=> {
 	       <CartState>
 	       
 	         <Cart/>
-	         <TheBar/>
 	         <MailForm/>
+	         <TheBar/>
 	         <AuthForm/>
 	         <ItemForm/>     
 	         <Filter  /> 

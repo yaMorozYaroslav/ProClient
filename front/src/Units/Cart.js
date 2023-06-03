@@ -76,7 +76,10 @@ export const Cart =()=> {
 	            </>)}
 	             
           </div>}
-        {mailForm && cartItems.map(item => <div style={{'display':'flex'}}>
+        {mailForm && <div style={{ 'width':'40%', 'margin-left':'43%'}}>
+		  <h2> Your items: </h2>
+			{cartItems.map(item => 
+			<div style={{ 'display':'flex'}}>
 			<img style={{'width':'60px', 'margin':'5px'}} src={item.photo}/>
-			<p style={{'fontSize':'20px'}}>{item.title}*{item.quantity}</p></div>)}</>
+			<p style={{'fontSize':'20px'}}>{item.title}*{item.quantity}</p></div>)}</div>}</>
 	}

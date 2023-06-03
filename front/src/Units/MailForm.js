@@ -30,24 +30,32 @@ export const MailForm =()=> {
 		setForEmail(JSON.stringify(inCart))
 		//console.log(forEmail)
 		},[forEmail, inCart])
+		
+	const changeBorder =(e)=> {
+			e.target.style.border = '2px solid green'
+			setTimeout(() => e.target.style.border = null, 1000)
+			}
 	
+	const  input = {'fontSize':'15px', 'margin': '5px'}
+	const button = {'fontSize':'20px', 'margin': '5px'}
 	
 	return <>
 	<form 
 	      ref={form} onSubmit={sendEmail} 
-	      style={{'display': !mailForm ?'none':'block', 'padding':'20px', 'background':'pink'}}>
-	
+	      style={{'display': !mailForm ?'none':'block', 'padding':'20px', 'background':'pink',
+			      'fontSize':'20px', 'margin': '5px', 'text-align':'center'}}>
+	  <h3>Your contacts:</h3>
 	  <label htmlFor='Name'>Name</label>
-	    <input type='text' placeholder='Name' name='user_name'  required/>
+	    <input style={input} type='text' placeholder='Name' name='user_name'  required/>
 	  <label htmlFor='Email'>Email</label>
-	    <input type='email' placeholder='Email' name='user_email' required/>
+	    <input style={input} type='email' placeholder='Email' name='user_email' required/>
 	  <label htmlFor='PhoneNumber'>PhoneNumber</label>
-	    <input type='number' placeholder='PhoneNumber' name='user_phone' required />
+	    <input style={input} type='number' placeholder='PhoneNumber' name='user_phone' required />
 	
 	   <textarea readOnly value={forEmail} name='items' style={{'display':'none'}} required/>
-	
-	<button type='submit'>Send</button>
-	<button onClick={closeMailForm}>Close</button>
+	   <br />
+	<button onMouseOver={changeBorder} style={button} type='submit'>SendMail</button>
+	<button onMouseOver={changeBorder} style={button} onClick={closeMailForm}>CloseForm</button>
 	</form>
 	      </>
 	}
