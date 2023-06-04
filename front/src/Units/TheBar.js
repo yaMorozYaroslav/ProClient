@@ -44,6 +44,11 @@ export const TheBar =()=> {
 		if(userKeys.length > 0)openItemForm()
 		if(userKeys.length === 0)alert('SignIn To Add An Item')
 		}
+		
+	const changeBorder =(e)=> {
+			e.target.style.border = '2px solid purple'
+			setTimeout(() => e.target.style.border = null, 1000)
+			}
 	
 	const button = { 'cursor':'pointer',
 		             'fontSize':'25px',
@@ -51,14 +56,14 @@ export const TheBar =()=> {
 		             'margin':'10px'}
 	
 	return <div style={{'marginLeft':'70%', 'display': 'flex'}}>
-	        {!authForm && <button  style={button} onClick={onAddItem}>AddItem</button>}
+	        {!authForm && <button onMouseOver={changeBorder} style={button} onClick={onAddItem}>AddItem</button>}
 	        {userKeys.length > 0 &&
 				<div>		   
 				   <h2>Hello, {userData.result.name}</h2>
-				   <button  style={button} onClick={handLogout}> Logout </button></div>
+				   <button  onMouseOver={changeBorder} style={button} onClick={handLogout}> Logout </button></div>
 				}
 			{!authForm && !userKeys.length && <div >
-				         <button style={button} onClick={openAuthForm}>SignIn</button>
+				         <button onMouseOver={changeBorder} style={button} onClick={openAuthForm}>SignIn</button>
 				</div>}    
 	       </div>
 	}

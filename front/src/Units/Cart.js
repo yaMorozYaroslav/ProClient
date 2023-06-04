@@ -81,5 +81,6 @@ export const Cart =()=> {
 			{cartItems.map(item => 
 			<div style={{ 'display':'flex'}}>
 			<img style={{'width':'60px', 'margin':'5px'}} src={item.photo}/>
-			<p style={{'fontSize':'20px'}}>{item.title}*{item.quantity}</p></div>)}</div>}</>
+			<p style={{'fontSize':'20px'}}>
+			{item.title} * {item.quantity} {item.quantity < 2?'unit':'units'}</p></div>)}</div>}</>
 	}
