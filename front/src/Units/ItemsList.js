@@ -12,7 +12,7 @@ import {Row, Col} from 'antd'
    
 export const ItemsList = () => {
 	
-	const {items, count, loading, error, fetchItems,
+	const {items, loading, error, fetchItems,
 		   removeItem, currentId, setCurrentId} = useContext(ItemContext)
     const {addToCart} = useContext(CartContext)
     
@@ -21,8 +21,6 @@ export const ItemsList = () => {
     const {userData} = useContext(UserContext)
     
     const {itemForm, authForm, openItemForm, closeAuthForm} = useContext(OpenContext)
-    
-    const totalPages = Math.ceil(count/5)
     
     const category = state.itemCategory
 	const search = state.itemSearch
@@ -51,9 +49,11 @@ export const ItemsList = () => {
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
+   console.log(filteredByPrice.length)
+   const totalPages = Math.ceil(filteredByPrice.length/5)
+   const Buttons = () => <div style={{'display':'flex'}}>{[...Array(totalPages)].map((e, i) => <p key={i}>{i+1}</p>)}</div>
 
-   const Buttons = () => [...Array(totalPages)].map((e, i) => <p key={i}>i</p>)
-
+    
 	 React.useEffect(()=> {
 		    
 			if(!loading&&!items.length &&!error.length&&category)fetchItems(category)

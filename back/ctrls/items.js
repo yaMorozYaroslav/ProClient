@@ -8,19 +8,19 @@ const router = express.Router()
 
 export const getItems = async(req,res) => {
 	try{
-		const {page = 1, limit = 5, category = 'all'} = req.query
+		const { category = 'all'} = req.query
 		
 		//console.log(category)
 		
-		let count
-		if(category !== 'all') count = await Item.countDocuments({category: category})
-		if(category === 'all') count = await Item.countDocuments()
-		console.log(count)
+		//let count
+		//if(category !== 'all') count = await Item.countDocuments({category: category})
+		//if(category === 'all') count = await Item.countDocuments()
+		
 		let items
-		if(category !== 'all') items = await Item.find({category: category}).limit(limit * 1).skip((page - 1) * limit).exec()
-		if(category === 'all') items = await Item.find().limit(limit * 1).skip((page - 1) * limit).exec()
+		if(category !== 'all') items = await Item.find({category: category})
+		if(category === 'all') items = await Item.find()
         
-		res.status(200).json({items, count})
+		res.status(200).json({items})
 	}catch(error){
 		res.status(404).json({message: error.message})
 	}

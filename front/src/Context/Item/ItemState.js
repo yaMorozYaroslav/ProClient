@@ -87,7 +87,6 @@ export const ItemState = ({ children }) => {
     <ItemContext.Provider
       value={{
         items: state.items,
-        count: state.count,
         loading: state.loading,
         error: state.error,
         currentId: state.currentId,
