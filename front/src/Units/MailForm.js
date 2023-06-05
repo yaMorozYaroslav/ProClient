@@ -43,7 +43,7 @@ export const MailForm =()=> {
 	<form 
 	      ref={form} onSubmit={sendEmail} 
 	      style={{'display': !mailForm ?'none':'block', 'padding':'20px', 'background':'pink',
-			      'fontSize':'20px', 'margin': '5px', 'text-align':'center'}}>
+			      'fontSize':'20px', 'margin': '5px', 'textAlign':'center'}}>
 	  <h3>Your contacts:</h3>
 	  <label htmlFor='Name'>Name</label>
 	    <input style={input} type='text' placeholder='Name' name='user_name'  required/>

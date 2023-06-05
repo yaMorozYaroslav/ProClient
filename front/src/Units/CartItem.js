@@ -25,7 +25,7 @@ export const CartItem =({item,removeFromCart,increase,
               
               <h5> {itemIndex}. &nbsp; </h5>
              <img style={{'width':'80px', 'margin':'10px'}} src={item.photo} />
-              <p style={{'margin-right':'5px'}}> {item.title} * {item.quantity}</p>
+              <p style={{'marginRight':'5px'}}> {item.title} * {item.quantity}</p>
              <button onMouseOver={changeBorder} style={button} onClick={()=>increase(item._id)}>+</button>
              <button onMouseOver={changeBorder} style={button} onClick={onDecrease}>-</button>
              <button onMouseOver={changeBorder} style={{...button, 'background':'pink'}} onClick={onDelete}>del</button>

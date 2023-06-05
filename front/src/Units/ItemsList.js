@@ -12,11 +12,9 @@ import {Row, Col} from 'antd'
    
 export const ItemsList = () => {
 	
-	const {items, loading, error, fetchItems,
+	const {items, count, loading, error, fetchItems,
 		   removeItem, currentId, setCurrentId} = useContext(ItemContext)
-    
     const {addToCart} = useContext(CartContext)
-		   
     
     const {state} = useContext(FiltContext)
 
@@ -24,9 +22,8 @@ export const ItemsList = () => {
     
     const {itemForm, authForm, openItemForm, closeAuthForm} = useContext(OpenContext)
     
-    const [page, setPage] = React.useState(1)
+    const totalPages = Math.ceil(count/5)
     
-    //console.log(totalPages, currentPage)
     const category = state.itemCategory
 	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
@@ -43,7 +40,7 @@ export const ItemsList = () => {
 		})
 	
 	const sortedByPrice = categorized.sort((a,b) => a.price - b.price)
-	//console.log(minPrice)
+
 	const filteredByPrice = sortedByPrice.filter(item => {
 		if(!search && minPrice > 0 && maxPrice === 0){
 			 return item.price > parseInt(minPrice)}
@@ -55,12 +52,12 @@ export const ItemsList = () => {
 		return item
 		})
 
-console.log(state.itemCategory)
+   const Buttons = () => [...Array(totalPages)].map((e, i) => <p key={i}>i</p>)
 
 	 React.useEffect(()=> {
 		    
 			if(!loading&&!items.length &&!error.length&&category)fetchItems(category)
-		},[loading,fetchItems,items.length, error, page, category]) 
+		},[loading,fetchItems,items.length, error, category]) 
 	
 	if(items.length)console.log(items)
 	let content
@@ -93,6 +90,7 @@ console.log(state.itemCategory)
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(
 		    <section>
+		    <Buttons/>
 		       {content}
 		    </section>
 		 )

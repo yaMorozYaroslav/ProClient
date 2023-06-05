@@ -10,6 +10,7 @@ export const ItemState = ({ children }) => {
   
   const initialState = {
     items: [],
+    count: null,
     loading: false, 
     error: [],
     currentId: null
@@ -22,7 +23,8 @@ export const ItemState = ({ children }) => {
 		dispatch({type: START_LOADING})
 		
 		const {data} = await getItems(category)
-		dispatch({type: GET_ITEMS, payload: data.items})
+		console.log(data)
+		dispatch({type: GET_ITEMS, payload: data})
 		
 		dispatch({type: END_LOADING})
 	 }
@@ -85,8 +87,7 @@ export const ItemState = ({ children }) => {
     <ItemContext.Provider
       value={{
         items: state.items,
-        totalPages: state.totalPages,
-        currentPage: state.currentPage,
+        count: state.count,
         loading: state.loading,
         error: state.error,
         currentId: state.currentId,

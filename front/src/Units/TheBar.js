@@ -6,7 +6,7 @@ import {UserContext, OpenContext} from '../Context/Contexts'
 
 export const TheBar =()=> {
 	
-	//const {currentId, setCurrentId} )= React.useContext(ItemContext
+	const [openAlert, setOpenAlert] = React.useState(false)
 	const {userData, logout} = React.useContext(UserContext)
 	
 	const {authForm, openItemForm, openAuthForm} = React.useContext(OpenContext)
@@ -42,20 +42,26 @@ export const TheBar =()=> {
 	
 	const onAddItem = () => {
 		if(userKeys.length > 0)openItemForm()
-		if(userKeys.length === 0)alert('SignIn To Add An Item')
+		if(userKeys.length === 0){
+			setOpenAlert(true)
+			setTimeout(()=>setOpenAlert(false),3000)}
 		}
 		
 	const changeBorder =(e)=> {
-			e.target.style.border = '2px solid purple'
-			setTimeout(() => e.target.style.border = null, 1000)
+			e.target.style.border = '2px solid black'
+			setTimeout(() => e.target.style.border = '2px solid grey', 1000)
 			}
+	const alert = <p style={{'position':'absolute', 'fontSize':'28px',
+		                     'left':'500px', 'border':'3px solid red'}}>Login to add an item.</p>
 	
 	const button = { 'cursor':'pointer',
 		             'fontSize':'25px',
-		             'border':'1px solid black',
+		             'border':'2px solid grey',
 		             'margin':'10px'}
 	
-	return <div style={{'marginLeft':'70%', 'display': 'flex'}}>
+	return <>
+	      {openAlert?alert:null} 
+	      <div style={{'marginLeft':'70%', 'display': 'flex'}}>
 	        {!authForm && <button onMouseOver={changeBorder} style={button} onClick={onAddItem}>AddItem</button>}
 	        {userKeys.length > 0 &&
 				<div>		   
@@ -64,6 +70,6 @@ export const TheBar =()=> {
 				}
 			{!authForm && !userKeys.length && <div >
 				         <button onMouseOver={changeBorder} style={button} onClick={openAuthForm}>SignIn</button>
-				</div>}    
-	       </div>
+				</div>}   
+	       </div></>
 	}

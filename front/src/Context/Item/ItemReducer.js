@@ -6,7 +6,7 @@ const ItemReducer = (state, action) => {
   switch (action.type) {
 	  
 	case GET_ITEMS:
-	  return {...state, items: action.payload}
+	  return {...state, items: action.payload.items, count: action.payload.count, }
 		  
 	case START_LOADING:
 	return{...state,loading: true}

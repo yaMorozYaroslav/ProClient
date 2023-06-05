@@ -29,7 +29,7 @@ export const Filter =(props)=> {
 			}
 		const text = {'fontSize':'20px', 'margin': '4px'}
 	return <> {show && <div>
-		 <button onMouseOver={changeBorder} style={text} onClick={()=>setShow(false)}>HideFilters</button>
+		 <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(false)}>HideFilters</button>
 		  <label style={{'fontSize':'30px', 'color':'purple'}}>Category</label>
 		 <select style={{...text,  'cursor':'pointer'}} onClick={()=>fetchItems(state.itemCategory)} name='howFilter' onChange={onCategory}>
 	       <option value='all'>All</option>
@@ -41,6 +41,6 @@ export const Filter =(props)=> {
 	     <input style={text} onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
 	     <input style={text} onChange={onSearch} placeholder='Search'/>
 	     </div>}
-	     {!show && <button onMouseOver={changeBorder} style={text} onClick={()=>setShow(true)}>ShowFilters</button>}
+	     {!show && <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(true)}>ShowFilters</button>}
 	     </>
 	}
