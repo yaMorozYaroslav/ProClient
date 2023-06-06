@@ -53,26 +53,26 @@ export const AuthForm = () => {
 	 return(
 	 <section style={{'display': !authForm ?'none':'block', 'textAlign':'center'}}>
 	 <h2>{!registered?'Registration':'Authentication'}</h2>
-	<form style={text} id='form'>
+	<form style={text} onSubmit={handSubmit} id='form'>
 	 <label>Email:</label>
 	 <input style={{...text, ...input}} name='email'
-	 onChange={handChange} required={required}/>
+	 onChange={handChange} required/>
 	
 	 <label>Password:</label>
 	 <input style={{...text, ...input}} name='password'
-	 onChange={handChange}/>
+	 onChange={handChange} required/>
 	 
 	 {!registered && (<>
 	 <label>Name:</label>
 	 <input style={{...text, ...input}} name='name'
-	 onChange={handChange}/>
+	 onChange={handChange} required/>
 	 
 	 <label>ConfPass:</label>
 	 <input style={{...text, ...input}} name='confPass'
-	 onChange={handChange}/>
+	 onChange={handChange} required/>
 	                   </>)}
 	 <br/>              
-	 <button style={text} onMouseOver={changeBorder} onClick={handSubmit}>Save</button>
+	 <button style={text} onMouseOver={changeBorder} type='submit'>Save</button>
 	</form>
 	 <button style={{...text, ...pointer}} onMouseOver={changeBorder} onClick={()=>setRegistered(isRegistered => !isRegistered)}>
 		 {!registered?'ToAuthentication':'ToRegistration'}

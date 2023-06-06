@@ -54,20 +54,20 @@ export const TheBar =()=> {
 	const alert = <p style={{'position':'absolute', 'fontSize':'28px',
 		                     'left':'500px', 'border':'3px solid red'}}>Login to add an item.</p>
 	
-	const button = { 'cursor':'pointer',
+	const button = { 'height':'50px',
+		             'cursor':'pointer',
 		             'fontSize':'25px',
 		             'border':'2px solid grey',
 		             'margin':'10px'}
-	
+	console.log(userData)
 	return <>
+	      {userKeys.length > 0 && <h1 style={{'position':'absolute'}}>Hello, Emanuel mirowan.</h1>}
 	      {openAlert?alert:null} 
-	      <div style={{'marginLeft':'70%', 'display': 'flex'}}>
+	      <div style={{'marginLeft':'60%', 'display': 'flex'}}>
 	        {!authForm && <button onMouseOver={changeBorder} style={button} onClick={onAddItem}>AddItem</button>}
+	   
 	        {userKeys.length > 0 &&
-				<div>		   
-				   <h2>Hello, {userData.result.name}</h2>
-				   <button  onMouseOver={changeBorder} style={button} onClick={handLogout}> Logout </button></div>
-				}
+				   <button  onMouseOver={changeBorder} style={{...button, 'background':'pink'}} onClick={handLogout}> Logout </button>}
 			{!authForm && !userKeys.length && <div >
 				         <button onMouseOver={changeBorder} style={button} onClick={openAuthForm}>SignIn</button>
 				</div>}   
