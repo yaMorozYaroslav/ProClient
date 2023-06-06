@@ -49,11 +49,24 @@ export const ItemsList = () => {
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
-   console.log(filteredByPrice.length)
+		
    const totalPages = Math.ceil(filteredByPrice.length/5)
-   const Buttons = () => <div style={{'display':'flex'}}>{[...Array(totalPages)].map((e, i) => <p key={i}>{i+1}</p>)}</div>
+   const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(totalPages)].map((e, i) => 
+	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>setPage(i)} key={i}>{i+1}</button>)}</div>
 
-    
+   function sliceIntoChunks() {
+    const res = [];
+    for (let i = 0; i < filteredByPrice.length; i += 5) {
+        const chunk = filteredByPrice.slice(i, i + 5);
+        res.push(chunk);
+    }
+    return res;
+}
+   const [page, setPage] = React.useState(3)
+
+   const slicer = sliceIntoChunks()
+   const slicedItems = slicer[page]
+   
 	 React.useEffect(()=> {
 		    
 			if(!loading&&!items.length &&!error.length&&category)fetchItems(category)
@@ -67,12 +80,14 @@ export const ItemsList = () => {
 		content = <p>loading</p>
 		
 	}
-	if (!loading&&items){
+	if (!loading&&items&&slicedItems){
 
 		content = 
   
-      <><Row gutter={[24, 24]}>
-       {filteredByPrice.map(item => (
+      <>
+       <h3></h3><Buttons/>
+      <Row gutter={[24, 24]}>
+       {slicedItems.map(item => (
 			  <Col key={item._id}  span={12}> 
 			   <ItemExcerpt  
 			           item={item}
@@ -90,7 +105,6 @@ export const ItemsList = () => {
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(
 		    <section>
-		    <Buttons/>
 		       {content}
 		    </section>
 		 )

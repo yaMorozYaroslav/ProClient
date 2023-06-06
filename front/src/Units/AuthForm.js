@@ -41,37 +41,43 @@ export const AuthForm = () => {
 
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
-	const text = {'fontSize':'18px', 'margin':'1px'}
+	const changeBorder =(e)=> {
+			e.target.style.border = '2px solid green'
+			setTimeout(() => e.target.style.border = null, 1000)
+			}
+	
+	const text = {'fontSize':'22px', 'margin':'5px'}
+	const input = {'width':'200px'}
 	const pointer = {'cursor':'pointer'}
 	
 	 return(
-	 <section style={{'display': !authForm ?'none':'block'}}>
+	 <section style={{'display': !authForm ?'none':'block', 'textAlign':'center'}}>
 	 <h2>{!registered?'Registration':'Authentication'}</h2>
 	<form style={text} id='form'>
 	 <label>Email:</label>
-	 <input style={text} name='email'
-	 onChange={handChange}/>
+	 <input style={{...text, ...input}} name='email'
+	 onChange={handChange} required={required}/>
 	
 	 <label>Password:</label>
-	 <input style={text} name='password'
+	 <input style={{...text, ...input}} name='password'
 	 onChange={handChange}/>
 	 
 	 {!registered && (<>
 	 <label>Name:</label>
-	 <input style={text} name='name'
+	 <input style={{...text, ...input}} name='name'
 	 onChange={handChange}/>
 	 
 	 <label>ConfPass:</label>
-	 <input style={text} name='confPass'
+	 <input style={{...text, ...input}} name='confPass'
 	 onChange={handChange}/>
 	                   </>)}
-	                   
-	 <button style={text} onClick={handSubmit}>Save</button>
+	 <br/>              
+	 <button style={text} onMouseOver={changeBorder} onClick={handSubmit}>Save</button>
 	</form>
-	 <button style={{...text, ...pointer}} onClick={()=>setRegistered(isRegistered => !isRegistered)}>
+	 <button style={{...text, ...pointer}} onMouseOver={changeBorder} onClick={()=>setRegistered(isRegistered => !isRegistered)}>
 		 {!registered?'ToAuthentication':'ToRegistration'}
      </button>
-     <button style={{...text, ...pointer}} onClick={()=>closeAuthForm()}>CloseForm</button>
+     <button style={{...text, ...pointer}} onMouseOver={changeBorder} onClick={()=>closeAuthForm()}>CloseForm</button>
 	 </section>
 	 )
 	}
