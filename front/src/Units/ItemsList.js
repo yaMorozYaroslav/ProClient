@@ -14,6 +14,7 @@ export const ItemsList = () => {
 	
 	const {items, loading, error, fetchItems,
 		   removeItem, currentId, setCurrentId} = useContext(ItemContext)
+		   
     const {addToCart} = useContext(CartContext)
     
     const {state} = useContext(FiltContext)
@@ -30,14 +31,14 @@ export const ItemsList = () => {
 	const sortedByDate = items.slice().sort((a, b) =>
 		                                   b.createdAt.localeCompare(a.createdAt))
 	
-	const categorized = sortedByDate.filter((item)=>{
+	/* const categorized = sortedByDate.filter((item)=>{
 		if(category === 'soil'){return item.category === 'soil'}
 		if(category === 'pesticide'){return item.category === 'pesticide'}
 		if(category === 'seed'){return item.category === 'seed'}
 		return item
-		})
+		}) */
 	
-	const sortedByPrice = categorized.sort((a,b) => a.price - b.price)
+	const sortedByPrice = sortedByDate.sort((a,b) => a.price - b.price)
 
 	const filteredByPrice = sortedByPrice.filter(item => {
 		if(!search && minPrice > 0 && maxPrice === 0){
@@ -62,7 +63,7 @@ export const ItemsList = () => {
     }
     return res;
 }
-   const [page, setPage] = React.useState(3)
+   const [page, setPage] = React.useState(0)
 
    const slicer = sliceIntoChunks()
    const slicedItems = slicer[page]

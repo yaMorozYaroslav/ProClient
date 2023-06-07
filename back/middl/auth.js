@@ -14,7 +14,7 @@ export const auth = async (req, res, next) => {
       decodedData = jwt.verify(token, secret)
 
       req.userId = decodedData?.id
-      //console.log(decodedData)
+     
     } else {
       decodedData = jwt.decode(token)
 
@@ -35,4 +35,4 @@ export const roleAuth = async(req, res, next) => {
 	else{throw new Error('User cannot perform the action')}
 	
 	}catch(error){console.log(error)}}
-//item.creator === req.userId||
+

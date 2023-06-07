@@ -59,10 +59,10 @@ export const TheBar =()=> {
 		             'fontSize':'25px',
 		             'border':'2px solid grey',
 		             'margin':'10px'}
-	console.log(userData)
+	
 	return <>
-	      {userKeys.length > 0 && <h1 style={{'position':'absolute'}}>Hello, Emanuel mirowan.</h1>}
-	      {openAlert?alert:null} 
+	      {userKeys.length > 0 && <h1 style={{'position':'absolute', 'left':'200px'}}>Hello, {userData.result.name} :)</h1>}
+	      {openAlert && !authForm ? alert : null} 
 	      <div style={{'marginLeft':'60%', 'display': 'flex'}}>
 	        {!authForm && <button onMouseOver={changeBorder} style={button} onClick={onAddItem}>AddItem</button>}
 	   

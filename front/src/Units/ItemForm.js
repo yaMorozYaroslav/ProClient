@@ -16,9 +16,7 @@ export const ItemForm = () => {
 	const ref = React.useRef()
 	const dispatch = useDispatch()
 	const [source, setSource] = React.useState(initialState)
-    //const user = JSON.parse(localStorage.getItem('profile'))
-    // const currItem = useSelector(state =>  state.items.items.find((item) => 
-    //                             item._id === currentId))
+  
     const currItem = items.find((item) => item._id === currentId)
     
     React.useEffect(()=>{
@@ -45,26 +43,27 @@ export const ItemForm = () => {
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
+	const sText = {'fontSize':'30px'}
 	
 	 return(
 	 <section style={{'display': !itemForm ?'none':'block',
-		              'marginLeft':'40%'}}>
-	 <h2>Item</h2>
-	<form style={{'width':'20%',}}ref={ref}>
+		              'textAlign':'center'}}>
+	 <h1 style={{'fontSize':'32px'}}>Item</h1>
+	<form style={sText} ref={ref}>
 	 <label>Title:</label>
 	 <input name='title' 
 	 value={source.title||''}    
-	 onChange={handChange}/>
+	 onChange={handChange}/><br/>
 	 
 	 <label>Description:</label>
 	 <input name='description'
 	 value={source.description||''} 
-	 onChange={handChange}/>
+	 onChange={handChange}/><br/>
 	 
 	 <label>Price:</label>
 	 <input name='price'
 	 value={source.price||''} 
-	 onChange={handChange}/>
+	 onChange={handChange}/><br/>
 	 
 	 <label>Category:</label>
 	 <select name='category'
@@ -73,14 +72,14 @@ export const ItemForm = () => {
 	 <option value='seed'>seed</option>
 	 <option value='soil'>soil</option>
 	 <option value='pesticide'>pesticide</option>
-	 </select>
+	 </select><br/>
 	 
 	 <label>Photo:</label>
       <FileBase 
                          type="file"
                          multiple={false}
                          onDone={({base64})=>setSource({
-                            ...source, photo: base64})}/>
+                            ...source, photo: base64})}/><br/>
                             
 	 <button onClick={handSubmit}>Save</button>
 	 <button onClick={closeItemForm}>closeForm</button>
