@@ -43,7 +43,8 @@ export const ItemForm = () => {
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
-	const sText = {'fontSize':'30px'}
+	const sText = {'fontSize':'28px'}
+	const sButton = {'fontSize':'20px', 'margin':'5px'}
 	
 	 return(
 	 <section style={{'display': !itemForm ?'none':'block',
@@ -53,36 +54,41 @@ export const ItemForm = () => {
 	 <label>Title:</label>
 	 <input name='title' 
 	 value={source.title||''}    
-	 onChange={handChange}/><br/>
+	 onChange={handChange}
+	 style={sButton}/><br/>
 	 
 	 <label>Description:</label>
 	 <input name='description'
 	 value={source.description||''} 
-	 onChange={handChange}/><br/>
+	 onChange={handChange}
+	 style={sButton}/><br/>
 	 
 	 <label>Price:</label>
 	 <input name='price'
 	 value={source.price||''} 
-	 onChange={handChange}/><br/>
+	 onChange={handChange}
+	 style={sButton}/><br/>
 	 
 	 <label>Category:</label>
 	 <select name='category'
 	         value={source.category}
-	         onChange={handChange}>
+	         onChange={handChange}
+	         style={sButton}>
 	 <option value='seed'>seed</option>
 	 <option value='soil'>soil</option>
 	 <option value='pesticide'>pesticide</option>
 	 </select><br/>
 	 
 	 <label>Photo:</label>
-      <FileBase 
+      <FileBase          
+                         style={sButton}
                          type="file"
                          multiple={false}
                          onDone={({base64})=>setSource({
                             ...source, photo: base64})}/><br/>
                             
 	 <button onClick={handSubmit}>Save</button>
-	 <button onClick={closeItemForm}>closeForm</button>
+	 <button onClick={closeItemForm}>CloseForm</button>
 	</form>
 	 </section>
 	 )
