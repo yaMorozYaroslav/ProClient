@@ -57,8 +57,8 @@ export const ItemsList = () => {
 
    function sliceIntoChunks() {
     const res = [];
-    for (let i = 0; i < filteredByPrice.length; i += 5) {
-        const chunk = filteredByPrice.slice(i, i + 5);
+    for (let i = 0; i < filteredByPrice.length; i += 4) {
+        const chunk = filteredByPrice.slice(i, i + 4);
         res.push(chunk);
     }
     return res;

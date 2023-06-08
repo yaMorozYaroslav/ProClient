@@ -33,12 +33,12 @@ export const ItemForm = () => {
 		
 	const handSubmit =(e)=> {
 		e.preventDefault()
+	if(source.photo){
 		if(!currentId){addItem(source)
-		}else{updateItem(currentId, source)
-		 }
-		 console.log(source)
+		}else{updateItem(currentId, source)}
 		reset()
 		closeItemForm()
+	}else{alert('Please, fill out the photo field.')}
 		}
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
@@ -50,7 +50,7 @@ export const ItemForm = () => {
 	
 	const sText = {fontSize:'24px'}
 	const sInput = {fontSize:'22px', margin:'7px'}
-	const sButton = {fontSize:'22px', margin:'7px', cursor: 'pointer'}
+	const sButton = {fontSize:'26px', margin:'14px', cursor: 'pointer'}
 	 return(
 	 <section style={{'display': !itemForm ?'none':'block',
 		              'textAlign':'center'}}>
@@ -78,7 +78,7 @@ export const ItemForm = () => {
 	 <select name='category'
 	         value={source.category}
 	         onChange={handChange}
-	         style={sButton}>
+	         style={{...sInput, cursor: 'pointer'}}>
 	 <option value='seed'>seed</option>
 	 <option value='soil'>soil</option>
 	 <option value='pesticide'>pesticide</option>
