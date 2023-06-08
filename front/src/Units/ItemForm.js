@@ -43,31 +43,36 @@ export const ItemForm = () => {
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
-	const sText = {'fontSize':'28px'}
-	const sButton = {'fontSize':'20px', 'margin':'5px'}
+	const changeBorder =(e)=> {
+			e.target.style.border = '2px solid purple'
+			setTimeout(() => e.target.style.border = null, 1000)
+			}
 	
+	const sText = {fontSize:'24px'}
+	const sInput = {fontSize:'22px', margin:'7px'}
+	const sButton = {fontSize:'22px', margin:'7px', cursor: 'pointer'}
 	 return(
 	 <section style={{'display': !itemForm ?'none':'block',
 		              'textAlign':'center'}}>
-	 <h1 style={{'fontSize':'32px'}}>Item</h1>
-	<form style={sText} ref={ref}>
+	 <h1 style={{'fontSize':'30px'}}>Item</h1>
+	<form onSubmit={handSubmit} style={sText} ref={ref}>
 	 <label>Title:</label>
 	 <input name='title' 
 	 value={source.title||''}    
 	 onChange={handChange}
-	 style={sButton}/><br/>
+	 style={sInput} required/><br/>
 	 
 	 <label>Description:</label>
 	 <input name='description'
 	 value={source.description||''} 
 	 onChange={handChange}
-	 style={sButton}/><br/>
+	 style={sInput} required/><br/>
 	 
 	 <label>Price:</label>
 	 <input name='price'
 	 value={source.price||''} 
 	 onChange={handChange}
-	 style={sButton}/><br/>
+	 style={sInput} required/><br/>
 	 
 	 <label>Category:</label>
 	 <select name='category'
@@ -79,16 +84,15 @@ export const ItemForm = () => {
 	 <option value='pesticide'>pesticide</option>
 	 </select><br/>
 	 
-	 <label>Photo:</label>
+	 <label>Photo: </label>
       <FileBase          
-                         style={sButton}
                          type="file"
                          multiple={false}
                          onDone={({base64})=>setSource({
                             ...source, photo: base64})}/><br/>
                             
-	 <button onClick={handSubmit}>Save</button>
-	 <button onClick={closeItemForm}>CloseForm</button>
+	 <button style={sButton} onMouseOver={changeBorder} type='submit'>Save</button>
+	 <button style={sButton} onMouseOver={changeBorder} onClick={closeItemForm}>CloseForm</button>
 	</form>
 	 </section>
 	 )
