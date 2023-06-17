@@ -3,19 +3,21 @@ import React from 'react'
 import {register, auth} from '../../api'
 import {UserContext} from '../Contexts'
 import {UserReducer} from './UserReducer'
-import {AUTH, LOGOUT, FROM_STORAGE} from './UserTypes'
+import {AUTH, LOGOUT, FROM_STORAGE, ERROR} from './UserTypes'
 
 export const UserState = ({children}) => {
 	//const UserContext = React.useContext(UserContext)
-   const initialState = {userData: {}, loading: false}
+   const initialState = {userData: {}, loading: false, error: null}
    
    const [state, dispatch] = React.useReducer(UserReducer, initialState)
 	
 	
 	const signUp = async(source) => {
+		try{
 		const {data} = await register(source)
         dispatch({type: AUTH, payload: data})
-		}
+		}catch(err){dispatch({type: ERROR, payload: err})}
+	}
 		
 	const signIn = async(source) => {
 		try{
@@ -23,7 +25,7 @@ export const UserState = ({children}) => {
 		const {data}= await auth(source)
 		dispatch({type: AUTH, payload: data})
 		dispatch({type: 'END_LOADING'})
-	}catch(err){console.log(err)}
+	}catch(err){dispatch({type: ERROR, payload: err})}
 		}
 	const setFromStorage =(source)=> {
 		dispatch({type: FROM_STORAGE, payload: source})
@@ -35,7 +37,7 @@ export const UserState = ({children}) => {
 	return (
 
     <UserContext.Provider
-      value={{userData: state.userData, signUp,
+      value={{userData: state.userData, error: state.error, signUp,
 		                signIn, logout, setFromStorage}}>
       {children}
     </UserContext.Provider>

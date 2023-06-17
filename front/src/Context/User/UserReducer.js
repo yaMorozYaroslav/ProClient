@@ -1,4 +1,4 @@
-import {AUTH, LOGOUT, FROM_STORAGE} from './UserTypes'
+import {AUTH, LOGOUT, FROM_STORAGE, ERROR} from './UserTypes'
 
 export const UserReducer = (state, action) => {
 	switch(action.type) {
@@ -13,7 +13,8 @@ export const UserReducer = (state, action) => {
 	      return{...state,loading: true}
 	    case 'END_LOADING':
 	      return{...state,loading: false}
-        
+        case ERROR:
+          return{...state,error: action.payload.response.data.message}
 		default:
 		  return state
 	}

@@ -7,33 +7,37 @@ const initialState = {name: '', email: '', password: '', confPass: ''}
 
 export const AuthForm = () => {
 	
-    const {userData, signIn, signUp, setFromStorage} = useContext(UserContext)
+    const {userData, signIn, signUp, setFromStorage, error} = useContext(UserContext)
 	const {authForm, closeAuthForm} = useContext(OpenContext)
+	if(error)alert(error)
 	
 	const [source, setSource] = React.useState(initialState)
 	const [registered, setRegistered] = React.useState(false)
 	
 	const profile = JSON.parse(localStorage.getItem('profile'))
 	
+	const currentUser = Object.keys(userData).length > 0
+	if(currentUser)console.log(userData)
+	
 	const handSubmit =(e)=> {
 		e.preventDefault()
-		if(!registered && source.password === source.confPass){
-			                                  signUp(source)}
+		if(!registered)if(source.password === source.confPass){
+			                                           signUp(source)
+	   }else{alert('Passwords do not match.')}
         if(registered)signIn(source)
-        closeAuthForm()
+        if(!error && currentUser)closeAuthForm()
 	}
 	
 	React.useEffect(()=>{
 		
-		const shouldUpdateStorage = Object.keys(userData).length > 0 && 
+		const shouldUpdateStorage = currentUser && 
 		         JSON.stringify(userData) !== JSON.stringify(profile)
 		if(shouldUpdateStorage){
 		  localStorage.setItem('profile', JSON.stringify(userData))
 		  }
 
-		const shouldUpdateState = profile && 
-		            Object.keys(profile).length > 0 &&
-		            JSON.stringify(userData) !== JSON.stringify(profile)
+		const shouldUpdateState = profile && currentUser &&
+		         JSON.stringify(userData) !== JSON.stringify(profile)
 		if(shouldUpdateState){
 		setFromStorage(profile)
 	    }
