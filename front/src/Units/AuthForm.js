@@ -11,8 +11,6 @@ export const AuthForm = () => {
 		   signUp, setFromStorage, error} = useContext(UserContext)
 		   
 	const {authForm, closeAuthForm} = useContext(OpenContext)
-	if(error)alert(error)
-		      //clearError()}
 	
 	const [source, setSource] = React.useState(initialState)
 	const [registered, setRegistered] = React.useState(false)
@@ -20,7 +18,6 @@ export const AuthForm = () => {
 	const profile = JSON.parse(localStorage.getItem('profile'))
 	
 	const currentUser = (source) => Object.keys(source).length > 0
-	if(currentUser)console.log(userData)
 	
 	const handSubmit =(e)=> {
 		e.preventDefault()
@@ -45,10 +42,14 @@ export const AuthForm = () => {
 		setFromStorage(profile)
 	    }
 		},[userData, profile, setFromStorage])
+		
    React.useEffect(()=>{
 	   if(currentUser(userData) && authForm)closeAuthForm()
 	   },[authForm, userData, closeAuthForm])
-	   
+    
+    if(error)alert(error)
+	if(error)clearError() 
+    
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
 	const changeBorder =(e)=> {

@@ -70,9 +70,10 @@ export const ItemForm = () => {
 	 
 	 <label>Price:</label>
 	 <input name='price'
-	 value={source.price||''} 
-	 onChange={handChange}
-	 style={sInput} required/><br/>
+	        type='number'
+	        value={source.price||''} 
+	        onChange={handChange}
+	        style={sInput} required/>$<br/>
 	 
 	 <label>Category:</label>
 	 <select name='category'
