@@ -3,7 +3,7 @@ import React from 'react'
 import {register, auth} from '../../api'
 import {UserContext} from '../Contexts'
 import {UserReducer} from './UserReducer'
-import {AUTH, LOGOUT, FROM_STORAGE, ERROR} from './UserTypes'
+import {AUTH, LOGOUT, FROM_STORAGE, ERROR, NO_ERROR} from './UserTypes'
 
 export const UserState = ({children}) => {
 	//const UserContext = React.useContext(UserContext)
@@ -34,11 +34,12 @@ export const UserState = ({children}) => {
     const logout = () => {
 		dispatch({type: LOGOUT})
 		}
+	const clearError = () => dispatch({type: NO_ERROR})
 	return (
 
     <UserContext.Provider
       value={{userData: state.userData, error: state.error, signUp,
-		                signIn, logout, setFromStorage}}>
+		                signIn, logout, setFromStorage, clearError}}>
       {children}
     </UserContext.Provider>
   )

@@ -31,7 +31,7 @@ export const TheBar =()=> {
 	        		if(decodedToken.exp * 1000 < new Date().getTime()){
 	        		 logout()
 	        		 removeProfile()
-	        		 alert('Token has expired')
+	        		 console.log('Token has expired')
 	              }
 	        	}
 	        },[userData, profile, logout])
