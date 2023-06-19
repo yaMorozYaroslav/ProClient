@@ -15,7 +15,6 @@ export const getItems = async(req,res) => {
 		//let count
 		//if(category !== 'all') count = await Item.countDocuments({category: category})
 		//if(category === 'all') count = await Item.countDocuments()
-		
 		let items
 		if(category !== 'all') items = await Item.find({category: category})
 		if(category === 'all') items = await Item.find()
@@ -38,7 +37,8 @@ export const getItem = async(req, res) => {
 }
 
 export const createItem = async(req,res)=> {
-
+    const userItems = await Item.countDocuments({creator: req.userId})
+    console.log(userItems)
 	const item = req.body
 	const newItem = new Item({
 		  ...item, creator: req.userId, createdAt: new Date().toISOString()})
