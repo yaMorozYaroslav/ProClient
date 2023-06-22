@@ -73,7 +73,7 @@ export const ItemsList = () => {
 			if(!loading&&!items.length &&!error.length&&category)fetchItems(category)
 		},[loading,fetchItems,items.length, error, category]) 
 	
-	if(items.length)console.log(items)
+	//if(items.length)console.log(items)
 	let content
 	
 	if(loading){

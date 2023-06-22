@@ -45,7 +45,7 @@ export const Cart =()=> {
 			e.target.style.border = '2px solid blue'
 			setTimeout(() => e.target.style.border = null, 1000)
 			}
-
+        console.log(cartItems)
     return <>{!mailForm && <div style={{'marginTop':'15px','fontSize':'32px'}}>
             <Badge color='secondary'
                    style={{'cursor':'pointer'}}
