@@ -29,5 +29,6 @@ export const CartItem =({item,removeFromCart,increase,
              <button onMouseOver={changeBorder} style={button} onClick={()=>increase(item._id)}>+</button>
              <button onMouseOver={changeBorder} style={button} onClick={onDecrease}>-</button>
              <button onMouseOver={changeBorder} style={{...button, 'background':'pink'}} onClick={onDelete}>del</button>
+           {item.quantity * item.price}
            </section></>
 	}

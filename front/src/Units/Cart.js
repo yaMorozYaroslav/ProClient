@@ -40,12 +40,14 @@ export const Cart =()=> {
 			clearCart()
 			localStorage.removeItem('cart')
 			}
-			
+		const total = cartItems.reduce((total, item) =>
+		                          total + item.price * item.quantity, 0)
+		console.log(total)	
 		const changeBorder =(e)=> {
 			e.target.style.border = '2px solid blue'
 			setTimeout(() => e.target.style.border = null, 1000)
 			}
-        console.log(cartItems)
+		
     return <>{!mailForm && <div style={{'marginTop':'15px','fontSize':'32px'}}>
             <Badge color='secondary'
                    style={{'cursor':'pointer'}}
