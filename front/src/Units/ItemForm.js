@@ -33,12 +33,14 @@ export const ItemForm = () => {
 		
 	const handSubmit =(e)=> {
 		e.preventDefault()
-	if(source.photo){
+	if(source.price < 0)alert('Number must be positive')
+	if(!source.photo && source.price > 0)alert('Please, fill out the photo field.')
+	if(source.photo && source.price > 0){
 		if(!currentId){addItem(source)
 		}else{updateItem(currentId, source)}
 		reset()
 		closeItemForm()
-	}else{alert('Please, fill out the photo field.')}
+	}else{}
 		}
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
@@ -62,11 +64,11 @@ export const ItemForm = () => {
 	 onChange={handChange}
 	 style={sInput} required/><br/>
 	 
-	 <label>Description:</label>
-	 <input name='description'
+	 <label style={{marginRight: '245px'}}>Description:</label><br/>
+	 <textarea name='description'
 	 value={source.description||''} 
 	 onChange={handChange}
-	 style={sInput} required/><br/>
+	 style={{...sInput, height: '50px', marginLeft: '45px'} } required/><br/>
 	 
 	 <label>Price:</label>
 	 <input name='price'

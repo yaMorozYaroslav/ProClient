@@ -15,7 +15,7 @@ export const CartItem =({item,removeFromCart,increase,
 			}
 			
 		const itemIndex = cartItems.findIndex(obj => { return obj._id === item._id}) + 1
-		console.log(itemIndex)
+		
 		const changeBorder =(e)=> {
 			e.target.style.border = '2px solid green'
 			setTimeout(() => e.target.style.border = null, 1000)
@@ -24,11 +24,11 @@ export const CartItem =({item,removeFromCart,increase,
     return <><section style={{'display':'flex', 'height':'100px'}}>
               
               <h5> {itemIndex}. &nbsp; </h5>
-             <img style={{'width':'80px', 'margin':'10px'}} src={item.photo} />
+             <img style={{'width':'80px', 'margin':'10px'}} src={item.photo} alt='' />
               <p style={{'marginRight':'5px'}}> {item.title} * {item.quantity}</p>
              <button onMouseOver={changeBorder} style={button} onClick={()=>increase(item._id)}>+</button>
              <button onMouseOver={changeBorder} style={button} onClick={onDecrease}>-</button>
              <button onMouseOver={changeBorder} style={{...button, 'background':'pink'}} onClick={onDelete}>del</button>
-           {item.quantity * item.price}
+            &nbsp;{item.quantity * item.price} $
            </section></>
 	}

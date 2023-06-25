@@ -6,6 +6,8 @@ import {CartItem} from './CartItem'
 
 import {OpenContext, CartContext, ItemContext} from '../Context/Contexts'
 
+import {Row, Col} from 'antd'   
+
 const button = {'fontSize':'20px', 'cursor':'pointer', 'margin':'5px'}
 
 export const Cart =()=> {
@@ -42,7 +44,7 @@ export const Cart =()=> {
 			}
 		const total = cartItems.reduce((total, item) =>
 		                          total + item.price * item.quantity, 0)
-		console.log(total)	
+			
 		const changeBorder =(e)=> {
 			e.target.style.border = '2px solid blue'
 			setTimeout(() => e.target.style.border = null, 1000)
@@ -64,7 +66,7 @@ export const Cart =()=> {
 				                                 increase={increase}
 				                                 decrease={decrease}
 				                                 cartItems={cartItems}/>))}
-            
+            {open && cartItems.length > 0 && <h7 style={{marginLeft:'25%'}}>total: {total} $</h7>}<br/>
 			{open && cartItems.length > 0 && (<>
 				 <button onMouseOver={changeBorder} style={button} 
 				          onClick={!mailForm?openMailForm:closeMailForm}>
@@ -78,11 +80,16 @@ export const Cart =()=> {
 	            </>)}
 	             
           </div>}
-        {mailForm && <div style={{ 'width':'40%', 'margin-left':'43%'}}>
+        {mailForm && <div style={{ 'width':'80%',marginLeft:'10%', textAlign:'center'}}>
 		  <h2> Your items: </h2>
-			{cartItems.map(item => 
+	  <Row gutter={[20, 20]}>
+	    {cartItems.map(item => 
+		  <Col key={item._id}  span={6}> 
 			<div style={{ 'display':'flex'}}>
-			<img style={{'width':'60px', 'margin':'5px'}} src={item.photo}/>
-			<p style={{'fontSize':'20px'}}>
-			{item.title} * {item.quantity} {item.quantity < 2?'unit':'units'}</p></div>)}</div>}</>
+			<img style={{'width':'80px', 'margin':'5px'}} src={item.photo} alt=''/>
+			<p style={{'fontSize':'24px'}}>
+			{item.title} <br/>. {item.quantity} {item.quantity < 2
+				                      ?'unit':'units'}</p></div></Col>)}
+	  </Row>
+			<h2>total:{total}$</h2></div>}</>
 	}
