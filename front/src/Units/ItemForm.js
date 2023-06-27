@@ -9,14 +9,15 @@ const initialState = {title: '', description: '', price: '', category: 'seed', p
 
 export const ItemForm = () => {
 	
-	const {items, addItem, updateItem, currentId, setCurrentId} = React.useContext(ItemContext)
+	const {items, addItem, updateItem, 
+		      currentId, setCurrentId} = React.useContext(ItemContext)
 	
 	const {itemForm, closeItemForm} = React.useContext(OpenContext)
 	
 	const ref = React.useRef()
 	const dispatch = useDispatch()
 	const [source, setSource] = React.useState(initialState)
-  
+    console.log(source)
     const currItem = items.find((item) => item._id === currentId)
     
     React.useEffect(()=>{

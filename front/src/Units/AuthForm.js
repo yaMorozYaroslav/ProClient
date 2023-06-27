@@ -83,7 +83,8 @@ export const AuthForm = () => {
 	 onChange={handChange} required/>
 	                   </>)}
 	 <br/>              
-	 <button style={text} onMouseOver={changeBorder} type='submit'>Save</button>
+	 <button style={text} onMouseOver={changeBorder} type='submit'>
+	                       {!registered?'Register':'Login'}</button>
 	</form>
 	 <button style={{...text, ...pointer}} onMouseOver={changeBorder} onClick={()=>setRegistered(isRegistered => !isRegistered)}>
 		 {!registered?'ToAuthentication':'ToRegistration'}
