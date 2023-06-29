@@ -1,5 +1,5 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+//import {useDispatch, useSelector} from 'react-redux'
 //import { addItem, changeItem} from '../Redux/itemsSlice'
 import FileBase from 'react-file-base64'
 import {ItemContext} from '../Context/Contexts'
@@ -15,7 +15,6 @@ export const ItemForm = () => {
 	const {itemForm, closeItemForm} = React.useContext(OpenContext)
 	
 	const ref = React.useRef()
-	const dispatch = useDispatch()
 	const [source, setSource] = React.useState(initialState)
     console.log(source)
     const currItem = items.find((item) => item._id === currentId)

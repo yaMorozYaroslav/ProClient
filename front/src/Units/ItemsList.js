@@ -7,13 +7,12 @@ import {OpenContext,
 	    UserContext,
 	    CartContext} from '../Context/Contexts'
 
-import InfiniteScroll from 'react-infinite-scroll-component'
 import {Row, Col} from 'antd'   
    
 export const ItemsList = () => {
 	
 	const {items, loading, error, fetchItems,
-		   removeItem, currentId, setCurrentId} = useContext(ItemContext)
+		   removeItem, setCurrentId} = useContext(ItemContext)
 		   
     const {addToCart} = useContext(CartContext)
     
@@ -21,7 +20,7 @@ export const ItemsList = () => {
 
     const {userData} = useContext(UserContext)
     
-    const {itemForm, authForm, openItemForm, closeAuthForm} = useContext(OpenContext)
+    const {openItemForm} = useContext(OpenContext)
     
     const category = state.itemCategory
 	const search = state.itemSearch
@@ -86,7 +85,7 @@ export const ItemsList = () => {
 		content = 
   
       <>
-       <h3></h3><Buttons/>
+       <Buttons/>
       <Row gutter={[24, 24]}>
        {slicedItems.map(item => (
 			  <Col key={item._id}  span={12}> 
