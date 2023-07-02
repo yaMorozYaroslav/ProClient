@@ -80,7 +80,7 @@ export const Cart =()=> {
 	            </>)}
 	             
           </div>}
-        {mailForm && <div style={{ 'width':'80%',marginLeft:'10%', textAlign:'center'}}>
+        {mailForm && cartItems.length > 0 && <div style={{ 'width':'80%',marginLeft:'10%', textAlign:'center'}}>
 		  <h2> Your items: </h2>
 	  <Row gutter={[20, 20]}>
 	    {cartItems.map(item => 
@@ -88,7 +88,7 @@ export const Cart =()=> {
 			<div style={{ 'display':'flex'}}>
 			<img style={{'width':'80px', 'margin':'5px'}} src={item.photo} alt=''/>
 			<p style={{'fontSize':'24px'}}>
-			{item.title} <br/>. {item.quantity} {item.quantity < 2
+			{item.title} <br/> {item.quantity} {item.quantity < 2
 				                      ?'unit':'units'}</p></div></Col>)}
 	  </Row>
 			<h2>total:{total}$</h2></div>}</>

@@ -16,7 +16,7 @@ export const ItemForm = () => {
 	
 	const ref = React.useRef()
 	const [source, setSource] = React.useState(initialState)
-    console.log(source)
+    
     const currItem = items.find((item) => item._id === currentId)
     
     React.useEffect(()=>{

@@ -58,7 +58,7 @@ export const ItemState = ({ children }) => {
 	try{
 		const {data} = await deleteItem(id)
 		console.log(data)
-		dispatch({type: REMOVE_ITEM, payload: id})
+		dispatch({type: REMOVE_ITEM, payload: data})
 	 }
 	catch(err){
 		dispatch({type: ERROR, payload: err})

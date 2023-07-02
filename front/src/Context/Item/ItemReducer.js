@@ -23,14 +23,12 @@ const ItemReducer = (state, action) => {
 			}
 
     case REMOVE_ITEM:
-    console.log(action.payload.id)
+    console.log(action.payload)
       return {
         ...state,
-        items: state.items.filter((item) => item.id !== action.payload.id),
+        items: state.items.filter((item) => item._id !== action.payload.id),
       }
 
-    // If the action type is CHECKOUT,
-    // we want to clear the cartItems array and set the checkout to true
     case SET_ID: 
       return {...state, currentId: action.payload}
     case REMOVE_ID:

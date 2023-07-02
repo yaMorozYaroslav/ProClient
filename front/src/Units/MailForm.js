@@ -1,13 +1,15 @@
 import React, {useRef} from 'react'
 import {useSelector} from 'react-redux'
 import emailjs from '@emailjs/browser'
-import {OpenContext} from '../Context/Contexts'
+import {OpenContext, CartContext} from '../Context/Contexts'
 	
 export const MailForm =()=> {
 	
 	const [forEmail, setForEmail] = React.useState([])
 	
 	const {mailForm, closeMailForm} = React.useContext(OpenContext)
+	
+	const {clearCart} = React.useContext(CartContext)
 	
 	const inCart = (useSelector(state => state.cart.cart))
 	
@@ -24,11 +26,18 @@ export const MailForm =()=> {
 				console.log(error.text)
 				})
 				e.target.reset()
+		clearCart()
+		localStorage.removeItem('cart')
+		closeMailForm()
 	}
 	
+	const onClearCart =()=> {
+			clearCart()
+			localStorage.removeItem('cart')
+			}
+			
 	React.useEffect(()=>{
 		setForEmail(JSON.stringify(inCart))
-		//console.log(forEmail)
 		},[forEmail, inCart])
 		
 	const changeBorder =(e)=> {
