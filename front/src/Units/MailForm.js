@@ -7,13 +7,18 @@ export const MailForm =()=> {
 	
 	const [forEmail, setForEmail] = React.useState([])
 	
+	const [source, setSource] = React.useState({name:'', email:'',
+		                                        phone:'', things:''})
+	
 	const {mailForm, closeMailForm} = React.useContext(OpenContext)
 	
-	const {clearCart} = React.useContext(CartContext)
+	const {cartItems, clearCart} = React.useContext(CartContext)
 	
-	const inCart = (useSelector(state => state.cart.cart))
+    //const inCart = (useSelector(state => state.cart.cart))
 	
 	const form = useRef()
+	
+	const handChange = (e) => setSource({...source, [e.target.name]: e.target.value}) 
 	
 	const sendEmail = e => {
 		e.preventDefault()
@@ -35,10 +40,12 @@ export const MailForm =()=> {
 			clearCart()
 			localStorage.removeItem('cart')
 			}
-			
+	const itemsNoPhoto = cartItems.map(({photo, ...rest})=> rest)
+	
 	React.useEffect(()=>{
-		setForEmail(JSON.stringify(inCart))
-		},[forEmail, inCart])
+		setForEmail(JSON.stringify(itemsNoPhoto))
+		},[forEmail, itemsNoPhoto])
+	console.log(forEmail)
 		
 	const changeBorder =(e)=> {
 			e.target.style.border = '2px solid green'
