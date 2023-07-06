@@ -66,7 +66,7 @@ export const Cart =()=> {
 				                                 increase={increase}
 				                                 decrease={decrease}
 				                                 cartItems={cartItems}/>))}
-            {open && cartItems.length > 0 && <h7 style={{marginLeft:'25%'}}>total: {total} $</h7>}<br/>
+            {open && cartItems.length > 0 && <h6 style={{marginLeft:'25%'}}>total: {total} $</h6>}<br/>
 			{open && cartItems.length > 0 && (<>
 				 <button onMouseOver={changeBorder} style={button} 
 				          onClick={!mailForm?openMailForm:closeMailForm}>

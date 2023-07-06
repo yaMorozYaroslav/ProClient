@@ -7,8 +7,9 @@ export const MailForm =()=> {
 	
 	const [forEmail, setForEmail] = React.useState([])
 	
-	const [source, setSource] = React.useState({name:'', email:'',
-		                                        phone:'', things:''})
+	const [source, setSource] = React.useState({user_name:'', user_email:'',
+		                                        user_phone:'', items:''})
+    const [response, setResponse] = React.useState({})
 	
 	const {mailForm, closeMailForm} = React.useContext(OpenContext)
 	
@@ -34,6 +35,7 @@ export const MailForm =()=> {
 		clearCart()
 		localStorage.removeItem('cart')
 		closeMailForm()
+		console.log(source)
 	}
 	
 	const onClearCart =()=> {
@@ -68,7 +70,7 @@ export const MailForm =()=> {
 	  <label htmlFor='PhoneNumber'>PhoneNumber</label>
 	    <input style={input} type='number' placeholder='PhoneNumber' name='user_phone' required />
 	
-	   <textarea readOnly value={forEmail} name='items' style={{'display':'none'}} required/>
+	   <textarea readOnly value={forEmail} onChange={handChange} name='items' style={{'display':'none'}} required/>
 	   <br />
 	<button onMouseOver={changeBorder} style={button} type='submit'>SendMail</button>
 	<button onMouseOver={changeBorder} style={button} onClick={closeMailForm}>CloseForm</button>
