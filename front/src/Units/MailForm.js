@@ -1,6 +1,7 @@
 import React, {useRef} from 'react'
 import {useSelector} from 'react-redux'
 import emailjs from '@emailjs/browser'
+import {Response} from './Response'
 import {OpenContext, CartContext} from '../Context/Contexts'
 	
 export const MailForm =()=> {
@@ -37,8 +38,8 @@ export const MailForm =()=> {
 		clearCart()
 		localStorage.removeItem('cart')
 		closeMailForm()
-		console.log(response)
 	}
+	console.log(response)
 	
 	const onClearCart =()=> {
 			clearCart()
@@ -50,7 +51,9 @@ export const MailForm =()=> {
 	  if(itemsNoPhoto && source.items.length !== itemsNoPhoto.length)
 		     setSource({...source, items: itemsNoPhoto})
 		},[source, itemsNoPhoto])
-	console.log(source.items.length, itemsNoPhoto.length)
+	//console.log(source.items.length, itemsNoPhoto.length)
+	
+	//const Response = ({response}) => <h6>{JSON.stringify(response.items)}</h6>
 		
 	const changeBorder =(e)=> {
 			e.target.style.border = '2px solid green'
@@ -61,6 +64,7 @@ export const MailForm =()=> {
 	const button = {'fontSize':'20px', 'margin': '5px'}
 	
 	return <>
+	{response && <Response response={response}/>}
 	<form 
 	      ref={form} onSubmit={sendEmail} 
 	      style={{'display': !mailForm ?'none':'block', 'padding':'20px', 'background':'pink',

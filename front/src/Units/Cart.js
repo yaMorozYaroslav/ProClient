@@ -36,7 +36,7 @@ export const Cart =()=> {
 		if(shouldUpdateState){
 		                 setFromLocale(cart)}
 		},[cartItems, loading, setFromLocale])
-		console.log(loading)
+		//console.log(loading)
 		
 		const onClearCart =()=> {
 			clearCart()
