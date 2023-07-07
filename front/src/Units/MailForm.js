@@ -8,8 +8,8 @@ export const MailForm =()=> {
 	const [forEmail, setForEmail] = React.useState([])
 	
 	const [source, setSource] = React.useState({user_name:'', user_email:'',
-		                                        user_phone:'', items:''})
-    const [response, setResponse] = React.useState({})
+		                                        user_phone:'', items:[]})
+    const [response, setResponse] = React.useState()
 	
 	const {mailForm, closeMailForm} = React.useContext(OpenContext)
 	
@@ -31,11 +31,13 @@ export const MailForm =()=> {
 			}, (error) => {
 				console.log(error.text)
 				})
+		console.log(source)
+	    setResponse(source)
 				e.target.reset()
 		clearCart()
 		localStorage.removeItem('cart')
 		closeMailForm()
-		console.log(source)
+		console.log(response)
 	}
 	
 	const onClearCart =()=> {
@@ -45,9 +47,10 @@ export const MailForm =()=> {
 	const itemsNoPhoto = cartItems.map(({photo, ...rest})=> rest)
 	
 	React.useEffect(()=>{
-		setForEmail(JSON.stringify(itemsNoPhoto))
-		},[forEmail, itemsNoPhoto])
-	console.log(forEmail)
+	  if(itemsNoPhoto && source.items.length !== itemsNoPhoto.length)
+		     setSource({...source, items: itemsNoPhoto})
+		},[source, itemsNoPhoto])
+	console.log(source.items.length, itemsNoPhoto.length)
 		
 	const changeBorder =(e)=> {
 			e.target.style.border = '2px solid green'
@@ -64,13 +67,13 @@ export const MailForm =()=> {
 			      'fontSize':'20px', 'margin': '5px', 'textAlign':'center'}}>
 	  <h3>Your contacts:</h3>
 	  <label htmlFor='Name'>Name</label>
-	    <input style={input} type='text' placeholder='Name' name='user_name'  required/>
+	    <input style={input} type='text' onChange={handChange} placeholder='Name' name='user_name'  required/>
 	  <label htmlFor='Email'>Email</label>
-	    <input style={input} type='email' placeholder='Email' name='user_email' required/>
+	    <input style={input} type='email' onChange={handChange} placeholder='Email' name='user_email' required/>
 	  <label htmlFor='PhoneNumber'>PhoneNumber</label>
-	    <input style={input} type='number' placeholder='PhoneNumber' name='user_phone' required />
+	    <input style={input} type='number' onChange={handChange} placeholder='PhoneNumber' name='user_phone' required />
 	
-	   <textarea readOnly value={forEmail} onChange={handChange} name='items' style={{'display':'none'}} required/>
+	   <textarea readOnly value={source.items} onChange={handChange} name='items' style={{'display':'none'}} required/>
 	   <br />
 	<button onMouseOver={changeBorder} style={button} type='submit'>SendMail</button>
 	<button onMouseOver={changeBorder} style={button} onClick={closeMailForm}>CloseForm</button>
