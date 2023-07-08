@@ -61,10 +61,10 @@ export const MailForm =()=> {
 			}
 	
 	const  input = {'fontSize':'15px', 'margin': '5px'}
-	const button = {'fontSize':'20px', 'margin': '5px'}
+	const button = {'fontSize':'20px', 'margin': '5px', cursor: 'pointer'}
 	
 	return <>
-	{response && <Response response={response}/>}
+	{response && <Response response={response} setResponse={setResponse}/>}
 	<form 
 	      ref={form} onSubmit={sendEmail} 
 	      style={{'display': !mailForm ?'none':'block', 'padding':'20px', 'background':'pink',
