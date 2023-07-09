@@ -3,17 +3,18 @@
 export const Response = ({response, setResponse}) => {
 
  const changeBorder =(e)=> {
-			e.target.style.border = '2px solid green'
+			e.target.style.border = '2px solid red'
 			setTimeout(() => e.target.style.border = null, 1000)
 			}
+const sLabel = {color: 'blue', margin: '10px'}
 			
   return <div style={{
-	   textAlign: 'center', border: '1px solid green', padding: '4px'}}>
+	   textAlign: 'center', border: '2px solid green', padding: '4px'}}>
        <h4>You sent a message with the following data :)</h4>
-       <div style={{display:'flex'}}><label>Name:</label> <p>{response.user_name}</p></div>
-       <h5>Email: {response.user_email}</h5>
-       <h5>Number: {response.user_phone}</h5>
-       <h5>Order: <br/>{JSON.stringify(response.items)}</h5>
+       <div><label style={sLabel}>Name:</label> {response.user_name}</div>
+       <div><label style={sLabel}>Email:</label>  {response.user_email}</div>
+       <div><label style={sLabel}>Number:</label> {response.user_phone}</div>
+       <div><label style={sLabel}>Order:</label> <br/>{JSON.stringify(response.items)}</div>
        <button onMouseOver={changeBorder} 
                onClick={()=>setResponse()}
 			   style={{cursor:'pointer'}}>CloseResponse</button>

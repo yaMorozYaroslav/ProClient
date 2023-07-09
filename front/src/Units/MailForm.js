@@ -1,12 +1,9 @@
 import React, {useRef} from 'react'
-import {useSelector} from 'react-redux'
 import emailjs from '@emailjs/browser'
 import {Response} from './Response'
 import {OpenContext, CartContext} from '../Context/Contexts'
 	
 export const MailForm =()=> {
-	
-	const [forEmail, setForEmail] = React.useState([])
 	
 	const [source, setSource] = React.useState({user_name:'', user_email:'',
 		                                        user_phone:'', items:[]})
@@ -16,7 +13,6 @@ export const MailForm =()=> {
 	
 	const {cartItems, clearCart} = React.useContext(CartContext)
 	
-    //const inCart = (useSelector(state => state.cart.cart))
 	
 	const form = useRef()
 	
@@ -41,19 +37,14 @@ export const MailForm =()=> {
 	}
 	console.log(response)
 	
-	const onClearCart =()=> {
-			clearCart()
-			localStorage.removeItem('cart')
-			}
 	const itemsNoPhoto = cartItems.map(({photo, ...rest})=> rest)
 	
 	React.useEffect(()=>{
 	  if(itemsNoPhoto && source.items.length !== itemsNoPhoto.length)
 		     setSource({...source, items: itemsNoPhoto})
 		},[source, itemsNoPhoto])
-	//console.log(source.items.length, itemsNoPhoto.length)
+	console.log(source.items.length, itemsNoPhoto.length)
 	
-	//const Response = ({response}) => <h6>{JSON.stringify(response.items)}</h6>
 		
 	const changeBorder =(e)=> {
 			e.target.style.border = '2px solid green'

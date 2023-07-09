@@ -12,7 +12,7 @@ import {Row, Col} from 'antd'
 export const ItemsList = () => {
 	
 	const {items, loading, error, fetchItems,
-		   removeItem, setCurrentId} = useContext(ItemContext)
+		   removeItem, currentId, setCurrentId} = useContext(ItemContext)
 		   
     const {addToCart} = useContext(CartContext)
     
@@ -22,6 +22,10 @@ export const ItemsList = () => {
     
     const {openItemForm} = useContext(OpenContext)
     
+    const [single, setSingle] = React.useState(false)
+    
+    const currItem = items.find((item) => item._id === currentId)
+    
     const category = state.itemCategory
 	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
@@ -30,26 +34,19 @@ export const ItemsList = () => {
 	const sortedByDate = items.slice().sort((a, b) =>
 		                                   b.createdAt.localeCompare(a.createdAt))
 	
-	/* const categorized = sortedByDate.filter((item)=>{
-		if(category === 'soil'){return item.category === 'soil'}
-		if(category === 'pesticide'){return item.category === 'pesticide'}
-		if(category === 'seed'){return item.category === 'seed'}
-		return item
-		}) */
-	
 	const sortedByPrice = sortedByDate.sort((a,b) => a.price - b.price)
 
 	const filteredByPrice = sortedByPrice.filter(item => {
-		if(!search && minPrice > 0 && maxPrice === 0){
+		if(!search && minPrice > 0 && !maxPrice){
 			 return item.price > parseInt(minPrice)}
-		if(!search && maxPrice > 0 && minPrice === 0){
+		if(!search && maxPrice > 0 && !minPrice){
 			return item.price < parseInt(maxPrice)}
 		if(!search && maxPrice > 0 && minPrice > 0){
 			return item.price > parseInt(minPrice) && item.price < parseInt(maxPrice)}
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
-		
+		console.log(filteredByPrice)
    const totalPages = Math.ceil(filteredByPrice.length/5)
    const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(totalPages)].map((e, i) => 
 	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>setPage(i)} key={i}>{i+1}</button>)}</div>
@@ -91,6 +88,7 @@ export const ItemsList = () => {
 			  <Col key={item._id}  span={12}> 
 			   <ItemExcerpt  
 			           item={item}
+			           setSingle={setSingle}
 			           setCurrentId={setCurrentId}
 			           openItemForm={openItemForm}
 			           removeItem={removeItem}
@@ -102,6 +100,17 @@ export const ItemsList = () => {
 			  </Row>
 	  </>
 		}
+	if (!loading&&items&&slicedItems&&single){
+
+		content = <><ItemExcerpt item={currItem}
+		                         single={single}
+		                         setSingle={setSingle}
+			                     setCurrentId={setCurrentId}
+			                     openItemForm={openItemForm}
+			                     removeItem={removeItem}
+			                     userData={userData}
+			                     addToCart={addToCart}/></>
+ }
 	if (error.length && !loading) {content = <section>{error}</section>}
 		 return(
 		    <section>
