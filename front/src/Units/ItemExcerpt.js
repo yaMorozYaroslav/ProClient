@@ -2,8 +2,9 @@ import React from 'react'
 
 export const ItemExcerpt =({item, setCurrentId, single, setSingle, openItemForm, 
 	                            userData, removeItem, addToCart }) => {
-  
-    const handEdit =(e)=> {
+    
+     
+    const handEdit =(e)=>  {
 		e.preventDefault()
 		openItemForm()
 		setCurrentId(item._id)
