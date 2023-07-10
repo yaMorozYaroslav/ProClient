@@ -62,6 +62,7 @@ export const ItemsList = () => {
    const [page, setPage] = React.useState(0)
 
    const slicer = sliceIntoChunks()
+   console.log(sliceIntoChunks())
    const slicedItems = slicer[page]
    
 	 React.useEffect(()=> {
@@ -83,9 +84,9 @@ export const ItemsList = () => {
   
       <>
        <Buttons/>
-      <Row gutter={[24, 24]}>
+      <Row gutter={[12, 12]}>
        {slicedItems.map(item => (
-			  <Col key={item._id}  span={12}> 
+			  <Col key={item._id}  span={6}> 
 			   <ItemExcerpt  
 			           item={item}
 			           setSingle={setSingle}
