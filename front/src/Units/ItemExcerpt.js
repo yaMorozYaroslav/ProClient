@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const ItemExcerpt =({item, setCurrentId, single, setSingle, openItemForm, 
-	                            userData, removeItem, addToCart }) => {
+	                            userData, removeItem, addToCart, setOpen}) => {
      const pointer = 'https://cdn-icons-png.flaticon.com/512/178/178404.png?w=740&t=st=1688989387~exp=1688989987~hmac=8143b1693b344a06a46761d35f7b1107ed19894e68a123f60e0fd627f8ef1945'
      const [over, setOver] = React.useState(false)
      const showPointer = over && !single
@@ -24,7 +24,8 @@ export const ItemExcerpt =({item, setCurrentId, single, setSingle, openItemForm,
 	   setSingle(true)
 	   }
    const parag = {fontSize: '17px'}
-   const button = {cursor: 'pointer', margin: '2px', fontSize: '18px'}
+   const button = {cursor: 'pointer', margin: '2px', fontSize: '20px'}
+   const buyButt = {cursor: 'crosshair', border: '3px solid green', fontSize: '20px'}
 	return (<>
 	<article style={{border:`6px solid #${randomColor}`, textAlign:'center',
 	                 background: '#b7b7b7', padding: '5px'}}>
@@ -43,7 +44,7 @@ export const ItemExcerpt =({item, setCurrentId, single, setSingle, openItemForm,
 	  <button style={button} onClick={handDelete}>Remove</button>
 	  <button style={button} onClick={handEdit}>Edit</button>
 	    </>)}
-	   <button style={button} onClick={() => addToCart(newItem)}>Buy</button>
+	   <button style={buyButt} onClick={() => addToCart(newItem)}>Buy</button>
 	</article>
 	 </> )
 	}

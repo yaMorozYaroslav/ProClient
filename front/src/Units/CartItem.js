@@ -1,12 +1,13 @@
 const button = {'height':'45px', 'width':'45px','fontSize':'20px', 
 	            'cursor':'pointer', 'marginTop':'25px', 'marginLeft':'5px'}
 
-export const CartItem =({item,removeFromCart,increase,
+export const CartItem =({item,removeFromCart,increase, setOpen,
 	              decrease,clearCart, setFromLocale, cartItems}) => {
 	    
 		const onDelete =()=>{
 			removeFromCart(item._id)
-			if(cartItems.length <= 1)localStorage.removeItem('cart')
+			if(cartItems.length <= 1){localStorage.removeItem('cart')
+				                      setOpen(false)}
 			}
 			
 	    const onDecrease =()=> {

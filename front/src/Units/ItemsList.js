@@ -47,14 +47,14 @@ export const ItemsList = () => {
 		return item
 		})
 		console.log(filteredByPrice)
-   const totalPages = Math.ceil(filteredByPrice.length/5)
+   const totalPages = Math.ceil(filteredByPrice.length/8)
    const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(totalPages)].map((e, i) => 
 	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>setPage(i)} key={i}>{i+1}</button>)}</div>
 
    function sliceIntoChunks() {
     const res = [];
-    for (let i = 0; i < filteredByPrice.length; i += 4) {
-        const chunk = filteredByPrice.slice(i, i + 4);
+    for (let i = 0; i < filteredByPrice.length; i += 8) {
+        const chunk = filteredByPrice.slice(i, i + 8);
         res.push(chunk);
     }
     return res;

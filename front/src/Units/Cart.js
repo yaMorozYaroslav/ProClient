@@ -36,7 +36,6 @@ export const Cart =()=> {
 		if(shouldUpdateState){
 		                 setFromLocale(cart)}
 		},[cartItems, loading, setFromLocale])
-		//console.log(loading)
 		
 		const onClearCart =()=> {
 			clearCart()
@@ -65,8 +64,9 @@ export const Cart =()=> {
 				                                 removeFromCart={removeFromCart}
 				                                 increase={increase}
 				                                 decrease={decrease}
+				                                 setOpen={setOpen}
 				                                 cartItems={cartItems}/>))}
-            {open && cartItems.length > 0 && <h6 style={{marginLeft:'25%'}}>total: {total} $</h6>}<br/>
+            {open && cartItems.length > 0 && <h5 style={{marginLeft:'25%'}}>total: {total} $</h5>}<br/>
 			{open && cartItems.length > 0 && (<>
 				 <button onMouseOver={changeBorder} style={button} 
 				          onClick={!mailForm?openMailForm:closeMailForm}>
