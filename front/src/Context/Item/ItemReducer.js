@@ -1,5 +1,5 @@
 
-import {GET_ITEMS, START_LOADING, END_LOADING, ADD_ITEM,
+import {GET_ITEMS, START_LOADING, END_LOADING, ADD_ITEM, SET_SINGLE,
 	   UPDATE_ITEM, REMOVE_ITEM, CHECKOUT, SET_ID, REMOVE_ID, ERROR} from "./ItemTypes.js"
 
 const ItemReducer = (state, action) => {
@@ -33,6 +33,8 @@ const ItemReducer = (state, action) => {
       return {...state, currentId: action.payload}
     case REMOVE_ID:
       return {...state, currentId: null}
+    case SET_SINGLE:
+      return {...state, single: action.payload}
     case ERROR:
 	return{...state, error: action.payload, loading: false}
 	

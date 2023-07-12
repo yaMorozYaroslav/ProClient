@@ -26,10 +26,11 @@ export const ItemExcerpt =({item, setCurrentId, single, setSingle, openItemForm,
    const parag = {fontSize: '17px'}
    const button = {cursor: 'pointer', margin: '2px', fontSize: '20px'}
    const buyButt = {cursor: 'crosshair', border: '3px solid green', fontSize: '20px'}
+   const listButt = {cursor: 'pointer', padding: '4px', fontSize: '20px'}
 	return (<>
 	<article style={{border:`6px solid #${randomColor}`, textAlign:'center',
 	                 background: '#b7b7b7', padding: '5px'}}>
-	  {single && <button style={button} 
+	  {single && <button style={listButt} 
 		            onClick = {()=>setSingle(false)}>ToTheList</button>}
 	  <h2>{item.title}</h2>
 	  <img src={!showPointer?item.photo:pointer} alt='' style={{width:'200px', height: '220px'}}

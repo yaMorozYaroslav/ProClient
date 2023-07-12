@@ -7,6 +7,7 @@ export const Response = ({response, setResponse}) => {
 			setTimeout(() => e.target.style.border = null, 1000)
 			}
 const sLabel = {color: 'blue', margin: '10px'}
+const sButt = {cursor:'pointer', margin: '8px'}
 			
   return <div style={{
 	   textAlign: 'center', border: '2px solid green', padding: '4px'}}>
@@ -17,6 +18,6 @@ const sLabel = {color: 'blue', margin: '10px'}
        <div><label style={sLabel}>Order:</label> <br/>{JSON.stringify(response.items)}</div>
        <button onMouseOver={changeBorder} 
                onClick={()=>setResponse()}
-			   style={{cursor:'pointer'}}>CloseResponse</button>
+			   style={sButt}>CloseResponse</button>
    </div>
 }

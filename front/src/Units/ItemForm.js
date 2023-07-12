@@ -9,7 +9,7 @@ const initialState = {title: '', description: '', price: '', category: 'seed', p
 
 export const ItemForm = () => {
 	
-	const {items, addItem, updateItem, 
+	const {items, addItem, updateItem, single,
 		      currentId, setCurrentId} = React.useContext(ItemContext)
 	
 	const {itemForm, closeItemForm} = React.useContext(OpenContext)
@@ -26,7 +26,7 @@ export const ItemForm = () => {
 	       },[currItem])
 	       
     const reset =()=> {	
-		setCurrentId(null)
+		//setCurrentId(null)
 		setSource(initialState)
 		ref.current.reset()
 		}

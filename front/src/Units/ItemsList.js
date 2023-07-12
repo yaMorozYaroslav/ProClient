@@ -11,7 +11,7 @@ import {Row, Col} from 'antd'
    
 export const ItemsList = () => {
 	
-	const {items, loading, error, fetchItems,
+	const {items, loading, error, fetchItems, single, setSingle,
 		   removeItem, currentId, setCurrentId} = useContext(ItemContext)
 		   
     const {addToCart} = useContext(CartContext)
@@ -21,8 +21,6 @@ export const ItemsList = () => {
     const {userData} = useContext(UserContext)
     
     const {openItemForm} = useContext(OpenContext)
-    
-    const [single, setSingle] = React.useState(false)
     
     const currItem = items.find((item) => item._id === currentId)
     

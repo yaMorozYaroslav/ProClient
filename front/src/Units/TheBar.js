@@ -1,12 +1,13 @@
 import React from 'react'
 import decode from 'jwt-decode'
 
-import {UserContext, OpenContext} from '../Context/Contexts'
+import {UserContext, OpenContext, ItemContext} from '../Context/Contexts'
 
 
 export const TheBar =()=> {
 	
 	const [openAlert, setOpenAlert] = React.useState(false)
+	const {single} = React.useContext(ItemContext)
 	const {userData, logout} = React.useContext(UserContext)
 	
 	const {authForm, openItemForm, openAuthForm} = React.useContext(OpenContext)
@@ -56,15 +57,18 @@ export const TheBar =()=> {
 	
 	const button = { 'height':'50px',
 		             'cursor':'pointer',
-		             'fontSize':'25px',
+		             'fontSize':'28px',
 		             'border':'2px solid grey',
-		             'margin':'10px'}
+		             'margin':'10px',
+		             'border-radius':'10px'}
 	
 	return <>
-	      {userKeys.length > 0 && <h1 style={{'position':'absolute', 'left':'200px'}}>Hello, {userData.result.name} :)</h1>}
+	      {userKeys.length > 0 &&
+		  <h2 style={{'position':'absolute', 'left':'250px', fontSize: '34px'}}>
+		                                    Hello, {userData.result.name} :)</h2>}
 	      {openAlert && !authForm ? alert : null} 
-	      <div style={{'marginLeft':'60%', 'display': 'flex'}}>
-	        {!authForm && <button onMouseOver={changeBorder} style={button} onClick={onAddItem}>AddItem</button>}
+	      <div style={{'marginLeft':'75%', 'display': 'flex'}}>
+	        {!authForm && !single && <button onMouseOver={changeBorder} style={button} onClick={onAddItem}>AddItem</button>}
 	   
 	        {userKeys.length > 0 &&
 				   <button  onMouseOver={changeBorder} style={{...button, 'background':'pink'}} onClick={handLogout}> Logout </button>}
