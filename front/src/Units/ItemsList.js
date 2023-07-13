@@ -11,8 +11,8 @@ import {Row, Col} from 'antd'
    
 export const ItemsList = () => {
 	
-	const {items, loading, error, fetchItems, single, setSingle,
-		   removeItem, currentId, setCurrentId} = useContext(ItemContext)
+	const {items, loading, error, fetchItems, single, setSingle, singleId,
+		   removeItem, currentId, setCurrentId, setSingleId} = useContext(ItemContext)
 		   
     const {addToCart} = useContext(CartContext)
     
@@ -22,7 +22,7 @@ export const ItemsList = () => {
     
     const {openItemForm} = useContext(OpenContext)
     
-    const currItem = items.find((item) => item._id === currentId)
+    const currItem = items.find((item) => item._id === singleId)
     
     const category = state.itemCategory
 	const search = state.itemSearch
@@ -89,6 +89,7 @@ export const ItemsList = () => {
 			           item={item}
 			           setSingle={setSingle}
 			           setCurrentId={setCurrentId}
+			           setSingleId={setSingleId}
 			           openItemForm={openItemForm}
 			           removeItem={removeItem}
 			           userData={userData}

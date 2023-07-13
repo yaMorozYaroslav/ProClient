@@ -40,6 +40,7 @@ export const Cart =()=> {
 		const onClearCart =()=> {
 			clearCart()
 			localStorage.removeItem('cart')
+			setOpen(false)
 			}
 		const total = cartItems.reduce((total, item) =>
 		                          total + item.price * item.quantity, 0)

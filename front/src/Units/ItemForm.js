@@ -26,7 +26,7 @@ export const ItemForm = () => {
 	       },[currItem])
 	       
     const reset =()=> {	
-		//setCurrentId(null)
+		setCurrentId(null)
 		setSource(initialState)
 		ref.current.reset()
 		}

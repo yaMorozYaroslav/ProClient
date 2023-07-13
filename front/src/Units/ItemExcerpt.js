@@ -1,7 +1,8 @@
 import React from 'react'
 
-export const ItemExcerpt =({item, setCurrentId, single, setSingle, openItemForm, 
-	                            userData, removeItem, addToCart, setOpen}) => {
+export const ItemExcerpt =({item, setCurrentId, single, setSingle,
+	                       setSingleId, delSingleId, openItemForm,
+	                       userData, removeItem, addToCart, setOpen}) => {
      const pointer = 'https://cdn-icons-png.flaticon.com/512/178/178404.png?w=740&t=st=1688989387~exp=1688989987~hmac=8143b1693b344a06a46761d35f7b1107ed19894e68a123f60e0fd627f8ef1945'
      const [over, setOver] = React.useState(false)
      const showPointer = over && !single
@@ -20,7 +21,7 @@ export const ItemExcerpt =({item, setCurrentId, single, setSingle, openItemForm,
    const newItem = {_id: item._id, title: item.title, 
 	                price: item.price, photo: item.photo}
    const onSingle = () => {
-	   setCurrentId(item._id)
+	   setSingleId(item._id)
 	   setSingle(true)
 	   }
    const parag = {fontSize: '17px'}

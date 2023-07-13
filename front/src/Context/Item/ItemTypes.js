@@ -7,5 +7,7 @@ export const REMOVE_ITEM = "REMOVE_ITEM"
 export const SET_ID = "SET_ID"
 export const REMOVE_ID = "REMOVE_ID"
 export const SET_SINGLE = "SET_SINGLE"
+export const SET_SINGLE_ID = "SET_SINGLE_ID"
+export const DEL_SINGLE_ID = "DEL_SINGLE_ID"
 export const ERROR = "ERROR"
 

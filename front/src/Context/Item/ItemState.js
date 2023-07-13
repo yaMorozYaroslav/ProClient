@@ -4,7 +4,8 @@ import ItemReducer from "./ItemReducer";
 import {getItems, createItem, editItem, deleteItem} from '../../api'
 
 import {GET_ITEMS, START_LOADING, END_LOADING, ADD_ITEM,
-	   UPDATE_ITEM, REMOVE_ITEM, SET_ID, REMOVE_ID, SET_SINGLE, ERROR} from "./ItemTypes.js"
+	      SET_SINGLE_ID, DEL_SINGLE_ID, UPDATE_ITEM, REMOVE_ITEM,
+	         SET_ID, REMOVE_ID, SET_SINGLE, ERROR} from "./ItemTypes.js"
 
 export const ItemState = ({ children }) => {
   
@@ -14,7 +15,8 @@ export const ItemState = ({ children }) => {
     loading: false, 
     error: [],
     currentId: null, 
-    single: false
+    single: false,
+    singleId: null
   };
 
   const [state, dispatch] = useReducer(ItemReducer, initialState)
@@ -89,6 +91,22 @@ export const ItemState = ({ children }) => {
 				dispatch({type: ERROR, payload: err})
 			}
 		   }
+    const setSingleId = (id) => {
+	  try{
+    dispatch({ type: SET_SINGLE_ID, payload: id });
+  }
+  catch(err){
+	  dispatch({type: ERROR, payload: err})
+	  }
+    }
+    
+     const delSingleId = () => {
+	  try{
+    dispatch({ type: DEL_SINGLE_ID });
+     }catch(err){
+	  dispatch({type: ERROR, payload: err})
+	  }
+    }
   return (
 
     <ItemContext.Provider
@@ -98,13 +116,16 @@ export const ItemState = ({ children }) => {
         error: state.error,
         currentId: state.currentId,
         single: state.single,
-        setSingle,
+        singleId: state.singleId,
         fetchItems,
         addItem,
         updateItem,
         removeItem,
         setCurrentId,
         removeCurrentId,
+        setSingle,
+        setSingleId,
+        delSingleId,
         ...state,
       }}
     >
