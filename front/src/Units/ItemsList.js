@@ -12,7 +12,7 @@ import {Row, Col} from 'antd'
 export const ItemsList = () => {
 	
 	const {items, loading, error, fetchItems, single, setSingle, singleId,
-		   removeItem, currentId, setCurrentId, setSingleId} = useContext(ItemContext)
+		   removeItem, setCurrentId, setSingleId} = useContext(ItemContext)
 		   
     const {addToCart} = useContext(CartContext)
     
@@ -41,18 +41,21 @@ export const ItemsList = () => {
 			return item.price < parseInt(maxPrice)}
 		if(!search && maxPrice > 0 && minPrice > 0){
 			return item.price > parseInt(minPrice) && item.price < parseInt(maxPrice)}
+		return item
+		})
+    const filteredBySearch = filteredByPrice.filter(item => {
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
-		console.log(filteredByPrice)
-   const totalPages = Math.ceil(filteredByPrice.length/8)
+		console.log(filteredBySearch)
+   const totalPages = Math.ceil(filteredBySearch.length/8)
    const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(totalPages)].map((e, i) => 
 	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>setPage(i)} key={i}>{i+1}</button>)}</div>
 
    function sliceIntoChunks() {
     const res = [];
-    for (let i = 0; i < filteredByPrice.length; i += 8) {
-        const chunk = filteredByPrice.slice(i, i + 8);
+    for (let i = 0; i < filteredBySearch.length; i += 8) {
+        const chunk = filteredBySearch.slice(i, i + 8);
         res.push(chunk);
     }
     return res;
@@ -104,6 +107,7 @@ export const ItemsList = () => {
 
 		content = <><ItemExcerpt item={currItem}
 		                         single={single}
+		                         setSingleId={setSingleId}
 		                         setSingle={setSingle}
 			                     setCurrentId={setCurrentId}
 			                     openItemForm={openItemForm}

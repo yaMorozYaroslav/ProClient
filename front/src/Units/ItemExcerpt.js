@@ -22,7 +22,7 @@ export const ItemExcerpt =({item, setCurrentId, single, setSingle,
 	                price: item.price, photo: item.photo}
    const onSingle = () => {
 	   setSingleId(item._id)
-	   setSingle(true)
+	   setSingle(!single)
 	   }
    const parag = {fontSize: '17px'}
    const button = {cursor: 'pointer', margin: '2px', fontSize: '20px'}
