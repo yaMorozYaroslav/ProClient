@@ -35,11 +35,11 @@ export const ItemsList = () => {
 	const sortedByPrice = sortedByDate.sort((a,b) => a.price - b.price)
 
 	const filteredByPrice = sortedByPrice.filter(item => {
-		if(!search && minPrice > 0 && !maxPrice){
+		if( minPrice > 0 && !maxPrice){
 			 return item.price > parseInt(minPrice)}
-		if(!search && maxPrice > 0 && !minPrice){
+		if( maxPrice > 0 && !minPrice){
 			return item.price < parseInt(maxPrice)}
-		if(!search && maxPrice > 0 && minPrice > 0){
+		if( maxPrice > 0 && minPrice > 0){
 			return item.price > parseInt(minPrice) && item.price < parseInt(maxPrice)}
 		return item
 		})

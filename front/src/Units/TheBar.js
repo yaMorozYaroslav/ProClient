@@ -60,7 +60,7 @@ export const TheBar =()=> {
 		             'fontSize':'28px',
 		             'border':'2px solid grey',
 		             'margin':'10px',
-		             'border-radius':'10px'}
+		             'borderRadius':'10px'}
 	
 	return <>
 	      {userKeys.length > 0 &&

@@ -35,7 +35,7 @@ export const MailForm =()=> {
 		localStorage.removeItem('cart')
 		closeMailForm()
 	}
-	console.log(response)
+	
 	
 	const itemsNoPhoto = cartItems.map(({photo, ...rest})=> rest)
 	
@@ -43,15 +43,14 @@ export const MailForm =()=> {
 	  if(itemsNoPhoto && source.items.length !== itemsNoPhoto.length)
 		     setSource({...source, items: itemsNoPhoto})
 		},[source, itemsNoPhoto])
-	console.log(source.items.length, itemsNoPhoto.length)
 	
 		
 	const changeBorder =(e)=> {
 			e.target.style.border = '2px solid green'
 			setTimeout(() => e.target.style.border = null, 1000)
 			}
-	
-	const  input = {'fontSize':'15px', 'margin': '5px'}
+	const label = {fontSize: '25px'}
+	const  input = {'fontSize':'20px', 'margin': '5px'}
 	const button = {'fontSize':'20px', 'margin': '5px', cursor: 'pointer'}
 	
 	return <>
@@ -61,11 +60,11 @@ export const MailForm =()=> {
 	      style={{'display': !mailForm ?'none':'block', 'padding':'20px', 'background':'pink',
 			      'fontSize':'20px', 'margin': '5px', 'textAlign':'center'}}>
 	  <h3>Your contacts:</h3>
-	  <label htmlFor='Name'>Name</label>
+	  <label style={label} htmlFor='Name'>Name</label>
 	    <input style={input} type='text' onChange={handChange} placeholder='Name' name='user_name'  required/>
-	  <label htmlFor='Email'>Email</label>
+	  <label style={label} htmlFor='Email'>Email</label>
 	    <input style={input} type='email' onChange={handChange} placeholder='Email' name='user_email' required/>
-	  <label htmlFor='PhoneNumber'>PhoneNumber</label>
+	  <label style={label} htmlFor='PhoneNumber'>PhoneNumber</label>
 	    <input style={input} type='number' onChange={handChange} placeholder='PhoneNumber' name='user_phone' required />
 	
 	   <textarea readOnly value={source.items} onChange={handChange} name='items' style={{'display':'none'}} required/>

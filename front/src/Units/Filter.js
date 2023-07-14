@@ -7,7 +7,7 @@ export const Filter =(props)=> {
 	
 	const [show, setShow] = React.useState(false)
 	const {state, setCategory, setSearch,setMinPrice, setMaxPrice} = React.useContext(FiltContext)
-	const {fetchItems} = React.useContext(ItemContext)
+	const {fetchItems, single} = React.useContext(ItemContext)
 	
 	function onCategory(event){
 		event.preventDefault()
@@ -41,6 +41,6 @@ export const Filter =(props)=> {
 	     <input style={text} onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
 	     <input style={text} onChange={onSearch} placeholder='Search'/>
 	     </div>}
-	     {!show && <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(true)}>ShowFilters</button>}
+	     {!show && !single && <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(true)}>ShowFilters</button>}
 	     </>
 	}

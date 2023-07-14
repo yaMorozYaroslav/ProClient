@@ -37,10 +37,13 @@ export const Cart =()=> {
 		                 setFromLocale(cart)}
 		},[cartItems, loading, setFromLocale])
 		
+	React.useEffect(()=>{
+		if(cartItems.length === 0)setOpen(false)
+		},[cartItems])
+	
 		const onClearCart =()=> {
 			clearCart()
 			localStorage.removeItem('cart')
-			setOpen(false)
 			}
 		const total = cartItems.reduce((total, item) =>
 		                          total + item.price * item.quantity, 0)
@@ -65,7 +68,6 @@ export const Cart =()=> {
 				                                 removeFromCart={removeFromCart}
 				                                 increase={increase}
 				                                 decrease={decrease}
-				                                 setOpen={setOpen}
 				                                 cartItems={cartItems}/>))}
             {open && cartItems.length > 0 && <h5 style={{marginLeft:'25%'}}>total: {total} $</h5>}<br/>
 			{open && cartItems.length > 0 && (<>

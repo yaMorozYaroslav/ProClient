@@ -9,8 +9,8 @@ const initialState = {title: '', description: '', price: '', category: 'seed', p
 
 export const ItemForm = () => {
 	
-	const {items, addItem, updateItem, single,
-		      currentId, setCurrentId} = React.useContext(ItemContext)
+	const {items, addItem, updateItem,
+		          currentId, setCurrentId} = React.useContext(ItemContext)
 	
 	const {itemForm, closeItemForm} = React.useContext(OpenContext)
 	
@@ -33,7 +33,7 @@ export const ItemForm = () => {
 		
 	const handSubmit =(e)=> {
 		e.preventDefault()
-	if(source.price < 0)alert('Number must be positive')
+	if(source.price <= 0)alert('Number must be positive')
 	if(!source.photo && source.price > 0)alert('Please, fill out the photo field.')
 	if(source.photo && source.price > 0){
 		if(!currentId){addItem(source)
