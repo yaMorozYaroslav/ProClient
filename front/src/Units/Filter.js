@@ -6,7 +6,8 @@ import {ItemContext} from '../Context/Contexts'
 export const Filter =(props)=> {
 	
 	const [show, setShow] = React.useState(false)
-	const {state, setCategory, setSearch,setMinPrice, setMaxPrice} = React.useContext(FiltContext)
+	const {state, setCategory, setSearch,
+		   setMinPrice, setMaxPrice, reset} = React.useContext(FiltContext)
 	const {fetchItems, single} = React.useContext(ItemContext)
 	
 	function onCategory(event){
@@ -37,9 +38,10 @@ export const Filter =(props)=> {
 	       <option value='pesticide'>Pesticides</option>
 	       <option value='seed'>Seeds</option>
 	     </select>
-	     <input style={text} onChange={onMinPrice} placeholder='MinPrice' type='num'/>
-	     <input style={text} onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
+	     <input style={text} value={state.itemPrice.min} onChange={onMinPrice} placeholder='MinPrice' type='num'/>
+	     <input style={text} value={state.itemPrice.max} onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
 	     <input style={text} onChange={onSearch} placeholder='Search'/>
+	     <button onClick={reset}>Reset</button>
 	     </div>}
 	     {!show && !single && <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(true)}>ShowFilters</button>}
 	     </>

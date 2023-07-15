@@ -1,4 +1,5 @@
 import React,{useContext} from 'react'
+import CircleLoader from "react-spinners/CircleLoader";
 import {ItemExcerpt} from './ItemExcerpt'
 
 import {ItemContext} from '../Context/Contexts'
@@ -76,7 +77,14 @@ export const ItemsList = () => {
 	
 	if(loading){
 		
-		content = <p>loading</p>
+		content = <p><CircleLoader
+        
+        cssOverride={{marginLeft:'40%', marginTop: '10%'}}
+        color={'#901031'}
+        size={200}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      /></p>
 		
 	}
 	if (!loading&&items&&slicedItems){

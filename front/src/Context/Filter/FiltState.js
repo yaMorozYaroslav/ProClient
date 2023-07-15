@@ -2,7 +2,7 @@ import { useReducer } from "react"
 import {FiltContext} from "../Contexts"
 import FiltReducer from "./FiltReducer"
 
-import {SET_CATEGORY, SET_SEARCH,
+import {SET_CATEGORY, SET_SEARCH, RESET,
         SET_MIN_PRICE, SET_MAX_PRICE, ERROR} from "./FiltTypes.js"
 
 export const FiltState = ({ children }) => {
@@ -54,6 +54,10 @@ export const FiltState = ({ children }) => {
     	console.log(err)
 	 }
    }
+  const reset = () => {
+	  dispatch({type: RESET, payload: initialState})
+	  console.log(state)
+	  }
 
  
   return (
@@ -64,7 +68,8 @@ export const FiltState = ({ children }) => {
         setCategory,
         setSearch,
         setMinPrice,
-        setMaxPrice
+        setMaxPrice,
+        reset
       }}
     >
       {children}
