@@ -11,10 +11,6 @@ export const getItems = async(req,res) => {
 		const { category = 'all'} = req.query
 		
 		//console.log(category)
-		
-		//let count
-		//if(category !== 'all') count = await Item.countDocuments({category: category})
-		//if(category === 'all') count = await Item.countDocuments()
 		let items
 		if(category !== 'all') items = await Item.find({category: category})
 		if(category === 'all') items = await Item.find()
@@ -31,7 +27,7 @@ export const getItem = async(req, res) => {
 		const {id} = req.params
 	console.log(id)
 		const item = await Item.findById(id)
-		console.log(item)
+		//console.log(item)
 		res.status(200).json(item)
 	}catch(error){res.status(404).json({message: error.message})}
 }
