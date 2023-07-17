@@ -9,24 +9,14 @@ import {AuthForm} from './Units/AuthForm'
 import {ItemForm} from './Units/ItemForm'
 import {MailForm} from './Units/MailForm'
 
-import {ItemState} from './Context/Item/ItemState'
-import {UserState} from './Context/User/UserState'
-import {OpenState} from './Context/Open/OpenState'
-import {FiltState} from './Context/Filter/FiltState'
-import {CartState} from './Context/Cart/CartState'
-
+import {AllTheStates} from './Context/AllTheStates'
 
 export const App =()=> {
 	
 	
 	return (
 	       <>
-	       <UserState>
-	       <ItemState>
-	       <OpenState>
-	       <FiltState>
-	       <CartState>
-	       
+	       <AllTheStates>
 	         <Cart/>
 	         <MailForm/>
 	         <TheBar/>
@@ -34,12 +24,7 @@ export const App =()=> {
 	         <ItemForm/>     
 	         <Filter  /> 
 	         <ItemsList />
-	         
-	           </CartState>
-	           </FiltState>
-	           </OpenState>
-	           </ItemState>
-	           </UserState>
+	       </AllTheStates>
 	       </>
 	      )
 	}

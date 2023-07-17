@@ -6,7 +6,7 @@ import {UserReducer} from './UserReducer'
 import {AUTH, LOGOUT, FROM_STORAGE, ERROR, NO_ERROR} from './UserTypes'
 
 export const UserState = ({children}) => {
-	//const UserContext = React.useContext(UserContext)
+	
    const initialState = {userData: {}, loading: false, error: null}
    
    const [state, dispatch] = React.useReducer(UserReducer, initialState)
@@ -35,6 +35,7 @@ export const UserState = ({children}) => {
 		dispatch({type: LOGOUT})
 		}
 	const clearError = () => dispatch({type: NO_ERROR})
+	
 	return (
 
     <UserContext.Provider
