@@ -77,9 +77,11 @@ export const ItemsList = () => {
 	
 	if(loading){
 		
-		content = <p><CircleLoader
+		content = <p style={{textAlign:'center'}}>
+		<h3>please wait, loading may take up to 2 minutes</h3>
+		<CircleLoader
         
-        cssOverride={{marginLeft:'40%', marginTop: '10%'}}
+        cssOverride={{marginLeft:'43%', marginTop: '5%'}}
         color={'#901031'}
         size={200}
         aria-label="Loading Spinner"
