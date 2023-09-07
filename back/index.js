@@ -2,14 +2,13 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import cors from 'cors'
-import dotenv from 'dotenv'
-import { MongoClient, ServerApiVersion } from "mongodb"
+//import { MongoClient, ServerApiVersion } from "mongodb"
 
 import itemRoutes from './routes/items.js'
 import userRoutes from './routes/user.js'
 
 const app = express()
-dotenv.config()
+
 
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(cors())
@@ -27,9 +26,9 @@ mongoose.connect(process.env.CONNECTION_URL)
              .catch((error)=>console.log(error.message))
 */
 
-const uri = "mongodb+srv://Yaroslav:HorHor37@cluster0.tlfsw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+//const uri = "mongodb+srv://Yaroslav:HorHor37@cluster0.tlfsw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
-export const client = new MongoClient(uri,  {
+/*export const client = new MongoClient(uri,  {
         serverApi: {
             version: ServerApiVersion.v1,
             strict: true,
@@ -42,7 +41,7 @@ async function run() {
     // Connect the client to the server (optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+    await client.db("myFirstDatabase").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
@@ -50,4 +49,5 @@ async function run() {
   }
 }
 run().catch(console.dir);
+*/
 app.listen(PORT, ()=>console.log(`Running on ${PORT}`))

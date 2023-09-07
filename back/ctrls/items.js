@@ -2,19 +2,26 @@ import express from 'express'
 import mongoose from 'mongoose'
 
 import Item from '../models/Item.js'
+import db from "../conn.js";
+import { ObjectId } from "mongodb";
 
 const router = express.Router()
 
 
 export const getItems = async(req,res) => {
 	try{
-		const { category = 'all'} = req.query
+		//const { category = 'all'} = req.query
 		
 		//console.log(category)
+		//let items
+		//if(category !== 'all') items = await Item.find({category: category})
+		//if(category === 'all') items = await Item.find()
+		let { category = 'all'} = req.query
 		let items
-		if(category !== 'all') items = await Item.find({category: category})
-		if(category === 'all') items = await Item.find()
-        
+        let collection = await db.collection("products");
+       // let results = await collection.find({}).limit(50).toArray();
+        if(category !== 'all') items = await collection.find({category: category}).toArray()
+		if(category === 'all') items = await collection.find({}).toArray()
 		res.status(200).json({items})
 	}catch(error){
 		res.status(404).json({message: error.message})
