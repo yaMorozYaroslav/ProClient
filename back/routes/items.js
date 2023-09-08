@@ -6,7 +6,7 @@ import {auth} from '../middl/auth.js'
 import {roleAuth} from '../middl/auth.js'
 
 router.get('/', getItems)
-//router.get('/:id', getItem)
+router.get('/:id', getItem)
 router.post('/',  auth, createItem)
 router.patch('/:id', auth, roleAuth, updateItem)
 router.delete('/:id', auth, roleAuth, deleteItem)
