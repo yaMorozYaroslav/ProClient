@@ -1,11 +1,9 @@
 import express from 'express'
-import mongoose from 'mongoose'
-
-import Item from '../models/Item.js'
+//import Item from '../models/Item.js'
 import db from "../conn.js";
 import { ObjectId } from "mongodb";
 
-const router = express.Router()
+//const router = express.Router()
 
 
 export const getItems = async(req,res) => {
@@ -32,23 +30,22 @@ export const getItems = async(req,res) => {
 
 export const getItem = async(req, res) => {
 	try{
-		//const {id} = req.params
 		let collection = await db.collection("products")
-		let query = {_id: new ObjectId(req.params)}
-	console.log(query)
+		let query = {_id: new ObjectId(req.params.id)}
+	//console.log(query)
 		const item = await collection.findOne(query)
-		//console.log(item)
 		res.status(200).json(item)
 	}catch(error){res.status(404).json({message: error.message})}
 }
 
 export const createItem = async(req,res)=> {
       try{
-    let collection = await db.collection("products");
-    let newDocument = req.body;
-    newDocument.date = new Date();
+    let newDocument = req.body
+    console.log(newDocument)
+    let collection = await db.collection("products")
+    //newDocument.date = new Date();
     let result = await collection.insertOne(newDocument)
-  
+    console.log(result)
 	/*const item = req.body
 	const newItem = new Item({
 		  ...item, creator: req.userId, createdAt: new Date().toISOString()})
@@ -92,4 +89,4 @@ export const deleteItem = async(req,res)=> {
 	await Item.findByIdAndRemove(id)*/
 	res.json({message: 'Post deleted', id})
 }
-export default router
+//export default router

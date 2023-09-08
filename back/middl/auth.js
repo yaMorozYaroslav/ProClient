@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 import User from '../models/User.js'
-import Item from '../models/Item.js'
+//import Item from '../models/Item.js'
 const secret = 'test'
 
 export const auth = async (req, res, next) => {
@@ -26,9 +26,11 @@ export const auth = async (req, res, next) => {
     console.log(error)
   }
 }
-export const roleAuth = async(req, res, next) => {
+/*export const roleAuth = async(req, res, next) => {
 	try{
-	const id = req.params
+	let query = {_id: new ObjectId(req.params.id)}
+	let collection = await db.collection("products")
+	const item = await collection.findOne(query)
 	const item = await Item.findById(id.id)
 	const user = await User.findById(req.userId)
 	if(user.role === 'admin'||req.userId === item.creator){next()}
@@ -36,3 +38,4 @@ export const roleAuth = async(req, res, next) => {
 	
 	}catch(error){console.log(error)}}
 
+*/
