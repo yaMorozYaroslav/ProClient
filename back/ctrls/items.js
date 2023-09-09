@@ -40,30 +40,26 @@ export const getItem = async(req, res) => {
 
 export const createItem = async(req,res)=> {
       try{
-    let newDocument = req.body
-    console.log(newDocument)
+    let item = req.body
     let collection = await db.collection("products")
-    //newDocument.date = new Date();
-    let result = await collection.insertOne(newDocument)
-    console.log(result)
-	/*const item = req.body
-	const newItem = new Item({
-		  ...item, creator: req.userId, createdAt: new Date().toISOString()})
-	try{
-		await newItem.save()*/
-		res.status(204).json(result)
+	const newItem = {...item, 
+		             creator: req.userId, 
+		             date: new Date().toISOString()}
+	let result = await collection.insertOne(newItem)
+	 console.log(result)	  
+		res.send(newItem).status(204)
 	}catch(error){
 		res.status(409).json({message: error.message})
 	}
 }
 export const updateItem = async(req, res)=> {
    try{
-    const query = { _id: ObjectId(req.params.id) };
+    const query = { _id: new ObjectId(req.params.id) };
     const updates = {
-    $push: { comments: req.body }
+    $push:  req.body 
   };
 
-    let collection = await db.collection("posts");
+    let collection = await db.collection("products");
     let result = await collection.updateOne(query, updates)
 	/*const {id} = req.params
 	const {title, description, creator, photo, price, category, createdAt} = req.body
@@ -73,7 +69,7 @@ export const updateItem = async(req, res)=> {
 
 	const updatedItem = {creator, title, description, photo, category, price, _id: id, createdAt}
     await Item.findByIdAndUpdate(id, updatedItem, {new: true})*/
-    res.status(201).json(result)
+    res.send(result).status(201)
 }catch(error){
 		res.status(409).json({message: error.message})
 	}}
