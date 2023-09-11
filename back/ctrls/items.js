@@ -35,7 +35,7 @@ export const createItem = async(req,res)=> {
 		             creator: req.userId, 
 		             date: new Date().toISOString()}
 	let result = await collection.insertOne(newItem)
-	 console.log(result)	  
+	//console.log(result)	  
 		res.send(newItem).status(204)
 	}catch(error){
 		res.status(409).json({message: error.message})
@@ -44,19 +44,18 @@ export const createItem = async(req,res)=> {
 export const updateItem = async(req, res)=> {
    try{
     const query = { _id: new ObjectId(req.params.id) }
-    const updates = {$set:  req.body }
+    const updates = {$set:{...req.body, date: new Date().toISOString()}}
     let collection = await db.collection("products")
-    let result = await collection.updateOne(query, updates)
     const item = await collection.findOne(query)
-	/*const {id} = req.params
-	const {title, description, creator, photo, price, category, createdAt} = req.body
-    
-	if(!mongoose.Types.ObjectId.isValid(id)) 
-		return res.status(404).send(`No item with id: ${id}`)
-
-	const updatedItem = {creator, title, description, photo, category, price, _id: id, createdAt}
-    await Item.findByIdAndUpdate(id, updatedItem, {new: true})*/
-    res.send(item).status(201)
+	//const {title, description, creator, photo, price, category, createdAt} = req.body
+	//const updatedItem = {creator, title, description, photo, 
+	//                       category, price, _id: id, createdAt}
+    if(!item)
+	 return res.send({message:`No post with id:${query._id}`}).status(404)
+	
+    let result = await collection.updateOne(query, updates)
+    let newItem = await collection.findOne(query)
+    res.send(newItem).status(201)
 }catch(error){
 		res.status(409).json({message: error.message})
 	}}
@@ -65,13 +64,13 @@ export const deleteItem = async(req,res)=> {
   try{
     const query = { _id: new ObjectId(req.params.id) };
 
-    const collection = db.collection("products");
-    let result = await collection.deleteOne(query)
+    const collection = db.collection("products")
     const item = await collection.findOne(query)
-    console.log(req.params.id)
+    
 	if(!item)
-	 return res.send({message:`No post with id: ${query._id}`}).status(404)
-	
-	res.send({ message: 'Post deleted', ...result}).status(200)
+	 return res.send({message:`No post with id:${query._id}`}).status(404)
+	 
+	let result = await collection.deleteOne(query)
+	res.send({ message: 'Post deleted', ...query}).status(200)
 }catch(error){res.status(409).json({message: error.message})}
  }
