@@ -28,14 +28,22 @@ export const signin = async(req,res)=> {
 
   try {
 	const { name, email, password} = req.body
-    let collection = await db.collection("users")
-    const oldUser = await collection.findOne({ email });
+    db.createCollection("users", {
+		validator: {
+			$jsonSchema:{
+				bsonType: 'object',
+				title: 'User Object Validation',
+				required: ['name']
+				}
+			}
+		})
+    const oldUser = await db.users.findOne({ email });
     if (oldUser) return res.status(400).json({ message: "User already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 12);
     const template = { email, password: hashedPassword, name: `${name}`, role: 'user' }
-    const result = await collection.insertOne(template)
-    const newUser = await collection.findOne({email}) 
+    const result = await db.users.insertOne(template)
+    const newUser = await db.users.findOne({email}) 
      
     const token = jwt.sign( { email: result.email, id: result._id },
                                           secret, { expiresIn: "1h" } )
