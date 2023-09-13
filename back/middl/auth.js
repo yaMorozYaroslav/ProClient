@@ -26,7 +26,7 @@ export const auth = async (req, res, next) => {
     res.status(409).json({message: error.message})
   }
 }
-export const roleAuth = async(req, res, next) => {
+/*export const roleAuth = async(req, res, next) => {
 	try{
 	let query = {_id: new ObjectId(req.params.id)}
 	let collectProds = await db.collection("products")
@@ -37,6 +37,6 @@ export const roleAuth = async(req, res, next) => {
 	if(user.role === 'admin'||req.userId === item.creator){next()}
 	else{throw new Error('User cannot perform the action')}
 	
-	}catch(error){console.log(error)}}
+	}catch(error){console.log(error)}}*/
 
 

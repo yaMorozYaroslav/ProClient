@@ -4,6 +4,14 @@ import db from "../conn.js";
 
 const secret = 'test'
 
+db.command( {
+   collMod: "contacts",
+   validator: { $jsonSchema: {
+      bsonType: "object",
+      required: [ "name" ]}},
+      validationLevel: "moderate"
+} )
+
 export const signin = async(req,res)=> {
 
   try{
@@ -28,7 +36,7 @@ export const signin = async(req,res)=> {
 
   try {
 	const { name, email, password} = req.body
-    db.createCollection("users", {
+    /*db.createCollection("users", {
 		validator: {
 			$jsonSchema:{
 				bsonType: 'object',
@@ -36,7 +44,7 @@ export const signin = async(req,res)=> {
 				required: ['name']
 				}
 			}
-		})
+		})*/
     const oldUser = await db.users.findOne({ email });
     if (oldUser) return res.status(400).json({ message: "User already exists" });
 
