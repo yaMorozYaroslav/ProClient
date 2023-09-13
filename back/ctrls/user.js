@@ -5,7 +5,7 @@ import db from "../conn.js";
 const secret = 'test'
 
 db.command( {
-   collMod: "contacts",
+   collMod: "users",
    validator: { $jsonSchema: {
       bsonType: "object",
       required: [ "name" ]}},
