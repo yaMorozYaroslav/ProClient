@@ -10,16 +10,21 @@ const secret = 'test'
       bsonType: "object",
       required: [ "name" ]}},
       validationLevel: "moderate"
-} )*/
+} )
 db.createCollection("users", {
 		validator: {
 			$jsonSchema:{
 				bsonType: 'object',
 				title: 'User Object Validation',
-				required: ['name']
+				required: ['name'],
+				 properties: {
+            name: {
+               bsonType: "string",
+               description: "'name' must be a string and is required"
+            },
 				}
-			}
-		})
+			}}
+		})*/
 
 export const signin = async(req,res)=> {
 
@@ -61,6 +66,6 @@ export const signin = async(req,res)=> {
     res.status(201).json({user: newUser, token })
     
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong" })
+    res.status(500).json({ message: error })
   }
 }
