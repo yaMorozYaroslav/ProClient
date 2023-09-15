@@ -56,7 +56,7 @@ export const signin = async(req,res)=> {
     if (oldUser) return res.status(400).json({ message: "User already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 12);
-    const template = { email, password: hashedPassword, name: `${name}`, role: 'user' }
+    const template = { email, password: hashedPassword, name: name?`${name}`:null, role: 'user' }
     const result = await collection.insertOne(template)
     const newUser = await collection.findOne({email}) 
      
