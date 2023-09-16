@@ -40,8 +40,8 @@ export const ItemExcerpt =({item, setCurrentId, single, setSingle,
 	  <p>{item.category}</p>
 	  <p style={parag}>{!single?item.description.substring(0,25)+'...':item.description}</p>
 	  <p style={parag}>{item.price} $</p>
-	  {(userData.result && 
-	   (userData.result._id === item.creator||userData.result.role === 'admin')) && 
+	  {(userData.user && 
+	   (userData.user._id === item.creator||userData.user.role === 'admin')) && 
 	   (<>
 	  <button style={button} onClick={handDelete}>Remove</button>
 	  <button style={button} onClick={handEdit}>Edit</button>

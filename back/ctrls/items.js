@@ -1,6 +1,6 @@
 import express from 'express'
-import db from "../conn.js";
-import { ObjectId } from "mongodb";
+import db from "../conn.js"
+import { ObjectId } from "mongodb"
 
 export const getItems = async(req,res) => {
 	try{

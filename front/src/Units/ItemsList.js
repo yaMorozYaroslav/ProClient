@@ -31,7 +31,7 @@ export const ItemsList = () => {
 	const maxPrice = state.itemPrice.max
 	
 	const sortedByDate = items.slice().sort((a, b) =>
-		                                   b.createdAt.localeCompare(a.createdAt))
+		                                   b.date.localeCompare(a.date))
 	
 	const sortedByPrice = sortedByDate.sort((a,b) => a.price - b.price)
 
@@ -48,7 +48,7 @@ export const ItemsList = () => {
 		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
 		return item
 		})
-		console.log(filteredBySearch)
+		
    const totalPages = Math.ceil(filteredBySearch.length/8)
    const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(totalPages)].map((e, i) => 
 	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>setPage(i)} key={i}>{i+1}</button>)}</div>
@@ -77,7 +77,7 @@ export const ItemsList = () => {
 	
 	if(loading){
 		
-		content = <p style={{textAlign:'center'}}>
+		content = <section style={{textAlign:'center'}}>
 		<h3>please wait, loading may take up to 2 minutes</h3>
 		<CircleLoader
         
@@ -86,7 +86,7 @@ export const ItemsList = () => {
         size={200}
         aria-label="Loading Spinner"
         data-testid="loader"
-      /></p>
+      /></section>
 		
 	}
 	if (!loading&&items&&slicedItems){

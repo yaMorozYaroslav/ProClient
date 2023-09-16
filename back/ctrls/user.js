@@ -4,12 +4,51 @@ import db from "../conn.js";
 
 const secret = 'test'
 
-/*db.command( {
+/*db.runCommand({
+    "collMod": "users",
+    "validator": {
+        $jsonSchema: {
+            "bsonType": "object",
+            "description": "Document describing a user",
+            "required": ["name", "email", "password"],
+            "properties": {
+                "name": {
+                    "bsonType": "string",
+                    "description": "Name must be a string and is required"
+                },
+                "email": {
+                    "bsonType": "string",
+                    "description": "Email must be a string and is required"
+                },
+                "password": {
+                    "bsonType": "string",
+                    "description": "Password must be a string and is required"
+                }
+            },
+        }
+    }
+})
+db.runCommand( {
    collMod: "users",
    validator: { $jsonSchema: {
       bsonType: "object",
-      required: [ "name" ]}},
-      validationLevel: "moderate"
+      required: [ "email", "name", "password" ],
+      properties: {
+         email: {
+            bsonType: "string",
+            description: "Phone must be a string and is required"
+         },
+         name: {
+            bsonType: "string",
+            description: "Name must be a string and is required"
+         },
+         password: {
+            bsonType: "string",
+            description: "Password must be a string and is required"
+                }
+      }
+   } },
+   validationLevel: "moderate"
 } )
 db.createCollection("users", {
 		validator: {
@@ -41,8 +80,8 @@ export const signin = async(req,res)=> {
     const token = jwt.sign({email: oldUser.email, id: oldUser._id},
                                             secret, {expiresIn: '1h'} )
     res.status(200).json({user: oldUser, token})
-	}catch(err){
-		res.status(500).json({message: 'Something went wrong'})
+	}catch(error){
+		res.status(500).json({message: error})
 	}
    }
    
@@ -50,7 +89,7 @@ export const signin = async(req,res)=> {
 
   try {
 	const { name, email, password} = req.body
-
+    //console.log(req)
 	const collection = await db.collection("users")
     const oldUser = await collection.findOne({ email });
     if (oldUser) return res.status(400).json({ message: "User already exists" });

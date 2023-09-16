@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API = axios.create({baseURL: 'https://item-auth-back-0555af6b9518.herokuapp.com'})
+//const API = axios.create({baseURL: 'https://item-auth-back-0555af6b9518.herokuapp.com'})
+const API = axios.create({baseURL: 'http://localhost:5000'})
 
 //console.log(localStorage.getItem('persist:profile'))
 

@@ -65,7 +65,7 @@ export const TheBar =()=> {
 	return <>
 	      {userKeys.length > 0 &&
 		  <h2 style={{'position':'absolute', 'left':'250px', fontSize: '34px'}}>
-		                                    Hello, {userData.result.name} :)</h2>}
+		                                    Hello, {userData.user.name} :)</h2>}
 	      {openAlert && !authForm ? alert : null} 
 	      <div style={{'marginLeft':'75%', 'display': 'flex'}}>
 	        {!authForm && !single && <button onMouseOver={changeBorder} style={button} onClick={onAddItem}>AddItem</button>}
