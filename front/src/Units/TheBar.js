@@ -11,7 +11,7 @@ export const TheBar =()=> {
 	const {userData, logout} = React.useContext(UserContext)
 	
 	const {authForm, openItemForm, openAuthForm} = React.useContext(OpenContext)
-	//console.log(state)
+	
 	const profile = JSON.parse(localStorage.getItem('profile'))
 	
 	const removeProfile = () => localStorage.removeItem('profile')
@@ -28,7 +28,7 @@ export const TheBar =()=> {
 	        	if(userData)token = userData.token
 	        	if(token){
 	        		const decodedToken = decode(token)
-	        		console.log(decodedToken)
+	        		//console.log(decodedToken)
 	        		if(decodedToken.exp * 1000 < new Date().getTime()){
 	        		 logout()
 	        		 removeProfile()

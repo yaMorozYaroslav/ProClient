@@ -6,7 +6,7 @@ export const ItemExcerpt =({item, setCurrentId, single, setSingle,
      const pointer = 'https://cdn-icons-png.flaticon.com/512/178/178404.png?w=740&t=st=1688989387~exp=1688989987~hmac=8143b1693b344a06a46761d35f7b1107ed19894e68a123f60e0fd627f8ef1945'
      const [over, setOver] = React.useState(false)
      const showPointer = over && !single
-     console.log(over)
+   
     const handEdit =(e)=>  {
 		e.preventDefault()
 		openItemForm()

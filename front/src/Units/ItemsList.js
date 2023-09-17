@@ -64,21 +64,23 @@ export const ItemsList = () => {
    const [page, setPage] = React.useState(0)
 
    const slicer = sliceIntoChunks()
-   console.log(sliceIntoChunks())
+   // console.log(sliceIntoChunks())
    const slicedItems = slicer[page]
    
-	 React.useEffect(()=> {
+	/* React.useEffect(()=> {
 		    
 			if(!loading&&!items.length &&!error.length&&category)fetchItems(category)
-		},[loading,fetchItems,items.length, error, category]) 
+		},[loading,fetchItems,items.length, error, category]) */
+	 React.useEffect(()=> {    
+			fetchItems(category)
+		},[]) 
 	
-	//if(items.length)console.log(items)
 	let content
 	
 	if(loading){
 		
 		content = <section style={{textAlign:'center'}}>
-		<h3>please wait, loading may take up to 2 minutes</h3>
+		<h3>let me upload the products</h3>
 		<CircleLoader
         
         cssOverride={{marginLeft:'43%', marginTop: '5%'}}
@@ -113,6 +115,7 @@ export const ItemsList = () => {
 			  </Row>
 	  </>
 		}
+		
 	if (!loading&&items&&slicedItems&&single){
 
 		content = <><ItemExcerpt item={currItem}
@@ -125,7 +128,7 @@ export const ItemsList = () => {
 			                     userData={userData}
 			                     addToCart={addToCart}/></>
  }
-	if (error.length && !loading) {content = <section>{error}</section>}
+	if (!items && !loading) {content = <section>error</section>}
 		 return(
 		    <section>
 		       {content}
