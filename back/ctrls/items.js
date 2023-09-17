@@ -44,12 +44,11 @@ export const createItem = async(req,res)=> {
 export const updateItem = async(req, res)=> {
    try{
     const query = { _id: new ObjectId(req.params.id) }
-    const updates = {$set:{...req.body, date: new Date().toISOString()}}
+    const {_id, ...rest} = req.body
+    const updates = {$set:{...rest, date: new Date().toISOString()}}
     let collection = await db.collection("products")
     const item = await collection.findOne(query)
-	//const {title, description, creator, photo, price, category, createdAt} = req.body
-	//const updatedItem = {creator, title, description, photo, 
-	//                       category, price, _id: id, createdAt}
+	
     if(!item)
 	 return res.send({message:`No post with id:${query._id}`}).status(404)
 	

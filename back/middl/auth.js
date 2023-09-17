@@ -37,7 +37,7 @@ export const roleAuth = async(req, res, next) => {
 	const item = await collectProds.findOne(itemQuery)
 	//const item = await Item.findById(id.id)
 	const user = await collectUsers.findOne(userQuery)
-	console.log(user)
+	//console.log(user)
 	if(user.role === 'admin'||req.userId === item.creator){next()}
 	else{throw new Error('User cannot perform the action')}
 	
