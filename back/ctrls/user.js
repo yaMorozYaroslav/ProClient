@@ -4,30 +4,7 @@ import db from "../conn.js";
 
 const secret = 'test'
 
-/*db.runCommand({
-    "collMod": "users",
-    "validator": {
-        $jsonSchema: {
-            "bsonType": "object",
-            "description": "Document describing a user",
-            "required": ["name", "email", "password"],
-            "properties": {
-                "name": {
-                    "bsonType": "string",
-                    "description": "Name must be a string and is required"
-                },
-                "email": {
-                    "bsonType": "string",
-                    "description": "Email must be a string and is required"
-                },
-                "password": {
-                    "bsonType": "string",
-                    "description": "Password must be a string and is required"
-                }
-            },
-        }
-    }
-})
+/*
 db.runCommand( {
    collMod: "users",
    validator: { $jsonSchema: {
