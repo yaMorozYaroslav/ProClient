@@ -30,6 +30,7 @@ export const auth = async (req, res, next) => {
 }
 export const roleAuth = async(req, res, next) => {
 	try{
+		console.log(req.userId, req.params.id)
 	let itemQuery = {_id: new ObjectId(req.params.id)}
 	let userQuery = {_id: new ObjectId(req.userId)}
 	let collectProds = await db.collection("products")
@@ -37,7 +38,6 @@ export const roleAuth = async(req, res, next) => {
 	const item = await collectProds.findOne(itemQuery)
 	//const item = await Item.findById(id.id)
 	const user = await collectUsers.findOne(userQuery)
-	//console.log(user)
 	if(user.role === 'admin'||req.userId === item.creator){next()}
 	else{throw new Error('User cannot perform the action')}
 	
