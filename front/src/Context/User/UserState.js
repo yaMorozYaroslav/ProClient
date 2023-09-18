@@ -14,10 +14,12 @@ export const UserState = ({children}) => {
 	
 	const signUp = async(source) => {
 		try{
+		dispatch({type: 'START_LOADING'})
 		const {data} = await register(source)
         dispatch({type: AUTH, payload: data})
-		}catch(err){dispatch({type: ERROR, payload: err})}
-	}
+        dispatch({type: 'END_LOADING'})
+    }catch(err){dispatch({type: ERROR, payload: err})}
+	    }
 		
 	const signIn = async(source) => {
 		try{
@@ -34,6 +36,7 @@ export const UserState = ({children}) => {
     const logout = () => {
 		dispatch({type: LOGOUT})
 		}
+		
 	const clearError = () => dispatch({type: NO_ERROR})
 	
 	return (

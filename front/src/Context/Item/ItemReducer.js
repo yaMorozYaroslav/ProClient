@@ -7,7 +7,7 @@ const ItemReducer = (state, action) => {
   switch (action.type) {
 	  
 	case GET_ITEMS:
-	  console.log(action.payload)
+	//  console.log(action.payload)
 	  return {...state, items: action.payload.items }
 		  
 	case START_LOADING:

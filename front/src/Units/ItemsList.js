@@ -67,25 +67,21 @@ export const ItemsList = () => {
    // console.log(sliceIntoChunks())
    const slicedItems = slicer[page]
    
-	/* React.useEffect(()=> {
-		    
-			if(!loading&&!items.length &&!error.length&&category)fetchItems(category)
-		},[loading,fetchItems,items.length, error, category]) */
 	 React.useEffect(()=> {    
 			fetchItems(category)
-		},[]) 
+		},[category]) 
 	
 	let content
 	
 	if(loading){
 		
 		content = <section style={{textAlign:'center'}}>
-		<h3>let me upload the products</h3>
+		<h1>Let me upload the products</h1>
 		<CircleLoader
         
         cssOverride={{marginLeft:'43%', marginTop: '5%'}}
         color={'#901031'}
-        size={200}
+        size={180}
         aria-label="Loading Spinner"
         data-testid="loader"
       /></section>
@@ -128,7 +124,9 @@ export const ItemsList = () => {
 			                     userData={userData}
 			                     addToCart={addToCart}/></>
  }
-	if (!items && !loading) {content = <section>error</section>}
+	if (!slicedItems && !loading) {content = 
+		 <section style={{textAlign:'center', margin: '60px', fontSize:'30px'}}>
+		                There are no products matching your request.</section>}
 		 return(
 		    <section>
 		       {content}
