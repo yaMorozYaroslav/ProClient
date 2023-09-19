@@ -1,9 +1,6 @@
 import axios from 'axios'
 
-//const API = axios.create({baseURL: 'https://item-auth-back-0555af6b9518.herokuapp.com'})
-const API = axios.create({baseURL: 'https://prod-auth-back-2c98a10f4500.herokuapp.com'})
-
-//console.log(localStorage.getItem('persist:profile'))
+const API = axios.create({baseURL:'https://back-prod-auth-187d07db32a6.herokuapp.com'})
 
 API.interceptors.request.use((req)=>{
     if(localStorage.getItem('profile')){
