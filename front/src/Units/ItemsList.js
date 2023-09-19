@@ -12,7 +12,7 @@ import {Row, Col} from 'antd'
    
 export const ItemsList = () => {
 	
-	const {items, loading, error, fetchItems, single, setSingle, singleId,
+	const {items, loading, fetchItems, single, setSingle, singleId,
 		   removeItem, setCurrentId, setSingleId} = useContext(ItemContext)
 		   
     const {addToCart} = useContext(CartContext)
@@ -67,9 +67,10 @@ export const ItemsList = () => {
    // console.log(sliceIntoChunks())
    const slicedItems = slicer[page]
    
-	 React.useEffect(()=> {    
-			fetchItems(category)
-		},[category]) 
+	 React.useEffect(()=> { 
+		    //console.log(items.length)   
+			if(!items.length&&!loading)fetchItems(category)
+		},[fetchItems, category, items]) 
 	
 	let content
 	
