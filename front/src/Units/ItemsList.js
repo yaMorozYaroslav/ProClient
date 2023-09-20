@@ -69,8 +69,8 @@ export const ItemsList = () => {
    
 	 React.useEffect(()=> { 
 		    //console.log(items.length)   
-			if(!items.length&&!loading)fetchItems(category)
-		},[fetchItems, category, items]) 
+			if(!items.length && state.itemCategory === 'all')fetchItems(category)
+		},[fetchItems, category, items, loading]) 
 	
 	let content
 	

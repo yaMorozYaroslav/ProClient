@@ -38,7 +38,7 @@ export const Filter =(props)=> {
 		 <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(false)}>HideFilters</button>
 		  <label style={{'fontSize':'30px', 'color':'purple'}}>Category</label>
 		 <select value={state.itemCategory} style={{...text, 'cursor':'pointer'}}
-		          name='howFilter' onChange={onCategory}>
+		         onClick={()=>fetchItems(state.itemCategory)} name='howFilter' onChange={onCategory}>
 	       <option value='all'>All</option>
 	       <option value='soil'>Soils</option>
 	       <option value='pesticide'>Pesticides</option>
