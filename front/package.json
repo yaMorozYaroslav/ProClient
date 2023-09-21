@@ -2,7 +2,7 @@
   "name": "front",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://prod-auth-back-2c98a10f4500.herokuapp.com",
+  "proxy": "https://auth-prod-back-7afcce7d449f.herokuapp.com",
   "dependencies": {
     "@babel/plugin-syntax-flow": "^7.21.4",
     "@emailjs/browser": "^3.11.0",
