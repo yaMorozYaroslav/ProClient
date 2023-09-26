@@ -2,7 +2,7 @@ import express from 'express'
 import db from "../conn.js"
 import { ObjectId } from "mongodb"
 
-export const getItems = async(req,res) => {
+/*export const getItems = async(req,res) => {
 	try{
 		let { category = 'all'} = req.query
 		let items
@@ -10,12 +10,33 @@ export const getItems = async(req,res) => {
        if(category !== 'all') items = 
                     await collection.find({category: category}).toArray()
 	   if(category === 'all') items = await collection.find({}).toArray()
+	    console.log(items.length)
+	   if(item.length > 10){
+		   
+		   }
+		res.status(200).json({items})
+	}catch(error){
+		res.status(404).json({message: error.message})
+	}
+   }*/
+
+export const getItems = async(req,res) => {
+	try{    
+	   let collection = await db.collection("products"); 
+	  // let items = await collection.find({}).toArray()
+	   // console.log(items.length)
+	  
+       const page = req.query.pageIndex ? +req.query.pageIndex : 1;
+       const limit = req.query.pageSize ? +req.query.pageSize : 10;
+       const skip = (page - 1) * limit
+      // const result = await collection.aggregate([
+       let items = await collection.find({}).skip((page-1)*10).limit(10)
+		   console.log(items)
 		res.status(200).json({items})
 	}catch(error){
 		res.status(404).json({message: error.message})
 	}
    }
-
 
 export const getItem = async(req, res) => {
 	try{
