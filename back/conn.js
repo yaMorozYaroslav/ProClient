@@ -3,17 +3,17 @@ import { MongoClient } from "mongodb"
 import dotenv from 'dotenv'
 dotenv.config()
 
-const connectionString = process.env.CONNECTION_URL || "";
+const connectionString = process.env.CONNECTION_URL || ""
 
-const client = new MongoClient(connectionString);
+const client = new MongoClient(connectionString)
 
 let conn;
 try {
-  conn = await client.connect();
+  conn = await client.connect()
 } catch(e) {
-  console.error(e);
+  console.error(e)
 }
 
-let db = conn.db("mySecondDatabase")
+const db = conn.db("mySecondDatabase")
 
 export default db

@@ -22,17 +22,31 @@ import { ObjectId } from "mongodb"
 
 export const getItems = async(req,res) => {
 	try{    
-	   let collection = await db.collection("products"); 
-	  // let items = await collection.find({}).toArray()
-	   // console.log(items.length)
+	   let collection = await db.collection("products")
+	   let category = req.query.category
+	   //let result = await collection.find({}).toArray()
+	    console.log(category)
 	  
-       const page = req.query.pageIndex ? +req.query.pageIndex : 1;
-       const limit = req.query.pageSize ? +req.query.pageSize : 10;
+       const page = req.query.page ? +req.query.page : 1;
+       const limit = req.query.limit ? +req.query.limit : 2;
        const skip = (page - 1) * limit
-      // const result = await collection.aggregate([
-       let items = await collection.find({}).skip((page-1)*10).limit(10)
-		   console.log(items)
-		res.status(200).json({items})
+       let result = await collection.aggregate([
+   //{$facet: {
+    // 'data':[
+      {$match: category?{category: `${category}`}:{}},
+      //{$group: {_id: '$_id', total: $count}},
+      {$count: 'count'},
+      {$skip: parseInt(`${skip}`)},
+      {$limit: parseInt(`${limit}`)}
+        ]).toArray()
+										
+	//	],
+	// 'count':[{$count: 'count'}] 
+    // }}
+        
+	  //const total = result.length
+		   //console.log(total)
+		res.status(200).json({result})
 	}catch(error){
 		res.status(404).json({message: error.message})
 	}
