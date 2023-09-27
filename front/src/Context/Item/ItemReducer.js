@@ -8,7 +8,7 @@ const ItemReducer = (state, action) => {
 	  
 	case GET_ITEMS:
 	console.log(action.payload)
-	  return {...state, items: action.payload.data }
+	  return {...state, items: action.payload }
 		  
 	case START_LOADING:
 	return{...state,loading: true}

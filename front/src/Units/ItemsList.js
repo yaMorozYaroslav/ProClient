@@ -23,9 +23,10 @@ export const ItemsList = () => {
     
     const {openItemForm} = useContext(OpenContext)
     
-    const currItem = items.find((item) => item._id === singleId)
+    const currItem = items.data && items.data.find((item) => item._id === singleId)
     
     const category = state.itemCategory
+    /*
 	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
 	const maxPrice = state.itemPrice.max
@@ -50,9 +51,7 @@ export const ItemsList = () => {
 		})
 		
    const totalPages = Math.ceil(filteredBySearch.length/8)
-   const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(totalPages)].map((e, i) => 
-	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>setPage(i)} key={i}>{i+1}</button>)}</div>
-
+   
    function sliceIntoChunks() {
     const res = [];
     for (let i = 0; i < filteredBySearch.length; i += 8) {
@@ -66,9 +65,14 @@ export const ItemsList = () => {
    const slicer = sliceIntoChunks()
    // console.log(sliceIntoChunks())
    const slicedItems = slicer[page]
+   */
    //console.log(category)
+   const [page, setPage] = React.useState(0)
+   const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(items.totalPages)].map((e, i) => 
+	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>setPage(i)} key={i}>{i+1}</button>)}</div>
+
 	 React.useEffect(()=> {   
-			if(!items.length && !loading &&
+			if(!items.data && !loading &&
 			   !category)fetchItems(category)
 		},[fetchItems, category, items, loading]) 
 	
@@ -88,14 +92,14 @@ export const ItemsList = () => {
       /></section>
 		
 	}
-	if (!loading&&items&&slicedItems){
+	if (!loading&&items.data){
 
 		content = 
   
       <>
        <Buttons/>
       <Row gutter={[12, 12]}>
-       {slicedItems.map(item => (
+       {items.data.map(item => (
 			  <Col key={item._id}  span={6}> 
 			   <ItemExcerpt  
 			           item={item}
@@ -113,7 +117,7 @@ export const ItemsList = () => {
 	  </>
 		}
 		
-	if (!loading&&items&&slicedItems&&single){
+	if (!loading&&items.data&&single){
 
 		content = <><ItemExcerpt item={currItem}
 		                         single={single}
@@ -125,7 +129,7 @@ export const ItemsList = () => {
 			                     userData={userData}
 			                     addToCart={addToCart}/></>
  }
-	if (!slicedItems && !loading) {content = 
+	if (!items && !loading) {content = 
 		 <section style={{textAlign:'center', margin: '60px', fontSize:'30px'}}>
 		                There are no products matching your request.</section>}
 		 return(
