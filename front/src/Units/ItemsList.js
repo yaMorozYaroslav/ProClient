@@ -66,10 +66,10 @@ export const ItemsList = () => {
    const slicer = sliceIntoChunks()
    // console.log(sliceIntoChunks())
    const slicedItems = slicer[page]
-   
+   //console.log(category)
 	 React.useEffect(()=> {   
 			if(!items.length && !loading &&
-			   category === 'all')fetchItems(category)
+			   !category)fetchItems(category)
 		},[fetchItems, category, items, loading]) 
 	
 	let content

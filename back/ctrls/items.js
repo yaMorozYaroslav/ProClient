@@ -24,29 +24,29 @@ export const getItems = async(req,res) => {
 	try{    
 	   let collection = await db.collection("products")
 	   let category = req.query.category
-	   //let result = await collection.find({}).toArray()
-	    console.log(category)
+	   // console.log(category)
 	  
-       const page = req.query.page ? +req.query.page : 1;
-       const limit = req.query.limit ? +req.query.limit : 2;
+       const page = req.query.page ? req.query.page : 1;
+       const limit = req.query.limit ? req.query.limit : 2;
        const skip = (page - 1) * limit
        let result = await collection.aggregate([
-   //{$facet: {
-    // 'data':[
-      {$match: category?{category: `${category}`}:{}},
-      //{$group: {_id: '$_id', total: $count}},
-      {$count: 'count'},
+   {$facet: {
+    'data':[
+      {$match: category.length?{category: `${category}`}:{}},
       {$skip: parseInt(`${skip}`)},
-      {$limit: parseInt(`${limit}`)}
-        ]).toArray()
-										
-	//	],
-	// 'count':[{$count: 'count'}] 
-    // }}
-        
-	  //const total = result.length
-		   //console.log(total)
-		res.status(200).json({result})
+      {$limit: parseInt(`${limit}`)}								
+		    ],
+		
+	'products' :[{$count: 'count'}],
+     }},
+     {$unwind: '$products'},
+     {$addFields: { totalPages:{ $ceil: {
+            $divide: ['$products.count', Number(`${limit}`)]
+          }}}}
+      ]).toArray()
+      
+	 //console.log(result)
+		res.status(200).json(result[0])
 	}catch(error){
 		res.status(404).json({message: error.message})
 	}

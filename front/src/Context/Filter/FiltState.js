@@ -8,7 +8,7 @@ import {SET_CATEGORY, SET_SEARCH, RESET,
 export const FiltState = ({ children }) => {
   
   const initialState = {
-    itemCategory: 'all',
+    itemCategory: '',
     itemSearch: '',
     itemPrice: {min: '', max: ''},
     error: null

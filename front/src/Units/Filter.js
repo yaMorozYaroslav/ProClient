@@ -26,7 +26,7 @@ export const Filter =(props)=> {
 		}
 	const resetFilt =()=> {
 		reset()
-		if(state.itemCategory !== 'all')fetchItems('all')
+		if(!state.itemCategory)fetchItems()
 		}
 	
     const changeBorder =(e)=> {
@@ -39,7 +39,7 @@ export const Filter =(props)=> {
 		  <label style={{'fontSize':'30px', 'color':'purple'}}>Category</label>
 		 <select value={state.itemCategory} style={{...text, 'cursor':'pointer'}}
 		         onClick={()=>fetchItems(state.itemCategory)} name='howFilter' onChange={onCategory}>
-	       <option value='all'>All</option>
+	       <option value=''>All</option>
 	       <option value='soil'>Soils</option>
 	       <option value='pesticide'>Pesticides</option>
 	       <option value='seed'>Seeds</option>
