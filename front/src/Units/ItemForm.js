@@ -8,6 +8,7 @@ import {OpenContext} from '../Context/Contexts'
 const initialState = {title: '', description: '', price: '', 
 	                  category: '', subCategory: '', photo: ''}
 const subSeed = ['flowers', 'veggies', 'herbs', 'seedlings']
+const subSoil = ['for flower','for veggie']
 
 export const ItemForm = () => {
 	
@@ -48,8 +49,9 @@ export const ItemForm = () => {
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
 	let currSubCat
-    if(source.category==='seed'){currSubCat = subSeed}else{currSubCat=subSeed}
-	
+    if(source.category==='seeds'){currSubCat = subSeed}else{currSubCat=subSeed}
+	if(source.category==='soil'){currSubCat = subSoil}
+	if(source.category===''){currSubCat = subSeed}
 	const changeBorder =(e)=> {
 			e.target.style.border = '2px solid purple'
 			setTimeout(() => e.target.style.border = null, 1000)
@@ -87,9 +89,10 @@ export const ItemForm = () => {
 	         value={source.category}
 	         onChange={handChange}
 	         style={{...sInput, cursor: 'pointer'}}>
-	 <option value='seed'>seed</option>
-	 <option value='soil'>soil</option>
-	 <option value='pesticide'>pesticide</option>
+	 <option value='seeds'>seeds</option>
+	 <option value='soils'>soils</option>
+	 <option value='supplements'>supplements</option>
+	 <option value='equipment'>equipment</option>
 	 </select><br/>
 	 <label>SubCategory:</label>
 	 <select name='subCategory'
