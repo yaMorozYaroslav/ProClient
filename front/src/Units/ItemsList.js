@@ -67,13 +67,17 @@ export const ItemsList = () => {
    const slicedItems = slicer[page]
    */
    //console.log(category)
-   const [page, setPage] = React.useState(0)
+   const [page, setPage] = React.useState(1)
    const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(items.totalPages)].map((e, i) => 
-	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>setPage(i)} key={i}>{i+1}</button>)}</div>
+	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>setPage(i+1)} key={i}>{i+1}</button>)}</div>
 
 	 React.useEffect(()=> {   
-			if(!items.data && !loading &&
-			   !category)fetchItems(category, page)
+		 
+		 if(!items.data && !loading)fetchItems(category, page)
+		 if(items.data && !loading &&
+			   items.currPage !== page){
+				                console.log(items.currPage, page)
+		                               fetchItems(category, page)}
 		},[fetchItems, category, items, loading, page]) 
 	
 	let content

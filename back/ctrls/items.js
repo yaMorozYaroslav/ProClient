@@ -27,7 +27,7 @@ export const getItems = async(req,res) => {
 	   // console.log(category)
 	  
        const page = req.query.page ? req.query.page : 1;
-       const limit = req.query.limit ? req.query.limit : 2;
+       const limit = req.query.limit ? req.query.limit : 3;
        const skip = (page - 1) * limit
        let result = await collection.aggregate([
    {$facet: {
@@ -42,7 +42,8 @@ export const getItems = async(req,res) => {
      {$unwind: '$products'},
      {$addFields: { totalPages:{ $ceil: {
             $divide: ['$products.count', Number(`${limit}`)]
-          }}}}
+          }},
+                    currPage: Number(`${page}`)}}
       ]).toArray()
       
 	 //console.log(result)

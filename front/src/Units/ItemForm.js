@@ -6,9 +6,11 @@ import {ItemContext} from '../Context/Contexts'
 import {OpenContext} from '../Context/Contexts'
 
 const initialState = {title: '', description: '', price: '', 
-	                  category: '', subCategory: '', photo: ''}
+	                  category: 'seed', subCategory: '', photo: ''}
 const subSeed = ['flowers', 'veggies', 'herbs', 'seedlings']
-const subSoil = ['for flower','for veggie']
+const subSoil = ['for flowers','for veggies', 'for fruit']
+const subSupplements = ['fertilizers', 'pesticides', 'other']
+const subEquipment = ['gloves','tools','gear']
 
 export const ItemForm = () => {
 	
@@ -19,7 +21,7 @@ export const ItemForm = () => {
 	
 	const ref = React.useRef()
 	const [source, setSource] = React.useState(initialState)
-    console.log(items)
+   
     const currItem = items.data && items.data.find((item) => item._id === currentId)
     
     React.useEffect(()=>{
@@ -49,9 +51,11 @@ export const ItemForm = () => {
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
 	let currSubCat
-    if(source.category==='seeds'){currSubCat = subSeed}else{currSubCat=subSeed}
-	if(source.category==='soil'){currSubCat = subSoil}
-	if(source.category===''){currSubCat = subSeed}
+    if(source.category==='seeds'){currSubCat = subSeed}
+	if(source.category==='soils'){currSubCat = subSoil}
+	if(source.category==='supplements'){currSubCat = subSupplements}
+	if(source.category==='equipment'){currSubCat = subEquipment}
+	
 	const changeBorder =(e)=> {
 			e.target.style.border = '2px solid purple'
 			setTimeout(() => e.target.style.border = null, 1000)
@@ -88,7 +92,8 @@ export const ItemForm = () => {
 	 <select name='category'
 	         value={source.category}
 	         onChange={handChange}
-	         style={{...sInput, cursor: 'pointer'}}>
+	         style={{...sInput, cursor: 'pointer'}}
+	         required >
 	 <option value='seeds'>seeds</option>
 	 <option value='soils'>soils</option>
 	 <option value='supplements'>supplements</option>
@@ -98,9 +103,11 @@ export const ItemForm = () => {
 	 <select name='subCategory'
 	         value={source.subCategory}
 	         onChange={handChange}
-	         style={{...sInput, cursor: 'pointer'}}>
-	     {currSubCat.map((item,i) => <option key={i} value={item}>{item}</option>)}
-	 </select>
+	         style={{...sInput, cursor: 'pointer'}}
+	         required >
+	     {currSubCat && currSubCat.map((item,i) => 
+			   <option key={i} value={item}>{item}</option>)}
+	 </select><br/>
 	 <label>Photo: </label>
       <FileBase          
                          type="file"

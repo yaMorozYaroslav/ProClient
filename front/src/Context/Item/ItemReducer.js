@@ -15,13 +15,16 @@ const ItemReducer = (state, action) => {
 	case END_LOADING:
 	return{...state,loading: false}
 
+   /* case ADD_ITEM:
+      return {...state.items, items: [...state.items, action.payload]
+      }*/
     case ADD_ITEM:
-      return {...state, items: [...state.items, action.payload]
+      return {...state, items: {...state.items, data: [...state.items.data, action.payload]}
       }
     case UPDATE_ITEM: 
         return{
-	     ...state, items: state.items.map((item) =>
-        (item._id === action.payload._id ? action.payload : item)) 
+	     ...state, items: {...state.items, data: state.items.data.map((item) =>
+        (item._id === action.payload._id ? action.payload : item)) }
 			}
 
     case REMOVE_ITEM:

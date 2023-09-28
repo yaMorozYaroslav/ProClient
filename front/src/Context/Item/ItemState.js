@@ -21,11 +21,11 @@ export const ItemState = ({ children }) => {
 
   const [state, dispatch] = useReducer(ItemReducer, initialState)
 
-  const fetchItems = async(category) => {
+  const fetchItems = async(category, page) => {
 	try{
 		dispatch({type: START_LOADING})
 		
-		const {data} = await getItems(category)
+		const {data} = await getItems(category, page)
 		//console.log(data)
 		dispatch({type: GET_ITEMS, payload: data})
 		
@@ -49,7 +49,7 @@ export const ItemState = ({ children }) => {
   const updateItem = async (id, source) => {
 	  try{
 		  const {data} = await editItem(id, source)
-		  console.log(data)
+		  //console.log(data)
 		  dispatch({type: UPDATE_ITEM, payload: data})
 		  }
 	  catch(err){
