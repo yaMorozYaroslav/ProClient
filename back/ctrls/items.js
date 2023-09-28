@@ -32,7 +32,7 @@ export const getItems = async(req,res) => {
        let result = await collection.aggregate([
    {$facet: {
     'data':[
-      {$match: category.length?{category: `${category}`}:{}},
+      {$match: category?{category: `${category}`}:{}},
       {$skip: parseInt(`${skip}`)},
       {$limit: parseInt(`${limit}`)}								
 		    ],

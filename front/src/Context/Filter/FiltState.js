@@ -9,6 +9,7 @@ export const FiltState = ({ children }) => {
   
   const initialState = {
     itemCategory: '',
+    itemSubCategory: '',
     itemSearch: '',
     itemPrice: {min: '', max: ''},
     error: null

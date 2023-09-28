@@ -73,8 +73,8 @@ export const ItemsList = () => {
 
 	 React.useEffect(()=> {   
 			if(!items.data && !loading &&
-			   !category)fetchItems(category)
-		},[fetchItems, category, items, loading]) 
+			   !category)fetchItems(category, page)
+		},[fetchItems, category, items, loading, page]) 
 	
 	let content
 	
@@ -129,7 +129,7 @@ export const ItemsList = () => {
 			                     userData={userData}
 			                     addToCart={addToCart}/></>
  }
-	if (!items && !loading) {content = 
+	if (items.data&&!items.data.length && !loading) {content = 
 		 <section style={{textAlign:'center', margin: '60px', fontSize:'30px'}}>
 		                There are no products matching your request.</section>}
 		 return(

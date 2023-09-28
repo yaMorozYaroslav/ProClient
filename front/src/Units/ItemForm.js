@@ -5,7 +5,9 @@ import FileBase from 'react-file-base64'
 import {ItemContext} from '../Context/Contexts'
 import {OpenContext} from '../Context/Contexts'
 
-const initialState = {title: '', description: '', price: '', category: 'seed', photo: ''}
+const initialState = {title: '', description: '', price: '', 
+	                  category: '', subCategory: '', photo: ''}
+const subSeed = ['flowers', 'veggies', 'herbs', 'seedlings']
 
 export const ItemForm = () => {
 	
@@ -44,6 +46,9 @@ export const ItemForm = () => {
 		}
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
+	
+	let currSubCat
+    if(source.category==='seed'){currSubCat = subSeed}else{currSubCat=subSeed}
 	
 	const changeBorder =(e)=> {
 			e.target.style.border = '2px solid purple'
@@ -86,7 +91,13 @@ export const ItemForm = () => {
 	 <option value='soil'>soil</option>
 	 <option value='pesticide'>pesticide</option>
 	 </select><br/>
-	 
+	 <label>SubCategory:</label>
+	 <select name='subCategory'
+	         value={source.subCategory}
+	         onChange={handChange}
+	         style={{...sInput, cursor: 'pointer'}}>
+	     {currSubCat.map((item,i) => <option key={i} value={item}>{item}</option>)}
+	 </select>
 	 <label>Photo: </label>
       <FileBase          
                          type="file"
