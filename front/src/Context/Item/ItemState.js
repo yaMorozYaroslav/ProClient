@@ -1,5 +1,6 @@
-import { useReducer } from "react";
+import { useReducer, useContext } from "react";
 import {ItemContext} from "../Contexts";
+import {FiltContext} from "../Contexts"
 import ItemReducer from "./ItemReducer";
 import {getItems, createItem, editItem, deleteItem} from '../../api'
 
@@ -18,6 +19,7 @@ export const ItemState = ({ children }) => {
     single: false,
     singleId: null
   };
+  const {category} = useContext(FiltContext)
 
   const [state, dispatch] = useReducer(ItemReducer, initialState)
 
@@ -39,7 +41,8 @@ export const ItemState = ({ children }) => {
   const addItem = async(source) => {
     try{
 		const {data} = await createItem(source)
-		dispatch({type: ADD_ITEM, payload: data})
+		const newData = !category||category===data.category?data:null
+		dispatch({type: ADD_ITEM, payload: newData})
 	 }
     catch(err){
     	dispatch({type: ERROR, payload: err})

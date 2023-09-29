@@ -19,6 +19,7 @@ const ItemReducer = (state, action) => {
       return {...state.items, items: [...state.items, action.payload]
       }*/
     case ADD_ITEM:
+      console.log(action.payload)
       return {...state, items: {...state.items, data: [...state.items.data, action.payload]}
       }
     case UPDATE_ITEM: 

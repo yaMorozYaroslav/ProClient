@@ -66,6 +66,7 @@ export const FiltState = ({ children }) => {
     <FiltContext.Provider
       value={{
         state,
+        category: state.itemCategory,
         setCategory,
         setSearch,
         setMinPrice,
