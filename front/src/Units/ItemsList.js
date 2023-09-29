@@ -26,6 +26,7 @@ export const ItemsList = () => {
     const currItem = items.data && items.data.find((item) => item._id === singleId)
     
     const category = state.itemCategory
+    const subCategory = state.itemSubCategory
     /*
 	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
@@ -73,7 +74,7 @@ export const ItemsList = () => {
 
 	 React.useEffect(()=> {   
 		 
-		 if(!items.data && !loading)fetchItems(category, page)
+		 if(!items.data && !loading)fetchItems(category, subCategory, page)
 		 if(items.data && !loading &&
 			   items.currPage !== page){
 				                console.log(items.currPage, page)

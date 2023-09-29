@@ -21,12 +21,12 @@ export const ItemState = ({ children }) => {
 
   const [state, dispatch] = useReducer(ItemReducer, initialState)
 
-  const fetchItems = async(category, page) => {
+  const fetchItems = async(category,subCategory, page) => {
 	try{
 		dispatch({type: START_LOADING})
 		
-		const {data} = await getItems(category, page)
-		//console.log(data)
+		const {data} = await getItems(category,subCategory, page)
+		console.log(data)
 		dispatch({type: GET_ITEMS, payload: data})
 		
 		dispatch({type: END_LOADING})

@@ -38,11 +38,12 @@ export const Filter =(props)=> {
 		 <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(false)}>HideFilters</button>
 		  <label style={{'fontSize':'30px', 'color':'purple'}}>Category</label>
 		 <select value={state.itemCategory} style={{...text, 'cursor':'pointer'}}
-		         onClick={()=>fetchItems(state.itemCategory)} name='howFilter' onChange={onCategory}>
+		         onClick={()=>fetchItems(state.itemCategory, 1)} name='howFilter' onChange={onCategory}>
 	       <option value=''>All</option>
-	       <option value='soil'>Soils</option>
-	       <option value='pesticide'>Pesticides</option>
-	       <option value='seed'>Seeds</option>
+	       <option value='seeds'>Seeds</option>
+	       <option value='soils'>Soils</option>
+	       <option value='supplements'>Supplements</option>
+	       <option value='equipment'>Equipment</option>
 	     </select>
 	     <input style={text} value={state.itemPrice.min} onChange={onMinPrice} placeholder='MinPrice' type='num'/>
 	     <input style={text} value={state.itemPrice.max} onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
