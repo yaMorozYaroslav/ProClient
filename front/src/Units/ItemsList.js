@@ -70,15 +70,17 @@ export const ItemsList = () => {
    //console.log(category)
    const [page, setPage] = React.useState(1)
    const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(items.totalPages)].map((e, i) => 
-	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>setPage(i+1)} key={i}>{i+1}</button>)}</div>
+	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>fetchItems(category, i+1)} key={i}>{i+1}</button>)}</div>
 
 	 React.useEffect(()=> {   
 		 
-		 if(!items.data && !loading)fetchItems(category, subCategory, page)
-		 if(items.data && !loading &&
-			   items.currPage !== page){
-				                console.log(items.currPage, page)
-		                               fetchItems(category, page)}
+		 if(!items.data && !loading){
+			 setPage(1)
+			 fetchItems(category, subCategory, 1)}
+		// if(items.data && !loading && page !== 1 &&
+		//	   items.currPage !== page){
+		//		                console.log(items.currPage, page)
+		 //                              fetchItems(category, page)}
 		},[fetchItems, category, items, loading, page]) 
 	
 	let content

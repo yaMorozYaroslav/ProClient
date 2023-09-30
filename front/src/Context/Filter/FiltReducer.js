@@ -1,5 +1,5 @@
 
-import {SET_CATEGORY, SET_SEARCH, RESET,
+import {SET_CATEGORY,SET_SUB_CAT, SET_SEARCH, RESET,
 	    SET_MIN_PRICE, SET_MAX_PRICE, ERROR} from "./FiltTypes.js"
 
 const FiltReducer = (state, action) => {
@@ -7,6 +7,8 @@ const FiltReducer = (state, action) => {
 	  
 	case SET_CATEGORY:
 	  return {...state, itemCategory: action.payload}
+	case SET_SUB_CAT:
+	  return {...state, itemSubCategory: action.payload}
     case SET_SEARCH:
       return {...state, itemSearch: action.payload}
     case SET_MIN_PRICE:
