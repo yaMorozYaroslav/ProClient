@@ -24,7 +24,7 @@ export const getItems = async(req,res) => {
 	try{    
 	   let collection = await db.collection("products")
 	   let category = req.query.category
-	   // console.log(category)
+	   let type = req.query.type
 	  
        const page = req.query.page ? req.query.page : 1;
        const limit = req.query.limit ? req.query.limit : 3;
@@ -32,18 +32,23 @@ export const getItems = async(req,res) => {
        let result = await collection.aggregate([
    {$facet: {
     'data':[
-      {$match: category?{category: `${category}`}:{}},
+      {$match: category?{category: `${category}`}:{},
+		      // type?{type: `${type}`}:{}
+		       },
+	  {$match: type?{type: `${type}`}:{}},
       {$skip: parseInt(`${skip}`)},
-      {$limit: parseInt(`${limit}`)}								
+      {$limit: parseInt(`${limit}`)},							
 		    ],
-		
-	'products' :[{$count: 'count'}],
+    'calculate':[
+      {$match: category?{category: `${category}`}:{}},
+      {$count: 'count'}
+      ],
      }},
-     {$unwind: '$products'},
+     {$unwind: '$calculate'},
      {$addFields: { totalPages:{ $ceil: {
-            $divide: ['$products.count', Number(`${limit}`)]
-          }},
-                    currPage: Number(`${page}`)}}
+            $divide: ['$calculate.count', Number(`${limit}`)]
+          }},  
+          currPage: Number(`${page}`)}}
       ]).toArray()
       
 	 //console.log(result)

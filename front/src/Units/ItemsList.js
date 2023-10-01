@@ -26,7 +26,7 @@ export const ItemsList = () => {
     const currItem = items.data && items.data.find((item) => item._id === singleId)
     
     const category = state.itemCategory
-    const subCategory = state.itemSubCategory
+    const type = state.itemType
     /*
 	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
@@ -69,19 +69,21 @@ export const ItemsList = () => {
    */
    //console.log(category)
    const [page, setPage] = React.useState(1)
-   const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(items.totalPages)].map((e, i) => 
-	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>fetchItems(category, i+1)} key={i}>{i+1}</button>)}</div>
-
+ 
 	 React.useEffect(()=> {   
 		 
 		 if(!items.data && !loading){
 			 setPage(1)
-			 fetchItems(category, subCategory, 1)}
+			 fetchItems(category, type, 1)}
 		// if(items.data && !loading && page !== 1 &&
 		//	   items.currPage !== page){
 		//		                console.log(items.currPage, page)
 		 //                              fetchItems(category, page)}
 		},[fetchItems, category, items, loading, page]) 
+		
+		const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(items.totalPages)].map((e, i) => 
+	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>fetchItems(category,undefined, i+1)} key={i}>{i+1}</button>)}</div>
+
 	
 	let content
 	

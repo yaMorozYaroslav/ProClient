@@ -19,15 +19,15 @@ export const ItemState = ({ children }) => {
     single: false,
     singleId: null
   };
-  const {category} = useContext(FiltContext)
+  const {category, type} = useContext(FiltContext)
 
   const [state, dispatch] = useReducer(ItemReducer, initialState)
 
-  const fetchItems = async(category,subCategory, page) => {
+  const fetchItems = async(category, type, page) => {
 	try{
 		dispatch({type: START_LOADING})
 		
-		const {data} = await getItems(category,subCategory, page)
+		const {data} = await getItems(category, type, page)
 		console.log(data)
 		dispatch({type: GET_ITEMS, payload: data})
 		
@@ -41,7 +41,8 @@ export const ItemState = ({ children }) => {
   const addItem = async(source) => {
     try{
 		const {data} = await createItem(source)
-		const newData = !category||category===data.category?data:null
+		const newData = !category||category===data.category&&
+		                !type||type===data.type?data:null
 		dispatch({type: ADD_ITEM, payload: newData})
 	 }
     catch(err){

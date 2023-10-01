@@ -11,23 +11,23 @@ export const Filter =(props)=> {
     const subEquipment = ['gloves','tools','gear']
 	
 	const [show, setShow] = React.useState(false)
-	const {state, category, setCategory, setSubCategory, setSearch,
+	const {state, category, setCategory, setType, setSearch,
 		   setMinPrice, setMaxPrice, reset} = React.useContext(FiltContext)
 	const {fetchItems, single} = React.useContext(ItemContext)
 	
-	  let currSubCat
-    if(category==='seeds'){currSubCat = subSeed}
-	if(category==='soils'){currSubCat = subSoil}
-	if(category==='supplements'){currSubCat = subSupplements}
-	if(category==='equipment'){currSubCat = subEquipment}
+	  let currType
+    if(category==='seeds'){currType = subSeed}
+	if(category==='soils'){currType = subSoil}
+	if(category==='supplements'){currType = subSupplements}
+	if(category==='equipment'){currType = subEquipment}
 	
 	function onCategory(event){
 		event.preventDefault()
 		setCategory(event.target.value)	
 		}
-	function onSubCategory(event){
+	function onType(event){
 		event.preventDefault()
-		setSubCategory(event.target.value)
+		setType(event.target.value)
 		}
 	function onSearch(event){
 		event.preventDefault()
@@ -53,19 +53,19 @@ export const Filter =(props)=> {
 		 <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(false)}>HideFilters</button>
 		  <label style={{'fontSize':'30px', 'color':'purple'}}>Category</label>
 		 <select value={state.itemCategory} style={{...text, 'cursor':'pointer'}}
-		         onClick={()=>fetchItems(state.itemCategory, 1)} onChange={onCategory}>
+		         onClick={()=>fetchItems(state.itemCategory,state.itemType, 1)} onChange={onCategory}>
 	       <option value=''>All</option>
 	       <option value='seeds'>Seeds</option>
 	       <option value='soils'>Soils</option>
 	       <option value='supplements'>Supplements</option>
 	       <option value='equipment'>Equipment</option>
 	     </select>
-	     <select name='subCategory'
-	         value={state.itemSubCategory}
-	         onChange={onSubCategory}
+	     <select name='type'
+	         value={state.itemType}
+	         onChange={onType}
 	         style={{...text, 'cursor':'pointer'}}
 	         required >
-	     {currSubCat && currSubCat.map((item,i) => 
+	     {currType && currType.map((item,i) => 
 			   <option key={i} value={item}>{item}</option>)}
 	 </select><br/>
 	     <input style={text} value={state.itemPrice.min} onChange={onMinPrice} placeholder='MinPrice' type='num'/>

@@ -2,14 +2,14 @@ import { useReducer } from "react"
 import {FiltContext} from "../Contexts"
 import FiltReducer from "./FiltReducer"
 
-import {SET_CATEGORY, SET_SUB_CAT, SET_SEARCH, RESET,
+import {SET_CATEGORY, SET_TYPE, SET_SEARCH, RESET,
         SET_MIN_PRICE, SET_MAX_PRICE, ERROR} from "./FiltTypes.js"
 
 export const FiltState = ({ children }) => {
   
   const initialState = {
     itemCategory: '',
-    itemSubCategory: '',
+    itemType: '',
     itemSearch: '',
     itemPrice: {min: '', max: ''},
     error: null
@@ -25,9 +25,9 @@ export const FiltState = ({ children }) => {
 		dispatch({type: ERROR, payload: err})
 	  }
    }
-   const setSubCategory = (source) => {
+   const setType = (source) => {
 	   try{
-		   dispatch({type: SET_SUB_CAT, payload: source})
+		   dispatch({type: SET_TYPE, payload: source})
 		   }
 	   catch(err){	
 		dispatch({type: ERROR, payload: err})
@@ -75,7 +75,8 @@ export const FiltState = ({ children }) => {
       value={{
         state,
         category: state.itemCategory,
-        setSubCategory,
+        type: state.itemType,
+        setType,
         setCategory,
         setSearch,
         setMinPrice,

@@ -50,11 +50,11 @@ export const ItemForm = () => {
 	
 	const handChange =(e)=> setSource({...source, [e.target.name]: e.target.value})
 	
-	let currSubCat
-    if(source.category==='seeds'){currSubCat = subSeed}
-	if(source.category==='soils'){currSubCat = subSoil}
-	if(source.category==='supplements'){currSubCat = subSupplements}
-	if(source.category==='equipment'){currSubCat = subEquipment}
+	let currType
+    if(source.category==='seeds'){currType = subSeed}
+	if(source.category==='soils'){currType = subSoil}
+	if(source.category==='supplements'){currType = subSupplements}
+	if(source.category==='equipment'){currType = subEquipment}
 	
 	const changeBorder =(e)=> {
 			e.target.style.border = '2px solid purple'
@@ -101,11 +101,11 @@ export const ItemForm = () => {
 	 </select><br/>
 	 <label>SubCategory:</label>
 	 <select name='subCategory'
-	         value={source.subCategory}
+	         value={source.type}
 	         onChange={handChange}
 	         style={{...sInput, cursor: 'pointer'}}
 	         required >
-	     {currSubCat && currSubCat.map((item,i) => 
+	     {currType && currType.map((item,i) => 
 			   <option key={i} value={item}>{item}</option>)}
 	 </select><br/>
 	 <label>Photo: </label>
