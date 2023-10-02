@@ -41,8 +41,8 @@ export const ItemState = ({ children }) => {
   const addItem = async(source) => {
     try{
 		const {data} = await createItem(source)
-		const newData = !category||category===data.category&&
-		                !type||type===data.type?data:null
+		const newData = (!category||category===data.category)&&
+		                (!type||type===data.type)?data:null
 		dispatch({type: ADD_ITEM, payload: newData})
 	 }
     catch(err){

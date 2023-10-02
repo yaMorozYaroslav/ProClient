@@ -38,7 +38,7 @@ export const ItemExcerpt =({item, setCurrentId, single, setSingle,
 	       onMouseOut={()=>setOver(false)} onMouseOver={()=>setOver(true)}
 	                                                onClick={onSingle}/>
 	  <p>{item.category}</p>
-	  <p>{item.subCategory&&item.subCategory.length?item.subCategory:'text'}</p>
+	  <p>{item.type&&item.type.length?item.type:'undefined'}</p>
 	  <p style={parag}>{!single?item.description.substring(0,25)+'...':item.description}</p>
 	  <p style={parag}>{item.price} $</p>
 	  {(userData.user && 

@@ -6,7 +6,7 @@ import {ItemContext} from '../Context/Contexts'
 import {OpenContext} from '../Context/Contexts'
 
 const initialState = {title: '', description: '', price: '', 
-	                  category: 'seed', subCategory: '', photo: ''}
+	                  category: 'seed', type: '', photo: ''}
 const subSeed = ['flowers', 'veggies', 'herbs', 'seedlings']
 const subSoil = ['for flowers','for veggies', 'for fruit']
 const subSupplements = ['fertilizers', 'pesticides', 'other']
@@ -99,8 +99,8 @@ export const ItemForm = () => {
 	 <option value='supplements'>supplements</option>
 	 <option value='equipment'>equipment</option>
 	 </select><br/>
-	 <label>SubCategory:</label>
-	 <select name='subCategory'
+	 <label>Type:</label>
+	 <select name='type'
 	         value={source.type}
 	         onChange={handChange}
 	         style={{...sInput, cursor: 'pointer'}}

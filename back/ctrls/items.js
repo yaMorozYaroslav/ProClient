@@ -50,9 +50,10 @@ export const getItems = async(req,res) => {
           }},  
           currPage: Number(`${page}`)}}
       ]).toArray()
-      
-	 //console.log(result)
-		res.status(200).json(result[0])
+     console.log(result)
+	 if(!result.length){res.status(200).json({data:[]})
+	 }else{res.status(200).json(result[0])}
+	 
 	}catch(error){
 		res.status(404).json({message: error.message})
 	}
