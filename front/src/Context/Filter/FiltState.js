@@ -20,6 +20,7 @@ export const FiltState = ({ children }) => {
   const setCategory = (source) => {
 	try{
 		dispatch({type: SET_CATEGORY, payload: source})
+		if(!source)dispatch({type: SET_TYPE, payload: source})
 	 }
 	catch(err){	
 		dispatch({type: ERROR, payload: err})
@@ -76,6 +77,7 @@ export const FiltState = ({ children }) => {
         state,
         category: state.itemCategory,
         type: state.itemType,
+        search: state.itemSearch,
         setType,
         setCategory,
         setSearch,

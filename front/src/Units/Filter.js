@@ -5,13 +5,13 @@ import {ItemContext} from '../Context/Contexts'
 
 export const Filter =(props)=> {
 	
-	const subSeed = ['flowers', 'veggies', 'herbs', 'seedlings']
-    const subSoil = ['for flowers','for veggies', 'for fruit']
-    const subSupplements = ['fertilizers', 'pesticides', 'other']
-    const subEquipment = ['gloves','tools','gear']
+	const subSeed = ['','flowers', 'veggies', 'herbs', 'seedlings']
+    const subSoil = ['','for flowers','for veggies', 'for fruit']
+    const subSupplements = ['','fertilizers', 'pesticides', 'other']
+    const subEquipment = ['','gloves','tools','gear']
 	
 	const [show, setShow] = React.useState(false)
-	const {state, category, setCategory, setType, setSearch,
+	const {state, category, type, setCategory, setType, setSearch,
 		   setMinPrice, setMaxPrice, reset} = React.useContext(FiltContext)
 	const {fetchItems, single} = React.useContext(ItemContext)
 	
@@ -31,6 +31,7 @@ export const Filter =(props)=> {
 		}
 	function onSearch(event){
 		event.preventDefault()
+		fetchItems(category, type, 1, event.target.value)
 		setSearch(event.target.value)
 		}
 	function onMinPrice(event){
@@ -52,21 +53,23 @@ export const Filter =(props)=> {
 	return <> {show && <div>
 		 <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(false)}>HideFilters</button>
 		  <label style={{'fontSize':'30px', 'color':'purple'}}>Category</label>
-		 <select value={state.itemCategory} style={{...text, 'cursor':'pointer'}}
-		         onClick={()=>fetchItems(state.itemCategory,state.itemType, 1)} onChange={onCategory}>
-	       <option value=''>All</option>
-	       <option value='seeds'>Seeds</option>
-	       <option value='soils'>Soils</option>
-	       <option value='supplements'>Supplements</option>
-	       <option value='equipment'>Equipment</option>
+		 <select value={category} style={{...text, 'cursor':'pointer'}}
+		         onClick={()=>fetchItems(category, type, 1)} onChange={onCategory}>
+	       <option value=''>all</option>
+	       <option value='seeds'>seeds</option>
+	       <option value='soils'>soils</option>
+	       <option value='supplements'>supplements</option>
+	       <option value='equipment'>equipment</option>
 	     </select>
+	       <label style={{'fontSize':'30px', 'color':'darkblue'}}>Type</label>
 	     <select name='type'
 	         value={state.itemType}
+	         onClick={()=>fetchItems(category, type, 1)}
 	         onChange={onType}
 	         style={{...text, 'cursor':'pointer'}}
 	         required >
 	     {currType && currType.map((item,i) => 
-			   <option key={i} value={item}>{item}</option>)}
+			   <option key={i} value={item}>{!item?'all':item}</option>)}
 	 </select><br/>
 	     <input style={text} value={state.itemPrice.min} onChange={onMinPrice} placeholder='MinPrice' type='num'/>
 	     <input style={text} value={state.itemPrice.max} onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>

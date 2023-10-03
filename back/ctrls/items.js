@@ -25,16 +25,16 @@ export const getItems = async(req,res) => {
 	   let collection = await db.collection("products")
 	   let category = req.query.category
 	   let type = req.query.type
-	  
-       const page = req.query.page ? req.query.page : 1;
-       const limit = req.query.limit ? req.query.limit : 3;
-       const skip = (page - 1) * limit
-       let result = await collection.aggregate([
+	   let search = req.query.search
+	  // console.log(search)
+       let page = req.query.page ? req.query.page : 1;
+       let limit = req.query.limit ? req.query.limit : 3;
+       let skip = (page - 1) * limit
+       let result
+       if(!search.length)result = await collection.aggregate([
    {$facet: {
     'data':[
-      {$match: category?{category: `${category}`}:{},
-		      // type?{type: `${type}`}:{}
-		       },
+      {$match: category?{category: `${category}`}:{}},
 	  {$match: type?{type: `${type}`}:{}},
       {$skip: parseInt(`${skip}`)},
       {$limit: parseInt(`${limit}`)},							
@@ -42,14 +42,19 @@ export const getItems = async(req,res) => {
     'calculate':[
       {$match: category?{category: `${category}`}:{}},
       {$count: 'count'}
-      ],
-     }},
+               ]
+             }},
      {$unwind: '$calculate'},
      {$addFields: { totalPages:{ $ceil: {
             $divide: ['$calculate.count', Number(`${limit}`)]
           }},  
           currPage: Number(`${page}`)}}
       ]).toArray()
+      //console.log(result)
+     if(search.length){
+		    let shift = await collection.find({$text: {$search: "new"}}).toArray()
+		    //console.log(shift)
+            result = [{data: shift}]}
      console.log(result)
 	 if(!result.length){res.status(200).json({data:[]})
 	 }else{res.status(200).json(result[0])}

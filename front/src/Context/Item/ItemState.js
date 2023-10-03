@@ -19,7 +19,7 @@ export const ItemState = ({ children }) => {
     single: false,
     singleId: null
   };
-  const {category, type} = useContext(FiltContext)
+  const {category, type, search} = useContext(FiltContext)
 
   const [state, dispatch] = useReducer(ItemReducer, initialState)
 
@@ -27,7 +27,7 @@ export const ItemState = ({ children }) => {
 	try{
 		dispatch({type: START_LOADING})
 		
-		const {data} = await getItems(category, type, page)
+		const {data} = await getItems(category, type, page, search)
 		console.log(data)
 		dispatch({type: GET_ITEMS, payload: data})
 		

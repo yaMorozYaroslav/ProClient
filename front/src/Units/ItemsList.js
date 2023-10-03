@@ -14,7 +14,7 @@ export const ItemsList = () => {
 	
 	const {items, loading, fetchItems, single, setSingle, singleId,
 		   removeItem, setCurrentId, setSingleId} = useContext(ItemContext)
-		 console.log(items)  
+		  
     const {addToCart} = useContext(CartContext)
     
     const {state} = useContext(FiltContext)
@@ -27,6 +27,7 @@ export const ItemsList = () => {
     
     const category = state.itemCategory
     const type = state.itemType
+    const search = state.itemSearch
     /*
 	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
@@ -72,17 +73,12 @@ export const ItemsList = () => {
  
 	 React.useEffect(()=> {   
 		 if(!items.data && !loading){
-			 console.log(items)
 			 setPage(1)
 			 fetchItems(category, type, 1)}
-		// if(items.data && !loading && page !== 1 &&
-		//	   items.currPage !== page){
-		//		                console.log(items.currPage, page)
-		 //                              fetchItems(category, page)}
+	    // if(search)fetchItems(category, type, page)
 		},[fetchItems, category,type, items, loading, page]) 
-		
 		const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(items.totalPages)].map((e, i) => 
-	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>fetchItems(category,undefined, i+1)} key={i}>{i+1}</button>)}</div>
+	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>fetchItems(category,type, i+1)} key={i}>{i+1}</button>)}</div>
 
 	
 	let content
