@@ -24,16 +24,19 @@ export const Filter =(props)=> {
 	function onCategory(event){
 		event.preventDefault()
 		setCategory(event.target.value)	
+		fetchItems(event.target.value, type, 1)
 		}
 	function onType(event){
 		event.preventDefault()
 		setType(event.target.value)
+		console.log(event.target.value)
+		fetchItems(category, event.target.value, 1)
 		}
 	function onSearch(event){
 		event.preventDefault()
-		//fetchItems(category, type, 1, event.target.value)
-		//console.log(state.itemSearch)
 		setSearch(event.target.value)
+		console.log(event.target.value)
+		fetchItems(category, type, 1, event.target.value)
 		}
 	function onMinPrice(event){
 		setMinPrice(event.target.value)
@@ -43,7 +46,7 @@ export const Filter =(props)=> {
 		}
 	const resetFilt =()=> {
 		reset()
-		if(!state.itemCategory)fetchItems()
+		fetchItems('', '', 1)
 		}
 	
     const changeBorder =(e)=> {
@@ -55,7 +58,7 @@ export const Filter =(props)=> {
 		 <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(false)}>HideFilters</button>
 		  <label style={{'fontSize':'30px', 'color':'purple'}}>Category</label>
 		 <select value={category} style={{...text, 'cursor':'pointer'}}
-		         onClick={()=>fetchItems(category, type, 1)} onChange={onCategory}>
+		          onChange={onCategory}>
 	       <option value=''>all</option>
 	       <option value='seeds'>seeds</option>
 	       <option value='soils'>soils</option>
@@ -65,7 +68,6 @@ export const Filter =(props)=> {
 	       <label style={{'fontSize':'30px', 'color':'darkblue'}}>Type</label>
 	     <select name='type'
 	         value={state.itemType}
-	         onClick={()=>fetchItems(category, type, 1)}
 	         onChange={onType}
 	         style={{...text, 'cursor':'pointer'}}
 	         required >
@@ -74,7 +76,7 @@ export const Filter =(props)=> {
 	 </select><br/>
 	     <input style={text} value={state.itemPrice.min} onChange={onMinPrice} placeholder='MinPrice' type='num'/>
 	     <input style={text} value={state.itemPrice.max} onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
-	     <input style={text} value={state.search} onChange={onSearch} placeholder='Search'/>
+	     <input style={text} value={state.itemSearch} onChange={onSearch} placeholder='Search'/>
 	     <button onClick={resetFilt} onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}}>Reset</button>
 	     </div>}
 	     {!show && !single && <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(true)}>ShowFilters</button>}

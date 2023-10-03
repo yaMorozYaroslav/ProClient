@@ -12,7 +12,7 @@ import {Row, Col} from 'antd'
    
 export const ItemsList = () => {
 	
-	const {items, loading, fetchItems, single, setSingle, singleId,
+	const {items, loading, error, fetchItems, single, setSingle, singleId,
 		   removeItem, setCurrentId, setSingleId} = useContext(ItemContext)
 		  
     const {addToCart} = useContext(CartContext)
@@ -29,7 +29,6 @@ export const ItemsList = () => {
     const type = state.itemType
     const search = state.itemSearch
     /*
-	const search = state.itemSearch
 	const minPrice = state.itemPrice.min
 	const maxPrice = state.itemPrice.max
 	
@@ -46,44 +45,25 @@ export const ItemsList = () => {
 		if( maxPrice > 0 && minPrice > 0){
 			return item.price > parseInt(minPrice) && item.price < parseInt(maxPrice)}
 		return item
-		})
-    const filteredBySearch = filteredByPrice.filter(item => {
-		if(search){return item.title.toUpperCase().includes(search.toUpperCase())}
-		return item
-		})
-		
-   const totalPages = Math.ceil(filteredBySearch.length/8)
-   
-   function sliceIntoChunks() {
-    const res = [];
-    for (let i = 0; i < filteredBySearch.length; i += 8) {
-        const chunk = filteredBySearch.slice(i, i + 8);
-        res.push(chunk);
-    }
-    return res;
+		}) 
 }
-   const [page, setPage] = React.useState(0)
-
-   const slicer = sliceIntoChunks()
-   // console.log(sliceIntoChunks())
-   const slicedItems = slicer[page]
+  
    */
-   //console.log(category)
    const [page, setPage] = React.useState(1)
  
-	 React.useEffect(()=> { 
-		 if(!items.data && !loading){
+	 React.useEffect(()=> {
+		// console.log(error) 
+		 if(!items.data && !loading && !error.length){
+			  setPage(1)
 			 fetchItems(category, type,1)
 			 }  
-		 if(items.data && !items.data.length && !loading){
-			 setPage(1)
-			 fetchItems(category, type, 1)}
-		},[fetchItems, category,type, items, loading, page]) 
-	   // if(search)fetchItems(category, type, page)
-	   console.log(search)
-	// React.useEffect(()=> {
-	//	 if(items.data&&search&&!loading)fetchItems(category, type, 1, search)
-	//	 },[search])
+		
+		  },[fetchItems, category,type, items, loading, page, error.length]) 
+	   
+	//React.useEffect(()=> {
+	//	 if(items.data&&search&&!loading)fetchItems(
+	//	                                      category, type, 1, search)
+	//	 },[search, items.data, loading, fetchItems, category, type])
 		 
 		const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(items.totalPages)].map((e, i) => 
 	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>fetchItems(category,type, i+1)} key={i}>{i+1}</button>)}</div>
@@ -142,9 +122,14 @@ export const ItemsList = () => {
 			                     userData={userData}
 			                     addToCart={addToCart}/></>
  }
-	if (items.data&&!items.data.length && !loading) {content = 
+	if(items.data&&!items.data.length && !loading) {content = 
 		 <section style={{textAlign:'center', margin: '60px', fontSize:'30px'}}>
 		                There are no products matching your request.</section>}
+		 
+	
+	if(error.length) {content = 
+		 <section style={{textAlign:'center', margin: '60px', fontSize:'30px'}}>
+		                {error}</section>}
 		 return(
 		    <section>
 		       {content}
