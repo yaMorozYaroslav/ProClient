@@ -31,7 +31,8 @@ export const Filter =(props)=> {
 		}
 	function onSearch(event){
 		event.preventDefault()
-		fetchItems(category, type, 1, event.target.value)
+		//fetchItems(category, type, 1, event.target.value)
+		//console.log(state.itemSearch)
 		setSearch(event.target.value)
 		}
 	function onMinPrice(event){
@@ -73,7 +74,7 @@ export const Filter =(props)=> {
 	 </select><br/>
 	     <input style={text} value={state.itemPrice.min} onChange={onMinPrice} placeholder='MinPrice' type='num'/>
 	     <input style={text} value={state.itemPrice.max} onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
-	     <input style={text} value={state.itemSearch} onChange={onSearch} placeholder='Search'/>
+	     <input style={text} value={state.search} onChange={onSearch} placeholder='Search'/>
 	     <button onClick={resetFilt} onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}}>Reset</button>
 	     </div>}
 	     {!show && !single && <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(true)}>ShowFilters</button>}

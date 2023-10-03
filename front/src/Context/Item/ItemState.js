@@ -28,7 +28,7 @@ export const ItemState = ({ children }) => {
 		dispatch({type: START_LOADING})
 		
 		const {data} = await getItems(category, type, page, search)
-		console.log(data)
+		//console.log(data)
 		dispatch({type: GET_ITEMS, payload: data})
 		
 		dispatch({type: END_LOADING})

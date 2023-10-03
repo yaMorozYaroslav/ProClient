@@ -52,7 +52,8 @@ export const getItems = async(req,res) => {
       ]).toArray()
       //console.log(result)
      if(search.length){
-		    let shift = await collection.find({$text: {$search: "new"}}).toArray()
+		 //console.log(search)
+		    let shift = await collection.find({$text: {$search: `${search}`}}).toArray()
 		    //console.log(shift)
             result = [{data: shift}]}
      console.log(result)

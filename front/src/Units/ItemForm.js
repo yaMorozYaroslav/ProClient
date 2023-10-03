@@ -7,10 +7,10 @@ import {OpenContext} from '../Context/Contexts'
 
 const initialState = {title: '', description: '', price: '', 
 	                  category: '', type: '', photo: ''}
-const subSeed = ['flowers', 'veggies', 'herbs', 'seedlings']
-const subSoil = ['for flowers','for veggies', 'for fruit']
-const subSupplements = ['fertilizers', 'pesticides', 'other']
-const subEquipment = ['gloves','tools','gear']
+const subSeed = ['', 'flowers', 'veggies', 'herbs', 'seedlings']
+const subSoil = ['', 'for flowers','for veggies', 'for fruit']
+const subSupplements = ['', 'fertilizers', 'pesticides', 'other']
+const subEquipment = ['', 'gloves','tools','gear']
 
 export const ItemForm = () => {
 	
