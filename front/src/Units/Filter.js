@@ -11,7 +11,7 @@ export const Filter =(props)=> {
     const subEquipment = ['','gloves','tools','gear']
 	
 	const [show, setShow] = React.useState(false)
-	const {state, category, type, setCategory, setType, setSearch,
+	const {state, category, type, search, setCategory, setType, setSearch,
 		   setMinPrice, setMaxPrice, reset} = React.useContext(FiltContext)
 	const {fetchItems, single} = React.useContext(ItemContext)
 	
@@ -21,10 +21,15 @@ export const Filter =(props)=> {
 	if(category==='supplements'){currType = subSupplements}
 	if(category==='equipment'){currType = subEquipment}
 	
+	const resetFilt =()=> {
+		reset()
+		fetchItems('', '', 1)
+		}
 	function onCategory(event){
 		event.preventDefault()
+		if(search)setSearch('')
 		setCategory(event.target.value)	
-		fetchItems(event.target.value, type, 1)
+		fetchItems(event.target.value, type, 1, '')
 		}
 	function onType(event){
 		event.preventDefault()
@@ -32,23 +37,19 @@ export const Filter =(props)=> {
 		console.log(event.target.value)
 		fetchItems(category, event.target.value, 1)
 		}
-	function onSearch(event){
-		event.preventDefault()
-		setSearch(event.target.value)
-		console.log(event.target.value)
-		fetchItems(category, type, 1, event.target.value)
-		}
 	function onMinPrice(event){
 		setMinPrice(event.target.value)
 		}
 	function onMaxPrice(event){
 		setMaxPrice(event.target.value)
 		}
-	const resetFilt =()=> {
-		reset()
-		fetchItems('', '', 1)
+	function onSearch(event){
+		event.preventDefault()
+		setSearch(event.target.value)
+		if(category)setCategory('')
+		//console.log(event.target.value)
+		fetchItems(category, type, 1, event.target.value)
 		}
-	
     const changeBorder =(e)=> {
 			e.target.style.border = '2px solid green'
 			setTimeout(() => e.target.style.border = null, 1000)

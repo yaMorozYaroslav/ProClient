@@ -36,28 +36,32 @@ export const getItems = async(req,res) => {
     'data':[
       {$match: category?{category: `${category}`}:{}},
 	  {$match: type?{type: `${type}`}:{}},
+	  //{$count: 'count'},
       {$skip: parseInt(`${skip}`)},
       {$limit: parseInt(`${limit}`)},							
 		    ],
     'calculate':[
       {$match: category?{category: `${category}`}:{}},
+      {$match: type?{type: `${type}`}:{}},
       {$count: 'count'}
                ]
              }},
      {$unwind: '$calculate'},
      {$addFields: { totalPages:{ $ceil: {
-            $divide: ['$calculate.count', Number(`${limit}`)]
+            $divide: ['$calculate.count'||0, Number(`${limit}`)]
           }},  
           currPage: Number(`${page}`)}}
       ]).toArray()
-      //console.log(result)
-     if(search.length){
-		 //console.log(search)
-		    let shift = await collection.find({$text: {$search: `${search}`}}).toArray()
-		    //console.log(shift)
-            result = [{data: shift}]}
-     console.log(result)
-	 if(!result.length){res.status(200).json({data:[]})
+   // console.log(!result[0].calculate[0])
+     if(search.length){result = await collection.aggregate([
+	                  {$match:{$text: {$search: `${search}`}}},
+                 {$facet: {
+                    'data':[],
+                    'calculate':[{$count: 'count'}] }} ]).toArray()
+                    }
+    // console.log(!result[0].calculate[0])
+    //console.log(result)
+	 if(!result[0]){res.status(200).json({data:[], message: 'nothing'})
 	 }else{res.status(200).json(result[0])}
 	 
 	}catch(error){
