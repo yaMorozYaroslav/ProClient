@@ -28,27 +28,7 @@ export const ItemsList = () => {
     const category = state.itemCategory
     const type = state.itemType
     const search = state.itemSearch
-    /*
-	const minPrice = state.itemPrice.min
-	const maxPrice = state.itemPrice.max
-	
-	const sortedByDate = items.slice().sort((a, b) =>
-		                                   b.date.localeCompare(a.date))
-	
-	const sortedByPrice = sortedByDate.sort((a,b) => a.price - b.price)
-
-	const filteredByPrice = sortedByPrice.filter(item => {
-		if( minPrice > 0 && !maxPrice){
-			 return item.price > parseInt(minPrice)}
-		if( maxPrice > 0 && !minPrice){
-			return item.price < parseInt(maxPrice)}
-		if( maxPrice > 0 && minPrice > 0){
-			return item.price > parseInt(minPrice) && item.price < parseInt(maxPrice)}
-		return item
-		}) 
-}
-  
-   */
+    
    const [page, setPage] = React.useState(1)
  
 	 React.useEffect(()=> {
@@ -60,15 +40,12 @@ export const ItemsList = () => {
 		
 		  },[fetchItems, items, loading, page, error, search]) 
 	console.log(items)
-	//React.useEffect(()=> {
-	//	 if(items.data&&search&&!loading)fetchItems(
-	//	                                      category, type, 1, search)
-	//	 },[search, items.data, loading, fetchItems, category, type])
-		 
-   const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>
-    Pages:{[...Array(items.totalPages)].map((e, i) => 
+	 
+   const Buttons = () =>
+        <div style={{'display':'flex', margin: '5px','fontSize':'20px'}}>
+             Pages:{[...Array(items.totalPages)].map((e, i) => 
     <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} 
-	        onClick={()=>fetchItems(category,type, i+1, '')} key={i}>{i+1}</button>)}</div>
+	        onClick={()=>fetchItems('','', i+1, search)} key={i}>{i+1}</button>)}</div>
 
 	
 	let content
@@ -93,7 +70,8 @@ export const ItemsList = () => {
   
       <>
        <Buttons/>
-      <Row gutter={[12, 12]}>
+      <Row gutter={[12, 12]}
+        style={{width: '80%', marginLeft:'10%'}}> 
        {items.data.map(item => (
 			  <Col key={item._id}  span={6}> 
 			   <ItemExcerpt  

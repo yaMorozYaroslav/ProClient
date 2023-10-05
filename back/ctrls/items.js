@@ -32,20 +32,24 @@ export const getItems = async(req,res) => {
        let skip = (page - 1) * limit
        let result
        if(!search.length)result = await collection.aggregate([
+  
    {$facet: {
     'data':[
+      {$sort: {price: 1}},
       {$match: category?{category: `${category}`}:{}},
-	  {$match: type?{type: `${type}`}:{}},
-	  //{$count: 'count'},
-      {$skip: parseInt(`${skip}`)},
-      {$limit: parseInt(`${limit}`)},							
+	  {$match: type?{type: `${type}`}:{}},  
+      //{$skip: parseInt(`${skip}`)},
+      //{$limit: parseInt(`${limit}`)},							
 		    ],
+		    
     'calculate':[
       {$match: category?{category: `${category}`}:{}},
       {$match: type?{type: `${type}`}:{}},
       {$count: 'count'}
                ]
              }},
+      // {$unwind: '$data'},
+      //{$sortArray: {input: '$data', sortBy: {price: 1}}},
      {$unwind: '$calculate'},
      {$addFields: { totalPages:{ $ceil: {
             $divide: ['$calculate.count'||0, Number(`${limit}`)]
@@ -60,7 +64,13 @@ export const getItems = async(req,res) => {
                      {$skip: parseInt(`${skip}`)},
                      {$limit: parseInt(`${limit}`)}
                     ],
-                    'calculate':[{$count: 'count'}] }} ]).toArray()
+                    'calculate':[{$count: 'count'}] }},
+                 {$unwind: '$calculate'},
+                 {$addFields: { totalPages:{ $ceil: {
+                    $divide: ['$calculate.count'||0, Number(`${limit}`)]
+                     }},  
+                      currPage: Number(`${page}`)}}                  
+                     ]).toArray()
                     }
     // console.log(!result[0].calculate[0])
     console.log(result)

@@ -37,7 +37,7 @@ export const ItemExcerpt =({item, setCurrentId, single, setSingle,
 	  <img src={!showPointer?item.photo:pointer} alt='' style={{width:'200px', height: '220px'}}
 	       onMouseOut={()=>setOver(false)} onMouseOver={()=>setOver(true)}
 	                                                onClick={onSingle}/>
-	  <p>{item.category}</p>
+	  <p>{item.category&&item.category.length?item.category:'undefined'}</p>
 	  <p>{item.type&&item.type.length?item.type:'undefined'}</p>
 	  <p style={parag}>{!single?item.description.substring(0,25)+'...':item.description}</p>
 	  <p style={parag}>{item.price} $</p>

@@ -72,30 +72,30 @@ export const ItemForm = () => {
 	<form onSubmit={handSubmit} style={sText} ref={ref}>
 	 <label>Title:</label>
 	 <input name='title' 
-	 value={source.title||''}    
+	 value={source.title}    
 	 onChange={handChange}
 	 style={sInput} required/><br/>
 	 
 	 <label style={{marginRight: '245px'}}>Description:</label><br/>
 	 <textarea name='description'
-	 value={source.description||''} 
+	 value={source.description} 
 	 onChange={handChange}
 	 style={{...sInput, height: '50px', marginLeft: '45px'} } required/><br/>
 	 
 	 <label>Price:</label>
 	 <input name='price'
-	        type='number'
-	        value={source.price||''} 
-	        onChange={handChange}
+	        value={source.price}
+	        onChange={e=>setSource(
+				          {...source, price: Number(e.target.value)})}
 	        style={sInput} required/>$<br/>
 	 
 	 <label>Category:</label>
 	 <select name='category'
-	        // value={source.category}
+	         value={source.category}
 	         onChange={handChange}
 	         style={{...sInput, cursor: 'pointer'}}
 	         >
-	 <option value={source.category}/>
+	 <option value=''/>
 	 <option value='seeds'>seeds</option>
 	 <option value='soils'>soils</option>
 	 <option value='supplements'>supplements</option>
