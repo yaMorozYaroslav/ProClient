@@ -29,13 +29,12 @@ export const Filter =(props)=> {
 		event.preventDefault()
 		if(search)setSearch('')
 		setCategory(event.target.value)	
-		fetchItems(event.target.value, type, 1, '')
+		fetchItems(event.target.value, '', 1, '')
 		}
 	function onType(event){
 		event.preventDefault()
 		setType(event.target.value)
-		console.log(event.target.value)
-		fetchItems(category, event.target.value, 1)
+		fetchItems(category, event.target.value, 1, '')
 		}
 	function onMinPrice(event){
 		setMinPrice(event.target.value)
@@ -47,7 +46,6 @@ export const Filter =(props)=> {
 		event.preventDefault()
 		setSearch(event.target.value)
 		if(category)setCategory('')
-		//console.log(event.target.value)
 		fetchItems(category, type, 1, event.target.value)
 		}
     const changeBorder =(e)=> {

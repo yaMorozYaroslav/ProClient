@@ -56,11 +56,14 @@ export const getItems = async(req,res) => {
      if(search.length){result = await collection.aggregate([
 	                  {$match:{$text: {$search: `${search}`}}},
                  {$facet: {
-                    'data':[],
+                    'data':[
+                     {$skip: parseInt(`${skip}`)},
+                     {$limit: parseInt(`${limit}`)}
+                    ],
                     'calculate':[{$count: 'count'}] }} ]).toArray()
                     }
     // console.log(!result[0].calculate[0])
-    //console.log(result)
+    console.log(result)
 	 if(!result[0]){res.status(200).json({data:[], message: 'nothing'})
 	 }else{res.status(200).json(result[0])}
 	 

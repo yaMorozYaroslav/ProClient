@@ -27,6 +27,7 @@ export const ItemForm = () => {
     React.useEffect(()=>{
 		
 	       	   if(currItem)setSource(currItem)
+	       	   //console.log(currItem)
 								 
 	       },[currItem])
 	       

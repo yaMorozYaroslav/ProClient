@@ -55,18 +55,20 @@ export const ItemsList = () => {
 		// console.log(error) 
 		 if(!items.data && !loading && !error.length && !search){
 			  setPage(1)
-			 fetchItems(category, type, 1)
+			 fetchItems('', '', 1, '')
 			 }  
 		
-		  },[fetchItems, category,type, items, loading, page, error.length]) 
+		  },[fetchItems, items, loading, page, error, search]) 
 	console.log(items)
-	React.useEffect(()=> {
+	//React.useEffect(()=> {
 	//	 if(items.data&&search&&!loading)fetchItems(
 	//	                                      category, type, 1, search)
-		 },[search, items.data, loading, fetchItems, category, type])
+	//	 },[search, items.data, loading, fetchItems, category, type])
 		 
-		const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>Pages:{[...Array(items.totalPages)].map((e, i) => 
-	   <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} onClick={()=>fetchItems(category,type, i+1)} key={i}>{i+1}</button>)}</div>
+   const Buttons = () => <div style={{'display':'flex', 'fontSize':'20px'}}>
+    Pages:{[...Array(items.totalPages)].map((e, i) => 
+    <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} 
+	        onClick={()=>fetchItems(category,type, i+1, '')} key={i}>{i+1}</button>)}</div>
 
 	
 	let content
