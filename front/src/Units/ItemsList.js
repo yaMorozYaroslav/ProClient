@@ -17,7 +17,7 @@ export const ItemsList = () => {
 		  
     const {addToCart} = useContext(CartContext)
     
-    const {state} = useContext(FiltContext)
+    const {state, minPrice} = useContext(FiltContext)
 
     const {userData} = useContext(UserContext)
     
@@ -35,7 +35,7 @@ export const ItemsList = () => {
 		// console.log(error) 
 		 if(!items.data && !loading && !error.length && !search){
 			  setPage(1)
-			 fetchItems('', '', 1, '')
+			 fetchItems('', '', 1, '', minPrice)
 			 }  
 		
 		  },[fetchItems, items, loading, page, error, search]) 
@@ -45,7 +45,7 @@ export const ItemsList = () => {
         <div style={{'display':'flex', margin: '5px','fontSize':'20px'}}>
              Pages:{[...Array(items.totalPages)].map((e, i) => 
     <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} 
-	        onClick={()=>fetchItems('','', i+1, search)} key={i}>{i+1}</button>)}</div>
+	        onClick={()=>fetchItems('','', i+1, '', minPrice)} key={i}>{i+1}</button>)}</div>
 
 	
 	let content

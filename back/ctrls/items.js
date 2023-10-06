@@ -2,31 +2,14 @@ import express from 'express'
 import db from "../conn.js"
 import { ObjectId } from "mongodb"
 
-/*export const getItems = async(req,res) => {
-	try{
-		let { category = 'all'} = req.query
-		let items
-        let collection = await db.collection("products");
-       if(category !== 'all') items = 
-                    await collection.find({category: category}).toArray()
-	   if(category === 'all') items = await collection.find({}).toArray()
-	    console.log(items.length)
-	   if(item.length > 10){
-		   
-		   }
-		res.status(200).json({items})
-	}catch(error){
-		res.status(404).json({message: error.message})
-	}
-   }*/
-
 export const getItems = async(req,res) => {
 	try{    
 	   let collection = await db.collection("products")
 	   let category = req.query.category
 	   let type = req.query.type
 	   let search = req.query.search
-	  // console.log(search)
+	   let sort = req.query.sort==='true'?'true':''
+	   console.log(sort)
        let page = req.query.page ? req.query.page : 1;
        let limit = req.query.limit ? req.query.limit : 3;
        let skip = (page - 1) * limit
@@ -37,7 +20,7 @@ export const getItems = async(req,res) => {
     'data':[
       {$match: category?{category: `${category}`}:{}},
 	  {$match: type?{type: `${type}`}:{}},
-	  {$sort: {price: 1}},  
+	  {$sort: sort?{price: 1}:{price: -1}},  
       {$skip: parseInt(`${skip}`)},
       {$limit: parseInt(`${limit}`)},							
 		    ],
@@ -48,19 +31,18 @@ export const getItems = async(req,res) => {
       {$count: 'count'}
                ]
              }},
-      // {$unwind: '$data'},
-      //{$sortArray: {input: '$data', sortBy: {price: 1}}},
      {$unwind: '$calculate'},
      {$addFields: { totalPages:{ $ceil: {
-            $divide: ['$calculate.count'||0, Number(`${limit}`)]
+           $divide: ['$calculate.count'||0, Number(`${limit}`)]
           }},  
           currPage: Number(`${page}`)}}
       ]).toArray()
-   // console.log(!result[0].calculate[0])
+      
      if(search.length){result = await collection.aggregate([
 	                  {$match:{$text: {$search: `${search}`}}},
                  {$facet: {
                     'data':[
+                     {$sort: sort?{price: 1}:{price: -1}}, 
                      {$skip: parseInt(`${skip}`)},
                      {$limit: parseInt(`${limit}`)}
                     ],
@@ -73,7 +55,6 @@ export const getItems = async(req,res) => {
                      ]).toArray()
                     }
     // console.log(!result[0].calculate[0])
-    console.log(result)
 	 if(!result[0]){res.status(200).json({data:[], message: 'nothing'})
 	 }else{res.status(200).json(result[0])}
 	 

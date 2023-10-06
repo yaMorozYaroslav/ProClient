@@ -29,31 +29,31 @@ export const Filter =(props)=> {
 	
 	const resetFilt =()=> {
 		reset()
-		fetchItems('', '', 1)
+		fetchItems('', '', 1, '', true)
 		}
 	function onCategory(event){
 		event.preventDefault()
 		if(search)setSearch('')
 		setCategory(event.target.value)	
-		fetchItems(event.target.value, '', 1, '')
+		fetchItems(event.target.value, '', 1, '', minPrice)
 		}
 	function onType(event){
 		event.preventDefault()
 		setType(event.target.value)
-		fetchItems(category, event.target.value, 1, '')
+		fetchItems(category, event.target.value, 1, '', minPrice)
 		}
 	
 	function onSearch(event){
 		event.preventDefault()
 		setSearch(event.target.value)
 		if(category)setCategory('')
-		fetchItems(category, type, 1, event.target.value)
+		fetchItems(category, type, 1, event.target.value, minPrice)
 		}
     const changeBorder =(e)=> {
 			e.target.style.border = '2px solid green'
 			setTimeout(() => e.target.style.border = null, 1000)
 			}
-		const text = {'fontSize':'20px', 'margin': '4px'}
+		const text = {'fontSize':'23px', 'margin': '4px', border: '1px solid white'}
 		
 		console.log(minPrice, maxPrice)
 	return <> {show && <div>
@@ -83,9 +83,12 @@ export const Filter =(props)=> {
 	     {currType && currType.map((item,i) => 
 			   <option key={i} value={item}>{!item?'all':item}</option>)}
 	 </select><br/>
-	     <button style={text} 
+	 
+	     <button style={text} disabled={minPrice}
 	             onClick={onSort}>MinPrice</button>
-	     <input style={text} value={state.itemPrice.max} onChange={onSort} placeholder='MaxPrice' type='num'/>
+	     <button style={text} disabled={maxPrice}
+	             onClick={onSort}>MaxPrice</button>
+	     
 	     <input style={text} value={state.itemSearch} onChange={onSearch} placeholder='Search'/>
 	     <button onClick={resetFilt} onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}}>Reset</button>
 	     </div>}
