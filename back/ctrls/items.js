@@ -35,11 +35,11 @@ export const getItems = async(req,res) => {
   
    {$facet: {
     'data':[
-      {$sort: {price: 1}},
       {$match: category?{category: `${category}`}:{}},
-	  {$match: type?{type: `${type}`}:{}},  
-      //{$skip: parseInt(`${skip}`)},
-      //{$limit: parseInt(`${limit}`)},							
+	  {$match: type?{type: `${type}`}:{}},
+	  {$sort: {price: 1}},  
+      {$skip: parseInt(`${skip}`)},
+      {$limit: parseInt(`${limit}`)},							
 		    ],
 		    
     'calculate':[

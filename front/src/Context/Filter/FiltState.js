@@ -11,7 +11,7 @@ export const FiltState = ({ children }) => {
     itemCategory: '',
     itemType: '',
     itemSearch: '',
-    itemPrice: {min: '', max: ''},
+    itemPrice: {min: true, max: false},
     error: null
   };
 
@@ -78,6 +78,8 @@ export const FiltState = ({ children }) => {
         category: state.itemCategory,
         type: state.itemType,
         search: state.itemSearch,
+        minPrice: state.itemPrice.min,
+        maxPrice: state.itemPrice.max,
         setType,
         setCategory,
         setSearch,

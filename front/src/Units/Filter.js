@@ -11,8 +11,11 @@ export const Filter =(props)=> {
     const subEquipment = ['','gloves','tools','gear']
 	
 	const [show, setShow] = React.useState(false)
-	const {state, category, type, search, setCategory, setType, setSearch,
-		   setMinPrice, setMaxPrice, reset} = React.useContext(FiltContext)
+	
+	const {state, category, type, search, minPrice, maxPrice,
+		   setCategory, setType, setSearch,setMinPrice, 
+		           setMaxPrice, reset} = React.useContext(FiltContext)
+		           
 	const {fetchItems, single} = React.useContext(ItemContext)
 	
 	  let currType
@@ -20,6 +23,9 @@ export const Filter =(props)=> {
 	if(category==='soils'){currType = subSoil}
 	if(category==='supplements'){currType = subSupplements}
 	if(category==='equipment'){currType = subEquipment}
+	
+	const onSort =()=> {if(minPrice){setMinPrice(false); setMaxPrice(true)}
+		               else{setMinPrice(true); setMaxPrice(false)}}
 	
 	const resetFilt =()=> {
 		reset()
@@ -36,12 +42,7 @@ export const Filter =(props)=> {
 		setType(event.target.value)
 		fetchItems(category, event.target.value, 1, '')
 		}
-	function onMinPrice(event){
-		setMinPrice(event.target.value)
-		}
-	function onMaxPrice(event){
-		setMaxPrice(event.target.value)
-		}
+	
 	function onSearch(event){
 		event.preventDefault()
 		setSearch(event.target.value)
@@ -53,17 +54,26 @@ export const Filter =(props)=> {
 			setTimeout(() => e.target.style.border = null, 1000)
 			}
 		const text = {'fontSize':'20px', 'margin': '4px'}
+		
+		console.log(minPrice, maxPrice)
 	return <> {show && <div>
-		 <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(false)}>HideFilters</button>
-		  <label style={{'fontSize':'30px', 'color':'purple'}}>Category</label>
-		 <select value={category} style={{...text, 'cursor':'pointer'}}
-		          onChange={onCategory}>
+		 <button onMouseOver={changeBorder} 
+		         style={{...text, 'cursor':'pointer'}} 
+		         onClick={()=>setShow(false)}>HideFilters</button>
+		         
+		  <label style={{'fontSize':'30px', 'color':'purple'}}>
+		                                              Category</label>
+		 <select value={category} 
+		        style={{...text, 'cursor':'pointer'}}
+		        onChange={onCategory}>
+		        
 	       <option value=''>all</option>
 	       <option value='seeds'>seeds</option>
 	       <option value='soils'>soils</option>
 	       <option value='supplements'>supplements</option>
 	       <option value='equipment'>equipment</option>
 	     </select>
+	     
 	       <label style={{'fontSize':'30px', 'color':'darkblue'}}>Type</label>
 	     <select name='type'
 	         value={state.itemType}
@@ -73,8 +83,9 @@ export const Filter =(props)=> {
 	     {currType && currType.map((item,i) => 
 			   <option key={i} value={item}>{!item?'all':item}</option>)}
 	 </select><br/>
-	     <input style={text} value={state.itemPrice.min} onChange={onMinPrice} placeholder='MinPrice' type='num'/>
-	     <input style={text} value={state.itemPrice.max} onChange={onMaxPrice} placeholder='MaxPrice' type='num'/>
+	     <button style={text} 
+	             onClick={onSort}>MinPrice</button>
+	     <input style={text} value={state.itemPrice.max} onChange={onSort} placeholder='MaxPrice' type='num'/>
 	     <input style={text} value={state.itemSearch} onChange={onSearch} placeholder='Search'/>
 	     <button onClick={resetFilt} onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}}>Reset</button>
 	     </div>}
