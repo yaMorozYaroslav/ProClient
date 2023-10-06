@@ -9,7 +9,7 @@ export const getItems = async(req,res) => {
 	   let type = req.query.type
 	   let search = req.query.search
 	   let sort = req.query.sort==='true'?'true':''
-	   console.log(sort)
+	   //console.log(sort)
        let page = req.query.page ? req.query.page : 1;
        let limit = req.query.limit ? req.query.limit : 3;
        let skip = (page - 1) * limit

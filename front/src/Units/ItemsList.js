@@ -44,7 +44,8 @@ export const ItemsList = () => {
    const Buttons = () =>
         <div style={{'display':'flex', margin: '5px','fontSize':'20px'}}>
              Pages:{[...Array(items.totalPages)].map((e, i) => 
-    <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer'}} 
+    <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer',
+		             background: items.currPage===i+1?'green':'blue'}} 
 	        onClick={()=>fetchItems('','', i+1, '', minPrice)} key={i}>{i+1}</button>)}</div>
 
 	

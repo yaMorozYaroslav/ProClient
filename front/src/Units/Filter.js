@@ -16,7 +16,7 @@ export const Filter =(props)=> {
 		   setCategory, setType, setSearch,setMinPrice, 
 		           setMaxPrice, reset} = React.useContext(FiltContext)
 		           
-	const {fetchItems, single} = React.useContext(ItemContext)
+	const {items, fetchItems, single} = React.useContext(ItemContext)
 	
 	  let currType
     if(category==='seeds'){currType = subSeed}
@@ -25,7 +25,9 @@ export const Filter =(props)=> {
 	if(category==='equipment'){currType = subEquipment}
 	
 	const onSort =()=> {if(minPrice){setMinPrice(false); setMaxPrice(true)}
-		               else{setMinPrice(true); setMaxPrice(false)}}
+		               else{setMinPrice(true); setMaxPrice(false)}
+		               fetchItems('', '', 1, '', !minPrice)
+		               }
 	
 	const resetFilt =()=> {
 		reset()
@@ -53,9 +55,9 @@ export const Filter =(props)=> {
 			e.target.style.border = '2px solid green'
 			setTimeout(() => e.target.style.border = null, 1000)
 			}
-		const text = {'fontSize':'23px', 'margin': '4px', border: '1px solid white'}
+		const text = {'fontSize':'23px', 'margin': '4px', border: '2px solid white'}
 		
-		console.log(minPrice, maxPrice)
+		console.log(items.currPage)
 	return <> {show && <div>
 		 <button onMouseOver={changeBorder} 
 		         style={{...text, 'cursor':'pointer'}} 
@@ -81,7 +83,8 @@ export const Filter =(props)=> {
 	         style={{...text, 'cursor':'pointer'}}
 	         required >
 	     {currType && currType.map((item,i) => 
-			   <option key={i} value={item}>{!item?'all':item}</option>)}
+			   <option key={i}
+				    value={item}>{!item?'all':item}</option>)}
 	 </select><br/>
 	 
 	     <button style={text} disabled={minPrice}
