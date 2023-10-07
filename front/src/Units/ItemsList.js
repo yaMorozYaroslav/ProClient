@@ -38,15 +38,15 @@ export const ItemsList = () => {
 			 fetchItems('', '', 1, '', minPrice)
 			 }  
 		
-		  },[fetchItems, items, loading, page, error, search]) 
+		  },[fetchItems, items, loading, page, error, search, minPrice]) 
 	console.log(items)
 	 
    const Buttons = () =>
         <div style={{'display':'flex', margin: '5px','fontSize':'20px'}}>
              Pages:{[...Array(items.totalPages)].map((e, i) => 
     <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer',
-		             background: items.currPage===i+1?'green':'blue'}} 
-	        onClick={()=>fetchItems('','', i+1, '', minPrice)} key={i}>{i+1}</button>)}</div>
+		             color: items.currPage===i+1?'purple':'blue'}} 
+	        onClick={()=>fetchItems(category, type, i+1, search, minPrice)} key={i}>{i+1}</button>)}</div>
 
 	
 	let content

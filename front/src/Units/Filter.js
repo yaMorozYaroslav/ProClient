@@ -26,7 +26,7 @@ export const Filter =(props)=> {
 	
 	const onSort =()=> {if(minPrice){setMinPrice(false); setMaxPrice(true)}
 		               else{setMinPrice(true); setMaxPrice(false)}
-		               fetchItems('', '', 1, '', !minPrice)
+		               fetchItems(category, type, 1, search, !minPrice)
 		               }
 	
 	const resetFilt =()=> {
@@ -55,7 +55,8 @@ export const Filter =(props)=> {
 			e.target.style.border = '2px solid green'
 			setTimeout(() => e.target.style.border = null, 1000)
 			}
-		const text = {'fontSize':'23px', 'margin': '4px', border: '2px solid white'}
+		const text = {'fontSize':'23px', 'margin': '4px',
+			           border: '2px solid white', 'cursor':'pointer'}
 		
 		console.log(items.currPage)
 	return <> {show && <div>
@@ -92,9 +93,13 @@ export const Filter =(props)=> {
 	     <button style={text} disabled={maxPrice}
 	             onClick={onSort}>MaxPrice</button>
 	     
-	     <input style={text} value={state.itemSearch} onChange={onSearch} placeholder='Search'/>
-	     <button onClick={resetFilt} onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}}>Reset</button>
+	     <input style={{...text, cursor:'se-resize'}} value={state.itemSearch} 
+	            onChange={onSearch} placeholder='Search By Title'/>
+	     <button onClick={resetFilt} onMouseOver={changeBorder}
+	             style={{...text, 'cursor':'pointer'}}>Reset</button>
 	     </div>}
-	     {!show && !single && <button onMouseOver={changeBorder} style={{...text, 'cursor':'pointer'}} onClick={()=>setShow(true)}>ShowFilters</button>}
+	     {!show && !single && <button onMouseOver={changeBorder} 
+			        style={{...text, 'cursor':'pointer'}} 
+			           onClick={()=>setShow(true)}>ShowFilters</button>}
 	     </>
 	}
