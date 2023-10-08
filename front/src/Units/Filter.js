@@ -59,7 +59,7 @@ export const Filter =(props)=> {
 			           border: '2px solid white', 'cursor':'pointer'}
 		
 		console.log(items.currPage)
-	return <> {show && <div>
+	return <div style={{marginLeft:'20px'}}> {show && <div>
 		 <button onMouseOver={changeBorder} 
 		         style={{...text, 'cursor':'pointer'}} 
 		         onClick={()=>setShow(false)}>HideFilters</button>
@@ -87,11 +87,11 @@ export const Filter =(props)=> {
 			   <option key={i}
 				    value={item}>{!item?'all':item}</option>)}
 	 </select><br/>
-	 
+	     <label>Sort By Price</label>
 	     <button style={text} disabled={minPrice}
-	             onClick={onSort}>MinPrice</button>
+	             onClick={onSort}>Minimum</button>
 	     <button style={text} disabled={maxPrice}
-	             onClick={onSort}>MaxPrice</button>
+	             onClick={onSort}>Maximum</button>
 	     
 	     <input style={{...text, cursor:'se-resize'}} value={state.itemSearch} 
 	            onChange={onSearch} placeholder='Search By Title'/>
@@ -101,5 +101,5 @@ export const Filter =(props)=> {
 	     {!show && !single && <button onMouseOver={changeBorder} 
 			        style={{...text, 'cursor':'pointer'}} 
 			           onClick={()=>setShow(true)}>ShowFilters</button>}
-	     </>
+	     </div>
 	}

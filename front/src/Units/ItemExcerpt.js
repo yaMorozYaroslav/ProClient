@@ -31,16 +31,23 @@ export const ItemExcerpt =({item, setCurrentId, single, setSingle,
 	return (<>
 	<article style={{border:`6px solid #${randomColor}`, textAlign:'center',
 	                 background: '#b7b7b7', padding: '5px'}}>
+	                 
 	  {single && <button style={listButt} 
 		            onClick = {()=>setSingle(false)}>ToTheList</button>}
+		            
 	  <h2>{item.title}</h2>
-	  <img src={!showPointer?item.photo:pointer} alt='' style={{width:'200px', height: '220px'}}
-	       onMouseOut={()=>setOver(false)} onMouseOver={()=>setOver(true)}
-	                                                onClick={onSingle}/>
+	  
+	  <img src={!showPointer?item.photo:pointer} alt='' 
+	       style={{width:'200px', height: '220px'}}
+	                onMouseOut={()=>setOver(false)} 
+	                onMouseOver={()=>setOver(true)}
+	                                 onClick={onSingle}/>
+	                                                
 	  <p>{item.category&&item.category.length?item.category:'undefined'}</p>
 	  <p>{item.type&&item.type.length?item.type:'undefined'}</p>
 	  <p style={parag}>{!single?item.description.substring(0,25)+'...':item.description}</p>
 	  <p style={parag}>{item.price} $</p>
+	  
 	  {(userData.user && 
 	   (userData.user._id === item.creator||userData.user.role === 'admin')) && 
 	   (<>

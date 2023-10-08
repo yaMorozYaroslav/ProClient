@@ -42,12 +42,14 @@ export const ItemsList = () => {
 	console.log(items)
 	 
    const Buttons = () =>
-        <div style={{'display':'flex', margin: '5px','fontSize':'20px'}}>
+        <div style={{'display':'flex', margin: '5px','fontSize':'23px'}}>
              Pages:{[...Array(items.totalPages)].map((e, i) => 
-    <button style={{'margin':'5px', 'fontSize':'20px', 'cursor':'pointer',
-		             color: items.currPage===i+1?'purple':'blue'}} 
-	        onClick={()=>fetchItems(category, type, i+1, search, minPrice)} key={i}>{i+1}</button>)}</div>
-
+    <button style={{'margin':'5px', 'fontSize':'21px', 'cursor':'pointer',
+		             color: items.currPage===i+1?'':'blue'}}
+		              
+	        onClick={()=>fetchItems(category, type, i+1,
+				                    search, minPrice)} key={i}>
+				                               {i+1}</button>)}</div>
 	
 	let content
 	
@@ -93,7 +95,8 @@ export const ItemsList = () => {
 		
 	if (!loading&&items.data&&single){
 
-		content = <><ItemExcerpt item={currItem}
+		content = <div style={{width: '50%', marginLeft:'25%'}}>
+			        <ItemExcerpt item={currItem}
 		                         single={single}
 		                         setSingleId={setSingleId}
 		                         setSingle={setSingle}
@@ -101,7 +104,7 @@ export const ItemsList = () => {
 			                     openItemForm={openItemForm}
 			                     removeItem={removeItem}
 			                     userData={userData}
-			                     addToCart={addToCart}/></>
+			                     addToCart={addToCart}/></div>
  }
 	if(items.data&&!items.data.length && !loading) {content = 
 		 <section style={{textAlign:'center', margin: '60px', fontSize:'30px'}}>
