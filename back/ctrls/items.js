@@ -14,7 +14,9 @@ export const getItems = async(req,res) => {
        let limit = req.query.limit ? req.query.limit : 3;
        let skip = (page - 1) * limit
        let result
-       if(!search.length)result = await collection.aggregate([
+       
+       if(!search||(search && !search.length))result =
+                                    await collection.aggregate([
   
    {$facet: {
     'data':[
@@ -38,7 +40,7 @@ export const getItems = async(req,res) => {
           currPage: Number(`${page}`)}}
       ]).toArray()
       
-     if(search.length){result = await collection.aggregate([
+     if(search){result = await collection.aggregate([
 	                  {$match:{$text: {$search: `${search}`}}},
                  {$facet: {
                     'data':[
