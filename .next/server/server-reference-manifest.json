@@ -1,0 +1,16 @@
+{
+  "node": {
+    "b6e51e7061dc3b642f9aa0993b4a7440ca358a92": {
+      "workers": {
+        "app/[locale]/seed-list/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fyaro%2FShopCli%2Fcomps%2FList%2Frevalidator.js%22%2C%5B%22default%22%5D%5D%5D&__client_imported__=true!",
+        "app/[locale]/item-list/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fyaro%2FShopCli%2Fcomps%2FList%2Frevalidator.js%22%2C%5B%22default%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/[locale]/seed-list/page": "action-browser",
+        "app/[locale]/item-list/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "pPIAf4qD+KfDsFpZwtvSnJ9cLlWDFE4RoMhZ57bg3hk="
+}
