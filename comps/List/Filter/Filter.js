@@ -8,8 +8,30 @@ import {allCats, seedTypes, itemTypes} from '../select-types'
 import Fade from '@mui/material/Fade';
 //~ import { useLocale } from 'next-intl'
 import {useTranslations} from 'next-intl'
+import axios from 'axios'
 
 export const Filter =(props)=> {
+    
+    const headers = {
+  "apiKey": "eee3a5f0b4d1ba07016827f6dff25e86",
+  "modelName": "Address",
+  "calledMethod": "getSettlementAreas",
+  "methodProperties": {
+   "Ref" : ""
+   }
+}
+async function getAreas(){
+const gotten = await axios.post('https://api.novaposhta.ua/v2.0/json/', 
+  {"apiKey": "eee3a5f0b4d1ba07016827f6dff25e86",
+  "modelName": "Address",
+  "calledMethod": "getSettlementAreas",
+  "methodProperties": {
+   "Ref" : ""  }}       
+  //~ {headers: headers  }
+  )
+  .then((response) => {console.log(response)
+  })
+  .catch((error) => {console.log(error)  })}
     
 	const t = useTranslations('Filter')
 	const tc = useTranslations('categories')
@@ -17,6 +39,8 @@ export const Filter =(props)=> {
 	//~ const locale = useLocale()   
 	const pathname = usePathname()
 	const isSeed = pathname === '/seed-list'
+	
+	
 	
 	const [show, setShow] = React.useState(false)
 	
@@ -109,5 +133,6 @@ export const Filter =(props)=> {
 	    <S.ShowBut onMouseOver={changeBorder}  
 		           onClick={()=>setShow(!show)}>
 		                 {!show?t("show"):'X'}</S.ShowBut>
+		 <button onClick={()=>getAreas()}>Get</button>
 	     </S.Container>
 	}

@@ -18,4 +18,4 @@ export default async function ItemList() {
   return (<>
     <List servData={someData}/>
     <Pages total={totalPages}/>
-  </>)}
+          </>)}
