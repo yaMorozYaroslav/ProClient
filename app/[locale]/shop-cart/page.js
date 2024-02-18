@@ -5,7 +5,7 @@ async function anyName() {
     method: 'POST',
     headers: {},
     body: JSON.stringify({
-  "apiKey": "eee3a5f0b4d1ba07016827f6dff25e86",
+  "apiKey": "",
    "modelName": "Address",
    "calledMethod": "getSettlementAreas",
    "methodProperties": {
