@@ -1,8 +1,12 @@
 import axios from 'axios'
 
-export const getAreas =()=> axios.post('https://api.novaposhta.ua/v2.0/json/',
+const apiKey = process.env.NEXT_PUBLIC_API_KEY
+export const getRegions =()=> axios.post('https://api.novaposhta.ua/v2.0/json/',
                                     {
-                            "apiKey": "eee3a5f0b4d1ba07016827f6dff25e86",
+                            "apiKey": `${apiKey}`,
                             "modelName": "Address",
-                            "calledMethod": "getSettlements",
-                            "methodProperties": {"Ref" : ""}})
+                            "calledMethod": "getSettlementCountryRegion",
+                            "methodProperties": {
+                              "AreaRef" : "dcaad5a7-4b33-11e4-ab6d-005056801329"
+                                   }
+                                     })

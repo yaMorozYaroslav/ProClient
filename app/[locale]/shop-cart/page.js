@@ -1,11 +1,12 @@
 import {Cart} from '../../../comps/Cart/Cart'
 
 async function anyName() {
+  const apiKey = process.env.NEXT_PUBLIC_API_KEY
   const res = await fetch('https://api.novaposhta.ua/v2.0/json/', {
     method: 'POST',
     headers: {},
     body: JSON.stringify({
-  "apiKey": "eee3a5f0b4d1ba07016827f6dff25e86",
+  "apiKey": `${apiKey}`,
    "modelName": "Address",
    "calledMethod": "getSettlementAreas",
    "methodProperties": {
