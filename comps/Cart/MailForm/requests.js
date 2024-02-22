@@ -4,6 +4,7 @@ const apiKey = process.env.NEXT_PUBLIC_API_KEY
 export const getRegions =()=> axios.post('https://api.novaposhta.ua/v2.0/json/',
                                     {
                             "apiKey": `${apiKey}`,
+refs/remotes/origin/master
                             "modelName": "Address",
                             "calledMethod": "getSettlementCountryRegion",
                             "methodProperties": {
