@@ -25,7 +25,7 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 	const template = pickUp?'template_gf9ayyc':'template_43tp6mb'
 	
     function combArea(e){e.preventDefault();handChange(e);
-	const currRef = servData.filter(x => 
+	         const currRef = servData.filter(x => 
 	                 x.name === e.target.value).map(({ref})=>ref)
 	          //~ setSelected({...selected, regions: regionsGet(currRef[0])})
 	          regionsGet(currRef[0]).then(r=>{
@@ -33,7 +33,13 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 				  setSelected({...selected, regions: r.regionsAll})
 				   })
 	      ;}
-
+    export function combRegion(e){e.preventDefault();handChange(e);
+		     const currRef = selected.regions.filter(x =>
+		             x.name === e.target.value).map(({ref})=>ref)
+		     locationsGet(currRef[0]).then(r=>{
+				 setSelected({...selected, locations: r.locationsAll})
+				 })
+		             }
 	console.log(source)
 	//~ console.log(selected.regions)
 	const sendEmail = e => {
