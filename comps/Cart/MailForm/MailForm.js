@@ -1,7 +1,7 @@
 import React from 'react'
 import emailjs from '@emailjs/browser'
 import * as S from './mail-form.styled'
-import {getRegions} from './requests'
+import {getRegions, regionsGet} from './requests'
 import axios from 'axios'
 
 
@@ -10,35 +10,32 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
     const [source, setSource] = React.useState({user_name:'', user_email:'',
 		                                        user_phone:'', delivery_method:'',
 		                                        user_area:'', user_region:{},
-		                                        user_location:'',post_office: '',
-		                                        user_date:'',items:''})
-	const [selected, setSelected] = React.useState({regions:['0'],
-		                                            locations:'', offices:'' })	 
+		                                        user_location:'', post_office: '',
+		                                        user_date:'', items:''})
+	const [selected, setSelected] = React.useState({regions: undefined,
+		                                            locations:['0'], offices:'' })	 
 	                                       
 	const form = React.useRef()
-	const handChange = (e) => setSource({...source, [e.target.name]: e.target.value})
-	const handChance = (e) => setSource({...source, [e.target.name]: e.target.value})
+	const handChange = (e) => setSource({...source, 
+		                               [e.target.name]: e.target.value})
+	const handChance = (e) => setSource({...source, 
+		                               [e.target.name]: e.target.value})
 	const pickUp = source.delivery_method === 'pick up'
 	const postOffice = source.delivery_method === 'post office'
 	const template = pickUp?'template_gf9ayyc':'template_43tp6mb'
 	
-	async function regionsGet(){
-		  const regionsData = await getRegions();
-		  //~ const regionsArray = regionsData.data.data.map(
-		                                 //~ ({Description, ...rest}) => Description)
-		                    //~ setSelected({...selected,
-		  const regionsAll = regionsData.data.data
-		                    setSelected({...selected,
-								        regions: regionsAll})
-	                        console.log(regionsAll);
-	                    return {regionsData}}
-	//~ console.log(selected.cities.data.data)
-	
-	const combined =(e)=> {e.preventDefault();regionsGet();}
-	const areaNames = servData.map(({name, ref}) => name)
-	//~ const regionNames = selected.regions.map(({Description, ...rest})=>Description)
-	console.log(servData)
+    function combArea(e){e.preventDefault();handChange(e);
+	const currRef = servData.filter(x => 
+	                 x.name === e.target.value).map(({ref})=>ref)
+	          //~ setSelected({...selected, regions: regionsGet(currRef[0])})
+	          regionsGet(currRef[0]).then(r=>{
+				  console.log(r);
+				  setSelected({...selected, regions: r.regionsAll})
+				   })
+	      ;}
+
 	console.log(source)
+	//~ console.log(selected.regions)
 	const sendEmail = e => {
 		e.preventDefault()
 		
@@ -78,31 +75,38 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 	               <S.Option value='post office'>Post Office</S.Option>
 	           </S.Select>
 	           
-	           {pickUp&&<S.Input name='user_date' onChange={handChange} 
+	     {pickUp&&<S.Input name='user_date' onChange={handChange} 
 				                 placeholder='when will you come?' required/>}
 				                 
-			   <S.Select onChange={combined} name='user_area'>
-			                                 {areaNames.map((area, i)=>
-												<S.Option key={i} value={area}
-												  >{area}</S.Option>)}
-			   </S.Select>
-			   <S.Select onChange={handChance} name='user_region'>
-			                                 {selected.regions.map((region, i)=>
-												<S.Option key={i} value={region}
-												  >{region.Description}</S.Option>)}
+			   <S.Select onChange={combArea} name='user_area'>
+			                                 {servData.map(({name, ref},i)=>
+												<S.Option key={i} value={name}
+												  >{name}</S.Option>)}
 			   </S.Select>
 			   
-			   {postOffice&&<>
-				          
-				         
-				          <S.Input onChange={handChange} name='post_devision'
-				                   placeholder='Post Devision' required/>
+	     {selected.regions && 
+			         <S.Select onChange={handChance} name='user_region'>
+			                    {selected.regions.map((region, i)=>
+								  <S.Option key={i} value={region.Description}
+								   >{region.Description}</S.Option>)}
+			         </S.Select>}
+			       <S.Select onChange={handChange} name='user_location'>
+			                {selected.locations.map((locat, i)=>
+								  <S.Option key={i} value={locat.Description}
+								   >{locat.Description}</S.Option>)}
+                   </S.Select>                         		   
+		 {postOffice && <>
+				                   
+			 <S.Select onChange={handChange} name='post_office'>
+			           Nothing
+			 </S.Select>
+			 
 				          </>}
 	           
-	       <br />
-	             <S.Textarea readOnly value={source.items} name='items' required/>
-	             <S.Button type='submit'>Place The Order</S.Button>
-	             <S.Button type="button" onClick={()=>setOpen(false)}>
-	                                                             Close</S.Button>
+	     <br />
+	         <S.Textarea readOnly value={source.items} name='items' required/>
+	         <S.Button type='submit'>Place The Order</S.Button>
+	         <S.Button type="button" onClick={()=>setOpen(false)}>
+	                                                          Close</S.Button>
 	                 </S.Mailer></>                   
 		                    }

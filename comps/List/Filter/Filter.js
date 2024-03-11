@@ -133,6 +133,6 @@ const gotten = await axios.post('https://api.novaposhta.ua/v2.0/json/',
 	    <S.ShowBut onMouseOver={changeBorder}  
 		           onClick={()=>setShow(!show)}>
 		                 {!show?t("show"):'X'}</S.ShowBut>
-		 <button onClick={()=>getAreas()}>Get</button>
+		 <button style={{position:'absolute',top:'5px'}} onClick={()=>getAreas()}>Get</button>
 	     </S.Container>
 	}

@@ -18,7 +18,8 @@ export const LangSwitch =()=> {
 	                        const filteredStrings = langStrings.filter(
 	                                                           elem=>elem !== thing)
 	                            setStrings([thing,...filteredStrings])
-	                           	   console.log(strings)   }              
+	                           	   //~ console.log(strings)  
+	                           	    }              
   const shouldShow =(str)=> !open&&str!==locale                       	                           
               //~ {!open && locale}                   
   return  <S.Ul onClick={()=>setOpen(!open)} onMouseLeave={()=>setOpen(false)}>
