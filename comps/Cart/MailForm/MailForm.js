@@ -33,7 +33,7 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 				  setSelected({...selected, regions: r.regionsAll})
 				   })
 	      ;}
-    export function combRegion(e){e.preventDefault();handChange(e);
+    function combRegion(e){e.preventDefault();handChange(e);
 		     const currRef = selected.regions.filter(x =>
 		             x.name === e.target.value).map(({ref})=>ref)
 		     locationsGet(currRef[0]).then(r=>{
