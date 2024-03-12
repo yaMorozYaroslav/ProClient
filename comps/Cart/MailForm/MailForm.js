@@ -1,24 +1,25 @@
 import React from 'react'
 import emailjs from '@emailjs/browser'
 import * as S from './mail-form.styled'
-import {getRegions, regionsGet} from './requests'
+import {regionsGet, locationsGet} from './requests'
 import axios from 'axios'
 
 
 //pen
 export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
+	
     const [source, setSource] = React.useState({user_name:'', user_email:'',
 		                                        user_phone:'', delivery_method:'',
 		                                        user_area:'', user_region:{},
 		                                        user_location:'', post_office: '',
 		                                        user_date:'', items:''})
+		                                        
 	const [selected, setSelected] = React.useState({regions: undefined,
-		                                            locations:['0'], offices:'' })	 
+		                                            locations: undefined,
+		                                            offices: undefined })	 
 	                                       
 	const form = React.useRef()
 	const handChange = (e) => setSource({...source, 
-		                               [e.target.name]: e.target.value})
-	const handChance = (e) => setSource({...source, 
 		                               [e.target.name]: e.target.value})
 	const pickUp = source.delivery_method === 'pick up'
 	const postOffice = source.delivery_method === 'post office'
@@ -35,13 +36,14 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 	      ;}
     function combRegion(e){e.preventDefault();handChange(e);
 		     const currRef = selected.regions.filter(x =>
-		             x.name === e.target.value).map(({ref})=>ref)
+		             x.Description === e.target.value).map(({Ref})=>Ref)
 		     locationsGet(currRef[0]).then(r=>{
+				 console.log(r)
 				 setSelected({...selected, locations: r.locationsAll})
 				 })
 		             }
-	console.log(source)
-	//~ console.log(selected.regions)
+	//~ console.log(source)
+	console.log(selected)
 	const sendEmail = e => {
 		e.preventDefault()
 		
@@ -91,16 +93,17 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 			   </S.Select>
 			   
 	     {selected.regions && 
-			         <S.Select onChange={handChance} name='user_region'>
+			         <S.Select onChange={combRegion} name='user_region'>
 			                    {selected.regions.map((region, i)=>
 								  <S.Option key={i} value={region.Description}
 								   >{region.Description}</S.Option>)}
 			         </S.Select>}
-			       <S.Select onChange={handChange} name='user_location'>
+		 {selected.locations &&
+			         <S.Select onChange={handChange} name='user_location'>
 			                {selected.locations.map((locat, i)=>
 								  <S.Option key={i} value={locat.Description}
 								   >{locat.Description}</S.Option>)}
-                   </S.Select>                         		   
+                   </S.Select>}                         		   
 		 {postOffice && <>
 				                   
 			 <S.Select onChange={handChange} name='post_office'>

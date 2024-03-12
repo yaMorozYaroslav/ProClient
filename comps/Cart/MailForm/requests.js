@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const apiKey = process.env.NEXT_PUBLIC_API_KEY
-export const getRegions =(areaRef)=> axios.post(
+
+const getRegions =(areaRef)=> axios.post(
                                  'https://api.novaposhta.ua/v2.0/json/',
                                     {
                             "apiKey": `${apiKey}`,
@@ -15,17 +16,21 @@ export const getRegions =(areaRef)=> axios.post(
 export async function regionsGet(currRef){
 		  const regionsData = await getRegions(currRef)
 		  const regionsAll = regionsData.data.data
-		  
-	                        return {regionsAll};
+		                   return {regionsAll};
 	                   }
 
-export const getLocations =(regionRef)=> axios.post(
+const getLocations =(locatRef)=> axios.post(
                                  'https://api.novaposhta.ua/v2.0/json/',
                                     {
 							"apiKey": `${apiKey}`,
                             "modelName": "Address",
-                            "calledMethod": "getSettlementCountryRegion",
+                            "calledMethod": "getSettlements",
                             "methodProperties": {
-                              "RegionRef" : `${regionRef}`
+                              "RegionRef" : `${locatRef}`
 								   }
 								      })
+export async function locationsGet(currRef){
+	       const locationsData = await getLocations(currRef)
+	       const locationsAll = locationsData.data.data
+	                          return {locationsAll};
+	                  }
