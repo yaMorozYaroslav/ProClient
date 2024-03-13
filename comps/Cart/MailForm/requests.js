@@ -19,18 +19,33 @@ export async function regionsGet(currRef){
 		                   return {regionsAll};
 	                   }
 
-const getLocations =(locatRef)=> axios.post(
+const getLocations =(regionRef)=> axios.post(
                                  'https://api.novaposhta.ua/v2.0/json/',
                                     {
 							"apiKey": `${apiKey}`,
                             "modelName": "Address",
                             "calledMethod": "getSettlements",
                             "methodProperties": {
-                              "RegionRef" : `${locatRef}`
+                              "RegionRef" : `${regionRef}`
 								   }
 								      })
 export async function locationsGet(currRef){
 	       const locationsData = await getLocations(currRef)
 	       const locationsAll = locationsData.data.data
 	                          return {locationsAll};
+	                  }
+const getOffices =(locatRef)=> axios.post(
+                                 'https://api.novaposhta.ua/v2.0/json/',
+                                    {
+							"apiKey": `${apiKey}`,
+                            "modelName": "Address",
+                            "calledMethod": "getWarehouses",
+                            "methodProperties": {
+                              "CityRef" : `${locatRef}`
+								   }
+								      })
+export async function officesGet(currRef){
+	       const officesData = await getOffices(currRef)
+	       const officesAll = officesData.data.data
+	                        return {officesAll};
 	                  }

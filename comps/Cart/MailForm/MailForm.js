@@ -1,11 +1,10 @@
 import React from 'react'
 import emailjs from '@emailjs/browser'
 import * as S from './mail-form.styled'
-import {regionsGet, locationsGet} from './requests'
+import {regionsGet, locationsGet, officesGet} from './requests'
 import axios from 'axios'
 
 
-//pen
 export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 	
     const [source, setSource] = React.useState({user_name:'', user_email:'',
@@ -28,18 +27,25 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
     function combArea(e){e.preventDefault();handChange(e);
 	         const currRef = servData.filter(x => 
 	                 x.name === e.target.value).map(({ref})=>ref)
-	          //~ setSelected({...selected, regions: regionsGet(currRef[0])})
-	          regionsGet(currRef[0]).then(r=>{
-				  console.log(r);
-				  setSelected({...selected, regions: r.regionsAll})
-				   })
-	      ;}
+	         regionsGet(currRef[0]).then(r=>{
+				 console.log(r);
+				 setSelected({...selected, regions: r.regionsAll})
+				  })
+	                 }
     function combRegion(e){e.preventDefault();handChange(e);
 		     const currRef = selected.regions.filter(x =>
 		             x.Description === e.target.value).map(({Ref})=>Ref)
 		     locationsGet(currRef[0]).then(r=>{
 				 console.log(r)
 				 setSelected({...selected, locations: r.locationsAll})
+				 })
+		             }
+    function combLocat(e){e.preventDefault();handChange(e);
+		     const currRef = selected.locations.filter(x =>
+		             x.Description === e.target.value).map(({Ref})=>Ref)
+		     officesGet(currRef[0]).then(r=>{
+				 console.log(r)
+				 setSelected({...selected, offices: r.officesAll})
 				 })
 		             }
 	//~ console.log(source)
@@ -98,19 +104,21 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 								  <S.Option key={i} value={region.Description}
 								   >{region.Description}</S.Option>)}
 			         </S.Select>}
+			         
 		 {selected.locations &&
-			         <S.Select onChange={handChange} name='user_location'>
+			         <S.Select onChange={combLocat} name='user_location'>
 			                {selected.locations.map((locat, i)=>
 								  <S.Option key={i} value={locat.Description}
 								   >{locat.Description}</S.Option>)}
-                   </S.Select>}                         		   
-		 {postOffice && <>
-				                   
-			 <S.Select onChange={handChange} name='post_office'>
-			           Nothing
-			 </S.Select>
-			 
-				          </>}
+                     </S.Select>}
+                     
+         {selected.offices &&
+			         <S.Select onChange={handChange} name='post_office'>
+			                {selected.offices.map((office, i)=>
+								  <S.Option key={i} value={office.Description}
+								  >{office.Description}</S.Option>)}
+			         </S.Select> }                         		   
+		
 	           
 	     <br />
 	         <S.Textarea readOnly value={source.items} name='items' required/>
