@@ -108,7 +108,8 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 		 {selected.locations &&
 			         <S.Select onChange={combLocat} name='user_location'>
 			                {selected.locations.map((locat, i)=>
-								  <S.Option key={i} value={locat.Description}
+								  <S.Option disabled={locat.Warehouse === "0"}
+								            key={i} value={locat.Description}
 								   >{locat.Description}</S.Option>)}
                      </S.Select>}
                      

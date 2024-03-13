@@ -41,7 +41,7 @@ const getOffices =(locatRef)=> axios.post(
                             "modelName": "Address",
                             "calledMethod": "getWarehouses",
                             "methodProperties": {
-                              "CityRef" : `${locatRef}`
+                              "SettlementRef" : `${locatRef}`
 								   }
 								      })
 export async function officesGet(currRef){
