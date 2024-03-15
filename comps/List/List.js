@@ -22,7 +22,7 @@ export function List({servData}){
 	const t = useTranslations('List')
 	const tc = useTranslations('categories')
 	const tt = useTranslations('types')
-	
+	console.log(servData)
 	const pathname = usePathname()
 	const router = useRouter()
 	const isSeed = pathname === '/seed-list'
@@ -36,8 +36,10 @@ export function List({servData}){
 	
 	const {userData} = useUserContext()
 	const {cartItems, addToCart} = useCartContext()
-	const {fetchItems, loadingItems, items, removeItem, resetItems} = useItemContext()
-	const {fetchSeeds, loadingSeeds, seeds, removeSeed, resetSeeds} = useSeedContext()
+	const {fetchItems, loadingItems, items,
+		               removeItem, resetItems} = useItemContext()
+	const {fetchSeeds, loadingSeeds, seeds, 
+		               removeSeed, resetSeeds} = useSeedContext()
 	const {state, category} = useQueryContext()
 	
 	

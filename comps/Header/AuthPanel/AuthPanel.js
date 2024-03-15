@@ -54,14 +54,15 @@ export function AuthPanel(){
 	        		const decodedToken = decode(token)
 	        		//~ console.log(decodedToken)
 	        		//~ if(decodedToken.exp * 1000 < new Date().getTime()){
-	        		if(decodedToken.exp * 999.998 < new Date().getTime()){
+	        		//~ if(decodedToken.exp * 999.998 < new Date().getTime()){
+	        		if(decodedToken.exp * 999.999 < new Date().getTime()){
 	        		 logout()
 	        		 removeProfile()
 	        		 alert('Token has expired')
 	              }
 	        	}
 	        	const interval = setInterval(()=>{setUpdate(update+1);
-					                              console.log(update);
+					                              //~ console.log(update);
 					                                       },10000)
 	        	if(!token){clearInterval(interval);setUpdate(0);}
 	        	return () => clearInterval(interval);

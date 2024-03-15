@@ -12,26 +12,6 @@ import axios from 'axios'
 
 export const Filter =(props)=> {
     
-    const headers = {
-  "apiKey": "eee3a5f0b4d1ba07016827f6dff25e86",
-  "modelName": "Address",
-  "calledMethod": "getSettlementAreas",
-  "methodProperties": {
-   "Ref" : ""
-   }
-}
-async function getAreas(){
-const gotten = await axios.post('https://api.novaposhta.ua/v2.0/json/', 
-  {"apiKey": "eee3a5f0b4d1ba07016827f6dff25e86",
-  "modelName": "Address",
-  "calledMethod": "getSettlementAreas",
-  "methodProperties": {
-   "Ref" : ""  }}       
-  //~ {headers: headers  }
-  )
-  .then((response) => {console.log(response)
-  })
-  .catch((error) => {console.log(error)  })}
     
 	const t = useTranslations('Filter')
 	const tc = useTranslations('categories')
@@ -51,7 +31,7 @@ const gotten = await axios.post('https://api.novaposhta.ua/v2.0/json/',
 	const {seeds, fetchSeeds} = useSeedContext()
 	
 	//const size = ScreenSize()
-	console.log(isSeed)
+	//~ console.log(isSeed)
 	const shownCats = isSeed?allCats.seedCats:allCats.itemCats
 	
 	  let currType
@@ -96,7 +76,6 @@ const gotten = await axios.post('https://api.novaposhta.ua/v2.0/json/',
 			e.target.style.border = '2px solid green'
 			setTimeout(() => e.target.style.border = null, 1000)
 			}
-		//	const mediaQuery = window.matchMedia("(max-width: 800px)").matches
 	
 	return <S.Container>
 	        
@@ -108,8 +87,10 @@ const gotten = await axios.post('https://api.novaposhta.ua/v2.0/json/',
 		 <S.Select name='category'
 		           value={state.category}
 	               onChange={onCategory}>
-	{shownCats.map((item, i) => <option key={i} 
-		                                 value={item}>{!item?null:tc(`${item}`)}</option>)}
+	  {shownCats.map((item, i) => <option key={i} 
+		                                value={item}>
+		                                   {!item?null:tc(`${item}`)}
+		                          </option>)}
 	 </S.Select><br/>
 	     
 	       <S.Label>{t("type")}: </S.Label>
@@ -133,6 +114,5 @@ const gotten = await axios.post('https://api.novaposhta.ua/v2.0/json/',
 	    <S.ShowBut onMouseOver={changeBorder}  
 		           onClick={()=>setShow(!show)}>
 		                 {!show?t("show"):'X'}</S.ShowBut>
-		 <button style={{position:'absolute',top:'5px'}} onClick={()=>getAreas()}>Get</button>
 	     </S.Container>
 	}

@@ -1,18 +1,7 @@
-//~ export const convertBase64 = (file) => {
-	//~ return new Promise((resolve, reject) => {
-		//~ const fileReader = new FileReader()
-		//~ fileReader.readAsDataURL(file)
-		
-		//~ fileReader.onload = () => {
-			//~ resolve(fileReader.result)
-			//~ }
-		//~ fileReader.onerror = (error) => {
-			            //~ reject(error)}
-		//~ })
-	//~ }
 import React from "react";
 import Resizer from "react-image-file-resizer";
-export const convert64 = (file) =>
+
+const convert64 = (file) =>
   new Promise((resolve) => {
     Resizer.imageFileResizer(
       file,
@@ -27,3 +16,19 @@ export const convert64 = (file) =>
       "base64"
     );
   });
+export const uploadImage = async(e) => {
+		const file = e.target.files[0]
+		console.log(file)
+		if(file && file.size > 10000000){alert('File is bigger than 10MB.')
+		}else{
+		const base64 = await convert64(file)
+		
+		var stringLength = base64.length - 'data:image/png;base64,'.length;
+        var sizeInBytes = 4 * Math.ceil((stringLength / 3))*0.5624896334383812;
+        var sizeInKb=sizeInBytes/1000;
+		console.log(sizeInKb)
+		console.log(source)
+		return {base64}
+		//~ setSource({...source, photo: base64})}
+		//~ setLabel(file.name)
+		}}
