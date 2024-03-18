@@ -4,6 +4,7 @@ import * as S from './list.styled'
 import {AddForm} from './AddForm/AddForm'
 import {Filter} from './Filter/Filter'
 import Box from '@mui/material/Box';
+import AddCartIcon from '@mui/icons-material/AddShoppingCart';
 import LinearProgress from '@mui/material/LinearProgress';
 
 import {useItemContext} from '../../context/items/ItemState'
@@ -22,7 +23,7 @@ export function List({servData}){
 	const t = useTranslations('List')
 	const tc = useTranslations('categories')
 	const tt = useTranslations('types')
-	console.log(servData)
+	//~ console.log(servData)
 	const pathname = usePathname()
 	const router = useRouter()
 	const isSeed = pathname === '/seed-list'
@@ -97,11 +98,13 @@ return (<S.Container>
                <S.Parag>{t('type')}: {item.type?tt(item.type):'---'}</S.Parag>
                <S.Parag>{t('price')}: {item.price}</S.Parag>
                
-               <S.AddButt onClick={(e)=>handAdd(e,item)}>AddToCart</S.AddButt><br/>
+               <S.AddButt onClick={(e)=>handAdd(e,item)}>{t('add_butt')}
+               <AddCartIcon style={{position:'relative',top:'5px',fontSize:'25px'}}/></S.AddButt><br/>
+               
                {(creator(item.creator)||admin)
-				&&<><S.AddButt onClick={(e)=>
-					      delUnit(e, item._id)}>Remove</S.AddButt>
-				  <S.AddButt onClick={(e)=>handEdit(e, item)}>Edit</S.AddButt></>}
+				&&<><S.KingButt onClick={(e)=>
+					      delUnit(e, item._id)}>{t('rem_butt')}</S.KingButt>
+				  <S.KingButt onClick={(e)=>handEdit(e, item)}>{t('edit_butt')}</S.KingButt></>}
               </S.Cell>
           ))}       
         </S.List>}

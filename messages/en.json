@@ -13,11 +13,13 @@
         "goods": "Goods"
 	},
  "List": {
-	    "add_butt": "Add",
+	    "add_butt": "Add ",
 	    "menu": "Menu",
 	    "category": "category",
 	    "type": "type",
-	    "price": "price"		    
+	    "price": "price",
+	    "rem_butt": "Remove",
+	    "edit_butt": "Edit"		    
 	 },
  "Pages":{"pages":"Pages"},
  "Cart": {},
@@ -62,7 +64,7 @@
 	 "seedlings": "seedlings",
 	 "soils": "soils",
 	 "supplements": "supplements",
-	 "equipment": "equipment"
+	 "equipment": "equipment" 
 	 },
  "types":{
 	 "annual": "annual",

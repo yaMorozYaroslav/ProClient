@@ -32,6 +32,13 @@ export function AddForm({setOpen, currItem, setCurrItem}){
 	const {state} = useQueryContext()
 	
 	const ref = React.useRef()
+    
+   const onImage =   async(e) => {
+		const {base64, file} = await uploadImage(e)
+		//~ console.log(base64)
+		setSource({...source, photo: base64})
+		setLabel(file.name)
+		}
    
    const fetcher =()=> isSeed?fetchSeeds(state):fetchItems(state)
    
@@ -110,7 +117,7 @@ export function AddForm({setOpen, currItem, setCurrItem}){
 	  <S.PhotoBut htmlFor="input">{t('select')}</S.PhotoBut>
 	  <S.Selected>{label}</S.Selected>
 	  <input type='file' id="input" style={{display:"none"}}
-	         onChange={(e)=>uploadImage(e)}/><br/>
+	         onChange={(e)=>onImage(e)}/><br/>
    </S.Selector> 
        
 	 <S.CatLabel>{t('category')}:</S.CatLabel>

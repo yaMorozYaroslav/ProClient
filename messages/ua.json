@@ -17,7 +17,9 @@
 	    "menu": "Меню",
 	    "category": "категорія",
 	    "type": "тип",
-	    "price": "ціна"	    
+	    "price": "ціна",
+	    "rem_butt": "Видалити",
+	    "edit_butt": "Редагувати"	 
 	 },
  "Pages":{"pages": "Сторінки"},
  "Cart": {},
@@ -62,7 +64,7 @@
 	 "seedlings": "саджанці",
 	 "soils": "ґрунти",
 	 "supplements": "додатки",
-	 "equipment": "обладнання"
+	 "equipment": "обладнання"   
 	 },
  "types":{
 	 "annual": "однорічний",

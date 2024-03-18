@@ -45,7 +45,10 @@ export const TitleLink = styled(Link)`font-size: 22px;
                                       padding: 5px; border:1px solid black;
                          @media (max-width: 600px) {font-size: 18px;}`
 export const Parag = styled.p`margin: 12px;`
-export const AddButt = styled.button`border-style:groove;margin:2px;font-size:21px;`
+export const AddButt = styled.button`border-style:groove;margin:2px;font-size:21px;
+                                     padding-bottom:5px;`
+export const KingButt = styled.button`border-style:groove;margin:2px;font-size:21px;
+                                      color: gold;background:black;`
 export const NoData = styled.p`margin-top:30px;padding-top:140px;height:213px;
                                font-size:32px;
                                text-align:center;position:relative;z-index:-1;`

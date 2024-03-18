@@ -9,14 +9,14 @@ const CartReducer = (state, action) => {
     case ADD_TO_CART:
     
     const itemInCart = state.cartItems.find(item => item._id === action.payload._id)
-        
-	  if(itemInCart){
+    
+	  if(itemInCart){ 
 		  return {...state, cartItems: 
 		         state.cartItems.map((item) =>
                        item._id === action.payload._id 
                            ? {...action.payload, quantity: item.quantity++} 
                            : item)}}
-          
+      
       return {...state, cartItems: [...state.cartItems, 
 		                         ({ ...action.payload, quantity: 1 })]}
      
@@ -41,7 +41,7 @@ const CartReducer = (state, action) => {
       
       return {...state, cartItems: state.cartItems.map((item) =>
                        (item._id === action.payload)
-                            ?{...item, quantity: item.quantity?item.quantity-1:1}
+                            ?{...item, quantity: item.quantity>1?item.quantity-1:1}
                             :item)}
 
    case FROM_LOCALE:
