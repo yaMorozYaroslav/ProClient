@@ -93,7 +93,7 @@ return (<S.Container>
              <S.Cell  key={item._id}>
                <S.StyledImage alt='' src={item.photo&&item.photo.length
 				                         ?item.photo:'/next.svg'}
-                              width={100} height={100} priority={true}/><br/>
+                              width={150} height={100} priority={true}/><br/>
                <S.TitleLink href={`/${urlSingle}/${item._id}`}
 				            className='styledLink'>{item.title.slice(0, 12)}</S.TitleLink>
                <S.Parag>{t('category')}: {item.category?tc(item.category):'---'}</S.Parag>

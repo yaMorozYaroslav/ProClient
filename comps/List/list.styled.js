@@ -27,10 +27,10 @@ export const List = styled.ul` display: grid;
                                column-gap:0.5%;
                                margin: 0% 0% 15px 0.5%;
                                list-style: none;
-                    @media (max-width: 1000px) {grid-template-columns: repeat(2, 49%);
-                                                margin-left:3%;}
+                    @media (max-width: 1000px) {grid-template-columns: repeat(2, 47%);
+                                                margin-left:4%;}
                     @media (max-width: 800px) {} 
-                    @media (max-width: 600px) {margin-left:-3%;column-gap:3%;row-gap:5px;}
+                    @media (max-width: 600px) {margin-left:-4%;column-gap:2%;row-gap:5px;}
                     @media (max-width: 400px) {display:block;
                                                margin-left:-5%;}`
 export const Cell = styled.li`font-size: 20px; border: 2px solid black;
@@ -40,7 +40,7 @@ export const Cell = styled.li`font-size: 20px; border: 2px solid black;
                     @media (max-width: 600px) {font-size: 18px;padding:3px;
                                                width:95%;height:385px;}
                     @media (max-width: 400px) {font-size: 20px;width:85%;height:360px;}`
-export const StyledImage = styled(Image)`margin:10px;width:89%;`
+export const StyledImage = styled(Image)`margin:10px;height:100px;`
 export const TitleLink = styled(Link)`font-size: 22px;
                                       padding: 5px; border:1px solid black;
                          @media (max-width: 600px) {font-size: 18px;}`
