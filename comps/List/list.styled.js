@@ -40,15 +40,15 @@ export const Cell = styled.li`font-size: 20px; border: 2px solid black;
                     @media (max-width: 600px) {font-size: 18px;padding:3px;
                                                width:95%;height:385px;}
                     @media (max-width: 400px) {font-size: 20px;width:85%;height:360px;}`
-export const StyledImage = styled(Image)`margin:10px;width:100px;`
+export const StyledImage = styled(Image)`margin:10px;width:89%;`
 export const TitleLink = styled(Link)`font-size: 22px;
                                       padding: 5px; border:1px solid black;
                          @media (max-width: 600px) {font-size: 18px;}`
 export const Parag = styled.p`margin: 12px;`
 export const AddButt = styled.button`border-style:groove;margin:2px;font-size:21px;
                                      padding-bottom:5px;`
-export const KingButt = styled.button`border-style:groove;margin:2px;font-size:21px;
-                                      color: gold;background:black;`
+export const KingButt = styled.button`border-style:groove;margin:3px;font-size:21px;
+                                      color: gold;background:black;height:40px;`
 export const NoData = styled.p`margin-top:30px;padding-top:140px;height:213px;
                                font-size:32px;
                                text-align:center;position:relative;z-index:-1;`

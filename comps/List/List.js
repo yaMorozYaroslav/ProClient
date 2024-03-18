@@ -5,6 +5,8 @@ import {AddForm} from './AddForm/AddForm'
 import {Filter} from './Filter/Filter'
 import Box from '@mui/material/Box';
 import AddCartIcon from '@mui/icons-material/AddShoppingCart';
+import OffIcon from '@mui/icons-material/HighlightOff';
+import EditIcon from '@mui/icons-material/Edit';
 import LinearProgress from '@mui/material/LinearProgress';
 
 import {useItemContext} from '../../context/items/ItemState'
@@ -102,9 +104,11 @@ return (<S.Container>
                <AddCartIcon style={{position:'relative',top:'5px',fontSize:'25px'}}/></S.AddButt><br/>
                
                {(creator(item.creator)||admin)
+				   
 				&&<><S.KingButt onClick={(e)=>
-					      delUnit(e, item._id)}>{t('rem_butt')}</S.KingButt>
-				  <S.KingButt onClick={(e)=>handEdit(e, item)}>{t('edit_butt')}</S.KingButt></>}
+					      delUnit(e, item._id)}><OffIcon style={{fontSize:'30px', marginTop:'2px'}}/></S.KingButt>
+				  <S.KingButt onClick={(e)=>handEdit(e, item)}><EditIcon style={{fontSize:'30px', marginTop:'2px'}}/></S.KingButt></>}
+              
               </S.Cell>
           ))}       
         </S.List>}
