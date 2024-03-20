@@ -3,7 +3,7 @@
 	    "title":"Флора",
 	    "badge":"Карт",
 	    "guest":"Гiсть",
-	    "login":"Логін",
+	    "login":"Увійти",
 	    "logout":"Вийти"
 	 },
  "First": {
@@ -17,9 +17,7 @@
 	    "menu": "Меню",
 	    "category": "категорія",
 	    "type": "тип",
-	    "price": "ціна",
-	    "rem_butt": "Видалити",
-	    "edit_butt": "Редагувати"	 
+	    "price": "ціна"	 
 	 },
  "Pages":{"pages": "Сторінки"},
  "Cart": {},

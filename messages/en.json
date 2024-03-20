@@ -3,7 +3,7 @@
 	    "title":"Flora",
 	    "badge":"Cart",
 	    "guest":"Guest",
-	    "login":"Login",
+	    "login":"Sign In",
 	    "logout":"Logout"
 	 },
  "First": {
@@ -17,9 +17,7 @@
 	    "menu": "Menu",
 	    "category": "category",
 	    "type": "type",
-	    "price": "price",
-	    "rem_butt": "Remove",
-	    "edit_butt": "Edit"		    
+	    "price": "price"	    
 	 },
  "Pages":{"pages":"Pages"},
  "Cart": {},
