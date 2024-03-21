@@ -34,7 +34,6 @@
   "resolutions": {
     "styled-components": "^6"
   },
-  "scripts": {"build": "yarn set version latest"}
-  {
+  
   "packageManager": "yarn@4.1.0"
 }
