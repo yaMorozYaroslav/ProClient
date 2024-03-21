@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "corepack enable && yarn init -2 && yarn set version latest && next build",
+    "build": "corepack enable && yarn init -2 && next build",
     "start": "next start",
     "lint": "next lint"
   },
