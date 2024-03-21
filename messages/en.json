@@ -3,8 +3,8 @@
 	    "title":"Flora",
 	    "badge":"Cart",
 	    "guest":"Guest",
-	    "login":"Sign In",
-	    "logout":"Logout"
+	    "login":"Sign in",
+	    "logout":"Log out"
 	 },
  "First": {
         "title":"Welcome to Store.",
@@ -44,8 +44,8 @@
 	    "reset": "Reset"    	
 	 },
  "AuthForm":{
-	 "sign_in": "Sign In",
-	 "sign_up": "Sign Up",
+	 "sign_in": "Sign in",
+	 "sign_up": "Sign up",
 	 "e_mail": "E-mail",
 	 "p_mail": "Write e-mail",
 	 "password":"Passord",
