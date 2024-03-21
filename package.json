@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "corepack enable && yarn init -2 && yarn set version stable && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -34,7 +34,7 @@
   "resolutions": {
     "styled-components": "^6"
   },
-  "scripts": {"build": "yarn set version latest"},
- 
+  "scripts": {"build": "yarn set version latest"}
+  {
   "packageManager": "yarn@4.1.0"
 }
