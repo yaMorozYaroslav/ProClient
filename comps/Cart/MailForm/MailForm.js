@@ -24,16 +24,16 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 	const postOffice = source.delivery_method === 'post office'
 	const template = pickUp?'template_gf9ayyc':'template_43tp6mb'
 	
-	function genericLocation(e, data, prop){e.preventDefault();handChange(e);
+	function genericLocation(e, data, func, prop){e.preventDefault();handChange(e);
 	         const currRef = data.filter(x => 
 	                 x.Description === e.target.value).map(({Ref})=>Ref)
 	                 console.log(data)
-	         regionsGet(currRef[0]).then(r=>{
+	         func(currRef[0]).then(r=>{
 				 console.log(r);
 				 setSelected({...selected, [prop]: r.dataAll})
 				  })
 	                 }
-	const combArea =(e)=> genericLocation(e, servData, 'regions')
+	const combArea =(e)=> genericLocation(e, servData, regionsGet, 'regions')
 	
     //~ function combArea(e){e.preventDefault();handChange(e);
 	         //~ const currRef = servData.filter(x => 

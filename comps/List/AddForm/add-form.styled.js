@@ -10,6 +10,7 @@ export const Container = styled.div`
 		                            text-align:center;
 		                            width:40%;
 		                            border:solid;
+		                            z-index:1;
 		                 @media (max-width:1000px) {width:50%;}
 		                 @media (max-width:800px) {width:55%;}
 		                 @media (max-width:600px) {width:70%;top:180px;}
