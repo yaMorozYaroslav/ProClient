@@ -15,8 +15,8 @@ const getRegions =(areaRef)=> axios.post(
                                      })
 export async function regionsGet(currRef){
 		  const regionsData = await getRegions(currRef)
-		  const regionsAll = regionsData.data.data
-		                   return {regionsAll};
+		  const dataAll = regionsData.data.data
+		                   return {dataAll};
 	                   }
 
 const getLocations =(regionRef)=> axios.post(
@@ -31,8 +31,8 @@ const getLocations =(regionRef)=> axios.post(
 								      })
 export async function locationsGet(currRef){
 	       const locationsData = await getLocations(currRef)
-	       const locationsAll = locationsData.data.data
-	                          return {locationsAll};
+	       const dataAll = locationsData.data.data
+	                          return {dataAll};
 	                  }
 const getOffices =(locatRef)=> axios.post(
                                  'https://api.novaposhta.ua/v2.0/json/',
@@ -46,6 +46,6 @@ const getOffices =(locatRef)=> axios.post(
 								      })
 export async function officesGet(currRef){
 	       const officesData = await getOffices(currRef)
-	       const officesAll = officesData.data.data
-	                        return {officesAll};
+	       const dataAll = officesData.data.data
+	                        return {dataAll};
 	                  }

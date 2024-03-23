@@ -24,20 +24,31 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 	const postOffice = source.delivery_method === 'post office'
 	const template = pickUp?'template_gf9ayyc':'template_43tp6mb'
 	
-    function combArea(e){e.preventDefault();handChange(e);
-	         const currRef = servData.filter(x => 
-	                 x.name === e.target.value).map(({ref})=>ref)
+	function genericLocation(e, data, prop){e.preventDefault();handChange(e);
+	         const currRef = data.filter(x => 
+	                 x.Description === e.target.value).map(({Ref})=>Ref)
+	                 console.log(data)
 	         regionsGet(currRef[0]).then(r=>{
 				 console.log(r);
-				 setSelected({...selected, regions: r.regionsAll})
+				 setSelected({...selected, [prop]: r.dataAll})
 				  })
 	                 }
+	const combArea =(e)=> genericLocation(e, servData, 'regions')
+	
+    //~ function combArea(e){e.preventDefault();handChange(e);
+	         //~ const currRef = servData.filter(x => 
+	                 //~ x.name === e.target.value).map(({ref})=>ref)
+	         //~ regionsGet(currRef[0]).then(r=>{
+				 //~ console.log(r);
+				 //~ setSelected({...selected, regions: r.regionsAll})
+				  //~ })
+	                 //~ }
     function combRegion(e){e.preventDefault();handChange(e);
 		     const currRef = selected.regions.filter(x =>
 		             x.Description === e.target.value).map(({Ref})=>Ref)
 		     locationsGet(currRef[0]).then(r=>{
 				 console.log(r)
-				 setSelected({...selected, locations: r.locationsAll})
+				 setSelected({...selected, locations: r.dataAll})
 				 })
 		             }
     function combLocat(e){e.preventDefault();handChange(e);
@@ -45,7 +56,7 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 		             x.Description === e.target.value).map(({Ref})=>Ref)
 		     officesGet(currRef[0]).then(r=>{
 				 console.log(r)
-				 setSelected({...selected, offices: r.officesAll})
+				 setSelected({...selected, offices: r.dataAll})
 				 })
 		             }
 	//~ console.log(source)
@@ -93,9 +104,9 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 				                 placeholder='when will you come?' required/>}
 				                 
 			   <S.Select onChange={combArea} name='user_area'>
-			                                 {servData.map(({name, ref},i)=>
-												<S.Option key={i} value={name}
-												  >{name}</S.Option>)}
+			                                 {servData.map((area, i)=>
+												<S.Option key={i} value={area.Description}
+												  >{area.Description}</S.Option>)}
 			   </S.Select>
 			   
 	     {selected.regions && 

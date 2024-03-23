@@ -17,8 +17,8 @@ async function anyName() {
   }, { next: { tags: ['regions'], revalidate: 1000}}) 
   const data = await res.json()
   //~ const regions = data.data.map(({description, ...rest})=>description)
-  const regions = data.data.map(({Description, Ref, ...rest})=> ({name:Description,
-	                                                             ref: Ref}))
+  const regions = data.data.map(({Description, Ref, ...rest})=> ({Description,
+	                                                             Ref}))
   return {regions}
 }
 
