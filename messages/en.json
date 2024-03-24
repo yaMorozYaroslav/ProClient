@@ -20,7 +20,15 @@
 	    "price": "price"	    
 	 },
  "Pages":{"pages":"Pages"},
- "Cart": {},
+ "Cart": {"price":"price",
+	      "quantity":"quantity",
+	      "increase":"increase",
+	      "decrease":"decrease",
+	      "remove":"remove",
+	      "total":"total",
+	      "buy_items":"Buy",
+	      "clear_cart":"Clear",
+	      "Menu":"Menu"},
  "AddForm":{
 	    "seed": "Seed",
 	    "item": "Item",

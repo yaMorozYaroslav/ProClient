@@ -20,7 +20,15 @@
 	    "price": "ціна"	 
 	 },
  "Pages":{"pages": "Сторінки"},
- "Cart": {},
+ "Cart": {"price":"ціна",
+	      "quantity":"кількість",
+	      "increase":"збільшити",
+	      "decrease":"зменшити",
+	      "remove":"видалити",
+	      "total":"сума",
+	      "buy_items":"Купити",
+	      "clear_cart":"Очистити",
+	      "Menu":"Меню"},
  "AddForm":{
 	    "seed": "Насіння",
 	    "item":"Товари",

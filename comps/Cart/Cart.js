@@ -8,6 +8,7 @@ import {useTranslations} from 'next-intl'
 
 export const Cart =({servData})=> {
 	const t = useTranslations('First')
+	const tc = useTranslations('Cart')
 	const {cartItems, increase, decrease, 
 		              removeFromCart, clearCart} = useCartContext()
 	const [open, setOpen] = React.useState(false)
@@ -44,9 +45,9 @@ export const Cart =({servData})=> {
 		                       quantity: {item.quantity}</S.Quantity>
 		                       
 		              <S.Butts> 
-		                <S.ThingButt onClick={(e)=>increaser(e,item._id)}>increase</S.ThingButt> 
-		                <S.ThingButt onClick={()=>decrease(item._id)}>decrease</S.ThingButt>
-		                <S.ThingButt onClick={(e)=>remover(e,item._id)}>remove</S.ThingButt>
+		                <S.ThingButt onClick={(e)=>increaser(e,item._id)}>{tc('increase')}</S.ThingButt> 
+		                <S.ThingButt onClick={()=>decrease(item._id)}>{tc('decrease')}</S.ThingButt>
+		                <S.ThingButt onClick={(e)=>remover(e,item._id)}>{tc('remove')}</S.ThingButt>
 		              </S.Butts>                         
 		   </S.Thing>)}
 	    </S.CartList>
@@ -56,11 +57,11 @@ export const Cart =({servData})=> {
 				               clearCart={clearCart} push={push}/>}
 	                 
 	         <S.CartButts>
-	            <S.Total>total: {counter()}</S.Total>
-		          <S.Button onClick={()=>setOpen(true)}>Buy Items</S.Button>
-		          <S.Button onClick={cleaner}>Clear Cart</S.Button><br/>
+	            <S.Total>{tc('total')}: {counter()}</S.Total>
+		          <S.Button onClick={()=>setOpen(true)}>{tc('buy_items')}</S.Button>
+		          <S.Button onClick={cleaner}>{tc('clear_cart')}</S.Button><br/>
 		            <S.StyledLink className='styledLink' href='/'>
-		                                       To Menu</S.StyledLink>
+		                                       {tc('Menu')}</S.StyledLink>
 		     </S.CartButts>
 	       </S.Container>
 	}
