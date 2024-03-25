@@ -1,4 +1,5 @@
 'use client'
+import React from 'react'
 import * as S from './first.styled'
 import {useTranslations} from 'next-intl'
 import {Link} from '../../navigation'
@@ -7,12 +8,13 @@ import Image from 'next/image'
         
 export const First = () => { 
 	const t = useTranslations('First')
-	
+	const [loading, setLoading] = React.useState(false)
   return (<S.Container>
         <S.FirstLine>{t('title')}</S.FirstLine>
         <S.SecondLine>{t('second')}</S.SecondLine><br/>
           
-        <S.SeedLink className='styledLink' href={'/seed-list'}>
+        <S.SeedLink className='styledLink' onClick={()=>setLoading(true)} 
+                    $value={loading} href={'/seed-list'}>
                                                {t('seeds')} <br/> 
            <S.ImageCont>
             <Image alt='seeds' src='/first/seeds.jpg' 
@@ -20,7 +22,8 @@ export const First = () => {
                    sizes="(max-width: 768px) 100vw" fill={true}/>
            </S.ImageCont>
         </S.SeedLink>
-        <S.ItemLink className='styledLink' href={'/item-list'}>
+        <S.ItemLink className='styledLink' onClick={()=>setLoading(true)} 
+                    $value={loading} href={'/item-list'}>
                                                    {t('goods')} <br/>
             <S.ImageCont>                                     
              <Image alt='items' src='/first/prods.jpg' 

@@ -7,10 +7,13 @@ import {MailForm} from './MailForm/MailForm'
 import {useTranslations} from 'next-intl'
 
 export const Cart =({servData})=> {
+	
 	const t = useTranslations('First')
 	const tc = useTranslations('Cart')
+	
 	const {cartItems, increase, decrease, 
 		              removeFromCart, clearCart} = useCartContext()
+		              
 	const [open, setOpen] = React.useState(false)
 	
 	const {push} = useRouter()
@@ -20,6 +23,7 @@ export const Cart =({servData})=> {
 	const cleaner = () => {clearCart();
 		                   localStorage.removeItem('cart');
 		                   setOpen(false);push('/')}
+		                   
 	const remover = (e, id) => {e.preventDefault()
 		                        removeFromCart(id)
 		                     if(cartItems.length === 1)cleaner()}
@@ -44,11 +48,14 @@ export const Cart =({servData})=> {
 		        <S.Quantity>price: {item.price}/<br/>
 		                       quantity: {item.quantity}</S.Quantity>
 		                       
-		              <S.Butts> 
-		                <S.ThingButt onClick={(e)=>increaser(e,item._id)}>{tc('increase')}</S.ThingButt> 
-		                <S.ThingButt onClick={()=>decrease(item._id)}>{tc('decrease')}</S.ThingButt>
-		                <S.ThingButt onClick={(e)=>remover(e,item._id)}>{tc('remove')}</S.ThingButt>
-		              </S.Butts>                         
+		      <S.Butts> 
+		        <S.ThingButt onClick={(e)=> increaser(e,item._id)}>
+			                          {tc('increase')}</S.ThingButt> 
+		        <S.ThingButt onClick={()=>decrease(item._id)}>
+		                              {tc('decrease')}</S.ThingButt>
+		        <S.ThingButt onClick={(e)=>remover(e,item._id)}>
+		                              {tc('remove')}</S.ThingButt>
+		      </S.Butts>                         
 		   </S.Thing>)}
 	    </S.CartList>
 		      
@@ -57,11 +64,13 @@ export const Cart =({servData})=> {
 				               clearCart={clearCart} push={push}/>}
 	                 
 	         <S.CartButts>
-	            <S.Total>{tc('total')}: {counter()}</S.Total>
-		          <S.Button onClick={()=>setOpen(true)}>{tc('buy_items')}</S.Button>
-		          <S.Button onClick={cleaner}>{tc('clear_cart')}</S.Button><br/>
-		            <S.StyledLink className='styledLink' href='/'>
-		                                       {tc('Menu')}</S.StyledLink>
+	             <S.Total>{tc('total')}: {counter()}</S.Total>
+		          <S.Button onClick={()=>setOpen(true)}>
+		                              {tc('buy_items')}</S.Button>
+		          <S.Button onClick={cleaner}>
+		                              {tc('clear_cart')}</S.Button><br/>
+		          <S.StyledLink className='styledLink' href='/'>
+		                              {tc('Menu')}</S.StyledLink>
 		     </S.CartButts>
 	       </S.Container>
 	}

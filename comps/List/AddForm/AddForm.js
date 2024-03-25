@@ -34,8 +34,8 @@ export function AddForm({setOpen, currItem, setCurrItem}){
 	const ref = React.useRef()
     
    const onImage =   async(e) => {
-		const {base64, file} = await uploadImage(e)
-		//~ console.log(base64)
+		const {base64, file, sizeInKb} = await uploadImage(e)
+		console.log(sizeInKb)
 		setSource({...source, photo: base64})
 		setLabel(file.name)
 		}

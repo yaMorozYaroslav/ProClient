@@ -24,19 +24,21 @@ export const SecondLine = styled.p`grid-column:2/7;grid-row:2;
                                                      font-size:28px;
                                                      grid-column:1/8;}`
                                                      
-export const ItemLink = styled(Link)`grid-column:5/6;grid-row:3;
+export const ItemLink = styled(Link)`${p=>p.$value&&'cursor:wait'};
+                                     grid-column:5/6;grid-row:3;
                                      margin-top:-90px;font-size:28px;
                         @media (max-width: 600px) {margin-top:-120px;}
                         @media (max-width: 400px) {margin-top:-200px;}`
                         
-export const SeedLink = styled(Link)`grid-column:3/4;grid-row:3;
+export const SeedLink = styled(Link)`cursor:${p=>p.$value?'wait':'pointer'};
+                                     grid-column:3/4;grid-row:3;
                                      margin-top:-90px;font-size:28px;
                         @media (max-width: 600px) {margin-top:-120px;}
                         @media (max-width: 400px) {margin-top:-200px;}`
                         
-export const ImageCont = styled.section` position: relative;
-                                         width:200px;height:180px;
-                                         border-style: groove;
+export const ImageCont = styled.section`position: relative;
+                                        width:200px;height:180px;
+                                        border-style: groove;
                            @media (max-width: 600px) {width:150px;height:140px;}
                            @media (max-width: 400px) {width:120px;height:115px;}`
 
