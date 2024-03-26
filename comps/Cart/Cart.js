@@ -29,8 +29,9 @@ export const Cart =({servData})=> {
 		                     if(cartItems.length === 1)cleaner()}
 		
 	function counter(){
-		let total
-		cartItems.map(item=>total =+ item.price * item.quantity)
+		console.log(cartItems)
+		let total = cartItems.reduce((accum, item) => 
+		               {return accum += (item.price * item.quantity)},0)
 		return total
 		}
 
@@ -45,8 +46,8 @@ export const Cart =({servData})=> {
                               width={0} height={0} priority={true}/>
 		        <S.Title>{item.title} </S.Title><br/>
 		               
-		        <S.Quantity>price: {item.price}/<br/>
-		                       quantity: {item.quantity}</S.Quantity>
+		        <S.Quantity>{tc('price')}: {item.price} <br/>
+		                    {tc('quantity')}: {item.quantity}</S.Quantity>
 		                       
 		      <S.Butts> 
 		        <S.ThingButt onClick={(e)=> increaser(e,item._id)}>
