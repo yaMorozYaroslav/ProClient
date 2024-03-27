@@ -29,7 +29,7 @@ export const Cart =({servData})=> {
 		                     if(cartItems.length === 1)cleaner()}
 		
 	function counter(){
-		console.log(cartItems)
+		//~ console.log(cartItems)
 		let total = cartItems.reduce((accum, item) => 
 		               {return accum += (item.price * item.quantity)},0)
 		return total
