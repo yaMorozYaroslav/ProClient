@@ -1,0 +1,40 @@
+{
+  "name": "seed-shop",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@babel/core": "^7.24.4",
+    "@emailjs/browser": "^4.3.3",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.14",
+    "@mui/material": "^5.15.14",
+    "axios": "^1.6.8",
+    "babel-plugin-styled-components": "^2.1.4",
+    "debug": "^4.3.4",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.1.4",
+    "jwt-decode": "^4.0.0",
+    "next": "^14.1.4",
+    "next-intl": "^3.10.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-image-file-resizer": "^0.4.8",
+    "styled-components": "^6.1.8",
+    "supports-color": "^9.4.0",
+    "typescript": "^5.4.3"
+  },
+  "resolutions": {
+    "styled-components": "^6"
+  },
+  "packageManager": "yarn@4.1.1",
+  "devDependencies": {
+    "yarn-upgrade-all": "^0.7.2"
+  }
+}
