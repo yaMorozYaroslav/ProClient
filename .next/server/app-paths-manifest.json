@@ -1,6 +1,0 @@
-{
-  "/[locale]/page": "app/[locale]/page.js",
-  "/[locale]/seed-list/page": "app/[locale]/seed-list/page.js",
-  "/[locale]/item-list/page": "app/[locale]/item-list/page.js",
-  "/[locale]/shop-cart/page": "app/[locale]/shop-cart/page.js"
-}
