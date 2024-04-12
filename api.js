@@ -26,8 +26,4 @@ export const deleteSeed =(id)=>API.delete(`/seeds/${id}`)
 
 export const auth =(source)=>API.post('/user/signin', source)
 export const register =(source)=>API.post('/user/signup', source)
-<<<<<<< HEAD
-=======
-
 export const sendEmail =(source)=>API.post('/email',source)
->>>>>>> update

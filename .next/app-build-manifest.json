@@ -1,3 +1,31 @@
 {
-  "pages": {}
+  "pages": {
+    "/[locale]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/css-_yarn___virtual___next-virtual-a2fc6c4075_2_yarn_berry_cache_next-npm-14_2_0-27849a3063-1-36bef5.css",
+      "static/chunks/app/[locale]/page.js"
+    ],
+    "/[locale]/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/css-_yarn___virtual___next-virtual-a2fc6c4075_2_yarn_berry_cache_next-npm-14_2_0-27849a3063-1-60f706.css",
+      "static/chunks/app/[locale]/layout.js"
+    ],
+    "/[locale]/seed-list/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/seed-list/page.js"
+    ],
+    "/[locale]/item-list/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/item-list/page.js"
+    ],
+    "/[locale]/shop-cart/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/shop-cart/page.js"
+    ]
+  }
 }
