@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser'
 import * as S from './mail-form.styled'
 import {regionsGet, locationsGet, officesGet} from './requests'
 import axios from 'axios'
-
+import {sendEmail} from '../../../api.js'
 
 export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 	
@@ -17,12 +17,13 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 		                                            locations: undefined,
 		                                            offices: undefined })	 
 	                                       
-	const form = React.useRef()
+
+	//~ const form = React.useRef()
 	const handChange = (e) => setSource({...source, 
 		                               [e.target.name]: e.target.value})
 	const pickUp = source.delivery_method === 'pick up'
 	const postOffice = source.delivery_method === 'post office'
-	const template = pickUp?'template_gf9ayyc':'template_43tp6mb'
+
 	
 	function genericLocation(e, data, func, prop){e.preventDefault();handChange(e);
 	         const currRef = data.filter(x => 
@@ -59,33 +60,42 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 				 setSelected({...selected, offices: r.dataAll})
 				 })
 		             }
+
+		const onSendEmail = e => {
+			 e.preventDefault()
+			 //~ console.log()
+			 sendEmail(source).then((result) => console.log(result, source),
+			                    (error) => console.log(error))
+			     //~ e.target.reset()
+			     clearCart()
+		         localStorage.removeItem('cart')
+		         setOpen(false)
+		         push('/')       
+			}
 	//~ console.log(source)
-	console.log(selected)
-	const sendEmail = e => {
-		e.preventDefault()
+	//~ console.log(selected)
+	//~ const sendEmail = e => {
+		//~ e.preventDefault()
 		
-		emailjs.sendForm(
-		'service_wzlecr5', template, form.current, 'LTwbosNcCwgaQan9I')
-		.then((result) => {
-			console.log(result.text)
-			}, (error) => {
-				console.log(error.text)
-				})
-				e.target.reset()
-		clearCart()
-		localStorage.removeItem('cart')
-		setOpen(false)
-		push('/')
-	}
+		//~ emailjs.sendForm(
+		//~ 'service_wzlecr5', template, form.current, 'LTwbosNcCwgaQan9I')
+		//~ .then((result) => {
+			//~ console.log(result.text)
+			//~ }, (error) => {
+				//~ console.log(error.text)
+				//~ })
+				//~ e.target.reset()
+		
+	//~ }
 	React.useEffect(()=>{
 	  //~ if(cartItems && source.items.length !== cartItems.length)
 	         const remains = cartItems.map(({photo, creator, ...rest})=>  rest)
 	         const muscles = remains.map(item => ({...item, $:'###'}))
 		     setSource({...source, items: JSON.stringify(muscles)})
 		},[])
-		
-	return  <><S.Mailer ref={form}
-	                    onSubmit={sendEmail}>
+
+		//~ ref={form}
+	return  <><S.Mailer onSubmit={onSendEmail}>
 	  
 	           <S.Input onChange={handChange} placeholder='Name' 
 	                        name='user_name'  required/><br/>
@@ -93,21 +103,36 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 	                        name='user_email' required/><br/>
 	           <S.Input onChange={handChange} placeholder='Phone Number' 
 	                        name='user_phone' required /><br/>
-	           <S.Select onChange={handChange} name='delivery_method' required>
-	               <S.Option value='' hidden={source.delivery_method}>
-	                                          Choose Delivery Method</S.Option>
+
+	           
+	           <S.Select onChange={handChange} 
+	                      name='delivery_method' required>
+	               <S.Option value='' 
+	                         hidden={source.delivery_method}>
+	                                          Choose Delivery Method
+	                                                         </S.Option>
+
 	               <S.Option value='pick up'>Pick Up</S.Option>
 	               <S.Option value='post office'>Post Office</S.Option>
 	           </S.Select>
 	           
-	     {pickUp&&<S.Input name='user_date' onChange={handChange} 
-				                 placeholder='when will you come?' required/>}
+
+	     {pickUp&&<S.Input name='user_date' 
+			               onChange={handChange} 
+				           placeholder='when will you come?' required/>}
 				                 
-			   <S.Select onChange={combArea} name='user_area'>
-			                                 {servData.map((area, i)=>
-												<S.Option key={i} value={area.Description}
-												  >{area.Description}</S.Option>)}
-			   </S.Select>
+	 <S.Select onChange={combArea} value={source.user_area}
+	           name='user_area' required>
+	                            <S.Option value='' 
+	                                      hidden={source.user_area}>
+	                                             Choose Area</S.Option>
+	                                          
+	                       {servData.map((area, i)=>
+								<S.Option key={i} 
+								          value={area.Description}
+										          >{area.Description}
+										                  </S.Option>)}
+	 </S.Select>
 			   
 	     {selected.regions && 
 			         <S.Select onChange={combRegion} name='user_region'>

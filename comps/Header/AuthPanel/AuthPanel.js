@@ -1,7 +1,8 @@
 'use client'
 
 import React from 'react'
-import decode from 'jwt-decode'
+
+import {jwtDecode} from 'jwt-decode'
 import * as S from './auth-panel.styled'
 import {useTranslations} from 'next-intl'
 import {useRouter} from '../../../navigation'
@@ -51,8 +52,9 @@ export function AuthPanel(){
 	              let token
 	        	if(userData)token = userData.token
 	        	if(token){
-	        		const decodedToken = decode(token)
-	        		//~ console.log(decodedToken)
+
+	        		const decodedToken = jwtDecode(token)
+                    //~ console.log(decodedToken)
 	        		//~ if(decodedToken.exp * 1000 < new Date().getTime()){
 	        		//~ if(decodedToken.exp * 999.998 < new Date().getTime()){
 	        		if(decodedToken.exp * 999.999 < new Date().getTime()){
