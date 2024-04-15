@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 //const API = axios.create({baseURL:'https://seed-shop-back-78049b8c30bb.herokuapp.com'})
-const API = axios.create({baseURL:'https://flora-storage-95930743be75.herokuapp.com'})
+const API = axios.create({baseURL:'https://flora-store-ed448aa4183f.herokuapp.com'})
 
 API.interceptors.request.use((req)=>{
     if(localStorage.getItem('profile')){
