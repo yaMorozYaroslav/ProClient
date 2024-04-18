@@ -6,14 +6,13 @@ import {useRouter} from 'next/navigation'
 import {MailForm} from './MailForm/MailForm'
 import {useTranslations} from 'next-intl'
 
-export const Cart =({servData})=> {
+export const Cart =(servData)=> {
 	
 	const t = useTranslations('First')
 	const tc = useTranslations('Cart')
-	
 	const {cartItems, increase, decrease, 
 		              removeFromCart, clearCart} = useCartContext()
-		              
+		              console.log(servData)
 	const [open, setOpen] = React.useState(false)
 	
 	const {push} = useRouter()
@@ -60,7 +59,8 @@ export const Cart =({servData})=> {
 		   </S.Thing>)}
 	    </S.CartList>
 		      
-		    {open && <MailForm servData={servData} setOpen={setOpen} 
+		    {open && <MailForm servData={servData.servData}
+				               setOpen={setOpen} 
 				               cartItems={cartItems}
 				               clearCart={clearCart} push={push}/>}
 	                 

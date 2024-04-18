@@ -4,21 +4,22 @@ import * as S from './mail-form.styled'
 import {regionsGet, locationsGet, officesGet} from './requests'
 import axios from 'axios'
 import {sendEmail} from '../../../api.js'
-
+  
+   
 export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
+	const initialState = {user_name:'', user_email:'',
+		                 user_phone:'', delivery_method:'',
+		                 user_area:'', user_region:{},
+		                 user_location:'', post_office: '',
+		                 user_date:'', items:''}
 	
-    const [source, setSource] = React.useState({user_name:'', user_email:'',
-		                                        user_phone:'', delivery_method:'',
-		                                        user_area:'', user_region:{},
-		                                        user_location:'', post_office: '',
-		                                        user_date:'', items:''})
+    const [source, setSource] = React.useState(initialState)
 		                                        
 	const [selected, setSelected] = React.useState({regions: undefined,
 		                                            locations: undefined,
-		                                            offices: undefined })	 
-	                                       
-
+		                                            offices: undefined })	 	                                       
 	//~ const form = React.useRef()
+	console.log(selected.regions)
 	const handChange = (e) => setSource({...source, 
 		                               [e.target.name]: e.target.value})
 	const pickUp = source.delivery_method === 'pick up'
@@ -34,32 +35,23 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 				 setSelected({...selected, [prop]: r.dataAll})
 				  })
 	                 }
-	const combArea =(e)=> genericLocation(e, servData, regionsGet, 'regions')
-	
-    //~ function combArea(e){e.preventDefault();handChange(e);
-	         //~ const currRef = servData.filter(x => 
-	                 //~ x.name === e.target.value).map(({ref})=>ref)
-	         //~ regionsGet(currRef[0]).then(r=>{
-				 //~ console.log(r);
-				 //~ setSelected({...selected, regions: r.regionsAll})
-				  //~ })
-	                 //~ }
-    function combRegion(e){e.preventDefault();handChange(e);
-		     const currRef = selected.regions.filter(x =>
-		             x.Description === e.target.value).map(({Ref})=>Ref)
-		     locationsGet(currRef[0]).then(r=>{
-				 console.log(r)
-				 setSelected({...selected, locations: r.dataAll})
-				 })
-		             }
-    function combLocat(e){e.preventDefault();handChange(e);
-		     const currRef = selected.locations.filter(x =>
-		             x.Description === e.target.value).map(({Ref})=>Ref)
-		     officesGet(currRef[0]).then(r=>{
-				 console.log(r)
-				 setSelected({...selected, offices: r.dataAll})
-				 })
-		             }
+	                 
+	const combArea =(e)=> genericLocation(e, servData, 
+	                                              regionsGet, 'regions')
+	                       
+	const combRegion =(e)=> genericLocation(e, selected.regions, 
+	                                          locationsGet, 'locations')
+	const combLocat =(e)=> genericLocation(e, selected.locations,
+	                                                  officesGet, 'offices')
+    
+    //~ function combLocat(e){e.preventDefault();handChange(e);
+		     //~ const currRef = selected.locations.filter(x =>
+		             //~ x.Description === e.target.value).map(({Ref})=>Ref)
+		     //~ officesGet(currRef[0]).then(r=>{
+				 //~ console.log(r)
+				 //~ setSelected({...selected, offices: r.dataAll})
+				 //~ })
+		             //~ }
 
 		const onSendEmail = e => {
 			 e.preventDefault()
@@ -72,28 +64,16 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 		         setOpen(false)
 		         push('/')       
 			}
-	//~ console.log(source)
-	//~ console.log(selected)
-	//~ const sendEmail = e => {
-		//~ e.preventDefault()
-		
-		//~ emailjs.sendForm(
-		//~ 'service_wzlecr5', template, form.current, 'LTwbosNcCwgaQan9I')
-		//~ .then((result) => {
-			//~ console.log(result.text)
-			//~ }, (error) => {
-				//~ console.log(error.text)
-				//~ })
-				//~ e.target.reset()
-		
-	//~ }
+	
 	React.useEffect(()=>{
 	  //~ if(cartItems && source.items.length !== cartItems.length)
 	         const remains = cartItems.map(({photo, creator, ...rest})=>  rest)
 	         const muscles = remains.map(item => ({...item, $:'###'}))
 		     setSource({...source, items: JSON.stringify(muscles)})
 		},[])
-
+  const HiddenOption = ({condition, text}) => 
+                                        <S.Option hidden={condition.length}
+                                                value=''>{text}</S.Option>
 		//~ ref={form}
 	return  <><S.Mailer onSubmit={onSendEmail}>
 	  
@@ -105,12 +85,10 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 	                        name='user_phone' required /><br/>
 
 	           
-	           <S.Select onChange={handChange} 
+	           <S.Select  onChange={handChange} value={source.delivery_method}
 	                      name='delivery_method' required>
-	               <S.Option value='' 
-	                         hidden={source.delivery_method}>
-	                                          Choose Delivery Method
-	                                                         </S.Option>
+	        <HiddenOption condition={source.delivery_method} 
+	                      text='Choose Delivery Method' />
 
 	               <S.Option value='pick up'>Pick Up</S.Option>
 	               <S.Option value='post office'>Post Office</S.Option>
@@ -120,12 +98,11 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 	     {pickUp&&<S.Input name='user_date' 
 			               onChange={handChange} 
 				           placeholder='when will you come?' required/>}
-				                 
+	 {postOffice &&	<>		                 
 	 <S.Select onChange={combArea} value={source.user_area}
 	           name='user_area' required>
-	                            <S.Option value='' 
-	                                      hidden={source.user_area}>
-	                                             Choose Area</S.Option>
+	                <HiddenOption condition={source.user_area} 
+	                              text='Choose Area' />
 	                                          
 	                       {servData.map((area, i)=>
 								<S.Option key={i} 
@@ -135,7 +112,10 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 	 </S.Select>
 			   
 	     {selected.regions && 
-			         <S.Select onChange={combRegion} name='user_region'>
+			         <S.Select onChange={combRegion} name='user_region' required>
+			              <HiddenOption condition={source.user_region} 
+	                                    text='Choose Region' />
+			               
 			                    {selected.regions.map((region, i)=>
 								  <S.Option key={i} value={region.Description}
 								   >{region.Description}</S.Option>)}
@@ -143,6 +123,9 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 			         
 		 {selected.locations &&
 			         <S.Select onChange={combLocat} name='user_location'>
+			              <HiddenOption condition={source.user_location} 
+	                                    text='Choose Location' />
+			             
 			                {selected.locations.map((locat, i)=>
 								  <S.Option disabled={locat.Warehouse === "0"}
 								            key={i} value={locat.Description}
@@ -150,11 +133,15 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
                      </S.Select>}
                      
          {selected.offices &&
+			      
 			         <S.Select onChange={handChange} name='post_office'>
+			            <HiddenOption condition={source.post_office} 
+	                                  text='Choose Office' />
 			                {selected.offices.map((office, i)=>
 								  <S.Option key={i} value={office.Description}
 								  >{office.Description}</S.Option>)}
-			         </S.Select> }                         		   
+			         </S.Select> }
+				 </>}                         		   
 		
 	           
 	     <br />
