@@ -12,7 +12,7 @@ export const Cart =(servData)=> {
 	const tc = useTranslations('Cart')
 	const {cartItems, increase, decrease, 
 		              removeFromCart, clearCart} = useCartContext()
-		              console.log(servData)
+		              //~ console.log(servData)
 	const [open, setOpen] = React.useState(false)
 	
 	const {push} = useRouter()

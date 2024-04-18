@@ -19,7 +19,7 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 		                                            locations: undefined,
 		                                            offices: undefined })	 	                                       
 	//~ const form = React.useRef()
-	console.log(selected.regions)
+	//~ console.log(selected.regions)
 	const handChange = (e) => setSource({...source, 
 		                               [e.target.name]: e.target.value})
 	const pickUp = source.delivery_method === 'pick up'
@@ -73,7 +73,9 @@ export const MailForm =({servData, setOpen, cartItems, clearCart, push})=> {
 		},[])
   const HiddenOption = ({condition, text}) => 
                                         <S.Option hidden={condition.length}
-                                                value=''>{text}</S.Option>
+                                                  value='' 
+                                                  selected={!condition}
+                                                                    >{text}</S.Option>
 		//~ ref={form}
 	return  <><S.Mailer onSubmit={onSendEmail}>
 	  
