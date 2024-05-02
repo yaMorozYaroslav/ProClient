@@ -7,9 +7,17 @@ import Image from 'next/image'
 
         
 export const First = () => { 
+   async function genSomeParams(){
+  const items = await fetch(
+    'https://seed-shop-back-78049b8c30bb.herokuapp.com/items?category=')
+                                        .then((res) => res.json())
+  const newItems = items.data.map((item) => ({id: item._id}))                              
+    console.log(newItems)
+	}
 	const t = useTranslations('First')
 	const [loading, setLoading] = React.useState(false)
   return (<S.Container>
+        <button onClick={genSomeParams}>butt</button>
         <S.FirstLine>{t('title')}</S.FirstLine>
         <S.SecondLine>{t('second')}</S.SecondLine><br/>
           

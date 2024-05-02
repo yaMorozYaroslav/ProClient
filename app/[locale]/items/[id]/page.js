@@ -12,7 +12,7 @@ export const dynamicParams = false
  async function getItem(params) {
   
    const item = await fetch(
-    `https://seed-shop-back-78049b8c30bb.herokuapp.com/items/${params.id}`, 
+    `https://seed-shop-back-78049b8c30bb.herokuapp.com/items/${params}`, 
                             { next: { tags: ['item'] }})
                                             .then((res) => res.json())
       //~ revalidateTag('item')
@@ -20,7 +20,7 @@ export const dynamicParams = false
 
        }
 export default async function Item({params}){
-	const item = await getItem(params)
+	const item = await getItem(params.id)
 	
-	return <Single unit={item} text='item-list'/>
+	return <Single unit={item} params={params}/>
 	}

@@ -3,8 +3,13 @@ import React from 'react'
 import * as S from './single.styled'
 //import {AddForm} from '../AddForm/AddForm'
 import Image from 'next/image'
+import { usePathname } from '../../navigation'
 
-export const Single =({unit, text})=>{
+export const Single =({unit, text, params})=>{
+	console.log(params)
+	const pathname = usePathname()
+	const pathBack = '/' + pathname.split('/')[1].slice(0,4) + '-list'
+	console.log(pathBack)
 	
 	
   return (<S.Container>		              
@@ -16,7 +21,7 @@ export const Single =({unit, text})=>{
              <S.Paragraph>category: {unit.category||'none'}</S.Paragraph>  
              <S.Paragraph>type: {unit.type||'none'}</S.Paragraph>  
 	         <S.Paragraph>price = {unit.price}</S.Paragraph>
-  <S.StyledLink href={`/${text}`}>Back To List</S.StyledLink>
+  <S.StyledLink href={pathBack}>Back To List</S.StyledLink>
 	</S.Container>)
 	}
 
