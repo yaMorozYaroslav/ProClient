@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { usePathname } from '../../navigation'
 
 export const Single =({unit, text, params})=>{
-	console.log(params)
+	//~ console.log(params)
 	const pathname = usePathname()
 	const pathBack = '/' + pathname.split('/')[1].slice(0,4) + '-list'
 	console.log(pathBack)

@@ -4,15 +4,17 @@ import * as S from './first.styled'
 import {useTranslations} from 'next-intl'
 import {Link} from '../../navigation'
 import Image from 'next/image'
-
+//~ import {useRouter} from 'next/navigation'
         
 export const First = () => { 
+	//~ const router = useRouter()
+	//~ console.log(router)
    async function genSomeParams(){
   const items = await fetch(
     'https://seed-shop-back-78049b8c30bb.herokuapp.com/items?category=')
                                         .then((res) => res.json())
   const newItems = items.data.map((item) => ({id: item._id}))                              
-    console.log(newItems)
+    console.log({paths: newItems})
 	}
 	const t = useTranslations('First')
 	const [loading, setLoading] = React.useState(false)
