@@ -1,47 +1,36 @@
 import {Single} from '../../../../comps/Single/Single'
 //~ import { revalidateTag } from 'next/cache'
 
-//~ export const dynamicParams = false
+export const dynamicParams = false
 
-//~ export async function generateStaticParams(){
-  //~ const items = await fetch(
-    //~ 'https://seed-shop-back-78049b8c30bb.herokuapp.com/items?category=')
-                                        //~ .then((res) => res.json())
-                                        
-    //~ return items.data.map((item) => ({id: item._id}))
-	//~ }
-	//~ export const getStaticPaths = async() => {
-	  //~ const items = await fetch(
-    //~ 'https://seed-shop-back-78049b8c30bb.herokuapp.com/items?category=')
-                                        //~ .then((res) => res.json())
-      //~ const itemsID = items.data.map((item) => ({id: item._id}))                              
-    //~ return {
-		  //~ paths: itemsID,
-		  //~ fallback:false
-		//~ }
-
-//~ }
-export async function getStaticPaths() {
-	 const items = await fetch(
+export async function generateStaticParams(){
+  const items = await fetch(
     'https://seed-shop-back-78049b8c30bb.herokuapp.com/items?category=')
                                         .then((res) => res.json())
+                                        
+    return items.data.map((item) => ({id: item._id, locale:'ua'}))
+	}
+//~ export async function getStaticPaths() {
+	 //~ const items = await fetch(
+    //~ 'https://seed-shop-back-78049b8c30bb.herokuapp.com/items?category=')
+                                        //~ .then((res) => res.json())
       //~ const itemsID = items.data.map((item) => ({id: item._id})) 
-      const paths = items.data.map((item) => {
-        return {
-          params: {
-            id: item._id,
-            locale: 'ua'
-          }
-        }
-      })
+      //~ const paths = items.data.map((item) => {
+        //~ return {
+          //~ params: {
+            //~ id: item._id,
+            //~ locale: 'ua'
+          //~ }
+        //~ }
+      //~ })
     
       //~ console.log(paths);
     
-      return {
-        paths,
-        fallback: false
-      }
-    }
+      //~ return {
+        //~ paths,
+        //~ fallback: false
+      //~ }
+    //~ }
  async function getItem(params) {
   
    const item = await fetch(
