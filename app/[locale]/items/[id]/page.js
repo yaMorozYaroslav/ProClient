@@ -8,7 +8,7 @@ export async function generateStaticParams(){
     'https://seed-shop-back-78049b8c30bb.herokuapp.com/items?category=')
                                         .then((res) => res.json())
                                         
-    return items.data.map((item) => ({id: item._id, locale:'ua'}))
+    return items.data.map((item) => ({id: item._id}))
 	}
 
  async function getItem(params) {
