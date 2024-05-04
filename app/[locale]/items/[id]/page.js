@@ -1,7 +1,7 @@
 import {Single} from '../../../../comps/Single/Single'
 //~ import { revalidateTag } from 'next/cache'
 
-export const dynamicParams = false
+export const dynamicParams = true
 
 export async function generateStaticParams(){
   const items = await fetch(
