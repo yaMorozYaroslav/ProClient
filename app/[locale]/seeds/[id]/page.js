@@ -1,4 +1,5 @@
 import {Single} from '../../../../comps/Single/Single'
+//~ import { revalidateTag } from 'next/cache
 
 export const dynamicParams = true
 

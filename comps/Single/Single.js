@@ -9,7 +9,7 @@ export const Single =({unit, text, params})=>{
 	//~ console.log(params)
 	const pathname = usePathname()
 	const pathBack = '/' + pathname.split('/')[1].slice(0,4) + '-list'
-	console.log(pathBack)
+	//~ console.log(pathBack)
 	
 	
   return (<S.Container>		              
