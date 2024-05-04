@@ -13,9 +13,13 @@ import {useTranslations} from 'next-intl'
 export const CartBadge = () => {
 const t = useTranslations('Header')
 const locale = useLocale()
-const {cartItems, setFromLocale} = useCartContext()
 const pathname = usePathname()
 
+const {cartItems, setFromLocale} = useCartContext()
+
+let localCart = ''
+if(typeof window !== 'undefined')localCart = JSON.parse(localStorage.getItem('cart'))
+console.log(localCart)
 
 const setCartToStorage = e => {	localStorage.setItem(
 	                            'cart', JSON.stringify(cartItems))	}
@@ -23,7 +27,6 @@ const setCartToStorage = e => {	localStorage.setItem(
 React.useEffect(()=>{if(cartItems.length)setCartToStorage()},[cartItems])
 
 React.useEffect(()=>{
-	 const localCart = JSON.parse(localStorage.getItem('cart'))
 	 if(localCart){setFromLocale(localCart)}
 	                },[])
 return (<S.Container>
@@ -32,7 +35,7 @@ return (<S.Container>
         <S.Label>{t('badge')}</S.Label>
      <Badge color='error'
             overlap="rectangular"
-            badgeContent={cartItems.length||null}
+            badgeContent={localCart.length||null}
             anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}> 
         <CartIcon style={{fontSize:'40px'}}/>             
      </Badge>
