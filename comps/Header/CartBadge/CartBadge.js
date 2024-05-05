@@ -17,25 +17,23 @@ const pathname = usePathname()
 
 const {cartItems, setFromLocale} = useCartContext()
 
-let localCart = ''
-if(typeof window !== 'undefined')localCart = JSON.parse(localStorage.getItem('cart'))
-console.log(localCart)
-
 const setCartToStorage = e => {	localStorage.setItem(
 	                            'cart', JSON.stringify(cartItems))	}
 	
 React.useEffect(()=>{if(cartItems.length)setCartToStorage()},[cartItems])
 
 React.useEffect(()=>{
-	 if(localCart){setFromLocale(localCart)}
+	     let localCart = JSON.parse(localStorage.getItem('cart'))
+	     if(localCart){setFromLocale(localCart)}
 	                },[])
+	                
 return (<S.Container>
         <Link className='styledLink' href={!cartItems.length
 			                         ?pathname.substr(4,20)||'/':'/shop-cart'}>
         <S.Label>{t('badge')}</S.Label>
      <Badge color='error'
             overlap="rectangular"
-            badgeContent={localCart.length||null}
+            badgeContent={cartItems.length}
             anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}> 
         <CartIcon style={{fontSize:'40px'}}/>             
      </Badge>
