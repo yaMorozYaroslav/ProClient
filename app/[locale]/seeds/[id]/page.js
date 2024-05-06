@@ -3,11 +3,11 @@ import {Single} from '../../../../comps/Single/Single'
 
 export const dynamicParams = false
 
-export async function generateStaticParams(){
+export async function generateStaticParams({params: {locale}}){
   const seeds = await fetch(
     'https://seed-shop-back-78049b8c30bb.herokuapp.com/seeds?category=&type=')
                                         .then((res) => res.json())
-  const arrSeeds = seeds.data.map((seed) => ({id: seed._id, locale: 'ua'}))
+  const arrSeeds = seeds.data.map((seed) => ({id: seed._id, locale: locale}))
     return  arrSeeds
 	}
 	
