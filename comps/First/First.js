@@ -7,6 +7,7 @@ import Image from 'next/image'
 //~ import {useRouter} from 'next/navigation'
         
 export const First = () => { 
+	//~ console.log(locale)
 	//~ const router = useRouter()
 	//~ console.log(router)
    async function genSomeParams(){

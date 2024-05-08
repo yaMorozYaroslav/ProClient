@@ -7,6 +7,7 @@ import {Russo_One} from 'next/font/google'
 const lora = Russo_One({ subsets: ['cyrillic'], weight:['400'] })
 
 export default async function Main() {
+	
 	//~ className={lora.className}
   return <div><First/></div>
 }
