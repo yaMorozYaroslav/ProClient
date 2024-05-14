@@ -56,9 +56,9 @@ let messages
        <CartState>
        <QueryState>
         <Header />
-       <Suspense>
-        {children}
-       </Suspense>
+         <Suspense>
+          {children}
+         </Suspense>
       </QueryState>
       </CartState>
       </UserState>
