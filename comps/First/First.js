@@ -9,7 +9,6 @@ import Image from 'next/image'
 export const First = () => { 
 	
 	//~ const router = useRouter()
-	//~ console.log(router)
    async function genSomeParams(){
   const items = await fetch(
     'https://seed-shop-back-78049b8c30bb.herokuapp.com/items?category=')
