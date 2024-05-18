@@ -15,7 +15,7 @@ import {notFound} from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import {unstable_setRequestLocale} from 'next-intl/server';
 
-//~ import Loading from './loading'
+import Loading from './loading'
 const lora = Russo_One({ subsets: ['cyrillic'], weight: ['400'] })
 //~ import {useLocale} from 'next-intl'
 
@@ -56,7 +56,7 @@ let messages
        <CartState>
        <QueryState>
         <Header />
-         <Suspense>
+         <Suspense fallback={<Loading/>}>
           {children}
          </Suspense>
       </QueryState>
