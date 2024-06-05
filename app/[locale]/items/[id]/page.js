@@ -12,7 +12,7 @@ export const dynamicParams = true
 	//~ }
 
  async function getItem(params) {
-  
+   await new Promise(resolve => setTimeout(resolve, 10000))
    const item = await fetch(
     `https://seed-shop-back-78049b8c30bb.herokuapp.com/items/${params.id}`)
                                             .then((res) => res.json())

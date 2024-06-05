@@ -1,6 +1,6 @@
 export const allCats = {
        seedCats: ['', 'flowers', 'veggies', 'seedlings'],
-       itemCats: ['', 'soils', 'supplements', 'equipment']	
+       itemCats: ['', 'soils', 'supplements', 'equipment', 'products']	
 	   }
 export const seedTypes = {                  
        subFlowers : ['', 'annual', 'multi-year'],
@@ -10,4 +10,5 @@ export const seedTypes = {
 export const itemTypes = {
        subSoil : ['', 'for flowers','for veggies', 'for fruit'],
        subSupplements : ['', 'fertilizers', 'pesticides', 'other'],
-       subEquipment : ['', 'gloves','tools','gear'] }
+       subEquipment : ['', 'gloves','tools','gear'],
+       subProducts : ['', 'fruit', 'veggies', 'honey'] }

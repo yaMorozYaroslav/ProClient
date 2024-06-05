@@ -70,7 +70,8 @@
 	 "seedlings": "seedlings",
 	 "soils": "soils",
 	 "supplements": "supplements",
-	 "equipment": "equipment" 
+	 "equipment": "equipment",
+	 "products":"products" 
 	 },
  "types":{
 	 "annual": "annual",
@@ -88,6 +89,9 @@
 	 "other": "other",
 	 "gloves": "gloves",
 	 "tools": "tools",
-	 "gear": "gear"
+	 "gear": "gear",
+	 "honey": "honey",
+	 "fruit": "fruit",
+	 "veggies": "veggies"
 	 }
         }

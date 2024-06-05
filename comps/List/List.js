@@ -6,7 +6,7 @@ import {Filter} from './Filter/Filter'
 import Box from '@mui/material/Box';
 import AddCartIcon from '@mui/icons-material/AddShoppingCart';
 import OffIcon from '@mui/icons-material/HighlightOff';
-//~ import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from '@mui/icons-material/Edit';
 //~ import LinearProgress from '@mui/material/LinearProgress';
 
 import {useItemContext} from '../../context/items/ItemState'
