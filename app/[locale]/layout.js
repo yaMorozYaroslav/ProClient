@@ -1,4 +1,4 @@
-import {Suspense} from 'react'
+//~ import {Suspense} from 'react'
 import {UserState} from '../../context/user/UserState'
 import {SeedState} from '../../context/seeds/SeedState'
 import {QueryState} from '../../context/queries/QueryState'
@@ -15,7 +15,6 @@ import {notFound} from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import {unstable_setRequestLocale} from 'next-intl/server';
 
-import Loading from './loading'
 const lora = Russo_One({ subsets: ['cyrillic'], weight: ['400'] })
 //~ import {useLocale} from 'next-intl'
 
@@ -56,9 +55,7 @@ let messages
        <CartState>
        <QueryState>
         <Header />
-         <Suspense fallback={<Loading/>}>
           {children}
-         </Suspense>
       </QueryState>
       </CartState>
       </UserState>

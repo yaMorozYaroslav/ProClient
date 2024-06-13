@@ -6,7 +6,7 @@ import {useItemContext} from '../../../context/items/ItemState'
 import {useQueryContext} from '../../../context/queries/QueryState'
 import * as S from './add-form.styled'
 import revalidator from '../revalidator'
-import {seedTypes, itemTypes} from '../select-types'
+import {allCats, seedTypes, itemTypes} from '../select-types'
 
 import {useTranslations} from 'next-intl'
 import {uploadImage} from './convert-base64'
@@ -42,9 +42,7 @@ export function AddForm({setOpen, currItem, setCurrItem}){
    
    const fetcher =()=> isSeed?fetchSeeds(state):fetchItems(state)
    
-    let categories
-    if(isSeed){ categories = ['', 'flowers', 'veggies', 'seedlings']
-	}else{categories = ['', 'soils', 'supplements', 'equipment']}
+	const shownCats = isSeed?allCats.seedCats:allCats.itemCats
     
     React.useEffect(()=>{		
 	       	   if(currItem._id)setSource(currItem)       
@@ -57,7 +55,7 @@ export function AddForm({setOpen, currItem, setCurrItem}){
 		}		
 		       
      let currType
-	{categories.map((category,i) => {
+	{shownCats.map((category,i) => {
 		       if(source.category===category&&category.length){
 						  currType = Object.values(
 		                  !isSeed?itemTypes:seedTypes)[i-1]}})}
@@ -125,7 +123,7 @@ export function AddForm({setOpen, currItem, setCurrItem}){
 	             value={source.category}
 	             onChange={handChange} >
 	             
-	{categories.map((item, i) => 
+	{shownCats.map((item, i) => 
 		<S.Option key={i} value={item}>{!item?null:tc(`${item}`)}</S.Option>)}
 	 </S.CatSelect><br/>
 	 

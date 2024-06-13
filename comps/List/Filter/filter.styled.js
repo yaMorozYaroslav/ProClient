@@ -22,7 +22,8 @@ export const Label = styled.label`margin:0.5%;font-size:24px;color:white;`
 export const ShowBut = styled.button`font-size:22px; 
                                      margin-top: -5px;
                                      margin:5px;
-                                     padding:10px;
+                                     margin-right: ${p => p.$show ? '84px' : '20px'};
+                                     padding:0px;
                                      height:88%;
                                      width:92%;
 			                         border: 2px solid groove;

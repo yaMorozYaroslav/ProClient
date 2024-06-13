@@ -68,9 +68,11 @@
 	 "flowers": "цветы",
 	 "veggies": "овощи",
 	 "seedlings": "рассада",
+	 "cuttings": "черенки",
 	 "soils": "почвы",
 	 "supplements": "добавки",
-	 "equipment": "снаряжение"
+	 "equipment": "снаряжение",
+	 "products":"продукты" 
 	 },
  "types":{
 	 "annual": "однолетний",
@@ -88,6 +90,9 @@
 	 "other": "другое",
 	 "gloves": "перчатки",
 	 "tools": "инструменты",
-	 "gear": "снаряжение"
+	 "gear": "снаряжение",
+	 "honey": "мёд",
+	 "fruit": "фрукты",
+	 "veggies": "овощи"
 	 }
         }

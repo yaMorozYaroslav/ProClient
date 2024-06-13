@@ -111,7 +111,8 @@ export const Filter =(props)=> {
 	                onMouseOver={changeBorder}>{t("reset")}</S.FiltBut>
 	     </S.Panel></Fade>
 	     
-	    <S.ShowBut onMouseOver={changeBorder}  
+	    <S.ShowBut $show={show}
+	               onMouseOver={changeBorder}  
 		           onClick={()=>setShow(!show)}>
 		                 {!show?t("show"):'X'}</S.ShowBut>
 	     </S.Container>

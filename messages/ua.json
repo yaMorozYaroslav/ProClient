@@ -68,9 +68,11 @@
 	 "flowers": "квіти",
 	 "veggies": "овочі",
 	 "seedlings": "саджанці",
+	 "cuttings": "живці",
 	 "soils": "ґрунти",
 	 "supplements": "додатки",
-	 "equipment": "обладнання"   
+	 "equipment": "обладнання",
+	 "products":"продукти"    
 	 },
  "types":{
 	 "annual": "однорічний",
@@ -88,6 +90,9 @@
 	 "other": "інше",
 	 "gloves": "рукавиці",
 	 "tools": "інструменти",
-	 "gear": "знаряддя"
+	 "gear": "знаряддя",
+	 "honey": "мед",
+	 "fruit": "фрукти",
+	 "veggies": "овочі"
 	 }
         }
