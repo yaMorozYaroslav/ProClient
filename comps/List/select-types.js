@@ -1,5 +1,9 @@
 export const allCats = {
+<<<<<<< HEAD
        seedCats: ['', 'flowers', 'veggies', 'seedlings', 'cuttings'],
+=======
+       seedCats: ['', 'flowers', 'veggies', 'seedlings'],
+>>>>>>> refs/remotes/origin/master
        itemCats: ['', 'soils', 'supplements', 'equipment', 'products']	
 	   }
 export const seedTypes = {                  
