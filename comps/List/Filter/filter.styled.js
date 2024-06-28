@@ -36,6 +36,6 @@ export const FiltBut = styled.button`font-size:22px;
                                      margin:10px;
                                      width:150px;
 			                         border: 2px solid white;`
-export const Select = styled.select`font-size:21px;background:white;`
+export const Select = styled.select`font-size:21px;background:white;margin-top:9px;`
 export const Input = styled.input`margin:0.5%;font-size:22px;width:60%;background:yellow;
                              @media (max-width: 600px) {}`

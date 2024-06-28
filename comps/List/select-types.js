@@ -6,7 +6,8 @@ export const allCats = {
 export const seedTypes = {                  
        subFlowers : ['', 'annual', 'multi-year'],
        subVegies : ['', 'early', 'late'],
-       subSeedlings : ['', 'fruit', 'veggies', 'flowers']
+       subSeedlings : ['', 'fruit', 'veggies', 'flowers'],
+       subCuttings: ['', 'grape', 'trees']
 	   }
 export const itemTypes = {
        subSoil : ['', 'for flowers','for veggies', 'for fruit'],

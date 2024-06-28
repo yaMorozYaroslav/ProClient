@@ -20,14 +20,14 @@ export const LangSwitch =()=> {
 	                            setStrings([thing,...filteredStrings])
 	                           	   //~ console.log(strings)  
 	                           	    }              
-  const shouldShow =(str)=> !open&&str!==locale                       	                           
+  const shouldHide =(str)=> !open&&str!==locale                       	                           
               //~ {!open && locale}                   
   return  <S.Ul onClick={()=>setOpen(!open)} onMouseLeave={()=>setOpen(false)}>
                
                      
                      {strings.map((string, i)=>
 				           <S.Li key={i} onClick={()=>handSwitch(string)}
-				                 value={string} hidden={shouldShow(string)}
+				                 value={string} hidden={shouldHide(string)}
 			                                                  >{string}</S.Li>)}
           </S.Ul>
 	     
