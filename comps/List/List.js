@@ -3,7 +3,7 @@ import React from 'react'
 import * as S from './list.styled'
 import {AddForm} from './AddForm/AddForm'
 import {Filter} from './Filter/Filter'
-import Box from '@mui/material/Box';
+//~ import Box from '@mui/material/Box';
 import AddCartIcon from '@mui/icons-material/AddShoppingCart';
 import OffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';

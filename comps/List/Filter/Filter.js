@@ -49,16 +49,17 @@ export const Filter =(props)=> {
 		               }
 	
 	const resetFilt =()=> {
-		reset()
-		
+		reset()	
 		fetchUnits({category:'',type:'',page:1, search:'', reverse:false})
 		}
+		
 	function onCategory(event){
 		event.preventDefault()
 		if(state.search)setSearch('')
 		setCategory(event.target.value)	
 		fetchUnits({...state, category: event.target.value, type: '', page: 1})
 		}
+		
 	function onType(event){
 		event.preventDefault()
 		setType(event.target.value)
