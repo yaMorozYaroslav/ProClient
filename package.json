@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "node -r ./.pnp.cjs next build",
+    "start": "node -r ./.pnp.cjs next start",
+    "lint": "node -r ./.pnp.cjs next lint"
   },
   "dependencies": {
     "@babel/core": "^7.24.4",
@@ -15,10 +15,11 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
+    "@types/node": "^22.4.1",
     "axios": "^1.6.8",
     "babel-plugin-styled-components": "^2.1.4",
     "debug": "^4.3.4",
-    "eslint": "^8.57.0",
+    "eslint": "^9.9.0",
     "eslint-config-next": "^14.1.4",
     "jwt-decode": "^4.0.0",
     "next": "^14.2.3",
