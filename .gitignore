@@ -1,5 +1,5 @@
 /node_modules
-.next/*
+.netx/*
 .env.local
 .pnp.*
 .yarn/*
