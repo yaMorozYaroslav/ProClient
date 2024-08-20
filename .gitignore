@@ -1,6 +1,5 @@
-# testing of commenting
-node_modules
-.next
+/node_modules
+.next/*
 .env.local
 .pnp.*
 .yarn/*

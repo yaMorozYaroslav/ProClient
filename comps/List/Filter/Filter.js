@@ -49,7 +49,9 @@ export const Filter =(props)=> {
 		               }
 	
 	const resetFilt =()=> {
-		reset()	
+
+		reset()
+		
 		fetchUnits({category:'',type:'',page:1, search:'', reverse:false})
 		}
 		
@@ -59,7 +61,7 @@ export const Filter =(props)=> {
 		setCategory(event.target.value)	
 		fetchUnits({...state, category: event.target.value, type: '', page: 1})
 		}
-		
+
 	function onType(event){
 		event.preventDefault()
 		setType(event.target.value)

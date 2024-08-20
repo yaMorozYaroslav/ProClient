@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const API = axios.create({baseURL:'https://flora-store-ed448aa4183f.herokuapp.com'})
+
+const API = axios.create({baseURL:'https://new-flora-7e8f21fd2b9f.herokuapp.com'})
+
 //~ const API = axios.create({baseURL:'https://flora-storage-95930743be75.herokuapp.com'})
 
 API.interceptors.request.use((req)=>{

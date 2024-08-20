@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import {Link} from '../../navigation'
-import Image from 'next/image'
+
 
 export const Container = styled.div`padding-top:1px;
                                     width:100%;
@@ -34,6 +33,7 @@ export const List = styled.ul` display: grid;
                     @media (max-width: 600px) {margin-left:-4%;column-gap:2%;row-gap:5px;}
                     @media (max-width: 400px) {display:block;
                                                margin-left:-5%;}`
+<<<<<<< HEAD
 export const Cell = styled.li`font-size: 20px; border: 2px solid black;
                                text-align:center;height: 365px;
                                width:85%;padding:10px;
@@ -50,6 +50,9 @@ export const AddButt = styled.button`border-style:groove;margin:2px;font-size:21
                                      padding-bottom:5px;`
 export const KingButt = styled.button`border-style:groove;margin:3px;font-size:21px;
                                       color: gold;background:black;height:40px;`
+=======
+
+>>>>>>> update
 export const NoData = styled.p`margin-top:30px;padding-top:140px;height:213px;
                                font-size:32px;
                                text-align:center;position:relative;z-index:-1;`
