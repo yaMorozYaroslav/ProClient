@@ -58,17 +58,12 @@ export function List({servData}){
 	
 	const handAdd =(e, s)=> {e.preventDefault();addToCart(s);}
 	
-<<<<<<< HEAD
-	const handEdit =(e, s)=> {e.preventDefault(); setCurrItem(s);setOpen(true)}
-    const onMenu = () => {router.push('/');if(isSeed){
-							            resetSeeds()}else{resetItems()}}
-=======
+
 	const handEdit =(e, s)=> {e.preventDefault(); 
 		                      setCurrItem(s);setOpen({...open, form: true})}
     const onMenu = () => {router.push('/');if(isSeed){
 							            resetSeeds()}else{resetItems()}}
 	const showOptions =()=>{setOpen({...open, options: !open.options});}
->>>>>>> update
 	
 	function fetchUnits(){if(isSeed){fetchSeeds(state)}
 		                       else{fetchItems(state)} } 
