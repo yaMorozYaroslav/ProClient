@@ -11,18 +11,6 @@
   "dependencies": {
     "@babel/core": "^7.24.4",
     "@emailjs/browser": "^4.3.3",
-<<<<<<< HEAD
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.14",
-    "@mui/material": "^5.15.14",
-    "@types/node": "^22.4.1",
-    "axios": "^1.6.8",
-    "babel-plugin-styled-components": "^2.1.4",
-    "debug": "^4.3.4",
-    "eslint": "^9.9.0",
-    "eslint-config-next": "^14.1.4",
-=======
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.15.14",
@@ -32,7 +20,6 @@
     "axios": "^1.6.8",
     "babel-plugin-styled-components": "^2.1.4",
     "debug": "^4.3.4",
->>>>>>> update
     "jwt-decode": "^4.0.0",
     "next": "^14.2.3",
     "next-intl": "^3.10.0",
@@ -41,19 +28,13 @@
     "react-image-file-resizer": "^0.4.8",
     "styled-components": "^6.1.8",
     "supports-color": "^9.4.0",
-<<<<<<< HEAD
-    "typescript": "^5.4.3"
-=======
+
     "typescript": "^5.5.4"
->>>>>>> update
   },
   "resolutions": {
     "styled-components": "^6"
   },
-<<<<<<< HEAD
-  "packageManager": "yarn@4.1.1",
-=======
->>>>>>> update
+  
   "devDependencies": {
     "yarn-upgrade-all": "^0.7.2"
   }
