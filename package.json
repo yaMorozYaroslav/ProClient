@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node -r ./.pnp.cjs next build",
+    "build": "next build",
     "start": "node -r ./.pnp.cjs next start",
     "lint": "node -r ./.pnp.cjs next lint"
   },
