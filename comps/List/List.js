@@ -79,7 +79,7 @@ return (<S.Container>
 			<S.AddAdmin onClick={()=>setOpen(true)}>
 			                   {t('add_butt')}</S.AddAdmin>}
         <S.NotLink onClick={()=>onMenu()}>{t('menu')}</S.NotLink>
-      < /S.ListButts>    
+      </S.ListButts>    
        {open &&
 		     <AddForm setOpen={setOpen} 
 		              currItem={currItem}
